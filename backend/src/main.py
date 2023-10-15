@@ -1,11 +1,27 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+import database
+from models.user import User
+from models.receta import Receta
 
 app = FastAPI()
 
-class User(BaseModel):
-    name: str
-
 @app.get("/")
 def index():
-    return "HOla"
+    return "hola"
+
+@app.post("/register/", response_model=str)
+def register(user: User):
+    return database.signup(user.email, user.password, user.userID)
+
+@app.get("/login/{user}", response_model=User)
+def login(usuari: User):
+    database.login(usuari.email, usuari.password)
+    
+
+@app.get("/receta/{name}", response_model=Receta)
+def get_receta(name: str):
+    database.get_receptes()
+
+@app.post("/receta", response_model=str)
+def publi_receta(receta: Receta):
+    database.create_recepta(receta)
