@@ -5,6 +5,9 @@
     <div class="p-3 text-left">
       <h1 class="mb-3">El Cocinillas</h1>
     </div>
+    <div class="text-right pt-1 mb-5 pb-1">
+      <button class="btn btn-primary btn-block" @click="goBackToMain" type="button" style="background-color: #73694f;">Volver a inicio</button>
+    </div>
   </header>
 </section>
 <section class="h-100 gradient-form" style="background-color: #eef2b6;">
@@ -50,6 +53,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+import router from '@/router'
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
     name: "Login",
@@ -73,8 +78,29 @@ export default {
           alert('Se necesita contraseña')
         }
         else{
-          alert('Sesión iniciada con éxito')
+          const parameters = 'username=' + this.username + '&password=' + this.password
+          const config = {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          }
+          const path = this.actual_path + 'login'
+          axios.post(path, parameters, config)
+            .then((res) => {
+              this.logged = true
+              this.token = res.data.access_token
+              alert('Successfully Logged In')
+              this.$router.push({ path: '/', query: { username: this.username, logged: this.logged, token: this.token } })
+            })
+            .catch((error) => {
+              // eslint-disable-next-line
+              console.error(error)
+              alert('Username or Password incorrect')
+            })
         }
+    },
+    goBackToMain () {
+      router.push('/')
     }
   }
 }

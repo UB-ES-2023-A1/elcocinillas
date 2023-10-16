@@ -1,11 +1,16 @@
 import BootstrapVue from 'bootstrap-vue'
-import 'bootstrap/dist/css/bootstrap.css'
-import App from './App.vue'
+import '@/../bootstrap/css/bootstrap.css'
 import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
 
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
+/* eslint-disable no-new */
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  el: '#app',
+  router,
+  components: { App },
+  template: '<App/>'
+})
