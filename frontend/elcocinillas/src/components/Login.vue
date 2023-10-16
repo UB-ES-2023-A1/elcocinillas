@@ -10,10 +10,10 @@
 <section class="h-100 gradient-form" style="background-color: #eef2b6;">
   <div class="row h-100">
     <div class="col">
-      <div class="card rounded-3 text-black">
+      <div class="card rounded-3 text-black" style="background-color: #eef2b6;">
         <div class="row g-0 justify-content-center">
           <div class="col-lg-6">
-            <div class="card-body p-md-5 mx-md-4">
+            <div class="card-body p-md-5 mx-md-4" style="background-color: #eef2b6;">
 
               <div class="text-center">
                 <h4 class="mt-1 mb-5 pb-1">Sign In</h4>
@@ -33,9 +33,9 @@
                 </div>
 
                 <div class="text-center pt-1 mb-5 pb-1">
-                  <button class="btn btn-primary btn-block" @click="checkLogin()" type="button">Sign
+                  <button class="btn btn-primary btn-block" @click="checkLogin()" type="button" style="background-color: #73694f;">Sign
                     in</button>
-                  <button class="btn btn-success btn-block" @click="createAccount" type="button">Create
+                  <button class="btn btn-success btn-block" @click="createAccount" type="button" style="background-color: #5c5540;">Create
                     Account</button>
                 </div>
               </form>
@@ -52,7 +52,31 @@
 <script>
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
-    name: "Login"
+    name: "Login",
+    data () {
+    return {
+      actual_path: 'http://localhost:8000/',
+      username: '',
+      password: '',
+      addUserForm: {
+        username: null,
+        password: null
+      }
+    }
+  },
+  methods:{
+    checkLogin(){
+        if (this.username == ''){
+          alert('Se necesita nombre de usuario.')
+        }
+        else if(this.password == ''){
+          alert('Se necesita contraseña')
+        }
+        else{
+          alert('Sesión iniciada con éxito')
+        }
+    }
+  }
 }
 </script>
 
