@@ -5,8 +5,8 @@
     <div class="p-3 text-left">
       <h1 class="mb-3">El Cocinillas</h1>
     </div>
-    <div class="text-right pt-1 mb-5 pb-1">
-      <button class="btn btn-primary btn-block" @click="goBackToMain" type="button" style="background-color: #73694f;">Volver a inicio</button>
+    <div class="mb-6 text-md-right">
+      <button class="btn btn-outline-info" @click="goBackToMain" type="button" style="background-color: #13cf89;">Volver a inicio</button>
     </div>
   </header>
 </section>
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import router from '@/router'
 export default {
     // eslint-disable-next-line vue/multi-word-component-names
@@ -70,7 +70,7 @@ export default {
     }
   },
   methods:{
-    checkLogin(){
+    async checkLogin(){
         if (this.username == ''){
           alert('Se necesita nombre de usuario.')
         }
@@ -78,25 +78,14 @@ export default {
           alert('Se necesita contraseña')
         }
         else{
-          const parameters = 'username=' + this.username + '&password=' + this.password
-          const config = {
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded'
-            }
+          try {
+            await signInWithEmailAndPassword(getAuth(),this.email, this.password)
+            alert('Sesión iniciada con éxito')
+            // Manejar el éxito del inicio de sesión (redirección, etc.)
+          } catch (error) {
+            alert(error.message)
+            // Manejar el error del inicio de sesión
           }
-          const path = this.actual_path + 'login'
-          axios.post(path, parameters, config)
-            .then((res) => {
-              this.logged = true
-              this.token = res.data.access_token
-              alert('Successfully Logged In')
-              this.$router.push({ path: '/', query: { username: this.username, logged: this.logged, token: this.token } })
-            })
-            .catch((error) => {
-              // eslint-disable-next-line
-              console.error(error)
-              alert('Username or Password incorrect')
-            })
         }
     },
     goBackToMain () {
