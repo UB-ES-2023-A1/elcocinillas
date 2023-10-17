@@ -8,17 +8,12 @@ app = FastAPI()
 
 @app.get("/")
 def index():
-    return "hola"
+    return ""
 
 @app.post("/register/", response_model=str)
 def register(user: User):
     return database.signup(user.email, user.password, user.userID)
-
-@app.get("/login/{user}", response_model=User)
-def login(usuari: User):
-    database.login(usuari.email, usuari.password)
     
-
 @app.get("/receta/{name}")
 def get_receta(name: str):
     print(database.get_recepta(name))

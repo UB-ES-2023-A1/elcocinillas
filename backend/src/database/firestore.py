@@ -1,11 +1,14 @@
 import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
-from firebase_admin import auth
+from firebase_admin import auth, storage
 import requests
 
+ruta_recetas = "imgRecetas/"
 cred = credentials.Certificate('C:\\Users\\leuis\\Desktop\\ES\\Services\\backend\\src\\database\\elcocinillas.json')
-firebase_admin.initialize_app(cred)
+firebase_admin.initialize_app(cred, {
+    'storageBucket': 'elcocinillas-93ebe.appspot.com'
+})
 
 db = firestore.client()    
 
@@ -13,6 +16,8 @@ def create_recepta(recepta):
     try:
         doc_ref = db.collection(u'receptes').document(recepta.nombre)
         doc_ref.set(recepta)
+
+        uploadImg(recepta)
         return 0
     except Exception as e:
         print(f"Error al crear la recepta: {e}")
@@ -50,29 +55,21 @@ def get_recepta(name_recepta):
     else:
         print("No such document!")
 
-def login(email, passwd):
-    firebase_token = "AIzaSyCellSmTsQmrbM4idiIlLuR7s2kqXGuPh8"
-    url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key={firebase_token}"
-    data = {
-        "email": email,
-        "password": passwd,
-        "returnSecureToken": True
-    }
+#images list{ruta_local_img}
+def uploadImg(recepta):
 
-    response = requests.post(url, json = data)
-    if response.status_code == 200:
-        json_response = response.json
-        token = json_response['idToken']
-        verify = auth.verify_id_token(token)
-        if verify:
-            return token
-        else:
-            return None
+    bucket = storage.bucket()
+    blob = bucket.blob(ruta_recetas + recepta.nombre)
+
+    for ruta in recepta.images:
+        blob.upload_from_filename(ruta)
+
 
 def signup(mail, passwd, username):
     try:
         # Crea un nuevo usuario con correo y contraseña
         user = auth.create_user(
+            uid=username,
             email = mail, 
             password = passwd
             )
