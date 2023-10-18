@@ -1,0 +1,25 @@
+POST http://127.0.0.1:8000/register/
+Content-Type: application/json
+
+{   
+    "email": "usuariodeprueba@gmail.com",
+    "password": "123456",
+    "userID": "12345"
+}
+
+###
+
+POST http://127.0.0.1:8000/receta
+Content-Type: application/json
+
+{   
+    "user": "12345",
+    "nombre": "Salsa de boletus",
+    "classe": "vegetariana",
+    "tipo": "italiana",
+    "ingredientes": [boletus, nata liquida, cebolla],
+    "pasos": [cortar boletus y cebolla, añadir nata y dejar reducir],
+    "images": [],
+    "time": 30,
+    "dificultad": 2
+}
