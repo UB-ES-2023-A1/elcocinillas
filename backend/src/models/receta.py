@@ -4,7 +4,10 @@ from typing import List
 class Receta(BaseModel):
     user: str
     nombre: str
+    classe: str
+    tipo: str
     ingredientes: List[str]
     pasos: List[str]
+    images: List[str]
     time: int
     dificultad: int
