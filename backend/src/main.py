@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-import database
-from models.user import User
-from models.receta import Receta
+from backend.src import database
+from backend.src.models.user import User
+from backend.src.models.receta import Receta
 
 app = FastAPI()
 

@@ -23,11 +23,11 @@
               </div>
 
               <form>
-                <p>Username</p>
+                <p>Email</p>
 
                 <div class="form-outline mb-4">
                   <input type="email" id="form2Example11" class="form-control"
-                    placeholder="Username" required autofocus v-model="username" />
+                    placeholder="Email" required autofocus v-model="email" />
                 </div>
                 <p>Pasword</p>
                 <div class="form-outline mb-4">
@@ -61,7 +61,7 @@ export default {
     data () {
     return {
       actual_path: 'http://localhost:8000/',
-      username: '',
+      email: '',
       password: '',
       addUserForm: {
         username: null,
@@ -71,8 +71,8 @@ export default {
   },
   methods:{
     async checkLogin(){
-        if (this.username == ''){
-          alert('Se necesita nombre de usuario.')
+        if (this.email == ''){
+          alert('Se necesita email del usuario.')
         }
         else if(this.password == ''){
           alert('Se necesita contraseña')
