@@ -4,8 +4,9 @@ from firebase_admin import credentials
 from firebase_admin import auth, storage
 import requests
 
+cred = credentials.Certificate('backend\\src\\database\\elcocinillas.json')
+
 ruta_recetas = "imgRecetas/"
-cred = credentials.Certificate('C:\\Users\\leuis\\Desktop\\ES\\Services\\backend\\src\\database\\elcocinillas.json')
 firebase_admin.initialize_app(cred, {
     'storageBucket': 'elcocinillas-93ebe.appspot.com'
 })

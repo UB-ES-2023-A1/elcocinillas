@@ -1,8 +1,8 @@
-from fastapi import FastAPI, Query
-import database
-from models.user import User
-from models.receta import Receta
-from models.filtros import FiltroRecetas
+from fastapi import FastAPI
+from backend.src import database
+from backend.src.models.user import User
+from backend.src.models.receta import Receta
+from backend.src.models.filtros import FiltroRecetas
 
 app = FastAPI()
 

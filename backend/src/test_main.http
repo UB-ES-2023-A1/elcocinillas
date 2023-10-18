@@ -1,0 +1,8 @@
+POST http://127.0.0.1:8000/register/
+Content-Type: application/json
+
+{   "email": "usuariodeprueba@gmail.com",
+    "password": "123456",
+    "userID": "12345"}
+
+###
