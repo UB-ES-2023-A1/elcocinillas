@@ -44,6 +44,9 @@ def get_receptes(filtro):
     result = query.stream()
     recetas = [receta.to_dict() for receta in result]
 
+    for receta in recetas:
+        getRecipeImages(receta)
+
     return recetas
 
 def get_recepta(name_recepta):
@@ -51,9 +54,30 @@ def get_recepta(name_recepta):
 
     doc = doc_ref.get()
     if doc.exists:
-        return doc.to_dict()
+        resposta = doc.to_dict()
+        resposta["images"] = getRecipeImages(name_recepta)
+
+        return resposta
     else:
         print("No such document!")
+
+def getRecipeImages(recepta): 
+    # Crea una lista para almacenar las URL de las imágenes
+    image_urls = []
+
+    # Conecta al bucket de almacenamiento
+    bucket = storage.bucket()
+    folder_path = ruta_recetas + recepta.nombre
+    blobs = bucket.list_blobs(prefix=folder_path)
+
+    for blob in blobs:
+        # Genera la URL del blob
+        image_url = blob.public_url
+        # Agrega la URL a la lista de imágenes
+        image_urls.append(image_url)
+
+    # Devuelve la lista de URLs de imágenes
+    return image_urls
 
 #images list{ruta_local_img}
 def uploadImg(recepta):
