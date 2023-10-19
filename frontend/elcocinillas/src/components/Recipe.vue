@@ -23,7 +23,7 @@
     <section class="sections">
       <h4>INGREDIENTES (4 personas):</h4>
       <hr id="solidDividerYellow">
-      <ul v-for="(ingrediente) in ingredientes" :key="ingrediente.name">
+      <ul v-for="(ingrediente) in this.getIngredients()" :key="ingrediente.name">
         <li>{{ ingrediente.name }}</li>
       </ul>
     </section>
@@ -73,6 +73,7 @@ export default {
   name: "Recipe",
   data() {
     return {
+      recipes : [],
       ingredientes: [],
       pasos: [],
       time : 0
@@ -84,22 +85,25 @@ export default {
 
   methods: {
     updateData () {
-      this.getIngredients(),
+      this.getRecipes(),
       this.getSteps(),
       this.getTime()
     },
-    getIngredients(){
-      const pathReceta = 'http://localhost:8080/receta/leuis123'
+    getRecipes(){
+      const pathReceta = 'http://localhost:8080/recetas'
       axios.get(pathReceta)
-          .then((res) => {
-            this.ingredientes = res.data.ingredientes
+          .then(response => {
+            this.recipes = response.data;
           })
-          .catch((error) => {
-            console.error("errorGetIngredientes: ", error)
-          })
+      .catch(error => {
+        console.error('Error fetching recipes:', error);
+      });
+    },
+    getIngredients(){
+      return recipes.ingredientes;
     },
     getIngredientsLength() {
-      return this.ingredientes.length;
+      return this.getIngredients().length;
     },
 
     getSteps(){
