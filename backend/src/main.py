@@ -1,4 +1,4 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, UploadFile, HTTPException
 from typing import List
 import os
 import database
@@ -35,20 +35,26 @@ def get_recetas(filtro: FiltroRecetas):
     return database.get_receptes(filtro)
 
 @app.post("/receta", response_model=str)
-def publi_receta(receta: Receta, files: List[UploadFile] = File(...)):
-    image_urls = []
+def publi_receta(receta: Receta, files: List[UploadFile]):
+    try:
+        image_urls = []
 
-    for file in files:
-        # Lee el archivo en memoria
-        image_data = file.file.read()
+        for file in files:
+            # Lee el archivo en memoria
+            image_data = file.file.read()
 
-        # Sube la imagen a Firebase Storage y obtén la URL
-        image_url = database.uploadImg(receta, image_data, file.filename)
+            # Sube la imagen a Firebase Storage y obtén la URL
+            image_url = database.uploadImg(receta, image_data, file.filename)
 
-        # Agrega la URL de la imagen a la lista de URLs
-        image_urls.append(image_url)
+            # Agrega la URL de la imagen a la lista de URLs
+            image_urls.append(image_url)
 
         receta.images = image_urls
 
-    database.create_recepta(receta)
-    return "200"
+        # Intenta crear la receta en la base de datos
+        database.create_recepta(receta)
+
+        return "200"
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=500, detail="Error en el servidor leer img: " + str(e))

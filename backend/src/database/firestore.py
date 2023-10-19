@@ -79,12 +79,18 @@ def getRecipeImages(recepta):
 #images list{ruta_local_img}
 def uploadImg(recepta, file, filename):
 
-    bucket = storage.bucket()
-    blob = bucket.blob(ruta_recetas + recepta.nombre)
+    try:
+        bucket = storage.bucket()
+        blob = bucket.blob(ruta_recetas + recepta.nombre)
 
-    blob.upload_from_string(file, content_type="image/jpeg")
+        blob.upload_from_string(file, content_type="image/jpeg")
 
-    return blob.public_url
+        return blob.public_url
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        print(f"Error al subir imagen a Firebase Storage: {str(e)}")
+        # Puedes registrar el error en un sistema de registro aquí si lo deseas
+        return None  # Devuelve None o un valor de error apropiado en caso de fallo
 
 
 def signup(mail, passwd, username):
