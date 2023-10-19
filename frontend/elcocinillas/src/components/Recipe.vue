@@ -1,19 +1,19 @@
 <template>
   <div id="app">
     <section id="headerSection">
-      <h1 id="title">Macarrones a la boloñesa</h1>
+      <h1 id="title">{{ this.name }}</h1>
       <div class="container">
         <div class="row">
           <div class="col-sm border-right">
-            <h2>{{getIngredientsLength()}}</h2>
+            <h2>{{ this.ingredientes.length }}</h2>
             <h4>ingredientes</h4>
           </div>
           <div class="col-sm border-right">
-            <h2>40</h2>
+            <h2>{{ this.time }}</h2>
             <h4>minutos</h4>
           </div>
           <div class="col-sm">
-            <h2>3 / 5</h2>
+            <h2>{{ this.dificultad}} / 5</h2>
             <h4>Dificultad</h4>
           </div>
         </div>
@@ -23,7 +23,7 @@
     <section class="sections">
       <h4>INGREDIENTES (4 personas):</h4>
       <hr id="solidDividerYellow">
-      <ul v-for="(ingrediente) in this.getIngredients()" :key="ingrediente.name">
+      <ul v-for="(ingrediente) in this.ingredientes" :key="ingrediente.name">
         <li>{{ ingrediente.name }}</li>
       </ul>
     </section>
@@ -32,12 +32,10 @@
       <h4>ELABORACIÓN DE LA RECETA</h4>
       <hr id="solidDividerYellow">
       <p>Estos son los pasos que tienes que seguir</p>
-      <ul v-for="(step) in pasos" :key="step.name">
+      <ul v-for="(step) in steps" :key="step.name">
         <li>{{ step.name }}</li>
       </ul>
     </section>
-
-
   </div>
 </template>
 
@@ -84,51 +82,33 @@ export default {
   name: "Recipe",
   data() {
     return {
-      recipes : [],
       ingredientes: [],
       steps: [],
-      time : 0
+      time : 0,
+      name : null,
+      dificultad : 0
     }
   },
   created() {
-    this.updateData()
+    this.getRecipe()
   },
 
   methods: {
-    updateData () {
-      this.getRecipes()
-      this.getIngredients()
-      this.getSteps()
-      this.getTime()
-    },
-    getRecipes(){
-      const pathReceta = 'http://localhost:8080/receta/leuis123'
+    getRecipe(){
+      const pathReceta = 'http://localhost:8080/receta' + //TODO: añadir nombre receta
       axios.get(pathReceta)
           .then(response => {
-            print(response.data);
-            this.recipes = response.data;
+            //TODO: setear los datos correctamente a partir de la respuesta de la llamada
             this.ingredientes = response.data.ingredientes
+            this.steps = response.data.pasos
+            this.time = response.data.time
+            this.name = response.data.nombre
+            this.dificultad = response.data.dificultad
           })
       .catch(error => {
         console.error('Error fetching recipes:', error);
       });
-    },
-    getIngredients(){
-      return this.ingredientes;
-    },
-    getIngredientsLength() {
-      return this.getIngredients().length;
-    },
-
-    getSteps(){
-      this.steps = this.recipes.pasos
-    },
-
-    getTime(){
-      this.time = this.recipes.time
     }
   }
 }
-
-
 </script>
