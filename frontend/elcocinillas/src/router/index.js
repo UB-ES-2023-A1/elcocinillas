@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login.vue'
 import HelloWorld from "@/components/HelloWorld.vue";
+import Recipe from "@/components/Recipe.vue";
 
 Vue.use(Router)
 
@@ -18,6 +19,11 @@ export default new Router({
       path:'/',
       name: 'Hello',
       component: HelloWorld
-    }
+    },
+    {
+      path: '/recetas',
+      name: 'Recipe',
+      component: Recipe
+    },
   ]
 })

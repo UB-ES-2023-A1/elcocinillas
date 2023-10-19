@@ -42,6 +42,17 @@
 </template>
 
 <style scoped>
+#app {
+  font-family: 'Lato', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+}
+
 #headerSection {
   color: #5C5540;
   margin-bottom: 10%;
@@ -75,7 +86,7 @@ export default {
     return {
       recipes : [],
       ingredientes: [],
-      pasos: [],
+      steps: [],
       time : 0
     }
   },
@@ -85,47 +96,36 @@ export default {
 
   methods: {
     updateData () {
-      this.getRecipes(),
-      this.getSteps(),
+      this.getRecipes()
+      this.getIngredients()
+      this.getSteps()
       this.getTime()
     },
     getRecipes(){
-      const pathReceta = 'http://localhost:8080/recetas'
+      const pathReceta = 'http://localhost:8080/receta/leuis123'
       axios.get(pathReceta)
           .then(response => {
+            print(response.data);
             this.recipes = response.data;
+            this.ingredientes = response.data.ingredientes
           })
       .catch(error => {
         console.error('Error fetching recipes:', error);
       });
     },
     getIngredients(){
-      return recipes.ingredientes;
+      return this.ingredientes;
     },
     getIngredientsLength() {
       return this.getIngredients().length;
     },
 
     getSteps(){
-      const pathReceta = 'http://localhost:8080/receta/leuis123'
-      axios.get(pathReceta)
-          .then((res) => {
-            this.pasos = res.data.pasos
-          })
-          .catch((error) => {
-            console.error("errorGetPasos: ", error)
-          })
+      this.steps = this.recipes.pasos
     },
 
     getTime(){
-      const pathReceta = 'http://localhost:8080/receta/leuis123'
-      axios.get(pathReceta)
-          .then((res) => {
-            this.time = res.data.time
-          })
-          .catch((error) => {
-            console.error("errorTime: ", error)
-          })
+      this.time = this.recipes.time
     }
   }
 }
