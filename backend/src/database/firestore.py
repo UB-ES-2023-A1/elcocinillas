@@ -2,7 +2,6 @@ import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
 from firebase_admin import auth, storage
-import json
 
 cred = credentials.Certificate('database\\elcocinillas.json')
 ruta_recetas = "imgRecetas/"
@@ -51,6 +50,10 @@ def get_recepta(name_recepta):
     if doc.exists:
         resposta = doc.to_dict()
 
+        bucket = storage.bucket()
+        blob = bucket.blob(ruta_recetas + name_recepta)
+        resposta['images'] = [blob.generate_signed_url(method='GET', expiration=3600)]
+
         return resposta
     else:
         print("No such document!")
@@ -91,7 +94,7 @@ def uploadImg(recepta, file):
         blob = bucket.blob(ruta_recetas + recepta['nombre'])
 
         blob.upload_from_string(file, content_type="image/jpeg")
-
+        
         return blob.public_url
     except Exception as e:
         # Captura cualquier excepción y maneja el error
