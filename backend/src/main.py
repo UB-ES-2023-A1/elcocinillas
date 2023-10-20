@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, HTTPException, File
+from fastapi import FastAPI, UploadFile, HTTPException, Form, File
 from typing import List
 import os
 import database
@@ -34,28 +34,32 @@ def get_receta(name: str):
 def get_recetas(filtro: FiltroRecetas):
     return database.get_receptes(filtro)
 
-@app.post("/imgUpload/{name}", response_model=str)
-def publi_img(files: List[UploadFile]):
-    receta = database.get_recepta(name)
+@app.post("/imgUpload/", response_model=str)
+def publi_img(nombre: str = Form(...), files: List[UploadFile] = File(...)):
+
+    receta = database.get_recepta(nombre)
+
     image_urls = []
     for file in files:
         # Lee el archivo en memoria
         image_data = file.file.read()
 
         # Sube la imagen a Firebase Storage y obtén la URL
-        image_url = database.uploadImg(receta, image_data, file.filename)
+        image_url = database.uploadImg(receta, image_data)
 
         # Agrega la URL de la imagen a la lista de URLs
         image_urls.append(image_url)
 
-    receta.images = image_urls
+    receta['images'] = image_urls
+    database.updateImg(receta)
+    
+    return "Tot bene"
 
 @app.post("/receta", response_model=str)
 def publi_receta(receta: Receta):
     try:
         # Intenta crear la receta en la base de datos
         database.create_recepta(receta)
-
         return "200"
     except Exception as e:
         # Captura cualquier excepción y maneja el error
