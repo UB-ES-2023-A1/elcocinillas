@@ -42,9 +42,6 @@ def get_receptes(filtro):
     result = query.stream()
     recetas = [receta.to_dict() for receta in result]
 
-    for receta in recetas:
-        getRecipeImages(receta)
-
     return recetas
 
 def get_recepta(name_recepta):
