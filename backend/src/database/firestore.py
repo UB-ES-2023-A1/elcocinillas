@@ -52,7 +52,7 @@ def get_recepta(name_recepta):
     doc = doc_ref.get()
     if doc.exists:
         resposta = doc.to_dict()
-        resposta["images"] = getRecipeImages(name_recepta)
+        #resposta["images"] = getRecipeImages(name_recepta)
 
         return resposta
     else:
