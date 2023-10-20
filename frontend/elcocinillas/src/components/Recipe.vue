@@ -90,14 +90,19 @@ export default {
     }
   },
   created() {
+    console.log("metodo created()")
     this.getRecipe()
   },
 
   methods: {
     getRecipe(){
-      const pathReceta = 'http://localhost:8080/receta' + //TODO: añadir nombre receta
-      axios.get(pathReceta)
+      console.log("metodo getRecipe() antes de la llamada")
+      const pathReceta = 'http://localhost:8080/receta/sala de boletus y ceps'
+      const urlCodificada = encodeURI(pathReceta)
+      axios.get(urlCodificada)
           .then(response => {
+            console.log("metodo getRecipe() llamada OK")
+            console.log(response.data)
             //TODO: setear los datos correctamente a partir de la respuesta de la llamada
             this.ingredientes = response.data.ingredientes
             this.steps = response.data.pasos

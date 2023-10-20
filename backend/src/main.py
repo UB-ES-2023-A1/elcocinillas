@@ -1,11 +1,11 @@
 from fastapi import FastAPI, File, UploadFile
 from typing import List
 import os
-import database
+from src import database
 from fastapi.middleware.cors import CORSMiddleware
-from models.user import User
-from models.receta import Receta
-from models.filtros import FiltroRecetas
+from src.models.user import User
+from src.models.receta import Receta
+from src.models.filtros import FiltroRecetas
 
 app = FastAPI()
 
