@@ -23,8 +23,8 @@
     <section class="sections">
       <h4>INGREDIENTES (4 personas):</h4>
       <hr id="solidDividerYellow">
-      <ul v-for="(ingrediente) in this.ingredientes" :key="ingrediente.name">
-        <li>{{ ingrediente.name }}</li>
+      <ul v-for="(ingrediente) in this.ingredientes">
+        <li>{{ ingrediente }}</li>
       </ul>
     </section>
 
@@ -32,8 +32,8 @@
       <h4>ELABORACIÓN DE LA RECETA</h4>
       <hr id="solidDividerYellow">
       <p>Estos son los pasos que tienes que seguir</p>
-      <ul v-for="(step) in steps" :key="step.name">
-        <li>{{ step.name }}</li>
+      <ul v-for="(step) in steps">
+        <li>{{ step}}</li>
       </ul>
     </section>
   </div>
@@ -86,7 +86,8 @@ export default {
       steps: [],
       time : 0,
       name : null,
-      dificultad : 0
+      dificultad : 0,
+      urlImagen : null
     }
   },
   created() {
@@ -97,18 +98,19 @@ export default {
   methods: {
     getRecipe(){
       console.log("metodo getRecipe() antes de la llamada")
-      const pathReceta = 'http://localhost:8080/receta/sala de boletus y ceps'
+      const pathReceta = 'http://localhost:8000/receta/Salsa de boletus y ceps'
       const urlCodificada = encodeURI(pathReceta)
       axios.get(urlCodificada)
           .then(response => {
             console.log("metodo getRecipe() llamada OK")
-            console.log(response.data)
             //TODO: setear los datos correctamente a partir de la respuesta de la llamada
             this.ingredientes = response.data.ingredientes
             this.steps = response.data.pasos
             this.time = response.data.time
             this.name = response.data.nombre
             this.dificultad = response.data.dificultad
+            this.urlImagen = response.data.images.toString()
+            console.log(this.urlImagen)
           })
       .catch(error => {
         console.error('Error fetching recipes:', error);
