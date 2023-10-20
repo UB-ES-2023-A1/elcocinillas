@@ -2,6 +2,7 @@ import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
 from firebase_admin import auth, storage
+import json
 
 cred = credentials.Certificate('database\\elcocinillas.json')
 ruta_recetas = "imgRecetas/"
@@ -14,7 +15,7 @@ db = firestore.client()
 def create_recepta(recepta):
     try:
         doc_ref = db.collection(u'receptes').document(recepta.nombre)
-        doc_ref.set(recepta)
+        doc_ref.set(recepta.__dict__)
         return 0
     except Exception as e:
         print(f"Error al crear la recepta: {e}")
@@ -41,9 +42,6 @@ def get_receptes(filtro):
     result = query.stream()
     recetas = [receta.to_dict() for receta in result]
 
-    for receta in recetas:
-        getRecipeImages(receta)
-
     return recetas
 
 def get_recepta(name_recepta):
@@ -52,7 +50,6 @@ def get_recepta(name_recepta):
     doc = doc_ref.get()
     if doc.exists:
         resposta = doc.to_dict()
-        resposta["images"] = getRecipeImages(name_recepta)
 
         return resposta
     else:
@@ -76,15 +73,31 @@ def getRecipeImages(recepta):
     # Devuelve la lista de URLs de imágenes
     return image_urls
 
+def updateImg(receta):
+    doc_ref = db.collection("receptes").document(receta['nombre'])
+
+    try:
+        # Actualiza los datos del documento
+        doc_ref.update(receta)
+        print("Documento actualizado con éxito")
+    except Exception as e:
+        print(f"Error al actualizar el documento: {e}")
+
 #images list{ruta_local_img}
-def uploadImg(recepta, file, filename):
+def uploadImg(recepta, file):
 
-    bucket = storage.bucket()
-    blob = bucket.blob(ruta_recetas + recepta.nombre)
+    try:
+        bucket = storage.bucket()
+        blob = bucket.blob(ruta_recetas + recepta['nombre'])
 
-    blob.upload_from_string(file, content_type="image/jpeg")
+        blob.upload_from_string(file, content_type="image/jpeg")
 
-    return blob.public_url
+        return blob.public_url
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        print(f"Error al subir imagen a Firebase Storage: {str(e)}")
+        # Puedes registrar el error en un sistema de registro aquí si lo deseas
+        return None  # Devuelve None o un valor de error apropiado en caso de fallo
 
 
 def signup(mail, passwd, username):
