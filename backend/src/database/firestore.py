@@ -15,9 +15,10 @@ def create_recepta(recepta):
     try:
         doc_ref = db.collection(u'receptes').document(recepta.nombre)
         doc_ref.set(recepta.__dict__)
-        return 0
+        return 200
     except Exception as e:
         print(f"Error al crear la recepta: {e}")
+        return -1
 
 def get_receptes(filtro):
 
@@ -41,6 +42,8 @@ def get_receptes(filtro):
     result = query.stream()
     recetas = [receta.to_dict() for receta in result]
 
+    if recetas.count == 0:
+        return -1
     return recetas
 
 def get_recepta(name_recepta):
@@ -57,6 +60,8 @@ def get_recepta(name_recepta):
         return resposta
     else:
         print("No such document!")
+        return -1
+        
 
 def getRecipeImages(recepta): 
     # Crea una lista para almacenar las URL de las imágenes
@@ -83,8 +88,10 @@ def updateImg(receta):
         # Actualiza los datos del documento
         doc_ref.update(receta)
         print("Documento actualizado con éxito")
+        return 200
     except Exception as e:
         print(f"Error al actualizar el documento: {e}")
+        return -1
 
 #images list{ruta_local_img}
 def uploadImg(recepta, file):
@@ -100,7 +107,7 @@ def uploadImg(recepta, file):
         # Captura cualquier excepción y maneja el error
         print(f"Error al subir imagen a Firebase Storage: {str(e)}")
         # Puedes registrar el error en un sistema de registro aquí si lo deseas
-        return None  # Devuelve None o un valor de error apropiado en caso de fallo
+        return -1  # Devuelve None o un valor de error apropiado en caso de fallo
 
 
 def signup(mail, passwd, username):
@@ -111,7 +118,7 @@ def signup(mail, passwd, username):
             email = mail, 
             password = passwd
             )
-        return user
+        return 200
     except ValueError as e:
         return f"Error en el registro: {str(e)}"
     except auth.EmailAlreadyExistsError as e:
