@@ -161,3 +161,6 @@ cython_debug/
 .idea/
 .vs/
 backend/.idea/
+.vs/
+frontend/elcocinillas/.vs
+
