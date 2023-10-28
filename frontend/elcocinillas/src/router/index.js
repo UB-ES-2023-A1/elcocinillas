@@ -1,29 +1,29 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Login from '@/components/Login.vue'
-import HelloWorld from "@/components/HelloWorld.vue";
+import Vue from "vue";
+import Router from "vue-router";
+import Login from "@/components/Login.vue";
 import Recipe from "@/components/Recipe.vue";
+import MainView from "@/views/HomeView.vue";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/userlogin',
-      name: 'Login',
-      component: Login
+      path: "/",
+      name: "Home",
+      component: MainView,
     },
     {
-      path:'/',
-      name: 'Hello',
-      component: HelloWorld
+      path: "/userlogin",
+      name: "Login",
+      component: Login,
     },
     {
-      path: '/recetas',
-      name: 'Recipe',
-      component: Recipe
+      path: "/recetas",
+      name: "Recipe",
+      component: Recipe,
     },
-  ]
-})
+  ],
+});
