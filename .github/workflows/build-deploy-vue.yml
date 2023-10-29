@@ -18,7 +18,7 @@ jobs:
         with:
           node-version: 20
       - name: Cd to path
-        run: ls -la
+        run: cd ./frontend/elcocinillas/
 
       - name: Install dependencies
         run: npm install
@@ -36,4 +36,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.MY_GITHUB_TOKEN }}
-          publish_dir: ./frontend/elcocinillas/dist  # Ajusta la ruta de salida de tu construcción
+          publish_dir: ./dist  # Ajusta la ruta de salida de tu construcción
