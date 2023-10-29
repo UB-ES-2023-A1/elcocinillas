@@ -42,8 +42,7 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: '.'
-          working-directory: ./frontend/elcocinillas/dist
+          path: './frontend/elcocinillas/dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
