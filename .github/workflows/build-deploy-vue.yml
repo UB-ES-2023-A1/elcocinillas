@@ -31,15 +31,19 @@ jobs:
         working-directory: ./frontend/elcocinillas/
 
   deploy:
-  
+    environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-
-    needs: build
-
     steps:
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+        
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
         with:
-          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
-          publish_dir: ./dist  # Ajusta la ruta de salida de tu construcción
-          working-directory: ./frontend/elcocinillas/
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
