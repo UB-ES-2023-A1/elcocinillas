@@ -28,7 +28,7 @@ jobs:
 
   deploy:
     needs: build
-    
+
     permissions:
       contents: read
       pages: write  
@@ -41,6 +41,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
       - name: Setup Pages
         uses: actions/configure-pages@v3
 
