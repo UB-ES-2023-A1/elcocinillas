@@ -17,15 +17,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
-      - name: Cd to path
-        run: cd ./frontend/elcocinillas/
-        working-directory: ./frontend/elcocinillas/
-
-      - name: listar recursos
-        run: ls -la
 
       - name: Install dependencies
         run: npm install
+        working-directory: ./frontend/elcocinillas/
 
       - name: Build Vue App
         run: npm run build
