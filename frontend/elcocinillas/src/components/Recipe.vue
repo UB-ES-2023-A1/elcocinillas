@@ -82,8 +82,8 @@ export default {
   name: "Recipe",
   data() {
     return {
-      ingredientes: ["Manzana", "Pera"],
-      steps: ["Picar la fruta", "Meter fruta en boca"],
+      ingredientes: [],
+      steps: [],
       time: 0,
       name: null,
       dificultad: 0,
@@ -91,20 +91,17 @@ export default {
     };
   },
   created() {
-    console.log("metodo created()");
     this.getRecipe();
   },
 
   methods: {
     getRecipe() {
-      console.log("metodo getRecipe() antes de la llamada");
       const pathReceta = "http://localhost:8000/receta/Salsa de boletus y ceps";
       const urlCodificada = encodeURI(pathReceta);
       axios
         .get(urlCodificada)
         .then((response) => {
           console.log("metodo getRecipe() llamada OK");
-          //TODO: setear los datos correctamente a partir de la respuesta de la llamada
           this.ingredientes = response.data.ingredientes;
           this.steps = response.data.pasos;
           this.time = response.data.time;
