@@ -19,6 +19,7 @@ jobs:
           node-version: 20
       - name: Cd to path
         run: cd ./frontend/elcocinillas/
+        working-directory: ./frontend/elcocinillas/
 
       - name: listar recursos
         run: ls -la
