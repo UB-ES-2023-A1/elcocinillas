@@ -20,6 +20,9 @@ jobs:
       - name: Cd to path
         run: cd ./frontend/elcocinillas/
 
+      - name: listar recursos
+        run: ls -la
+
       - name: Install dependencies
         run: npm install
 
