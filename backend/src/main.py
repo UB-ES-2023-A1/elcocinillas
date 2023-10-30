@@ -31,6 +31,10 @@ def register(user: User):
 def get_receta(name: str):
     return database.get_recepta(name)
 
+@app.get("/user/{username}")
+def get_user(username: str):
+    return database.get_user(username)
+
 @app.get("/recetas/", response_model=tuple)
 def get_recetas(filtro: FiltroRecetas):
     return database.get_receptes(filtro)

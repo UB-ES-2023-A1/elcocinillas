@@ -122,3 +122,15 @@ def signup(mail, passwd, username):
     except Exception as e:
         return f"Error desconocido: {str(e)}"
     
+
+def get_user(username):
+    doc_ref = auth.get_user(username)
+
+    if doc_ref:
+        user_data = {
+            "uid": doc_ref.uid,
+            "email": doc_ref.email,
+        }
+        return user_data
+    else:
+        return {"error": "User not found"}
