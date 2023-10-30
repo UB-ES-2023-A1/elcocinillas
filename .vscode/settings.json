@@ -1,0 +1,8 @@
+{
+    "yaml.schemas": {
+        "https://json.schemastore.org/github-workflow.json": [
+            "file:///c%3A/Users/leuis/Desktop/ES/Services/.github/workflows/deploy.yml",
+            "file:///c%3A/Users/leuis/Desktop/ES/Services/.github/workflows/pipeline.yml"
+        ]
+    }
+}
