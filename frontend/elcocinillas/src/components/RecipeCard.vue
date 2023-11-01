@@ -1,6 +1,6 @@
 <template>
   <div class="card text-left border-light cardStyle">
-    <img class="card-img-top" src="./foto.jpg">
+    <img class="card-img-top" src="defaultRecipePhoto.jpg">
     <div class="card-body">
       <p class="card-text">{{recipeTitle}}</p>
     </div>
