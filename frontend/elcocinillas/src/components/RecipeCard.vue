@@ -1,0 +1,25 @@
+<template>
+  <div class="card text-left border-light cardStyle">
+    <img class="card-img-top" src="./foto.jpg">
+    <div class="card-body">
+      <p class="card-text">Titulo de la receta</p>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+  .cardStyle{
+    width: 18rem;
+    margin-bottom: 10%;
+    border-radius: 3%;
+  }
+
+  .cardStyle img{
+    border-radius: 3%;
+  }
+</style>
+
+<script setup>
+
+
+</script>
