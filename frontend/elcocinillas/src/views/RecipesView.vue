@@ -1,41 +1,38 @@
 <template>
-  <v-sheet class="mx-auto" elevation="8" max-width="800">
-    vsheet
-    <v-slide-group
-      v-model="model"
-      class="pa-4"
-      selected-class="bg-success"
-      show-arrows
-      v-slot="{}"
-    >
-      vslide
-      <v-slide-group-item v-for="n in 15" :key="n">
-        <v-card
-          color="grey-lighten-1"
-          :class="['ma-4', isSelected]"
-          height="200"
-          width="100"
-        >
-          vcard
-          <div class="d-flex fill-height align-center justify-center">
-            <v-scale-transition>
-              <v-icon
-                color="white"
-                size="48"
-                icon="mdi-close-circle-outline"
-              ></v-icon>
-            </v-scale-transition>
-          </div>
-        </v-card>
-      </v-slide-group-item>
-    </v-slide-group>
-  </v-sheet>
+  <div id="app">
+    <h1 id="title">RECETAS</h1>
+    <recipe-card :recipe-title=title />
+  </div>
+
 </template>
 
+<style>
+#app {
+  font-family: "Lato", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 5%;
+}
+
+#title {
+  font-weight: bold;
+  margin-bottom: 80px;
+}
+
+</style>
+
 <script>
+import RecipeCard from "@/components/RecipeCard.vue";
 export default {
-  data: () => ({
-    model: null,
-  }),
+  components: {RecipeCard},
+  data() {
+    return {
+      title: 'macarrones con tomate'
+    }
+  }
 };
 </script>
