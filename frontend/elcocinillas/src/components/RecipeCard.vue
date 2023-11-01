@@ -2,7 +2,7 @@
   <div class="card text-left border-light cardStyle">
     <img class="card-img-top" src="./foto.jpg">
     <div class="card-body">
-      <p class="card-text">Titulo de la receta</p>
+      <p class="card-text">{{recipeTitle}}</p>
     </div>
   </div>
 </template>
@@ -19,7 +19,13 @@
   }
 </style>
 
-<script setup>
-
+<script>
+export default {
+  // eslint-disable-next-line vue/multi-word-component-names
+  name: "RecipeCard",
+  props: {
+    recipeTitle : String
+  }
+};
 
 </script>
