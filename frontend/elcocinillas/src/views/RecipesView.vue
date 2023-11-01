@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <h1 id="title">RECETAS</h1>
-    <recipe-card :recipe-title=title />
+    <recipe-card v-for="rp in this.recipes"
+                 v-bind:key="rp.id"
+                 v-bind:recipeTitle="rp.title">
+    </recipe-card>
   </div>
 
 </template>
@@ -31,7 +34,11 @@ export default {
   components: {RecipeCard},
   data() {
     return {
-      title: 'macarrones con tomate'
+      recipes: [
+        { id: 1, title: 'Macarrones con tomate' },
+        { id: 2, title: 'Arroz con huevo' },
+        { id: 3, title: 'Berenjena rellena' }
+      ]
     }
   }
 };

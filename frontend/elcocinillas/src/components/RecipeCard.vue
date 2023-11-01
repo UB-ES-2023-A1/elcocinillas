@@ -10,7 +10,7 @@
 <style scoped>
   .cardStyle{
     width: 18rem;
-    margin-bottom: 10%;
+    margin: 2%;
     border-radius: 3%;
   }
 
