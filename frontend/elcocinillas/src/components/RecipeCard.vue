@@ -17,11 +17,7 @@
   .cardStyle img{
     border-radius: 3%;
   }
-
-  .card:hover{
-    width: 20rem;
-  }
-
+  
 </style>
 
 <script>
