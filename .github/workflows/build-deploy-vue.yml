@@ -27,14 +27,15 @@ jobs:
         with:
           node-version: 20
 
-      - name: llistar
-        run: cd ./frontend/elcocinillas
-
       - name: Install dependencies
-        run: npm install
+        run: |
+          cd ./frontend/elcocinillas
+          npm install
 
       - name: Build Vue App
-        run: npm run build
+        run: |
+          cd ./frontend/elcocinillas
+          npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
@@ -43,7 +44,7 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           # Upload entire repository
-          path: './elcocinillas/dist'
+          path: './frontend/elcocinillas/dist'
 
       - name: Deploy to GitHub Pages
         id: deployment
