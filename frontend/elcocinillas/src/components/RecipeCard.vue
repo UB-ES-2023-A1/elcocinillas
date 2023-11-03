@@ -1,5 +1,5 @@
 <template>
-  <div class="card text-left border-light cardStyle">
+  <div class="card text-left border-light cardStyle"  @click="openRecipe">
     <img class="card-img-top" src="./defaultRecipePhoto.jpg">
     <div class="card-body">
       <p class="card-text">{{recipeTitle}}</p>
@@ -17,7 +17,7 @@
   .cardStyle img{
     border-radius: 3%;
   }
-  
+
 </style>
 
 <script>
@@ -26,6 +26,12 @@ export default {
   name: "RecipeCard",
   props: {
     recipeTitle : String
+  },
+
+  methods : {
+    openRecipe() {
+      alert("ha hecho click en una receta");
+    }
   }
 };
 
