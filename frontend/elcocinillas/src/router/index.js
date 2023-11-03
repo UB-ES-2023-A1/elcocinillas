@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Login from "@/components/Login.vue";
 import RecipesView from "@/views/RecipesView.vue";
 import MainView from "@/views/HomeView.vue";
+import Recipe from "@/components/Recipe.vue";
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
       path: "/recetas",
       name: "RecipesView",
       component: RecipesView,
+    },
+    {
+      path: "/recetas/:nombreReceta",
+      name: "Recipe",
+      component: Recipe,
     },
   ],
 });

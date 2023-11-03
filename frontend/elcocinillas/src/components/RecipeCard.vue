@@ -30,7 +30,7 @@ export default {
 
   methods : {
     openRecipe() {
-      alert("ha hecho click en una receta");
+      alert("ha hecho click en la receta" + this.recipeTitle);
     }
   }
 };
