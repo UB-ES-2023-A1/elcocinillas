@@ -4,7 +4,7 @@
     <div class="d-flex flex-row flex-wrap">
       <recipe-card v-for="rp in this.recipes"
                    v-bind:key="rp.id"
-                   v-bind:recipeTitle="rp.title">
+                   v-bind:recipeName="rp.title">
       </recipe-card>
     </div>
   </div>
@@ -41,7 +41,7 @@ export default {
         { id: 2, title: 'Arroz con huevo' },
         { id: 3, title: 'Berenjena rellena' },
         { id: 4, title: 'Berenjena rellena' },
-        { id: 5, title: 'Berenjena rellena' },
+        { id: 5, title: 'Salsa de boletus y ceps' },
         { id: 6, title: 'Berenjena rellena' },
         { id: 7, title: 'Berenjena rellena' },
         { id: 8, title: 'Berenjena rellena' },

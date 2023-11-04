@@ -2,7 +2,7 @@
   <div class="card text-left border-light cardStyle"  @click="openRecipe">
     <img class="card-img-top" src="./defaultRecipePhoto.jpg">
     <div class="card-body">
-      <p class="card-text">{{recipeTitle}}</p>
+      <p class="card-text">{{ recipeName }}</p>
     </div>
   </div>
 </template>
@@ -25,12 +25,12 @@ export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "RecipeCard",
   props: {
-    recipeTitle : String
+    recipeName : String
   },
 
   methods : {
     openRecipe() {
-      this.$router.push('/recetas/'+this.recipeTitle)
+      this.$router.push('/recetas/'+this.recipeName)
     }
   }
 };
