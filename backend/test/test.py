@@ -7,7 +7,7 @@ urlImg = 'http://127.0.0.1:8000/imgUpload/'
 # Definir los datos de la receta en formato JSON
 data = {
     "user": "Guillem",
-    "nombre": "Salsa de boletus y ceps",
+    "nombre": "Salsa de boletus y ceps1",
     "classe": "vegetariana",
     "tipo": "italiana",
     "ingredientes": ["boletus", "nata liquida", "cebolla"],
@@ -18,9 +18,8 @@ data = {
 }
 # Cargar las imágenes desde archivos locales
 image_paths = ["imgTest\\boletus.jpg"]
-files = [("files", (image_path, open(image_path, 'rb'), "image/jpeg")) for image_path in image_paths]
 
-response1 = requests.post(urlImg, data={"nombre": data["nombre"]}, files=files)
+response1 = requests.post(url, json=data)
 
 # Imprimir la respuesta del servidor
 print(f'Respuesta del servidor: {response1.status_code}')
