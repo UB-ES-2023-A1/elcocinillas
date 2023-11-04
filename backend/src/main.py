@@ -35,7 +35,7 @@ def get_receta(name: str):
 def get_user(username: str):
     return database.get_user(username)
 
-@app.get("/recetas/", response_model=tuple)
+@app.get("/recetas/")
 def get_recetas(filtro: FiltroRecetas):
     return database.get_receptes(filtro)
 

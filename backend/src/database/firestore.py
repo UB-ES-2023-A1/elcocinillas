@@ -32,7 +32,7 @@ def get_all_recipes():
     return data
 def get_receptes(filtro):
 
-    recetas_ref = db.collection("recetas")
+    recetas_ref = db.collection("receptes")
     query = recetas_ref
 
     if filtro.user is not None:

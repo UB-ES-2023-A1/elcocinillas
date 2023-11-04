@@ -31,11 +31,11 @@ Accept: application/json
 
 GET http://127.0.0.1:8000/recetas/
 Content-Type: application/json
-Accept: application/json
 
 {
   "classe": "vegetariana"
 }
+
 ###
 
 GET http://127.0.0.1:8000/todasrecetas/
