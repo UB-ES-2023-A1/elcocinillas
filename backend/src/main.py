@@ -39,6 +39,11 @@ def get_user(username: str):
 def get_recetas(filtro: FiltroRecetas):
     return database.get_receptes(filtro)
 
+
+@app.get("/todasrecetas/")
+def get_all_recipes():
+    return database.get_all_recipes()
+
 @app.post("/imgUpload/", response_model=str)
 def publi_img(nombre: str = Form(...), files: List[UploadFile] = File(...)):
 
