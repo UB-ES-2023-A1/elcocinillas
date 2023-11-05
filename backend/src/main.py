@@ -1,11 +1,12 @@
 from fastapi import FastAPI, UploadFile, HTTPException, Form, File
 from typing import List
 import os
-from src import database
+from database import firestore as database
 from fastapi.middleware.cors import CORSMiddleware
-from src.models.user import User
-from src.models.receta import Receta
-from src.models.filtros import FiltroRecetas
+from models.user import User
+from models.receta import Receta
+from models.filtros import FiltroRecetas
+
 
 app = FastAPI()
 
@@ -30,9 +31,18 @@ def register(user: User):
 def get_receta(name: str):
     return database.get_recepta(name)
 
+@app.get("/user/{username}")
+def get_user(username: str):
+    return database.get_user(username)
+
 @app.get("/recetas/", response_model=tuple)
 def get_recetas(filtro: FiltroRecetas):
     return database.get_receptes(filtro)
+
+
+@app.get("/todasrecetas/")
+def get_all_recipes():
+    return database.get_all_recipes()
 
 @app.post("/imgUpload/", response_model=str)
 def publi_img(nombre: str = Form(...), files: List[UploadFile] = File(...)):
