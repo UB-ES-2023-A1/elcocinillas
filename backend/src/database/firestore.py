@@ -23,23 +23,30 @@ def create_recepta(recepta):
         print(f"Error al crear la recepta: {e}")
         return -1
 
+def get_all_recipes():
+    coleccion = db.collection("receptes")
+    recetas = coleccion.stream()
+
+    data = [doc.to_dict() for doc in recetas]
+
+    return data
 def get_receptes(filtro):
 
-    recetas_ref = db.collection("recetas")
+    recetas_ref = db.collection("receptes")
     query = recetas_ref
 
-    if filtro.user:
+    if filtro.user is not None:
         query = query.where("user", "==", filtro.user)
-    if filtro.classe:
+    if filtro.classe is not None:
         query = query.where("classe", "==", filtro.classe)
-    if filtro.tipo:
+    if filtro.tipo is not None:
         query = query.where("tipo", "==", filtro.tipo)
-    if filtro.ingredientes:
+    if filtro.ingredientes is not None:
         for ingrediente in filtro.ingredientes:
             query = query.where("ingredientes", "array_contains", ingrediente)
-    if filtro.time:
+    if filtro.time is not None:
         query = query.where("time", "==", filtro.time)
-    if filtro.dificultad:
+    if filtro.dificultad is not None:
         query = query.where("dificultad", "==", filtro.dificultad)
 
     result = query.stream()
@@ -141,3 +148,4 @@ def get_user(username):
         return user_data
     else:
         return {"error": "User not found"}
+
