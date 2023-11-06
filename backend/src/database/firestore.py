@@ -1,9 +1,12 @@
+import os
 import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
 from firebase_admin import auth, storage
 
-cred = credentials.Certificate('database\\elcocinillas.json')
+current_directory = os.path.dirname(__file__)
+file_path = os.path.join(current_directory, 'elcocinillas.json')
+cred = credentials.Certificate(file_path)
 ruta_recetas = "imgRecetas/"
 firebase_admin.initialize_app(cred, {
     'storageBucket': 'elcocinillas-93ebe.appspot.com'
@@ -20,23 +23,30 @@ def create_recepta(recepta):
         print(f"Error al crear la recepta: {e}")
         return -1
 
+def get_all_recipes():
+    coleccion = db.collection("receptes")
+    recetas = coleccion.stream()
+
+    data = [doc.to_dict() for doc in recetas]
+
+    return data
 def get_receptes(filtro):
 
-    recetas_ref = db.collection("recetas")
+    recetas_ref = db.collection("receptes")
     query = recetas_ref
 
-    if filtro.user:
+    if filtro.user is not None:
         query = query.where("user", "==", filtro.user)
-    if filtro.classe:
+    if filtro.classe is not None:
         query = query.where("classe", "==", filtro.classe)
-    if filtro.tipo:
+    if filtro.tipo is not None:
         query = query.where("tipo", "==", filtro.tipo)
-    if filtro.ingredientes:
+    if filtro.ingredientes is not None:
         for ingrediente in filtro.ingredientes:
             query = query.where("ingredientes", "array_contains", ingrediente)
-    if filtro.time:
+    if filtro.time is not None:
         query = query.where("time", "==", filtro.time)
-    if filtro.dificultad:
+    if filtro.dificultad is not None:
         query = query.where("dificultad", "==", filtro.dificultad)
 
     result = query.stream()
@@ -126,3 +136,16 @@ def signup(mail, passwd, username):
     except Exception as e:
         return f"Error desconocido: {str(e)}"
     
+
+def get_user(username):
+    doc_ref = auth.get_user(username)
+
+    if doc_ref:
+        user_data = {
+            "uid": doc_ref.uid,
+            "email": doc_ref.email,
+        }
+        return user_data
+    else:
+        return {"error": "User not found"}
+
