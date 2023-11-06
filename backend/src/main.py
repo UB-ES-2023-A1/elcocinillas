@@ -7,7 +7,6 @@ from models.user import User
 from models.receta import Receta
 from models.filtros import FiltroRecetas
 
-
 app = FastAPI()
 
 # Configura CORS para permitir solicitudes desde tu aplicación Vue
