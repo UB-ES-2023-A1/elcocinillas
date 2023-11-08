@@ -58,19 +58,20 @@ export default {
   methods : {
     getRecipesFromDB() {
       const path = "http://localhost:8000/recetas/";
-      const filtroRecetas = {
-      };
 
       axios.get(path, {
-        params: filtroRecetas
+        params: {
+          "user": 'Guillem',
+          "classe": 'vegetariana'
+        }
       })
-          .then((response) => {
-            console.log("metodo get_recetas() llamada OK");
-            this.recipes = response.data;
-          })
-          .catch((error) => {
-            console.error("Error fetching recipes:", error);
-          });
+      .then(response => {
+        console.log("metodo todasRecetas() llamada OK");
+        this.recipes = response.data;
+      })
+      .catch(error => {
+        console.error("Error fetching recipes:", error);
+      });
     },
 
     getAllRecipesFromDB() {

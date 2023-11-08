@@ -1,4 +1,4 @@
-from fastapi import FastAPI, UploadFile, HTTPException, Form, File
+from fastapi import FastAPI, UploadFile, HTTPException, Form, File, Query
 from typing import List
 import os
 from database import firestore as database
@@ -39,9 +39,14 @@ def get_user(username: str):
 def update_user(user_id: str, updated_user: User):
     return database.update_user(user_id,updated_user)
 
-@app.get("/recetas/")
-async def get_recetas(filtro: FiltroRecetas):
-    print(filtro)
+@app.get("/recetas/",response_model=tuple)
+def get_recetas(user: str = Query(None),
+    classe: str = Query(None),
+    tipo: str = Query(None),
+    ingredientes: List = Query([]),
+    time: int =  Query(None),
+    dificultad: int = Query(None) ):
+    filtro = {"user": user ,"classe": classe,"tipo": tipo,"ingredientes": ingredientes, "time": time, "dificultad": dificultad}
     return database.get_receptes(filtro)
 
 
