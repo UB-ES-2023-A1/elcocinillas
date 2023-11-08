@@ -47,28 +47,22 @@ export default {
   },
 
   created() {
+      /*
     if (this.filtros == null){
       this.getAllRecipesFromDB();
-    } else{
+    } else{*/
       this.getRecipesFromDB();
-    }
+   // }
   },
 
   methods : {
     getRecipesFromDB() {
-      const config = {
-        header: {
-          'Content-Type': 'application/json'
-        }
-      };
       const path = "http://localhost:8000/recetas/";
       const filtroRecetas = {
-        classe: "vegetariana"
       };
 
       axios.get(path, {
         params: filtroRecetas
-        , headers : config.header
       })
           .then((response) => {
             console.log("metodo get_recetas() llamada OK");

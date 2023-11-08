@@ -35,8 +35,13 @@ def get_receta(name: str):
 def get_user(username: str):
     return database.get_user(username)
 
-@app.get("/recetas/", response_model=tuple)
-def get_recetas(filtro: FiltroRecetas):
+@app.put("/user/{user_id}")
+def update_user(user_id: str, updated_user: User):
+    return database.update_user(user_id,updated_user)
+
+@app.get("/recetas/")
+async def get_recetas(filtro: FiltroRecetas):
+    print(filtro)
     return database.get_receptes(filtro)
 
 

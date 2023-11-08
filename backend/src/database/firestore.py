@@ -147,5 +147,14 @@ def get_user(username):
         }
         return user_data
     else:
-        return {"error": "User not found"}
+        return {"error": "Usuario no encontrado"}
 
+def update_user(user_id, updated_user):
+    user = auth.get_user(user_id)
+    if user.userID == user_id:
+        # Actualiza los campos del usuario
+        user.email = updated_user.email
+        user.password = updated_user.password
+        return {"message": "Usuario actualizado con éxito"}
+
+    return {"error": "Usuario no encontrado"}
