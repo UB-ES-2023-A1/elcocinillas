@@ -60,4 +60,4 @@ jobs:
           app-name: 'elcocinillas'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_56F44D72C7734915BC1BF4B3EB8740F8 }}
-          package: ./frontend/elcocinillas/src
+          package: ./frontend/elcocinillas/dist
