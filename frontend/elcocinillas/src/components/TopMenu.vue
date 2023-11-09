@@ -59,16 +59,28 @@ export default {
     // eslint-disable-next-line vue/multi-word-component-names
     name: "Login",
     data () {
-    return {
-      actual_path: 'http://localhost:8000/',
-      email: '',
-      password: '',
-      addUserForm: {
-        username: null,
-        password: null
+      return {
+        actual_path: 'http://localhost:8000/',
+        email: '',
+        password: '',
+        addUserForm: {
+          username: null,
+          password: null
+        }
       }
-    }
-  },
+    },
+    name: "Recipe",
+    data () {
+      return {
+        actual_path: 'http://localhost:8000/recipe/'
+      }
+    },
+    name: "View",
+    data () {
+      return {
+        actual_path: 'http://localhost:8000/view/"
+      }
+    },
   methods:{
     async checkLogin(){
         if (this.email == ''){
