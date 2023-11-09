@@ -25,35 +25,19 @@
   margin-top: 20px;
 }
 .description {
-  place-items: center;
   align-content: center;
   width: 75%;
   position: relative;
   left: 50px;
 }
-.max-height {
-  height: 50px;
-}
-.heading {
-  position: relative;
-}
-
 h1 {
   font-size: 50px;
   color: black;
   text-shadow: 2px 2px white;
 }
-h2 {
-  font-size: 40px;
-  color: black;
-  text-shadow: 2px 2px white;
-  text-decoration: none;
-}
 section {
   display: grid;
   place-items: center;
-  align-content: center;
-  position: relative;
 }
 .hidden {
   opacity: 0;
