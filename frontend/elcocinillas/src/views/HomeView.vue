@@ -1,5 +1,5 @@
 <template>
-  <div class="rel">
+  <div class="pos">
     <div>
       <div class="column left">
         <ColumnComp>
@@ -8,17 +8,16 @@
             <img src="../assets/clock.png" alt="Health Icon" />
           </template>
           <template #description>
-            <v-app class="slider">
-              Minutos:
+            <v-app class="choices" style="padding-top: 25px;">
+              Tiempo Máximo (minutos):
               <v-slider
-                v-model="value"
+                v-model="time"
                 :min="0"
                 :max="60"
                 :step="15"
-                thumb-label
+                thumb-label="always"
               ></v-slider>
             </v-app>
-            {{ value }}
           </template>
         </ColumnComp>
       </div>
@@ -32,9 +31,10 @@
             <v-app class="choices">
               <v-container>
                 <v-select
+                  v-model="diet"
                   chips
                   label="Escoge tu dieta"
-                  :items="['Vegana', 'Vegetariana', 'Omnívora']"
+                  :items="diets"
                   multiple
                 ></v-select>
               </v-container>
@@ -46,15 +46,16 @@
         <ColumnComp>
           <template #heading>Plato</template>
           <template #image>
-            <img src="../assets/foodtypes.png" alt="Health Icon"/>
+            <img src="../assets/food-plate-1.png" alt="Health Icon"/>
           </template>
           <template #description>
             <v-app class="choices">
               <v-container>
                 <v-select
+                  v-model="dish"
                   chips
                   label="Escoge tipo de comida"
-                  :items="['Ensalada', 'Hamburguesa', 'Pizza', 'Postre']"
+                  :items="dishes"
                   multiple
                 ></v-select>
               </v-container>
@@ -63,102 +64,109 @@
         </ColumnComp>
       </div>
     </div>
-    <div class="link">
-      <router-link to='recetas/${}'>
-        <div>
-          <h2>
-            Ver Recetas!
-          </h2>
-        </div>
-      </router-link>
-    </div>
+    <button class="to-recipes" @click="toLink('/recetas')">
+      <h2>
+        Ver Recetas
+      </h2>
+    </button>
   </div>
 </template>
 
 <style scoped>
-.link:hover{
-  scale: 1.1;
+.pos{
+  display: grid;
+  background-size: 200px;
+  background-repeat: repeat;
 }
-
-.toRecipes{
-  text-align: center;
-  place-content: center;
-}
-.h2{
-  margin: 20px;
-  font-size: 100px;
+h1 {
+  font-size: 35px;
+  text-shadow: 2px 2px lightsteelblue;
   color: black;
-  text-shadow: 2px 2px white;
 }
-.rel {
-  width: 100%;
-  text-align: center;
-  place-content: center;
+h2 {
+  font-size: 35px;
+  color: white;
 }
 .column {
-  width: 33%;
+  width: 33.3333%;
   float: left;
   height: 450px;
 }
 .choices {
   max-height: 100px;
-  place-content: center;
   text-align: center;
   border-radius: 25px;
-  position: relative;
   cursor: pointer;
+  overflow: hidden;
 }
-.slider {
-  max-height: 60px;
-  text-align: center;
-  border-radius: 15px;
-  position: relative;
-  cursor: pointer;
+.choices {
+  overflow: visible;
 }
 .left {
-  background-color: #13cfb9;
-  transition: filter 1s;
-}
-.left:hover {
-  filter: brightness(120%);
-  transition: filter 1s;
-  cursor: pointer;
+  background-color: white;
 }
 .center {
-  background-color: #76ded9;
-  filter: brightness(100%);
-  transition: filter 1s;
-}
-.center:hover {
-  filter: brightness(130%);
-  transition: filter 1s;
-  cursor: pointer;
+  background-color: white;
 }
 .right {
-  background-color: #13cfb9;
-  transition: filter 1s;
-}
-.right:hover {
-  filter: brightness(120%);
-  transition: filter 1s;
-  cursor: pointer;
+  background-color: white;
 }
 
 img {
   height: 180px;
-  place-items: center;
-  place-content: center;
   transition: 1s;
-  position: relative;
 }
-
 img:hover {
   transform: scale(1.1);
   transition: 1s;
 }
+
+.to-recipes {
+  position: relative;
+  background-color: #cc9966;
+  color: white;
+  background-size: 300px;
+  font-size: 16px;
+  padding: 10px 20px 10px;
+  height: 75px;
+  width: 300px;
+  text-align: center;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 10px;
+  top: -20px;
+}
+
+.to-recipes:hover{
+  filter: brightness(1.1);
+  transform: rotate(-3deg);
+  transition: 0.2s;
+}
 </style>
 
-<script setup>
+<script>
 import ColumnComp from "../components/ColumnComp.vue"
 
+export default {  
+    components: { ColumnComp },
+    data(){
+      return {
+        // Data:
+        diets: ['Vegana', 'Vegetariana', 'Omnívora'],
+        dishes: ['Ensalada', 'Hamburguesa', 'Pizza', 'Postre'],
+        // Options chosen:
+        time: 0,
+        diet: [],
+        dish: []
+      }
+    },
+    methods: {
+      toLink(link){
+        window.location = encodeURI(link
+            + '%' + this.time
+            + '%' + this.diet
+            + '%' + this.dish);
+      }
+    }
+  };
 </script>
