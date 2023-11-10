@@ -1,5 +1,5 @@
 <template>
-  <div class="pos">
+  <div class="pos" @click="updateData">
     <div>
       <div class="column left">
         <ColumnComp>
@@ -31,10 +31,10 @@
             <v-app class="choices">
               <v-container>
                 <v-select
-                  v-model="diet"
+                  v-model="diets"
                   chips
                   label="Escoge tu dieta"
-                  :items="diets"
+                  :items="dataDiets"
                   multiple
                 ></v-select>
               </v-container>
@@ -52,10 +52,10 @@
             <v-app class="choices">
               <v-container>
                 <v-select
-                  v-model="dish"
+                  v-model="dishes"
                   chips
                   label="Escoge tipo de comida"
-                  :items="dishes"
+                  :items="dataDishes"
                   multiple
                 ></v-select>
               </v-container>
@@ -65,9 +65,11 @@
       </div>
     </div>
     <button class="to-recipes" @click="toLink('/recetas')">
-      <h2>
-        Ver Recetas
-      </h2>
+      <router-link to="/recetas">
+        <h2>
+          Ver Recetas
+        </h2>
+      </router-link>
     </button>
   </div>
 </template>
@@ -86,6 +88,7 @@ h1 {
 h2 {
   font-size: 35px;
   color: white;
+  text-shadow: 2px black;
 }
 .column {
   width: 33.3333%;
@@ -123,9 +126,9 @@ img:hover {
 
 .to-recipes {
   position: relative;
-  background-color: #cc9966;
+  background-image: url("../assets/food-mural-2.jpg");
   color: white;
-  background-size: 300px;
+  background-size: 400px;
   font-size: 16px;
   padding: 10px 20px 10px;
   height: 75px;
@@ -139,6 +142,8 @@ img:hover {
 
 .to-recipes:hover{
   filter: brightness(1.1);
+  background-size: 250px;
+  background-repeat: repeat;
   transform: rotate(-3deg);
   transition: 0.2s;
 }
@@ -152,20 +157,28 @@ export default {
     data(){
       return {
         // Data:
-        diets: ['Vegana', 'Vegetariana', 'Omnívora'],
-        dishes: ['Ensalada', 'Hamburguesa', 'Pizza', 'Postre'],
+        dataDiets: ['Vegana', 'Vegetariana', 'Omnívora'],
+        dataDishes: ['Ensalada', 'Hamburguesa', 'Pizza', 'Postre'],
         // Options chosen:
         time: 0,
-        diet: [],
-        dish: []
+        diets: [],
+        dishes: []
       }
     },
     methods: {
+      updateData() {
+        this.$globalData.time = this.time;
+        this.$globalData.diets = this.diets;
+        this.$globalData.dishes = this.dishes;
+      },
       toLink(link){
+        window.location = encodeURI(link);
+        /*
         window.location = encodeURI(link
             + '%' + this.time
-            + '%' + this.diet
-            + '%' + this.dish);
+            + '%' + this.diets
+            + '%' + this.dishes);
+        */
       }
     }
   };
