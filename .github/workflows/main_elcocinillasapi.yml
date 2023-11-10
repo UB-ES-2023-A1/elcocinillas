@@ -71,3 +71,4 @@ jobs:
           app-name: 'elcocinillasApi'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4C55852F15304BFAAC1047CE8FFDB1C4 }}
+          path: ./backend/src
