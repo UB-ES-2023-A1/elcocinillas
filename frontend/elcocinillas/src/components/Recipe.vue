@@ -80,6 +80,9 @@ import axios from "axios";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Recipe",
+  props: {
+    nombreReceta : String
+  },
   data() {
     return {
       ingredientes: [],
@@ -96,7 +99,7 @@ export default {
 
   methods: {
     getRecipe() {
-      const pathReceta = "http://localhost:8000/receta/Salsa de boletus y ceps";
+      const pathReceta = "http://localhost:8000/receta/"+this.nombreReceta;
       const urlCodificada = encodeURI(pathReceta);
       axios
         .get(urlCodificada)

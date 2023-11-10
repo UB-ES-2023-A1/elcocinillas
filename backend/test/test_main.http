@@ -17,9 +17,27 @@ Content-Type: application/json
     "nombre": "Salsa de boletus",
     "classe": "vegetariana",
     "tipo": "italiana",
-    "ingredientes": [boletus, nata liquida, cebolla],
-    "pasos": [cortar boletus y cebolla, añadir nata y dejar reducir],
+    "ingredientes": ["boletus", "nata liquida", "cebolla"],
+    "pasos": ["cortar boletus y cebolla", "añadir nata y dejar reducir"],
     "images": [],
     "time": 30,
     "dificultad": 2
 }
+###
+
+GET http://127.0.0.1:8000/user/Kd9WLagwJkVuBm5Ph2vrVWLNLg23
+Accept: application/json
+###
+
+GET http://127.0.0.1:8000/recetas/
+Content-Type: application/json
+
+{
+  "classe": "vegetariana"
+}
+
+
+###
+
+GET http://127.0.0.1:8000/todasrecetas/
+Accept: application/json

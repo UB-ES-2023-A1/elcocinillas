@@ -1,9 +1,12 @@
+import os
 import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
 from firebase_admin import auth, storage
 
-cred = credentials.Certificate('database\\elcocinillas.json')
+current_directory = os.path.dirname(__file__)
+file_path = os.path.join(current_directory, 'elcocinillas.json')
+cred = credentials.Certificate(file_path)
 ruta_recetas = "imgRecetas/"
 firebase_admin.initialize_app(cred, {
     'storageBucket': 'elcocinillas-93ebe.appspot.com'
@@ -20,24 +23,32 @@ def create_recepta(recepta):
         print(f"Error al crear la recepta: {e}")
         return -1
 
-def get_receptes(filtro):
+def get_all_recipes():
+    coleccion = db.collection("receptes")
+    recetas = coleccion.stream()
 
-    recetas_ref = db.collection("recetas")
+    data = [doc.to_dict() for doc in recetas]
+
+    return data
+def get_receptes(filtro):
+    print(filtro)
+
+    recetas_ref = db.collection("receptes")
     query = recetas_ref
 
-    if filtro.user:
-        query = query.where("user", "==", filtro.user)
-    if filtro.classe:
-        query = query.where("classe", "==", filtro.classe)
-    if filtro.tipo:
-        query = query.where("tipo", "==", filtro.tipo)
-    if filtro.ingredientes:
-        for ingrediente in filtro.ingredientes:
+    if filtro['user'] is not None:
+        query = query.where("user", "==", filtro['user'])
+    if filtro["classe"] is not None:
+        query = query.where("classe", "==", filtro["classe"])
+    if filtro["tipo"] is not None:
+        query = query.where("tipo", "==", filtro["tipo"])
+    if filtro["ingredientes"] is not None:
+        for ingrediente in filtro["ingredientes"]:
             query = query.where("ingredientes", "array_contains", ingrediente)
-    if filtro.time:
-        query = query.where("time", "==", filtro.time)
-    if filtro.dificultad:
-        query = query.where("dificultad", "==", filtro.dificultad)
+    if filtro["time"] is not None:
+        query = query.where("time", "==", filtro["time"])
+    if filtro["dificultad"] is not None:
+        query = query.where("dificultad", "==", filtro["dificultad"])
 
     result = query.stream()
     recetas = [receta.to_dict() for receta in result]
@@ -126,3 +137,25 @@ def signup(mail, passwd, username):
     except Exception as e:
         return f"Error desconocido: {str(e)}"
     
+
+def get_user(username):
+    doc_ref = auth.get_user(username)
+
+    if doc_ref:
+        user_data = {
+            "uid": doc_ref.uid,
+            "email": doc_ref.email,
+        }
+        return user_data
+    else:
+        return {"error": "Usuario no encontrado"}
+
+def update_user(user_id, updated_user):
+    user = auth.get_user(user_id)
+    if user.userID == user_id:
+        # Actualiza los campos del usuario
+        user.email = updated_user.email
+        user.password = updated_user.password
+        return {"message": "Usuario actualizado con éxito"}
+
+    return {"error": "Usuario no encontrado"}
