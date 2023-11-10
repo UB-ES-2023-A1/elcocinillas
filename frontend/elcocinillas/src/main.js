@@ -6,6 +6,7 @@ import App from "./App.vue";
 import router from "./router";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import vuetify from './plugins/vuetify'
 
 // Configura tus credenciales de Firebase
 const firebaseConfig = {
@@ -27,10 +28,20 @@ export { auth };
 Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 
+Vue.prototype.$globalData = Vue.observable({
+  time: 0,
+  diets: [],
+  dishes: []
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
   router,
   components: { App },
-  template: "<App/>",
+  vuetify,
+  template: "<App/>"
 });
+
+/* eslint-disable */
+
