@@ -64,7 +64,3 @@ def publi_receta(receta: Receta):
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=500, detail="Error en el servidor leer img: " + str(e))
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port= os.environ["PORT"])
