@@ -31,23 +31,24 @@ def get_all_recipes():
 
     return data
 def get_receptes(filtro):
+    print(filtro)
 
     recetas_ref = db.collection("receptes")
     query = recetas_ref
 
-    if filtro.user is not None:
-        query = query.where("user", "==", filtro.user)
-    if filtro.classe is not None:
-        query = query.where("classe", "==", filtro.classe)
-    if filtro.tipo is not None:
-        query = query.where("tipo", "==", filtro.tipo)
-    if filtro.ingredientes is not None:
-        for ingrediente in filtro.ingredientes:
+    if filtro['user'] is not None:
+        query = query.where("user", "==", filtro['user'])
+    if filtro["classe"] is not None:
+        query = query.where("classe", "==", filtro["classe"])
+    if filtro["tipo"] is not None:
+        query = query.where("tipo", "==", filtro["tipo"])
+    if filtro["ingredientes"] is not None:
+        for ingrediente in filtro["ingredientes"]:
             query = query.where("ingredientes", "array_contains", ingrediente)
-    if filtro.time is not None:
-        query = query.where("time", "==", filtro.time)
-    if filtro.dificultad is not None:
-        query = query.where("dificultad", "==", filtro.dificultad)
+    if filtro["time"] is not None:
+        query = query.where("time", "==", filtro["time"])
+    if filtro["dificultad"] is not None:
+        query = query.where("dificultad", "==", filtro["dificultad"])
 
     result = query.stream()
     recetas = [receta.to_dict() for receta in result]
@@ -147,5 +148,14 @@ def get_user(username):
         }
         return user_data
     else:
-        return {"error": "User not found"}
+        return {"error": "Usuario no encontrado"}
 
+def update_user(user_id, updated_user):
+    user = auth.get_user(user_id)
+    if user.userID == user_id:
+        # Actualiza los campos del usuario
+        user.email = updated_user.email
+        user.password = updated_user.password
+        return {"message": "Usuario actualizado con éxito"}
+
+    return {"error": "Usuario no encontrado"}
