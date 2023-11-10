@@ -1,5 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
+import Login from "../components/Login.vue";
+import Perfil from  "../components/Perfil.vue";
+import Recipe from "../components/Recipe.vue";
+import MainView from "../views/HomeView.vue";
 import Login from "@/components/Login.vue";
 import RecipesView from "@/views/RecipesView.vue";
 import MainView from "@/views/HomeView.vue";
@@ -32,5 +36,10 @@ export default new Router({
       props: true,
       component: Recipe,
     },
+    {
+      path: "/perfil",
+      name: "Perfil",
+      component: Perfil,
+    }
   ],
 });
