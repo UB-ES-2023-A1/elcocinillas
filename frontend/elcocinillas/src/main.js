@@ -29,6 +29,12 @@ export { auth };
 Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 
+Vue.prototype.$globalData = Vue.observable({
+  time: 0,
+  diets: [],
+  dishes: []
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: "#app",

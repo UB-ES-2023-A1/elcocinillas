@@ -1,10 +1,11 @@
 <template>
   <nav>
+    {{ filterDiet }}
     <a href="#">
       <router-link to="/">Home</router-link>
     </a>
     <a href="#">
-      <router-link to="/recetas">Recipes</router-link>
+      <router-link to="/recetas">Recetas</router-link>
     </a>
     <a href="#">
       <router-link to="/userlogin">Log In</router-link>
@@ -84,3 +85,12 @@ span {
   color: #2bd6b4;
 }
 </style>
+
+<script>
+export default {
+  // eslint-disable-next-line vue/multi-word-component-names
+  props: [
+    'filterDiet'
+  ]
+}
+</script>
