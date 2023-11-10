@@ -6,6 +6,8 @@ import App from "./App.vue";
 import router from "./router";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import store from "./store";
+
 
 // Configura tus credenciales de Firebase
 const firebaseConfig = {
@@ -30,7 +32,8 @@ Vue.config.productionTip = false;
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
+  store,
   router,
   components: { App },
   template: "<App/>",
-});
+})

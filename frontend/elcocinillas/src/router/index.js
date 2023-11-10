@@ -1,8 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Login from "@/components/Login.vue";
-import Recipe from "@/components/Recipe.vue";
-import MainView from "@/views/HomeView.vue";
+import Login from "../components/Login.vue";
+import Perfil from  "../components/Perfil.vue";
+import Recipe from "../components/Recipe.vue";
+import MainView from "../views/HomeView.vue";
 
 Vue.use(Router);
 
@@ -25,5 +26,10 @@ export default new Router({
       name: "Recipe",
       component: Recipe,
     },
+    {
+      path: "/perfil",
+      name: "Perfil",
+      component: Perfil,
+    }
   ],
 });
