@@ -31,6 +31,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
         working-directory: ./backend/
+        
+      - name: Config JSON
+        run: echo "${{ secrets.FIREBASE_CONFIG }}" > elcocinillas.json
+        working-directory: ./backend/src/database/
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
       - name: Zip artifact for deployment
