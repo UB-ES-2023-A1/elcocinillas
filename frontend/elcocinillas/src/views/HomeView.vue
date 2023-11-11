@@ -1,5 +1,5 @@
 <template>
-  <div class="pos" @click="updateData">
+  <div class="pos" @mouseover="updateData">
     <div>
       <div class="column left">
         <ColumnComp>
@@ -8,16 +8,9 @@
             <img src="../assets/clock.png" alt="Health Icon" />
           </template>
           <template #description>
-            <v-app class="choices" style="padding-top: 25px;">
-              Tiempo Máximo (minutos):
-              <v-slider
-                v-model="time"
-                :min="0"
-                :max="60"
-                :step="15"
-                thumb-label="always"
-              ></v-slider>
-            </v-app>
+            Tiempo máximo (minutos): {{ time }}
+            <input type="range" min="0" max="60" value="30" 
+            class="slider" id="myRange" v-model="time">
           </template>
         </ColumnComp>
       </div>
@@ -28,17 +21,18 @@
             <img src="../assets/diet.png" alt="Health Icon" />
           </template>
           <template #description> 
-            <v-app class="choices">
-              <v-container>
-                <v-select
-                  v-model="diets"
-                  chips
-                  label="Escoge tu dieta"
-                  :items="dataDiets"
-                  multiple
-                ></v-select>
-              </v-container>
-            </v-app>
+            <div>
+              <input type="checkbox" id="dietVega" value="Vegana" v-model="diets">
+              <label for="dietVega">Vegana</label>
+            </div>
+            <div>
+              <input type="checkbox" id="dietVege" value="Vegetariana" v-model="diets">
+              <label for="dietVege">Vegetariana</label>
+            </div>
+            <div>
+              <input type="checkbox" id="dietOmni" value="Omnívora" v-model="diets">
+              <label for="dietOmni">Omnívora</label>
+            </div>
           </template>
         </ColumnComp>
       </div>
@@ -49,22 +43,23 @@
             <img src="../assets/food-plate-1.png" alt="Health Icon"/>
           </template>
           <template #description>
-            <v-app class="choices">
-              <v-container>
-                <v-select
-                  v-model="dishes"
-                  chips
-                  label="Escoge tipo de comida"
-                  :items="dataDishes"
-                  multiple
-                ></v-select>
-              </v-container>
-            </v-app>
+            <div>
+              <input type="checkbox" id="dishSala" value="Ensalada" v-model="dishes">
+              <label for="dishSala">Ensalada</label>
+            </div>
+            <div>
+              <input type="checkbox" id="dishBurg" value="Hamburguesa" v-model="dishes">
+              <label for="dishBurg">Hamburguesa</label>
+            </div>
+            <div>
+              <input type="checkbox" id="dishDess" value="Postre" v-model="dishes">
+              <label for="dishDess">Postre</label>
+            </div>
           </template>
         </ColumnComp>
       </div>
     </div>
-    <button class="to-recipes" @click="toLink('/recetas')">
+    <button class="to-recipes">
       <router-link to="/recetas">
         <h2>
           Ver Recetas
@@ -156,9 +151,6 @@ export default {
     components: { ColumnComp },
     data(){
       return {
-        // Data:
-        dataDiets: ['Vegana', 'Vegetariana', 'Omnívora'],
-        dataDishes: ['Ensalada', 'Hamburguesa', 'Pizza', 'Postre'],
         // Options chosen:
         time: 0,
         diets: [],
