@@ -1,6 +1,7 @@
 import BootstrapVue from "bootstrap-vue";
 import "@/../bootstrap/css/bootstrap.css";
 import Vue from "vue";
+import vuetify from "@/plugins/vuetify";
 import "./plugins/bootstrap-vue";
 import App from "./App.vue";
 import router from "./router";
@@ -39,6 +40,7 @@ Vue.prototype.$globalData = Vue.observable({
 new Vue({
   el: "#app",
   store,
+  vuetify,
   router,
   components: { App },
   template: "<App/>",

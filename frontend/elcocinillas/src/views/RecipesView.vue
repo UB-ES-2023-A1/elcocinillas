@@ -47,12 +47,11 @@ export default {
   },
 
   created() {
-      /*
     if (this.filtros == null){
       this.getAllRecipesFromDB();
-    } else{*/
+    } else{
       this.getRecipesFromDB();
-   // }
+    }
   },
 
   methods : {

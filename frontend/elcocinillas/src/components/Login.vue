@@ -71,7 +71,7 @@
                       </button>
                       <button
                         class="btn btn-success btn-block"
-                        @click="createAccount"
+                        @click="createAccount()"
                         type="button"
                         style="background-color: #5c5540"
                       >
@@ -129,6 +129,9 @@ export default {
     },
     goBackToMain() {
       router.push("/");
+    },
+    createAccount(){
+      router.push("/registre");
     },
   },
 };
