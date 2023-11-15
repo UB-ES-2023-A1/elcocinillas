@@ -72,6 +72,15 @@ def get_recepta(name_recepta):
     else:
         print("No such document!")
         return -1
+
+
+def busca_recetas(cadena):
+    doc_ref = db.collection("receptes")
+    query = doc_ref.where("nombre","contains",cadena).stream()
+
+    resultados = [doc.to_dict() for doc in query]
+
+    return resultados
         
 
 def getRecipeImages(recepta): 
