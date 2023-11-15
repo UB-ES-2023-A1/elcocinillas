@@ -48,7 +48,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          context: .
+          context: ./backend/
           tags: api_test/latest
 
           
