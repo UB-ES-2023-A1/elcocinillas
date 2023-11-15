@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    runs-on: latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -24,7 +24,7 @@ jobs:
           pip install -r /backend/requirements.txt
 
   docker:
-    runs-on: latest
+    runs-on: ubuntu-latest
     needs: build
 
     steps:
