@@ -1,73 +1,60 @@
 <template>
-  <div class="main-container">
-    <aside class="left-aside">
-    </aside>
-  <!-- 
-    <aside class="left-aside">
-      <p> Amigos </p>
-      <p> Seguidores </p>
-      <p> Recetas guardadas </p>
-    </aside>
-  --> 
-    <div class="center">
-      <div class="container">
-        <img src="../assets/user.png" alt="User imagen">
-        <h2>{{ this.userName }}</h2>
-        <form @submit.prevent="modificarInformacion">
-          <label for="newcorreo">Correo:</label> <br>
-          <input type="email" v-model="correo" required> <br>
+  <div class="background-container">
+    <div class="container">
+      <div class="center">
+        <div>
+          <img src="../assets/user.png" alt="User imagen">
+          <h2>{{ this.userName }}</h2>
+          <form @submit.prevent="modificarInformacion">
+            <label for="newcorreo">Correo:</label> <br>
+            <input type="email" v-model="correo" required> <br>
 
-          <label for="contrasena">Contraseña:</label><br>
-          <input type="password" v-model="contrasena" required><br>
+            <label for="contrasena">Contraseña:</label><br>
+            <input type="password" v-model="contrasena" required><br>
 
-          <button type="submit">Modificar Información</button>
-        </form>
+            <button type="submit">Modificar Información</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.main-container {
-  display: flex; /* Utilizamos Flexbox para la disposición */
-  margin-top: 10vh;
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
 }
-
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% 30% 30% 10%;
+    grid-template-areas: 
+          "header"
+          "sidebar"
+          "main"
+          "section"
+          "content"
+          "footer";
+  }
+}
 .center {
-  flex-basis: 70%; /* Define el ancho del centro (ajusta según tus necesidades) */
-  display: flex;
-  justify-content: center;
-  align-items: center; /* Centra verticalmente el contenido del centro */
-
+    background-color: rgba(255, 255, 255, 0.6); 
+    border-radius: 10px; 
+    padding: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+.background-container {
+  min-height: 96vh;
+  background-image: url('../assets/background.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-.left-aside {
-  padding-top: 10px;
-  background-color: #76DED9;
-  flex-basis: 15%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.left-aside p {
-  margin-top: 10px; /* Ajusta el valor según la cantidad de margen deseada */
-}
-input {
-  margin: 10px;
-}
-img, h2 {
-  margin-bottom: 15px;
-}
-button {
-  margin-top: 25px;
-}
-.container {
-  display: block;
-  text-align: center;
-  padding: 20px; /* Añade relleno al contenedor si es necesario */
-
-}
-
+  
 </style>
 
 <script>
@@ -82,7 +69,6 @@ export default {
       correo: '',
       contrasena: '',
       newcorreo: store.state.correo,
-
     }
   },
   methods: {
