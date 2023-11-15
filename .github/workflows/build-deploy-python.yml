@@ -49,6 +49,6 @@ jobs:
         with:
           push: true
           context: ./backend/
-          tags: api_test/latest
+          tags: leuis123/elcocinillas:latest
 
           
