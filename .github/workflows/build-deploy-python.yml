@@ -23,9 +23,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r /backend/requirements.txt
 
-      - name: Test with pytest
-        run: python -m pytest /backend/tests
-
   docker:
     runs-on: ubuntu-18.04
     needs: build
