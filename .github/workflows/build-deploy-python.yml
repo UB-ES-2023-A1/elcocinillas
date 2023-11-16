@@ -24,10 +24,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ./backend/requirements.txt
           echo '{{ secrets.APIKEY_FIRESTORE }}' > ./backend/src/database/elcocinillas.json
-          
-      - name: List
-        run: ls -la ./backend/src/database
-        
+
   docker:
     runs-on: ubuntu-latest
     needs: build
