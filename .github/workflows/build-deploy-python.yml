@@ -36,7 +36,7 @@ jobs:
       - name: Add ApiKey
         run: |
           echo '{{ secrets.APIKEY_FIRESTORE }}' > ./backend/src/database/elcocinillas.json
-          ls -R ./
+          cp ./backend/src/database/elcocinillas.json ./backend/src/database
           
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
