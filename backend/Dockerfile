@@ -8,7 +8,6 @@ RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 ENV APIKEY_FIRESTORE=""
-ARG APIKEY_FIRESTORE
 
 RUN echo $APIKEY_FIRESTORE > /code/api/src/database/elcocinillas.json
 
