@@ -34,8 +34,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Add ApiKey
-        run: echo '{{ secrets.APIKEY_FIRESTORE }}' > ./backend/src/database/elcocinillas.json
-
+        run: |
+          echo '{{ secrets.APIKEY_FIRESTORE }}' > ./backend/src/database/elcocinillas.json
+          ls -R ./
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
@@ -54,9 +55,5 @@ jobs:
           push: true
           context: ./backend/
           tags: leuis123/elcocinillas:latest
-
-      - name: Print Directory Structure
-        run: |
-          ls -R /code
 
           
