@@ -55,4 +55,8 @@ jobs:
           context: ./backend/
           tags: leuis123/elcocinillas:latest
 
+      - name: Print Directory Structure
+        run: |
+          ls -R /code
+
           
