@@ -38,8 +38,8 @@ jobs:
           echo '{{ secrets.APIKEY_FIRESTORE }}' >> ./backend/src/database/elcocinillas.json
           echo "FIREBASE_JSON=$(cat ./backend/src/database/elcocinillas.json)" >> $GITHUB_ENV
       
-      - name: Show Firebase JSON
-        run: echo "$FIREBASE_JSON"
+      - name: Show Firebase JSON Secret
+        run: echo "${{ secrets.APIKEY_FIRESTORE }}"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
