@@ -9,9 +9,6 @@ from models.filtros import FiltroRecetas
 
 app = FastAPI()
 
-# Agrega este código antes de la línea que causa el error
-print("Current directory contents:", os.listdir())
-
 # Configura CORS para permitir solicitudes desde tu aplicación Vue
 app.add_middleware(
     CORSMiddleware,
