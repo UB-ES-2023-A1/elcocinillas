@@ -7,7 +7,7 @@ from firebase_admin import auth, storage
 current_directory = os.path.dirname(__file__)
 file_path = os.path.join(current_directory, 'elcocinillas.json')
 
-cred = credentials.Certificate("./elcocinillas.json")
+cred = credentials.Certificate(file_path)
 
 ruta_recetas = "imgRecetas/"
 firebase_admin.initialize_app(cred, {
