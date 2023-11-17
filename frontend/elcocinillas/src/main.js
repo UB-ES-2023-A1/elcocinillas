@@ -8,10 +8,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import store from "./store";
 
-import bFormSlider from 'vue-bootstrap-slider';
-Vue.use(bFormSlider)
-import 'bootstrap-slider/dist/css/bootstrap-slider.css'
-
 // Configura tus credenciales de Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCellSmTsQmrbM4idiIlLuR7s2kqXGuPh8",
