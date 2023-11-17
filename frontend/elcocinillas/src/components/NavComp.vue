@@ -1,23 +1,21 @@
 <template>
   <div id="nav">
     <div style="float: left; width: 33%;">
-      <div id="logo">
+      <div id="search" style="display: flex;">
         <router-link to="/">
-          <img src="../assets/cheff.png">
+          <img src="../assets/cheff.png" id="logo">
         </router-link>
+        <input type="search" id="search">
+        <img class="imgUp" src="../assets/search.png">
       </div>
     </div>
-    <div id="search" style="float: left; width: 33%; overflow: hidden;">
-      <img class="imgUp" src="../assets/search.png">
-      <input type="search" id="search">
+    <div style="float: right; width: 33%; overflow: visible;">
       <div class="link">
         <router-link to="/recetas">
           <img class="imgUp" src="../assets/recipe.png">
           Recetas
         </router-link>
       </div>
-    </div>
-    <div style="float: right; width: 33%; overflow: visible;">
       <div class="link" v-if="$globalData.logged">
         <router-link to="/perfil">
           <img class="imgUp" src="../assets/perfil.png">
@@ -37,17 +35,19 @@
         </router-link>
       </div>
       <div class="link" v-if="!$globalData.logged">
-        <router-link to="/registro">
+        <router-link to="/registre">
           <img class="imgUp" src="../assets/enter.png">
           Registrarse
         </router-link>
       </div>
+      <!--
       <div id="settings" v-show="false">
         <img src="../assets/settings.png" class="rotate" @click="settings()">
         <ul id="setts" class="dropdown-content" v-if="false">
           <li>Dark mode <input type="checkbox"></li>
         </ul>
       </div>
+      -->
     </div>
   </div>
 </template>
@@ -60,6 +60,7 @@ a {
 #logo{
   width: fit-content;
   margin-left: 30px;
+  margin-right: 5px;
   position: relative;
   top: 5px;
   transition: 0.2;
@@ -76,7 +77,7 @@ a {
 }
 .link {
   line-height: 40px;
-  width: 140px;
+  width: 150px;
   margin-left: 5px;
   margin-right: 5px;
   display: inline-block;

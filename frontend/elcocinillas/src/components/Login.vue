@@ -97,7 +97,7 @@ export default {
   name: "Login",
   data() {
     return {
-      actual_path: "http://localhost:8000/",
+      actual_path: "http://localhost:8080/",
       email: "",
       password: "",
       addUserForm: {
@@ -120,6 +120,7 @@ export default {
             this.password
           );
           alert("Sesión iniciada con éxito");
+          this.$globalData.logged = true;
           // Manejar el éxito del inicio de sesión (redirección, etc.)
         } catch (error) {
           alert(error.message);
@@ -127,11 +128,11 @@ export default {
         }
       }
     },
+    createAccount(){
+
+    },
     goBackToMain() {
       router.push("/");
-    },
-    createAccount(){
-      router.push("/registre");
     },
   },
 };
