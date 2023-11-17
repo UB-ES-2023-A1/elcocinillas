@@ -1,7 +1,6 @@
 import BootstrapVue from "bootstrap-vue";
 import "@/../bootstrap/css/bootstrap.css";
 import Vue from "vue";
-import vuetify from "@/plugins/vuetify";
 import "./plugins/bootstrap-vue";
 import App from "./App.vue";
 import router from "./router";
@@ -9,6 +8,9 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import store from "./store";
 
+import bFormSlider from 'vue-bootstrap-slider';
+Vue.use(bFormSlider)
+import 'bootstrap-slider/dist/css/bootstrap-slider.css'
 
 // Configura tus credenciales de Firebase
 const firebaseConfig = {
@@ -31,6 +33,13 @@ Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 
 Vue.prototype.$globalData = Vue.observable({
+  y: 0,
+  diets: ['Vegana', 'Vegetariana', 'Omnívora'],
+  dishes: ['Ensalada', 'Hamburguesa', 'Postre'],
+  logged: false,
+  darkMode: false,
+});
+Vue.prototype.$chosen = Vue.observable({
   time: 0,
   diets: [],
   dishes: []
@@ -40,7 +49,6 @@ Vue.prototype.$globalData = Vue.observable({
 new Vue({
   el: "#app",
   store,
-  vuetify,
   router,
   components: { App },
   template: "<App/>",
