@@ -75,10 +75,14 @@ def get_recepta(name_recepta):
 
 
 def busca_recetas(cadena):
-    doc_ref = db.collection("receptes")
-    query = doc_ref.where("nombre","contains",cadena).stream()
+    coleccion = db.collection("receptes")
+    recetas = coleccion.stream()
 
-    resultados = [doc.to_dict() for doc in query]
+    data = [doc.to_dict() for doc in recetas]
+    resultados = []
+    for doc in data:
+        if cadena in doc["nombre"]:
+            resultados.append(doc)
 
     return resultados
         
