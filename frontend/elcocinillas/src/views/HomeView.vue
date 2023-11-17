@@ -10,7 +10,7 @@
           <template #description>
             Tiempo máximo (minutos): {{ time }}
             <input type="range" min="0" max="60" value="30" 
-            class="slider" id="myRange" v-model="time">
+            class="slider" id="slider" v-model="time">
           </template>
         </ColumnComp>
       </div>
@@ -21,18 +21,15 @@
             <img src="../assets/diet.png" alt="Health Icon" />
           </template>
           <template #description> 
-            <div>
-              <input type="checkbox" id="dietVega" value="Vegana" v-model="diets">
-              <label for="dietVega">Vegana</label>
-            </div>
-            <div>
-              <input type="checkbox" id="dietVege" value="Vegetariana" v-model="diets">
-              <label for="dietVege">Vegetariana</label>
-            </div>
-            <div>
-              <input type="checkbox" id="dietOmni" value="Omnívora" v-model="diets">
-              <label for="dietOmni">Omnívora</label>
-            </div>
+            <ul>
+              <li v-for="diet in optionsDiets" v-bind:key="diet.id"
+              :style="[$chosen.diets.includes(diet) ? 
+              {'background-color': clicked} :
+              {'background-color': notClicked}]"
+              @click="addDiet(diet)">
+              {{ diet }}
+              </li>
+            </ul>
           </template>
         </ColumnComp>
       </div>
@@ -43,18 +40,15 @@
             <img src="../assets/food-plate-1.png" alt="Health Icon"/>
           </template>
           <template #description>
-            <div>
-              <input type="checkbox" id="dishSala" value="Ensalada" v-model="dishes">
-              <label for="dishSala">Ensalada</label>
-            </div>
-            <div>
-              <input type="checkbox" id="dishBurg" value="Hamburguesa" v-model="dishes">
-              <label for="dishBurg">Hamburguesa</label>
-            </div>
-            <div>
-              <input type="checkbox" id="dishDess" value="Postre" v-model="dishes">
-              <label for="dishDess">Postre</label>
-            </div>
+            <ul>
+              <li v-for="dish in optionsDishes" v-bind:key="dish.id"
+              :style="[$chosen.dishes.includes(dish) ? 
+              {'background-color': clicked} :
+              {'background-color': notClicked}]"
+              @click="addDish(dish)">
+              {{ dish }}
+              </li>
+            </ul>
           </template>
         </ColumnComp>
       </div>
@@ -70,10 +64,15 @@
 </template>
 
 <style scoped>
+a {
+  text-decoration: none;
+  color: inherit;
+}
+img{
+  margin-bottom: 30px;
+}
 .pos{
   display: grid;
-  background-size: 200px;
-  background-repeat: repeat;
 }
 h1 {
   font-size: 35px;
@@ -90,15 +89,8 @@ h2 {
   float: left;
   height: 450px;
 }
-.choices {
-  max-height: 100px;
-  text-align: center;
-  border-radius: 25px;
-  cursor: pointer;
-  overflow: hidden;
-}
-.choices {
-  overflow: visible;
+#slider{
+  width: 50%;
 }
 .left {
   background-color: white;
@@ -109,7 +101,6 @@ h2 {
 .right {
   background-color: white;
 }
-
 img {
   height: 180px;
   transition: 1s;
@@ -118,7 +109,6 @@ img:hover {
   transform: scale(1.1);
   transition: 1s;
 }
-
 .to-recipes {
   position: relative;
   background-image: url("../assets/food-mural-2.jpg");
@@ -134,12 +124,33 @@ img:hover {
   border-radius: 10px;
   top: -20px;
 }
-
 .to-recipes:hover{
   filter: brightness(1.1);
   background-size: 250px;
   background-repeat: repeat;
   transform: rotate(-3deg);
+  transition: 0.2s;
+}
+ul{
+  height: 100px;
+  list-style-type: none;
+}
+li{
+  height:fit-content;
+  width: 150px;
+  color: white;
+  background-color: bisque;
+  text-align: center;
+  margin: 2px;
+  border-radius: 20px;
+  box-shadow: 2px 2px black;
+  cursor: pointer;
+  transition: 0.2s;
+  transform: translateX(-15px)
+}
+li:hover{
+  margin-bottom: 5px;
+  box-shadow: 5px 5px black;
   transition: 0.2s;
 }
 </style>
@@ -151,27 +162,43 @@ export default {
     components: { ColumnComp },
     data(){
       return {
+        // Options:
+        optionsDiets: this.$globalData.diets,
+        optionsDishes: this.$globalData.dishes,
+
         // Options chosen:
         time: 0,
         diets: [],
-        dishes: []
+        dishes: [],
+
+        clicked: '#44d9de',
+        notClicked: 'lightgray',
       }
     },
     methods: {
-      updateData() {
-        this.$globalData.time = this.time;
-        this.$globalData.diets = this.diets;
-        this.$globalData.dishes = this.dishes;
+      addDiet(diet){
+        if (this.$chosen.diets.includes(diet)){
+          this.$chosen.diets = this.$chosen.diets.filter((d) => d !== diet)
+        } else {
+          this.$chosen.diets.push(diet);
+        }
       },
-      toLink(link){
-        window.location = encodeURI(link);
-        /*
+      addDish(dish){
+        if (this.$chosen.dishes.includes(dish)){
+          this.$chosen.dishes = this.$chosen.dishes.filter((d) => d !== dish)
+        } else {
+          this.$chosen.dishes.push(dish);
+        }
+      },
+      updateData() {
+
+      },
+      /*toLink(link){
         window.location = encodeURI(link
             + '%' + this.time
             + '%' + this.diets
             + '%' + this.dishes);
-        */
+      }*/
       }
-    }
   };
 </script>
