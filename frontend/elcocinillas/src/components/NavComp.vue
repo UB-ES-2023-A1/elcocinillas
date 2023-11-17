@@ -1,101 +1,164 @@
 <template>
-  <nav>
-    {{ filterDiet }}
-    <a href="#">
-      <router-link to="/">Home</router-link>
-    </a>
-    <a href="#">
-      <router-link to="/recetas">Recetas</router-link>
-    </a>
-    <a href="#">
-      <router-link to="/userlogin">Log In</router-link>
-    </a>
-    <a href="#">
-      <router-link to="/t&c">T&C</router-link>
-    </a>
-    <div class="animation start-home"></div>
-  </nav>
+  <div id="nav">
+    <div style="float: left; width: 33%;">
+      <div id="logo">
+        <router-link to="/">
+          <img src="../assets/cheff.png">
+        </router-link>
+      </div>
+    </div>
+    <div id="search" style="float: left; width: 33%; overflow: hidden;">
+      <img class="imgUp" src="../assets/search.png">
+      <input type="search" id="search">
+      <div class="link">
+        <router-link to="/recetas">
+          <img class="imgUp" src="../assets/recipe.png">
+          Recetas
+        </router-link>
+      </div>
+    </div>
+    <div style="float: right; width: 33%; overflow: visible;">
+      <div class="link" v-if="$globalData.logged">
+        <router-link to="/perfil">
+          <img class="imgUp" src="../assets/perfil.png">
+          Perfil
+        </router-link>
+      </div>
+      <div class="link" v-if="$globalData.logged" @click="logoff()">
+        <router-link to="/">
+          <img class="imgUp" src="../assets/exit.png">
+          Cerrar Sesión
+        </router-link>
+      </div>
+      <div class="link" v-if="!$globalData.logged">
+        <router-link to="/userlogin">
+          <img class="imgUp" src="../assets/enter.png">
+          Iniciar Sesión
+        </router-link>
+      </div>
+      <div class="link" v-if="!$globalData.logged">
+        <router-link to="/registro">
+          <img class="imgUp" src="../assets/enter.png">
+          Registrarse
+        </router-link>
+      </div>
+      <div id="settings" v-show="false">
+        <img src="../assets/settings.png" class="rotate" @click="settings()">
+        <ul id="setts" class="dropdown-content" v-if="false">
+          <li>Dark mode <input type="checkbox"></li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-nav {
-  position: relative;
-  text-align: center;
-  height: fit-content;
-  width: 100%;
-  background-color: #cc9966;
-}
-nav a {
-  line-height: 40px;
-  display: inline-block;
-  position: relative;
-  z-index: 1;
+a {
   text-decoration: none;
-  text-align: center;
-  color: white;
+  color: inherit;
 }
-nav a:hover {
-  color: black;
-  font-weight: bold;
+#logo{
+  width: fit-content;
+  margin-left: 30px;
+  position: relative;
+  top: 5px;
+  transition: 0.2;
 }
-nav .animation {
-  position: absolute;
-  height: 100%;
-  top: 0;
-  border-radius: 5px;
+#logo:hover{
+  transform: rotate(30deg) scale(1.1) translate(5px);
   transition: 0.2s;
-
 }
-a:nth-child(1) {
-  width: 100px;
+#nav {
+  height: fit-content;
+  background-color: #73694f;
+  width: 100%;
+  overflow: visible;
 }
-a:nth-child(2) {
-  width: 100px;
+.link {
+  line-height: 40px;
+  width: 140px;
+  margin-left: 5px;
+  margin-right: 5px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 15px;
+  color:white;
+  cursor: pointer;
 }
-a:nth-child(3) {
-  width: 100px;
-}
-a:nth-child(4) {
-  width: 100px;
-}
-a:nth-child(5) {
-  width: 100px;
-}
-a:nth-child(1):hover ~ .animation {
-  width: 100px;
-  left: 432px;
+.link:hover{
+  color:black;
+  font-weight: bold;
   background-color: white;
 }
-a:nth-child(2):hover ~ .animation {
-  width: 100px;
-  left: 530px;
-  background-color: white;
+img{
+  height: 30px;
+  filter: invert(95%);
 }
-a:nth-child(3):hover ~ .animation {
-  width: 100px;
-  left: 630px;
-  background-color: white;
+.link:hover img{
+  filter: invert(5%);
 }
-a:nth-child(4):hover ~ .animation {
-  width: 100px;
-  left: 730px;
-  background-color: white;
+#search{
+  height: 90%; 
+  width: 140px;
+  margin: auto;
+  margin-left: 10px;
+  border-radius: 20px;
+  border: none;
 }
-a:nth-child(5):hover ~ .animation {
-  width: 100px;
-  left: 400px;
-  background-color: #c7c292;
+#settings{
+  float: right;
+  position: relative;
+  top: 5px;
+  margin-right: 10px;
+  cursor: pointer;
 }
-span {
-  color: #2bd6b4;
+.rotate:hover{
+  transform: rotate(90deg);
+  transition: 1s;
+}
+.imgUp{
+  position: relative;
+  transform: scale(0.7);
+  top: -2px;
+}
+ul{
+  list-style-type: none;
+  background-color: lightgray;
+  box-shadow: 0px 5px 5px 0px lightgray;
+}
+li{
+  width: 180px;
+}
+li:hover{
+  filter: scale(1.1);
+}
+.dropdown-content {
+  position: absolute;
+  left: -140px;
+  top: 35px;
 }
 </style>
 
 <script>
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  props: [
-    'filterDiet'
-  ]
+  data(){
+    return {
+      showingSettings: false
+    }
+  },
+  methods: {
+    logoff(){
+      this.$globalData.logged = false;
+    },
+    settings(){
+      this.showingSettings = !this.showingSettings;
+      document.getElementById("setts").style.display = "block";
+    },
+    darkMode(){
+      if(this.globalData.darkMode) this.$globalData.background = this.$globalData.backgroundDark;
+      else this.$globalData.background = this.globalData.backgroundlight;
+    }
+  }
 }
 </script>

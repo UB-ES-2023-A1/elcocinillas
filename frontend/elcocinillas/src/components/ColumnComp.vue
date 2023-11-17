@@ -18,14 +18,13 @@
 
 <style scoped>
 * {
-  padding: 0;
   margin: 5px;
 }
 .image{
   margin-top: 20px;
 }
 .description {
-  align-content: center;
+  margin: auto;
   width: 75%;
   position: relative;
   left: 50px;
