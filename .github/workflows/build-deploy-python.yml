@@ -33,14 +33,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Add ApiKey
-        run: |
-          {
-            echo 'FIREBASE_JSON<<EOF'
-            echo "${{ secrets.APIKEY_FIRESTORE }}"
-            echo EOF
-          } >> "$GITHUB_ENV"
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
 
@@ -59,8 +51,8 @@ jobs:
           push: true
           context: ./backend/
           tags: leuis123/elcocinillas:latest
-          build-args: FIREBASE_JSON=${{ secrets.APIKEY_FIRESTORE }}
-          
+          secret-files: FIREBASE_JSON=${{ secrets.APIKEY_FIRESTORE }}
+
       - name: Az Cli Login
         uses: azure/login@v1
         with:
