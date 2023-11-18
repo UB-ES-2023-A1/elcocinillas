@@ -35,7 +35,7 @@ jobs:
 
       - name: Add ApiKey
         run: |
-          echo '{{ secrets.APIKEY_FIRESTORE }}' >> ./backend/src/database/elcocinillas.json
+          echo '${{ secrets.APIKEY_FIRESTORE }}' >> ./backend/src/database/elcocinillas.json
           echo "FIREBASE_JSON=$(cat ./backend/src/database/elcocinillas.json)" >> $GITHUB_ENV
 
       - name: Set up QEMU
@@ -57,4 +57,18 @@ jobs:
           context: ./backend/
           tags: leuis123/elcocinillas:latest
 
+      - name: Az Cli Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.USER_AZURE }}
+
+      - run: |
+            az containerapp up 
+            --name elcocinillas-api 
+            --resource-group elcocinillasGroup 
+            --location westeurope 
+            --image leuis123/elcocinillas:latest 
+            --target-port 80 
+            --ingress external 
+            --query properties.configuration.ingress.fqdn
           
