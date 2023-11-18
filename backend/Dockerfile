@@ -11,6 +11,6 @@ ARG FIREBASE_JSON
 
 COPY . /code/api
 
-RUN echo "$FIREBASE_JSON"
+RUN echo $FIREBASE_JSON
 
 CMD ["uvicorn", "--app-dir=/code/api/src", "main:app", "--host", "0.0.0.0", "--port", "80"]
