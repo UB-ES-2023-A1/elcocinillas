@@ -7,12 +7,12 @@
         </div>
         <div class="item">
           <label for="name">Nombre receta<span> *</span></label>
-          <input id="name" type="text" required v-model="nombre"/>
+          <input id="name" type="text" required v-model="nombreReceta"/>
         </div>
 
         <div class="item">
           <p>Escoge la dieta<span> *</span></p>
-          <select v-model="tipo">
+          <select v-model="tipoReceta">
             <option selected value=""></option>
             <option value="Vegana" >Vegana</option>
             <option value="Vegetariana">Vegetariana</option>
@@ -22,7 +22,7 @@
 
         <div class="item">
           <p>¿De qué clase dirías que es tu plato?<span> *</span></p>
-          <select v-model="classe">
+          <select v-model="classeReceta">
             <option selected value=""></option>
             <option value="Hamburguesa" >Hamburguesa</option>
             <option value="Postre">Postre</option>
@@ -32,16 +32,16 @@
 
         <div class="item">
           <label for="visit">¿Cuáles son los ingredientes necesarios?<span> *</span></label>
-          <textarea id="visit" rows="4" required v-model="ingredientes"></textarea>
+          <textarea id="visit" rows="4" required v-model="ingredientesReceta"></textarea>
         </div>
         <div class="item">
           <label for="visit">Describe los pasos para elaborar la receta<span> *</span></label>
-          <textarea id="visit" rows="6" required v-model="pasos"></textarea>
+          <textarea id="visit" rows="6" required v-model="pasosReceta"></textarea>
         </div>
 
         <div class="item">
           <p>Dificultad<span> *</span></p>
-          <select v-model="dificultad">
+          <select v-model="dificultadReceta">
             <option selected value="0">0</option>
             <option value="1" >1</option>
             <option value="2">2</option>
@@ -52,8 +52,8 @@
         </div>
 
         <div id="timeSlider">
-          <label for="phone">Tiempo máximo (minutos): {{ time }} <span>minutos</span></label>
-          <input type="range" min="0" max="120" class="slider" id="myRange" v-model="time">
+          <label for="phone">Tiempo máximo (minutos): {{ timeReceta }} <span>minutos</span></label>
+          <input type="range" min="0" max="120" class="slider" id="myRange" v-model="timeReceta">
         </div>
 
         <div id="photoPicker">
@@ -210,15 +210,15 @@ export default {
   // eslint-disable-next-line vue/multi-word-component-names
   data() {
     return {
-      user: null, //TODO: recoger usuario de vuex
-      nombre: null,
-      classe: "",
-      tipo: "",
-      ingredientes: "",
-      pasos: "",
-      images: null,
-      time: 15,
-      dificultad: 0
+      usuario: null, //TODO: recoger usuario de vuex
+      nombreReceta: null,
+      classeReceta: "",
+      tipoReceta: "",
+      ingredientesReceta: "",
+      pasosReceta: "",
+      imagesReceta: null,
+      timeReceta: 15,
+      dificultadReceta: 0
     };
   },
 
@@ -238,27 +238,19 @@ export default {
             console.error('KO publicar receta:', error);
             alert("Se ha producido un error. Inténtalo de nuevo más tarde")
           })
-
-      /*try {
-        const respuesta = axios.post(path, this.getDatosReceta());
-
-        console.log('Ok publicar receta:', respuesta.data);
-      } catch (error) {
-        console.error('KO publicar receta:', error);
-      }*/
     },
 
     getDatosReceta() {
       return {
-          formUser: "Marcos",
-          formNombre: this.nombre,
-          formClasse: this.classe,
-          formTipo: this.tipo,
-          formIngredientes: this.ingredientes,
-          formPasos: this.pasos,
-          formImages: "",
-          formTime: this.time,
-          formDificultad: this.dificultad
+          user: "Marcos",
+          nombre: this.nombreReceta,
+          classe: this.classeReceta,
+          tipo: this.tipoReceta,
+          ingredientes: this.ingredientesReceta,
+          pasos: this.pasosReceta,
+          images: "",
+          time: this.timeReceta,
+          dificultad: this.dificultadReceta
       };
     },
 
