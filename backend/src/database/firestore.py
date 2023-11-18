@@ -94,8 +94,9 @@ def busca_recetas(cadena):
         for i in range(10):
             name = respuesta[i][0]
             query = coleccion.where("nombre","==",name)
-            rec = query.stream()
-            resultados.append(rec)
+            ret = query.stream()
+            rec = [doc.to_dict() for doc in ret]
+            resultados.append(rec[0])
 
         return resultados
 
