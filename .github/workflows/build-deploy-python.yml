@@ -36,8 +36,8 @@ jobs:
       - name: Add ApiKey
         run: |
           {
-            echo 'JSON_RESPONSE<<EOF'
-            echo ${{ secrets.APIKEY_FIRESTORE }}
+            echo 'FIREBASE_JSON<<EOF'
+            echo "${{ secrets.APIKEY_FIRESTORE }}"
             echo EOF
           } >> "$GITHUB_ENV"
 
