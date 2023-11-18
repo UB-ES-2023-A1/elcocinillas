@@ -1,21 +1,61 @@
 <template>
-  <div id="app">
-    <h1 id="title">Publicar Receta</h1>
-      <div class="form-group">
-        <label for="exampleInputEmail1">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-      </div>
-      <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-      </div>
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-      </div>
-      <button type="submit" class="btn btn-primary" @click="uploadRecipe">Submit</button>
-  </div>
+  <body>
+    <div class="testbox">
+      <form action="/">
+        <div class="banner">
+          <h1 style="font-weight: bold;">Publicar receta</h1>
+        </div>
+        <div class="item">
+          <label for="name">Nombre receta<span> *</span></label>
+          <input id="name" type="text" name="name" required/>
+        </div>
+
+        <div class="item">
+          <p>Escoge la dieta<span> *</span></p>
+          <select>
+            <option selected value="" disabled selected></option>
+            <option value="Vegana" >Vegana</option>
+            <option value="Vegetariana">Vegetariana</option>
+            <option value="Omnívora">Omnívora</option>
+          </select>
+        </div>
+
+        <div class="item">
+          <p>¿De qué clase dirías que es tu plato?<span> *</span></p>
+          <select>
+            <option selected value="" disabled selected></option>
+            <option value="Hamburguesa" >Hamburguesa</option>
+            <option value="Postre">Postre</option>
+            <option value="Ensalada">Ensalada</option>
+          </select>
+        </div>
+
+        <div class="item">
+          <label for="visit">¿Cuáles son los ingredientes necesarios?<span> *</span></label>
+          <textarea id="visit" rows="4" required></textarea>
+        </div>
+        <div class="item">
+          <label for="visit">Describe los pasos para elaborar la receta<span> *</span></label>
+          <textarea id="visit" rows="6" required></textarea>
+        </div>
+
+        <div id="photoPicker">
+          <label for="exampleFormControlFile1">¿Quieres acompañar tu receta con alguna foto?</label>
+          <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        </div>
+
+        <div id="timeSlider">
+          <label for="phone">Tiempo máximo (minutos): {{ time }} <span>minutos</span></label>
+          <input type="range" min="0" max="120" value="60"
+                 class="slider" id="myRange" v-model="time">
+        </div>
+
+        <div class="btn-block">
+          <button type="submit" href="/">SUBMIT</button>
+        </div>
+      </form>
+    </div>
+  </body>
 </template>
 
 <style>
@@ -26,17 +66,138 @@
   color: #2c3e50;
   margin-left: 10%;
   margin-right: 10%;
-  margin-top: 5%;
   text-align: left;
 }
 
-#title {
-  font-weight: bold;
-  margin-bottom: 80px;
-  color: #5c5540;
-  margin-bottom: 8%;
+body {
+  min-height: 100%;
+}
+body, div, form, input, select, textarea, label {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 14px;
+  color: #666;
+  line-height: 22px;
+}
+h1 {
+  position: absolute;
+  margin: 0;
+  font-size: 40px;
+  color: #fff;
+  z-index: 2;
+  line-height: 83px;
+}
+.testbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+  padding: 20px;
+}
+form {
+  width: 100%;
+  padding: 20px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 0 8px  #73694F;
+}
+.banner {
+  position: relative;
+  height: 400px;
+  background-image: url("../img/defaultPhotoForm.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
+.banner::after {
+  content: "";
+  background-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+input, select, textarea {
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+input {
+  width: calc(100% - 10px);
+  padding: 5px;
+}
+
+textarea {
+  width: calc(100% - 12px);
+  padding: 5px;
+}
+.item:hover p, input:hover::placeholder {
+  color: #73694F;
+}
+.item input:hover, .item select:hover, .item textarea:hover {
+  border: 1px solid transparent;
+  box-shadow: 0 0 3px 0 #73694F;
+  color: #73694F;
+}
+
+.item select {
+  min-width: 150px;
+}
+
+.item {
+  position: relative;
+  margin: 10px 0;
+}
+.item span {
+  color: red;
+}
+
+.btn-block {
+  margin-top: 10px;
+  text-align: center;
+}
+button {
+  width: 150px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #EEF2B6;
+  font-size: 16px;
+  cursor: pointer;
+}
+button:hover {
+  background: #eef2b6;
+  opacity: 70%;
+}
+
+#timeSlider {
+  margin: 25px 0;
+}
+
+input[type="range"] {
+  accent-color: #13CFB9;
+}
+
+@media (min-width: 568px) {
+  .name-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .name-item input, .name-item div {
+    width: calc(50% - 20px);
+  }
+  .name-item div input {
+    width:97%;}
+  .name-item div label {
+    display:block;
+    padding-bottom:5px;
+  }
+}
+
 
 </style>
 
