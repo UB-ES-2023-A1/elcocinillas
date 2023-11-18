@@ -3,6 +3,7 @@ import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
 from firebase_admin import auth, storage
+from fuzzywuzzy import fuzz, process
 
 current_directory = os.path.dirname(__file__)
 file_path = os.path.join(current_directory, 'elcocinillas.json')
@@ -84,7 +85,21 @@ def busca_recetas(cadena):
         if cadena in doc["nombre"]:
             resultados.append(doc)
 
-    return resultados
+    if len(resultados) > 0:
+        return resultados
+    else:
+        nombres = [doc["nombre"] for doc in data]
+        respuesta = process.extract(cadena, nombres, limit=10)
+
+        for i in range(10):
+            name = respuesta[i][0]
+            query = coleccion.where("nombre","==",name)
+            ret = query.stream()
+            rec = [doc.to_dict() for doc in ret]
+            resultados.append(rec[0])
+
+        return resultados
+
         
 
 def getRecipeImages(recepta): 
