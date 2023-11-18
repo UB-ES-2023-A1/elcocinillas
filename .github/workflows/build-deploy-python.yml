@@ -34,10 +34,12 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Add ApiKey
-        run: echo "FIREBASE_JSON=${JSON}" >> $GITHUB_ENV
-        shell: bash
-        env:
-          JSON: ${{ secrets.APIKEY_FIRESTORE }}
+        run: |
+          {
+            echo 'JSON_RESPONSE<<EOF'
+            echo ${{ APIKEY_FIRESTORE }}
+            echo EOF
+          } >> "$GITHUB_ENV"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
