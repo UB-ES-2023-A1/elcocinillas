@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-  JSON: ${{ secrets.APIKEY_FIRESTORE }}
+  JSON: (echo "${{ secrets.APIKEY_FIRESTORE }}")
 
 jobs:
   build:
