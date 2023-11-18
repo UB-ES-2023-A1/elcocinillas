@@ -178,7 +178,7 @@ button:hover {
 }
 
 input[type="range"] {
-  accent-color: #13CFB9;
+  accent-color: #73694F;
 }
 
 @media (min-width: 568px) {
