@@ -7,7 +7,7 @@ COPY ./requirements.txt /code/requirements.txt
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
-ARG FIREBASE_JSON
+ENV FIREBASE_JSON=${FIREBASE_JSON}
 
 COPY . /code/api
 
