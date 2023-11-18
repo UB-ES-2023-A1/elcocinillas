@@ -43,5 +43,5 @@ GET http://127.0.0.1:8000/todasrecetas/
 Accept: application/json
 
 ###
-GET http://127.0.0.1:8000/recetas/Salsa
+GET http://127.0.0.1:8000/recetas/Salso
 Accept: application/json

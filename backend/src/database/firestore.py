@@ -3,7 +3,7 @@ import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
 from firebase_admin import auth, storage
-from fuzzywuzzy import fuzz
+from fuzzywuzzy import fuzz, process
 
 current_directory = os.path.dirname(__file__)
 file_path = os.path.join(current_directory, 'elcocinillas.json')
@@ -85,29 +85,20 @@ def busca_recetas(cadena):
         if cadena in doc["nombre"]:
             resultados.append(doc)
 
-    if resultados:
+    if len(resultados) > 0:
+        return resultados
+    else:
+        nombres = [doc["nombre"] for doc in data]
+        respuesta = process.extract(cadena, nombres, limit=10)
+
+        for i in range(10):
+            name = respuesta[i][0]
+            query = coleccion.where("nombre","==",name)
+            rec = query.stream()
+            resultados.append(rec)
+
         return resultados
 
-
-'''
-
-
-# Example: Search for recipes containing a similar ingredient
-desired_ingredient = 'polo'  # Typo: should be 'pollo'
-
-# Get all documents in the collection
-all_recipes = recipe_collection.stream()
-
-# Iterate over the recipes and calculate similarity for each ingredient
-matching_recipes = []
-for recipe in all_recipes:
-    ingredients = rec
-matching_recipes.append((recipe.id, recipe.to_dict(), similarity_ratio))
-
-FALTA HACER SORT Y DEVOLVER LOS X PRIMEROS
-recetas_cercanas.sort()[:10]
-
-'''
         
 
 def getRecipeImages(recepta): 
