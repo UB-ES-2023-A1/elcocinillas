@@ -85,14 +85,12 @@ def busca_recetas(cadena):
         if cadena in doc["nombre"]:
             resultados.append(doc)
 
-    return resultados
+    if resultados:
+        return resultados
+
 
 '''
-# Initialize Firestore client
-db = firestore.Client()
 
-# Reference to the collection
-recipe_collection = db.collection('recipes')
 
 # Example: Search for recipes containing a similar ingredient
 desired_ingredient = 'polo'  # Typo: should be 'pollo'
@@ -108,17 +106,6 @@ matching_recipes.append((recipe.id, recipe.to_dict(), similarity_ratio))
 
 FALTA HACER SORT Y DEVOLVER LOS X PRIMEROS
 recetas_cercanas.sort()[:10]
-
-coleccion = db.collection("receptes")
-    recetas = coleccion.stream()
-
-    data = [doc.to_dict() for doc in recetas]
-    resultados = []
-    for doc in data:
-        if cadena in doc["nombre"]:
-            resultados.append(doc)
-
-    return resultados
 
 '''
         
