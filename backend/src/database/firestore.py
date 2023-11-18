@@ -3,6 +3,7 @@ import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
 from firebase_admin import auth, storage
+from fuzzywuzzy import fuzz
 
 current_directory = os.path.dirname(__file__)
 file_path = os.path.join(current_directory, 'elcocinillas.json')
@@ -85,6 +86,41 @@ def busca_recetas(cadena):
             resultados.append(doc)
 
     return resultados
+
+'''
+# Initialize Firestore client
+db = firestore.Client()
+
+# Reference to the collection
+recipe_collection = db.collection('recipes')
+
+# Example: Search for recipes containing a similar ingredient
+desired_ingredient = 'polo'  # Typo: should be 'pollo'
+
+# Get all documents in the collection
+all_recipes = recipe_collection.stream()
+
+# Iterate over the recipes and calculate similarity for each ingredient
+matching_recipes = []
+for recipe in all_recipes:
+    ingredients = rec
+matching_recipes.append((recipe.id, recipe.to_dict(), similarity_ratio))
+
+FALTA HACER SORT Y DEVOLVER LOS X PRIMEROS
+recetas_cercanas.sort()[:10]
+
+coleccion = db.collection("receptes")
+    recetas = coleccion.stream()
+
+    data = [doc.to_dict() for doc in recetas]
+    resultados = []
+    for doc in data:
+        if cadena in doc["nombre"]:
+            resultados.append(doc)
+
+    return resultados
+
+'''
         
 
 def getRecipeImages(recepta): 
