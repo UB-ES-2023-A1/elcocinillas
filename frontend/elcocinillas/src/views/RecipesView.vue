@@ -7,7 +7,9 @@
                    v-bind:recipeName="rp.nombre">
       </recipe-card>
     </div>
-    <button id="boton-flotante" @click="uploadRecipe">+</button>
+    <button id="boton-flotante" @click="uploadRecipe">
+        <router-link to="/publicarReceta" id="boton-flotante">+</router-link>
+    </button>
   </div>
 
 </template>
@@ -42,6 +44,7 @@
   border-radius: 50%;
   cursor: pointer;
   font-size: 24px;
+  text-decoration: none;
 }
 
 </style>
@@ -102,7 +105,7 @@ export default {
     },
 
     uploadRecipe() {
-      console.log("Boton flotante");
+      this.$router.push('/recetas/publicarReceta')
     }
   }
 };

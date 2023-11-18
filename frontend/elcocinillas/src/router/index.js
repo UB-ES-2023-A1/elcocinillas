@@ -7,7 +7,8 @@ import MainView from "@/views/HomeView.vue";
 import Recipe from "@/components/Recipe.vue";
 import Registre from "@/components/Registre.vue";
 import AboutView from "@/views/AboutView.vue";
-import TermsView from "@/views/TermsView.vue"
+import TermsView from "@/views/TermsView.vue";
+import UploadRecipeView from "@/views/UploadRecipeView.vue";
 
 Vue.use(Router);
 
@@ -55,6 +56,11 @@ export default new Router({
       path: "/t&c",
       name: "Terms",
       component: TermsView,
+    },
+    {
+      path: "publicarReceta",
+      name: "UploadRecipe",
+      component: UploadRecipeView,
     }
   ],
 });
