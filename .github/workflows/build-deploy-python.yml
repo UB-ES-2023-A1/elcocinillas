@@ -37,7 +37,7 @@ jobs:
         run: |
           {
             echo 'JSON_RESPONSE<<EOF'
-            echo ${{ APIKEY_FIRESTORE }}
+            echo ${{ secrets.APIKEY_FIRESTORE }}
             echo EOF
           } >> "$GITHUB_ENV"
 
