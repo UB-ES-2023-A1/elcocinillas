@@ -7,6 +7,7 @@
                    v-bind:recipeName="rp.nombre">
       </recipe-card>
     </div>
+    <button id="boton-flotante" @click="uploadRecipe">+</button>
   </div>
 
 </template>
@@ -26,6 +27,21 @@
 #title {
   font-weight: bold;
   margin-bottom: 80px;
+}
+
+#boton-flotante {
+  position: fixed;
+  height: 55px;
+  width: 55px;
+  bottom: 8%;
+  right: 8%;
+  padding: 10px;
+  background-color: #73694F;
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
 }
 
 </style>
@@ -83,6 +99,10 @@ export default {
           .catch((error) => {
             console.error("Error fetching recipes:", error);
           })
+    },
+
+    uploadRecipe() {
+      console.log("Boton flotante");
     }
   }
 };
