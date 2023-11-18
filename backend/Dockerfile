@@ -13,6 +13,6 @@ ENV FIREBASE_JSON_ARG=${FIREBASE_JSON}
 
 COPY . /code/api
 
-RUN echo $FIREBASE_JSON_ARG
+RUN cat $FIREBASE_JSON_ARG
 
 CMD ["uvicorn", "--app-dir=/code/api/src", "main:app", "--host", "0.0.0.0", "--port", "80"]
