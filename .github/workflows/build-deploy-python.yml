@@ -35,7 +35,7 @@ jobs:
 
       - name: Add ApiKey
         run: |
-          echo '${{ secrets.APIKEY_FIRESTORE }}' >> ./backend/src/database/elcocinillas.json
+          echo "${{ secrets.APIKEY_FIRESTORE }}" >> ./backend/src/database/elcocinillas.json
           echo "FIREBASE_JSON=$(cat ./backend/src/database/elcocinillas.json)" >> $GITHUB_ENV
 
       - name: Set up QEMU
