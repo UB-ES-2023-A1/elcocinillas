@@ -64,27 +64,37 @@ export default {
       console.log("Click en submit");
 
       const path = "http://localhost:8000/receta/";
-      axios.post(path, {
-            user: "Alejandro",
-            nombre: "Ensalada césar",
-            classe: "Omnivora",
-            tipo: "Ensalada",
-            ingredientes: ["lechuga", "pollo", "salsa", "tomate", "picatostes"],
-            pasos: ["Prepararamos primero los picatostes caseros. Para ello calentamos el horno a 180º. Mientras se calienta, frotamos el pan con un diente de ajo y lo cortamos en dados. Aliñamos el pan con un poco de aceite de oliva y los horneamos durante 5 minutos hasta que estén dorados.",
-            "Para hacer el aliño o salsa César, hacemos puré el diente de ajo que habíamos usado para frotar el pan y lo mezclamos con el aceite, la salsa Perrins, el zumo de limón, una cucharada de vinagre y la yema de huevo. Batimos bien hasta emulsionar y lo reservamos. Como podéis ver, en la salsa original, no se utilizan anchoas, pero sí en la salsa de la ensalada Cesar de pollo.",
-            "Lavamos y secamos las hojas de lechuga romana y las salpimentamos con esmero. Después echamos el aliño o salsa César por encima de las barcas u hojas de lechuga romana. Completamos rellenando las hojas con algunos picatostes y rallamos en el momento el queso parmesano por encima para que sea bien visible."],
-            images: [],
-            time: 15,
-            dificultad: 0
-          })
-          .then(function (response) {
-            console.log("Receta publicada", response);
-          })
-          .catch(function (error) {
-            console.log("Error en la publicacion", error.toString());
-          });
 
+      try {
+        // Realiza la solicitud POST utilizando this.datos
+        const respuesta = axios.post(path, this.getDatosReceta());
+
+        // Maneja la respuesta
+        console.log('Respuesta del servidor:', respuesta.data);
+      } catch (error) {
+        // Maneja los errores
+        console.error('Error al realizar la solicitud POST:', error);
+      }
     },
+
+    getDatosReceta() {
+      return {
+          user: "Marc",
+          nombre: "Hamburguesa de garbanzos",
+          classe: "Vegetariana",
+          tipo: "Ensalada",
+          ingredientes: ["500 g de garbanzos cocidos (naturales o de bote)", "2 cucharadas de aceite de oliva", "1 cebolla picada", "3 apios picados", "1 manzana picada", "60gr de almendras picadas"],
+          pasos: ["Trituramos los garbanzos cocidos de manera que formen una pasta más o menos homogénea y reservamos.",
+            "Doramos la cebolla, y cuando esté más o menos dorada, incorporamos el apio, la manzana y las  almendras picadas. Lo salpimentamos al gusto (también podemos añadir algo de albahaca).",
+            "Lo añadimos a la mezcla de los garbanzos junto a las 2 cucharadas de harina de garbanzos y volvemos a batir.",
+            "Una vez preparada la mezcla, pasamos las hamburguesas por un poco más de harina de garbanzos",
+            "En una sartén con aceite caliente, se doran las hamburguesas a un fuego medio, 5 minutos por cada lado."],
+          images: [],
+          time: 45,
+          dificultad: 2
+      };
+    }
+
   },
 };
 
