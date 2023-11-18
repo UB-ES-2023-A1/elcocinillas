@@ -51,7 +51,6 @@ jobs:
           push: true
           context: ./backend/
           tags: leuis123/elcocinillas:latest
-          secret-files: FIREBASE_JSON=${{ secrets.APIKEY_FIRESTORE }}
 
       - name: Az Cli Login
         uses: azure/login@v1
