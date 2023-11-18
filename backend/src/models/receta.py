@@ -7,7 +7,7 @@ class Receta(BaseModel):
     classe: str
     tipo: str
     ingredientes: List[str]
-    pasos: List[str]
-    images: List[str]
+    pasos: str
+    images: str
     time: int
     dificultad: int
