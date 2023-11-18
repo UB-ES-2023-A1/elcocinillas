@@ -6,6 +6,9 @@ on:
       - US2.7-Task_Mejora_vista
   workflow_dispatch:
 
+env:
+  JSON: ${{ secrets.APIKEY_FIRESTORE }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,8 +38,8 @@ jobs:
 
       - name: Add ApiKey
         run: |
-          echo "${{ secrets.APIKEY_FIRESTORE }}" >> ./backend/src/database/elcocinillas.json
-          echo "FIREBASE_JSON=$(cat ./backend/src/database/elcocinillas.json)" >> $GITHUB_ENV
+          echo "FIREBASE_JSON=$JSON" >> $GITHUB_ENV
+
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
