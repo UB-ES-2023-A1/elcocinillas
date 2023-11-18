@@ -1,19 +1,19 @@
 <template>
   <body>
     <div class="testbox">
-      <form action="/">
+      <form @submit.prevent="uploadRecipe">
         <div class="banner">
           <h1 style="font-weight: bold;">Publicar receta</h1>
         </div>
         <div class="item">
           <label for="name">Nombre receta<span> *</span></label>
-          <input id="name" type="text" name="name" required/>
+          <input id="name" type="text" required v-model="nombre"/>
         </div>
 
         <div class="item">
           <p>Escoge la dieta<span> *</span></p>
-          <select>
-            <option selected value="" disabled selected></option>
+          <select v-model="tipo">
+            <option selected value=""></option>
             <option value="Vegana" >Vegana</option>
             <option value="Vegetariana">Vegetariana</option>
             <option value="Omnívora">Omnívora</option>
@@ -22,8 +22,8 @@
 
         <div class="item">
           <p>¿De qué clase dirías que es tu plato?<span> *</span></p>
-          <select>
-            <option selected value="" disabled selected></option>
+          <select v-model="classe">
+            <option selected value=""></option>
             <option value="Hamburguesa" >Hamburguesa</option>
             <option value="Postre">Postre</option>
             <option value="Ensalada">Ensalada</option>
@@ -32,26 +32,37 @@
 
         <div class="item">
           <label for="visit">¿Cuáles son los ingredientes necesarios?<span> *</span></label>
-          <textarea id="visit" rows="4" required></textarea>
+          <textarea id="visit" rows="4" required v-model="ingredientes"></textarea>
         </div>
         <div class="item">
           <label for="visit">Describe los pasos para elaborar la receta<span> *</span></label>
-          <textarea id="visit" rows="6" required></textarea>
+          <textarea id="visit" rows="6" required v-model="pasos"></textarea>
         </div>
 
-        <div id="photoPicker">
-          <label for="exampleFormControlFile1">¿Quieres acompañar tu receta con alguna foto?</label>
-          <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        <div class="item">
+          <p>Dificultad<span> *</span></p>
+          <select v-model="dificultad">
+            <option selected value="0">0</option>
+            <option value="1" >1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
         </div>
 
         <div id="timeSlider">
           <label for="phone">Tiempo máximo (minutos): {{ time }} <span>minutos</span></label>
-          <input type="range" min="0" max="120" value="60"
-                 class="slider" id="myRange" v-model="time">
+          <input type="range" min="0" max="120" class="slider" id="myRange" v-model="time">
+        </div>
+
+        <div id="photoPicker">
+          <label for="exampleFormControlFile1">¿Quieres acompañar tu receta con alguna foto?</label>
+          <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="handleFileChange">
         </div>
 
         <div class="btn-block">
-          <button type="submit" href="/">SUBMIT</button>
+          <button type="submit">Publicar</button>
         </div>
       </form>
     </div>
@@ -59,24 +70,14 @@
 </template>
 
 <style>
-#app {
-  font-family: "Lato", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-  margin-left: 10%;
-  margin-right: 10%;
-  text-align: left;
-}
-
 body {
   min-height: 100%;
+  font-family: "Lato", sans-serif;
 }
 body, div, form, input, select, textarea, label {
   padding: 0;
   margin: 0;
   outline: none;
-  font-family: Roboto, Arial, sans-serif;
   font-size: 14px;
   color: #666;
   line-height: 22px;
@@ -167,6 +168,7 @@ button {
   background: #EEF2B6;
   font-size: 16px;
   cursor: pointer;
+  margin-top: 7%;
 }
 button:hover {
   background: #eef2b6;
@@ -210,51 +212,61 @@ export default {
     return {
       user: null, //TODO: recoger usuario de vuex
       nombre: null,
-      classe: null,
-      tipo: null,
-      ingredientes: [],
-      pasos: [],
+      classe: "",
+      tipo: "",
+      ingredientes: "",
+      pasos: "",
       images: null,
-      time: null,
+      time: 15,
       dificultad: 0
     };
   },
 
   methods: {
     uploadRecipe() {
-      console.log("Click en submit");
+      console.log("Click en submit", this.getDatosReceta());
 
       const path = "http://localhost:8000/receta/";
 
-      try {
-        // Realiza la solicitud POST utilizando this.datos
+      axios.post(path, this.getDatosReceta())
+          .then((response) => {
+            console.log('Ok publicar receta:', response.data);
+            this.recipes = response.data;
+            alert("¡Felicidades! Tu receta se ha publicado")
+          })
+          .catch((error) => {
+            console.error('KO publicar receta:', error);
+            alert("Se ha producido un error. Inténtalo de nuevo más tarde")
+          })
+
+      /*try {
         const respuesta = axios.post(path, this.getDatosReceta());
 
-        // Maneja la respuesta
-        console.log('Respuesta del servidor:', respuesta.data);
+        console.log('Ok publicar receta:', respuesta.data);
       } catch (error) {
-        // Maneja los errores
-        console.error('Error al realizar la solicitud POST:', error);
-      }
+        console.error('KO publicar receta:', error);
+      }*/
     },
 
     getDatosReceta() {
       return {
-          user: "Marc",
-          nombre: "Hamburguesa de garbanzos",
-          classe: "Vegetariana",
-          tipo: "Ensalada",
-          ingredientes: ["500 g de garbanzos cocidos (naturales o de bote)", "2 cucharadas de aceite de oliva", "1 cebolla picada", "3 apios picados", "1 manzana picada", "60gr de almendras picadas"],
-          pasos: ["Trituramos los garbanzos cocidos de manera que formen una pasta más o menos homogénea y reservamos.",
-            "Doramos la cebolla, y cuando esté más o menos dorada, incorporamos el apio, la manzana y las  almendras picadas. Lo salpimentamos al gusto (también podemos añadir algo de albahaca).",
-            "Lo añadimos a la mezcla de los garbanzos junto a las 2 cucharadas de harina de garbanzos y volvemos a batir.",
-            "Una vez preparada la mezcla, pasamos las hamburguesas por un poco más de harina de garbanzos",
-            "En una sartén con aceite caliente, se doran las hamburguesas a un fuego medio, 5 minutos por cada lado."],
-          images: [],
-          time: 45,
-          dificultad: 2
+          formUser: "Marcos",
+          formNombre: this.nombre,
+          formClasse: this.classe,
+          formTipo: this.tipo,
+          formIngredientes: this.ingredientes,
+          formPasos: this.pasos,
+          formImages: "",
+          formTime: this.time,
+          formDificultad: this.dificultad
       };
-    }
+    },
+
+    handleFileChange(event) {
+      this.images = event.target.files[0];
+
+      console.log('Foto seleccionada:', this.images);
+    },
 
   },
 };
