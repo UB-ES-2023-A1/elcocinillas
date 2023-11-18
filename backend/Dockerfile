@@ -9,10 +9,8 @@ RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 ARG FIREBASE_JSON
 
-ENV FIREBASE_JSON_ARG=${FIREBASE_JSON}
-
 COPY . /code/api
 
-RUN cat $FIREBASE_JSON_ARG
+RUN echo "$FIREBASE_JSON"
 
 CMD ["uvicorn", "--app-dir=/code/api/src", "main:app", "--host", "0.0.0.0", "--port", "80"]
