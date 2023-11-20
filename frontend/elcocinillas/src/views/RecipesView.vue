@@ -8,7 +8,7 @@
       </recipe-card>
     </div>
     <button id="boton-flotante" @click="uploadRecipe">
-        <router-link to="/publicarReceta" id="boton-flotante">+</router-link>
+        <router-link to="/publicarReceta" id="boton-flotante-inner">+</router-link>
     </button>
   </div>
 
@@ -42,10 +42,12 @@
   right: 8%;
   padding: 10px;
   background-color: #73694F;
-  color: #ffffff;
   border: none;
   border-radius: 50%;
-  cursor: pointer;
+}
+
+#boton-flotante-inner{
+  color: #ffffff;
   font-size: 24px;
   text-decoration: none;
 }
