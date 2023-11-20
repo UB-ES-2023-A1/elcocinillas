@@ -45,7 +45,7 @@ def update_user(user_id: str, updated_user: User):
 @app.get("/recetas/",response_model=tuple)
 def get_recetas(user: str = Query(None),
     classe: str = Query(None),
-    tipo: str = Query(None),
+    tipo: List = Query([]),
     ingredientes: List = Query([]),
     time: int =  Query(None),
     dificultad: int = Query(None) ):
