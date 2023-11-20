@@ -61,8 +61,7 @@ export default {
 
       axios.get(path, {
         params: {
-          "user": 'Guillem',
-          "classe": 'vegetariana'
+          "classe": 'Vegetariana'
         }
       })
       .then(response => {
