@@ -1,5 +1,5 @@
 <template>
-  <body class="container">
+  <body class="granContainerRegistre">
     <div>
       <form @submit.prevent="checkLogin">
         <h1 id="title">Registro</h1>
@@ -24,30 +24,28 @@
 body {
   justify-content: center;
   font-family: Lato, sans-serif;
-  background-image: url('defaultRecipePhoto.png');
-  /* Configurar el tamaño y el comportamiento de la imagen de fondo */
-  background-size: cover; /* Puedes usar "contain" en lugar de "cover" según tus preferencias */
-  background-repeat: no-repeat;
-  /* Ajustar la posición de la imagen de fondo */
-  background-position: center center;
-  background-c
 }
 
-.container {
-
+.granContainerRegistre {
+  height: 100vh;
+  background-image: url('defaultRecipePhoto.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow-y: hidden;
 }
 
 form {
   border: 5px solid #EEF2B6;
-  margin: 5%;
   background-color: white;
-  opacity: 90%;
+  opacity: 95%;
+  margin: 5%;
+  padding: 2%;
 }
 
 #title {
   font-weight: bold;
   color: #5c5540;
-  margin-top: 5%;
 }
 
 input[type=text], input[type=password] {
@@ -59,12 +57,6 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
-.icon {
-  font-size: 110px;
-  display: flex;
-  justify-content: center;
-  color: #4286f4;
-}
 button {
   background-color: #73694F;
   color: white !important;
@@ -82,7 +74,6 @@ button:hover {
 }
 .formcontainer {
   text-align: center;
-  margin: 24px 50px 12px;
 }
 .container {
   padding: 16px 0;
