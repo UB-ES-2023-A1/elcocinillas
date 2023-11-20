@@ -1,12 +1,15 @@
 <template>
   <div id="app">
-    <h1 id="title">RECETAS</h1>
+    <h2 id="title">RECETAS</h2>
     <div class="d-flex flex-row flex-wrap">
       <recipe-card v-for="rp in this.recipes"
                    v-bind:key="rp.id"
                    v-bind:recipeName="rp.nombre">
       </recipe-card>
     </div>
+    <button id="boton-flotante" @click="uploadRecipe">
+        <router-link to="/publicarReceta" id="boton-flotante-inner">+</router-link>
+    </button>
   </div>
 
 </template>
@@ -19,13 +22,34 @@
   text-align: center;
   color: #2c3e50;
   margin-left: 10%;
-  margin-right: 10%;
   margin-top: 5%;
 }
 
 #title {
   font-weight: bold;
   margin-bottom: 80px;
+  color: #5c5540;
+  text-align: center;
+  font-size: xxx-large;
+  margin-right: 10%;
+}
+
+#boton-flotante {
+  position: fixed;
+  height: 55px;
+  width: 55px;
+  bottom: 8%;
+  right: 8%;
+  padding: 10px;
+  background-color: #73694F;
+  border: none;
+  border-radius: 50%;
+}
+
+#boton-flotante-inner{
+  color: #ffffff;
+  font-size: 24px;
+  text-decoration: none;
 }
 
 </style>
@@ -82,6 +106,10 @@ export default {
           .catch((error) => {
             console.error("Error fetching recipes:", error);
           })
+    },
+
+    uploadRecipe() {
+      this.$router.push('/publicarReceta')
     }
   }
 };
