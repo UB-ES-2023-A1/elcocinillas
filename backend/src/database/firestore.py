@@ -110,7 +110,7 @@ def busca_recetas(cadena):
 def getRecipeImages(recepta): 
     # Crea una lista para almacenar las URL de las imágenes
     image_urls = []
-    #Pequeña prueba para el github
+
     # Conecta al bucket de almacenamiento
     bucket = storage.bucket()
     folder_path = ruta_recetas + recepta.nombre
