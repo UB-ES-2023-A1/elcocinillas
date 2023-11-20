@@ -20,6 +20,9 @@
     "vuetify": "^2.6.0",
     "vuex": "^4.1.0"
   },
+  "engines": {
+  "node": ">=18.0.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
