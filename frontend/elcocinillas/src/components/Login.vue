@@ -2,9 +2,6 @@
   <body>
     <form @submit.prevent="checkLogin">
       <h1 id="title">Inicio de sesión</h1>
-      <div class="icon">
-        <i class="fas fa-user-circle"></i>
-      </div>
       <div class="formcontainer">
         <div class="container">
           <label for="mail"><strong>Email</strong></label>
@@ -60,9 +57,7 @@ export default {
         }
       }
     },
-    goBackToMain() {
-      router.push("/");
-    },
+
     createAccount(){
       router.push("/registre");
     },
