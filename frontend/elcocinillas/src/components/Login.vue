@@ -1,92 +1,22 @@
 <template>
-  <div>
-    <section class="h-100 gradient-form" style="background-color: #76ded9">
-      <header>
-        <div class="p-3 text-left">
-          <h1 class="mb-3">El Cocinillas</h1>
-        </div>
-        <div class="mb-6 text-md-right">
-          <button
-            class="btn btn-outline-info"
-            @click="goBackToMain"
-            type="button"
-            style="background-color: #13cf89"
-          >
-            Volver a inicio
-          </button>
-        </div>
-      </header>
-    </section>
-    <section class="h-100 gradient-form" style="background-color: #eef2b6">
-      <div class="row h-100">
-        <div class="col">
-          <div
-            class="card rounded-3 text-black"
-            style="background-color: #eef2b6"
-          >
-            <div class="row g-0 justify-content-center">
-              <div class="col-lg-6">
-                <div
-                  class="card-body p-md-5 mx-md-4"
-                  style="background-color: #eef2b6"
-                >
-                  <div class="text-center">
-                    <h4 class="mt-1 mb-5 pb-1">Sign In</h4>
-                  </div>
-
-                  <form>
-                    <p>Email</p>
-
-                    <div class="form-outline mb-4">
-                      <input
-                        type="email"
-                        id="form2Example11"
-                        class="form-control"
-                        placeholder="Email"
-                        required
-                        autofocus
-                        v-model="email"
-                      />
-                    </div>
-                    <p>Pasword</p>
-                    <div class="form-outline mb-4">
-                      <input
-                        type="password"
-                        id="form2Example22"
-                        class="form-control"
-                        placeholder="Password"
-                        required
-                        v-model="password"
-                      />
-                    </div>
-
-                    <div class="text-center pt-1 mb-5 pb-1">
-                      <button
-                        class="btn btn-primary btn-block"
-                        @click="checkLogin()"
-                        type="button"
-                        style="background-color: #73694f"
-                      >
-                        Sign in
-                      </button>
-                      <button
-                        class="btn btn-success btn-block"
-                        @click="createAccount()"
-                        type="button"
-                        style="background-color: #5c5540"
-                      >
-                        Create Account
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+  <body>
+    <form @submit.prevent="checkLogin">
+      <h1 id="title">Inicio de sesión</h1>
+      <div class="icon">
+        <i class="fas fa-user-circle"></i>
       </div>
-    </section>
-  </div>
+      <div class="formcontainer">
+        <div class="container">
+          <label for="mail"><strong>Email</strong></label>
+          <input type="text" placeholder="Introduce el correo" name="mail" required autofocus v-model="email">
+          <label for="psw"><strong>Contraseña</strong></label>
+          <input type="password" placeholder="Introduce la contraseña" name="psw" required v-model="password">
+          <a @click="createAccount">¿No tienes cuenta? Regístrate</a>
+        </div>
+        <button type="submit"><strong>Iniciar sesión</strong></button>
+      </div>
+    </form>
+  </body>
 </template>
 
 <script>
@@ -121,8 +51,9 @@ export default {
           );
           alert("Sesión iniciada con éxito");
           // Manejar el éxito del inicio de sesión (redirección, etc.)
+          router.push("/recetas");
         } catch (error) {
-          alert(error.message);
+          alert("Error en el inicio de sesión: email o contraseñas incorrectos");
           // Manejar el error del inicio de sesión
         }
       }
@@ -137,4 +68,74 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+body {
+  justify-content: center;
+  font-family: Lato, sans-serif;
+  background-size: 100%;
+}
+
+form {
+  border: 5px solid #EEF2B6;
+  background-color: white;
+  margin: 10%;
+}
+
+#title {
+  font-weight: bold;
+  color: #5c5540;
+  margin-top: 5%;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 16px 8px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.icon {
+  font-size: 110px;
+  display: flex;
+  justify-content: center;
+  color: #4286f4;
+}
+button {
+  background-color: #73694F;
+  color: white !important;
+  padding: 14px 0;
+  margin: 10px 0;
+  border: none;
+  cursor: grab;
+  width: 48%;
+}
+h1 {
+  text-align:center;
+}
+button:hover {
+  opacity: 0.8;
+}
+.formcontainer {
+  text-align: center;
+  margin: 24px 50px 12px;
+}
+.container {
+  padding: 16px 0;
+  text-align:left;
+}
+span.psw {
+  float: right;
+  padding-top: 0;
+  padding-right: 15px;
+}
+/* Change styles for span on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+}
+
+</style>
