@@ -47,11 +47,11 @@ export default {
   },
 
   created() {
-    if (this.filtros == null){
+    /*if (this.filtros == null){
       this.getAllRecipesFromDB();
-    } else{
+    } else{*/
       this.getRecipesFromDB();
-    }
+   // }
   },
 
   methods : {
@@ -60,7 +60,6 @@ export default {
 
       axios.get(path, {
         params: {
-          "user": 'Guillem',
           "classe": 'vegetariana'
         }
       })
