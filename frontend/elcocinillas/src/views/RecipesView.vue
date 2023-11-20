@@ -31,6 +31,7 @@
   color: #5c5540;
   text-align: center;
   font-size: xxx-large;
+  margin-right: 10%;
 }
 
 #boton-flotante {

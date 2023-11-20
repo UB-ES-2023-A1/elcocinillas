@@ -5,8 +5,8 @@
       <div class="container">
         <div class="row">
           <div class="col-sm border-right">
-            <h2>{{ this.ingredientes.length }}</h2>
-            <h4>ingredientes</h4>
+            <h2>{{ this.user }}</h2>
+            <h4>usuario</h4>
           </div>
           <div class="col-sm border-right">
             <h2>{{ this.time }}</h2>
@@ -91,6 +91,7 @@ export default {
       name: null,
       dificultad: 0,
       urlImagen: null,
+      user: null
     };
   },
   created() {
@@ -111,7 +112,7 @@ export default {
           this.name = response.data.nombre;
           this.dificultad = response.data.dificultad;
           this.urlImagen = response.data.images.toString();
-          console.log(this.urlImagen);
+          this.user = response.data.user;
         })
         .catch((error) => {
           console.error("Error fetching recipes:", error);
