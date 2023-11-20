@@ -1,11 +1,14 @@
 import BootstrapVue from "bootstrap-vue";
 import "@/../bootstrap/css/bootstrap.css";
 import Vue from "vue";
+import vuetify from "@/plugins/vuetify";
 import "./plugins/bootstrap-vue";
 import App from "./App.vue";
 import router from "./router";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import store from "./store";
+
 
 // Configura tus credenciales de Firebase
 const firebaseConfig = {
@@ -27,10 +30,18 @@ export { auth };
 Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 
+Vue.prototype.$globalData = Vue.observable({
+  time: 0,
+  diets: [],
+  dishes: []
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
+  store,
+  vuetify,
   router,
   components: { App },
   template: "<App/>",
-});
+})

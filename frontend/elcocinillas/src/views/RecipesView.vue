@@ -1,41 +1,117 @@
 <template>
-  <v-sheet class="mx-auto" elevation="8" max-width="800">
-    vsheet
-    <v-slide-group
-      v-model="model"
-      class="pa-4"
-      selected-class="bg-success"
-      show-arrows
-      v-slot="{}"
-    >
-      vslide
-      <v-slide-group-item v-for="n in 15" :key="n">
-        <v-card
-          color="grey-lighten-1"
-          :class="['ma-4', isSelected]"
-          height="200"
-          width="100"
-        >
-          vcard
-          <div class="d-flex fill-height align-center justify-center">
-            <v-scale-transition>
-              <v-icon
-                color="white"
-                size="48"
-                icon="mdi-close-circle-outline"
-              ></v-icon>
-            </v-scale-transition>
-          </div>
-        </v-card>
-      </v-slide-group-item>
-    </v-slide-group>
-  </v-sheet>
+  <div id="app">
+    <h2 id="title">RECETAS</h2>
+    <div class="d-flex flex-row flex-wrap">
+      <recipe-card v-for="rp in this.recipes"
+                   v-bind:key="rp.id"
+                   v-bind:recipeName="rp.nombre">
+      </recipe-card>
+    </div>
+    <button id="boton-flotante" @click="uploadRecipe">
+        <router-link to="/publicarReceta" id="boton-flotante-inner">+</router-link>
+    </button>
+  </div>
+
 </template>
 
+<style>
+#app {
+  font-family: "Lato", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-left: 10%;
+  margin-top: 5%;
+}
+
+#title {
+  font-weight: bold;
+  margin-bottom: 80px;
+  color: #5c5540;
+  text-align: center;
+  font-size: xxx-large;
+  margin-right: 10%;
+}
+
+#boton-flotante {
+  position: fixed;
+  height: 55px;
+  width: 55px;
+  bottom: 8%;
+  right: 8%;
+  padding: 10px;
+  background-color: #73694F;
+  border: none;
+  border-radius: 50%;
+}
+
+#boton-flotante-inner{
+  color: #ffffff;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+</style>
+
 <script>
+import RecipeCard from "@/components/RecipeCard.vue";
+import axios from "axios";
 export default {
-  data: () => ({
-    model: null,
-  }),
+  components: {RecipeCard},
+  props : {
+    filtros : {
+      type : Object
+    }
+  },
+  data() {
+    return {
+      recipes: []
+    }
+  },
+
+  created() {
+    if (this.filtros == null){
+      this.getAllRecipesFromDB();
+    } else{
+      this.getRecipesFromDB();
+    }
+  },
+
+  methods : {
+    getRecipesFromDB() {
+      const path = "http://localhost:8000/recetas/";
+
+      axios.get(path, {
+        params: {
+          "user": 'Guillem',
+          "classe": 'vegetariana'
+        }
+      })
+      .then(response => {
+        console.log("metodo todasRecetas() llamada OK");
+        this.recipes = response.data;
+      })
+      .catch(error => {
+        console.error("Error fetching recipes:", error);
+      });
+    },
+
+    getAllRecipesFromDB() {
+      const path = "http://localhost:8000/todasrecetas/";
+      axios.get(path)
+          .then((response) => {
+            console.log("metodo todasRecetas() llamada OK");
+            this.recipes = response.data;
+          })
+          .catch((error) => {
+            console.error("Error fetching recipes:", error);
+          })
+    },
+
+    uploadRecipe() {
+      this.$router.push('/recetas/publicarReceta')
+    }
+  }
 };
 </script>

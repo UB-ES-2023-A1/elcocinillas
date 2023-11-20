@@ -1,12 +1,12 @@
 <template>
   <div id="app">
     <section id="headerSection">
-      <h1 id="title">{{ this.name }}</h1>
+      <h2 id="title">{{ this.name }}</h2>
       <div class="container">
         <div class="row">
           <div class="col-sm border-right">
-            <h2>{{ this.ingredientes.length }}</h2>
-            <h4>ingredientes</h4>
+            <h2>{{ this.user }}</h2>
+            <h4>usuario</h4>
           </div>
           <div class="col-sm border-right">
             <h2>{{ this.time }}</h2>
@@ -23,18 +23,15 @@
     <section class="sections">
       <h4>INGREDIENTES (4 personas):</h4>
       <hr id="solidDividerYellow" />
-      <ul v-for="ingrediente in this.ingredientes" :key="ingrediente.id">
-        <li>{{ ingrediente }}</li>
-      </ul>
+      <p>{{ this.ingredientes }}</p>
+
     </section>
 
     <section class="sections">
       <h4>ELABORACIÓN DE LA RECETA</h4>
       <hr id="solidDividerYellow" />
       <p>Estos son los pasos que tienes que seguir</p>
-      <ul v-for="step in steps" :key="step.id">
-        <li>{{ step }}</li>
-      </ul>
+      <p>{{ this.steps }}</p>
     </section>
   </div>
 </template>
@@ -59,6 +56,9 @@
 #title {
   font-weight: bold;
   margin-bottom: 80px;
+  color: #5c5540;
+  text-align: center;
+  font-size: xxx-large;
 }
 
 .sections {
@@ -80,14 +80,18 @@ import axios from "axios";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Recipe",
+  props: {
+    nombreReceta : String
+  },
   data() {
     return {
-      ingredientes: [],
-      steps: [],
+      ingredientes: null,
+      steps: null,
       time: 0,
       name: null,
       dificultad: 0,
       urlImagen: null,
+      user: null
     };
   },
   created() {
@@ -96,7 +100,7 @@ export default {
 
   methods: {
     getRecipe() {
-      const pathReceta = "http://localhost:8000/receta/Salsa de boletus y ceps";
+      const pathReceta = "http://localhost:8000/receta/"+this.nombreReceta;
       const urlCodificada = encodeURI(pathReceta);
       axios
         .get(urlCodificada)
@@ -108,7 +112,7 @@ export default {
           this.name = response.data.nombre;
           this.dificultad = response.data.dificultad;
           this.urlImagen = response.data.images.toString();
-          console.log(this.urlImagen);
+          this.user = response.data.user;
         })
         .catch((error) => {
           console.error("Error fetching recipes:", error);
