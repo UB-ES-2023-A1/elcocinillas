@@ -12,7 +12,7 @@ app = FastAPI()
 # Configura CORS para permitir solicitudes desde tu aplicación Vue
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Reemplaza con la URL de tu frontend Vue
+    allow_origins=["http://localhost:8080", "http://127.0.0.1:8080"],  # Reemplaza con la URL de tu frontend Vue
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
