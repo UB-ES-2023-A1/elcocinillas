@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <section id="headerSection">
-      <h1 id="title">{{ this.name }}</h1>
+      <h2 id="title">{{ this.name }}</h2>
       <div class="container">
         <div class="row">
           <div class="col-sm border-right">
@@ -59,6 +59,9 @@
 #title {
   font-weight: bold;
   margin-bottom: 80px;
+  color: #5c5540;
+  text-align: center;
+  font-size: xxx-large;
 }
 
 .sections {

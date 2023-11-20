@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h1 id="title">RECETAS</h1>
+    <h2 id="title">RECETAS</h2>
     <div class="d-flex flex-row flex-wrap">
       <recipe-card v-for="rp in this.recipes"
                    v-bind:key="rp.id"
@@ -29,6 +29,9 @@
 #title {
   font-weight: bold;
   margin-bottom: 80px;
+  color: #5c5540;
+  text-align: center;
+  font-size: xxx-large;
 }
 
 #boton-flotante {
