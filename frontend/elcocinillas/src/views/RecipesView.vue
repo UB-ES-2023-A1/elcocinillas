@@ -109,7 +109,7 @@ export default {
     },
 
     uploadRecipe() {
-      this.$router.push('/recetas/publicarReceta')
+      this.$router.push('/publicarReceta')
     }
   }
 };
