@@ -40,14 +40,19 @@ def get_receptes(filtro):
     if filtro['user'] is not None:
         query = query.where("user", "==", filtro['user'])
     if filtro["classe"] is not None:
-        query = query.where("classe", "==", filtro["classe"])
-    if filtro["tipo"] is not None:
-        query = query.where("tipo", "==", filtro["tipo"])
-    if filtro["ingredientes"] is not None:
+        clases = [filtro["classe"],filtro["classe"].lower()]
+        query = query.where("classe", "in", clases)
+    if filtro["tipo"] != []:
+        tipos = []
+        for t in filtro["tipo"]:
+            tipos.append(t)
+            tipos.append(t.lower())
+        query = query.where("tipo", "in", tipos)
+    if filtro["ingredientes"] != []:
         for ingrediente in filtro["ingredientes"]:
             query = query.where("ingredientes", "array_contains", ingrediente)
     if filtro["time"] is not None:
-        query = query.where("time", "==", filtro["time"])
+        query = query.where("time", "<=", filtro["time"])
     if filtro["dificultad"] is not None:
         query = query.where("dificultad", "==", filtro["dificultad"])
 
