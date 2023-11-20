@@ -11,7 +11,7 @@
           <input type="text" placeholder="Introduce el correo" name="mail" required autofocus v-model="email">
           <label for="psw"><strong>Contraseña</strong></label>
           <input type="password" placeholder="Introduce la contraseña" name="psw" required v-model="password">
-          <a @click="createAccount">¿No tienes cuenta? Regístrate</a>
+          <a @click="createAccount" style="color: #73694F">¿No tienes cuenta? Regístrate</a>
         </div>
         <button type="submit"><strong>Iniciar sesión</strong></button>
       </div>
@@ -51,8 +51,10 @@ export default {
           );
           alert("Sesión iniciada con éxito");
           // Manejar el éxito del inicio de sesión (redirección, etc.)
+          this.$globalData.logged = true;
           router.push("/recetas");
         } catch (error) {
+          this.$globalData.logged = false;
           alert("Error en el inicio de sesión: email o contraseñas incorrectos");
           // Manejar el error del inicio de sesión
         }

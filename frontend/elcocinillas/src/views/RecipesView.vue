@@ -52,6 +52,7 @@ export default {
     } else{
       this.getRecipesFromDB();
     }
+    console.log("isUserlogged : ", this.$globalData.logged)
   },
 
   methods : {
