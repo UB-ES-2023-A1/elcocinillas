@@ -253,7 +253,6 @@ export default {
           dificultad: this.dificultadReceta
       };
     },
-
     handleFileChange(event) {
       this.images = event.target.files[0];
       const path = "http://localhost:8000/imgUpload/";
