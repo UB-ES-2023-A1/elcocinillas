@@ -216,7 +216,7 @@ export default {
       tipoReceta: "",
       ingredientesReceta: "",
       pasosReceta: "",
-      imagesReceta: null,
+      imagesReceta: "",
       timeReceta: 15,
       dificultadReceta: 0
     };
