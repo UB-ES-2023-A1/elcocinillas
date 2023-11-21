@@ -254,10 +254,15 @@ export default {
       };
     },
     handleFileChange(event) {
-      this.images = event.target.files[0];
+      const file = event.target.files[0];
+
+      // Crea un objeto FormData para enviar el archivo y otros datos
+      const formData = new FormData();
+      formData.append('nombre', this.nombreReceta);
+      formData.append('file', file);
       const path = "http://localhost:8000/imgUpload/";
       try{
-          const response = axios.post(path,this.nombreReceta,this.images);
+          const response = axios.post(path,formData);
           console.log('Foto seleccionada:', this.images);
           this.imagesReceta = response.data.url;
       } catch (error){

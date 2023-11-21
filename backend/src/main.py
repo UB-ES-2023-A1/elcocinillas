@@ -73,7 +73,7 @@ def publi_img(nombre: str, file: UploadFile = File(...)):
 
     receta['images'] = image_url
     
-    return database.updateImg(receta)
+    return image_url
 
 @app.post("/receta", response_model=str)
 def publi_receta(receta: Receta):
