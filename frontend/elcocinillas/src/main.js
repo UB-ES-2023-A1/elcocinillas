@@ -33,7 +33,8 @@ Vue.config.productionTip = false;
 Vue.prototype.$globalData = Vue.observable({
   time: 0,
   diets: [],
-  dishes: []
+  dishes: [],
+  logged: false,
 });
 
 /* eslint-disable no-new */
