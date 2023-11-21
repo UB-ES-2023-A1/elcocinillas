@@ -1,6 +1,7 @@
 <template>
   <div class="card text-left border-light cardStyle"  @click="openRecipe">
-    <img class="card-img-top" src="../img/defaultRecipePhoto.png">
+    <img class="card-img-top" v-if="NotImage" src="../img/defaultRecipePhoto.png">
+    <img class="card-img-top" v-else src="imageUrl">
     <div class="card-body">
       <p class="card-text">{{ recipeName }}</p>
     </div>
@@ -25,7 +26,8 @@ export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "RecipeCard",
   props: {
-    recipeName : String
+    recipeName : String,
+    imageUrl: String
   },
 
   methods : {
