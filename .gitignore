@@ -166,5 +166,4 @@ backend/.idea/
 frontend/elcocinillas/.vs
 
 frontend/elcocinillas/package-lock.json
-backend/src/database/elcocinillas.json
 /backend/src/pc_env/
