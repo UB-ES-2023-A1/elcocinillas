@@ -1,10 +1,10 @@
 <template>
-  <body class="granContainerRegistre">
+  <body id="granContainerRegistre">
     <div>
-      <form @submit.prevent="checkLogin">
-        <h1 id="title">Registro</h1>
-        <div class="formcontainer">
-          <div class="container">
+      <form @submit.prevent="checkLogin" class="formcontainer">
+        <h2 id="title">Registro</h2>
+        <div>
+          <div class="inner-container">
             <label for="mail"><strong>Email</strong></label>
             <input type="text" placeholder="Introduce el correo" name="mail" required autofocus v-model="email">
             <label for="psw"><strong>Contraseña</strong></label>
@@ -21,31 +21,20 @@
 </template>
 
 <style>
-body {
-  justify-content: center;
-  font-family: Lato, sans-serif;
-}
-
-.granContainerRegistre {
+#granContainerRegistre {
   height: 100vh;
-  background-image: url('defaultRecipePhoto.png');
+  background-image: url('../img/defaultRecipePhoto.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  overflow-y: hidden;
-}
-
-form {
-  border: 5px solid #EEF2B6;
-  background-color: white;
-  opacity: 95%;
-  margin: 5%;
-  padding: 2%;
+  display: block;
+  text-align: center;
 }
 
 #title {
   font-weight: bold;
   color: #5c5540;
+  text-align:center;
 }
 
 input[type=text], input[type=password] {
@@ -66,16 +55,20 @@ button {
   cursor: grab;
   width: 48%;
 }
-h1 {
-  text-align:center;
-}
 button:hover {
   opacity: 0.8;
 }
+
 .formcontainer {
   text-align: center;
+  border: 5px solid #EEF2B6;
+  background-color: white;
+  opacity: 95%;
+  width: 80%;
+  display: inline-block;
+  margin: 5%;
 }
-.container {
+.inner-container {
   padding: 16px 0;
   text-align:left;
 }
@@ -84,6 +77,7 @@ span.psw {
   padding-top: 0;
   padding-right: 15px;
 }
+
 /* Change styles for span on extra small screens */
 @media screen and (max-width: 300px) {
   span.psw {

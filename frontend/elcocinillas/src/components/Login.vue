@@ -1,9 +1,9 @@
 <template>
-  <body class="granContainerLogin">
-    <form @submit.prevent="checkLogin">
-      <h1 id="title">Inicio de sesión</h1>
-      <div class="formcontainer">
-        <div class="container">
+  <body id="granContainerRegistre">
+    <form @submit.prevent="checkLogin" class="formcontainer">
+      <h2 id="title">Inicio de sesión</h2>
+      <div>
+        <div class="inner-container">
           <label for="mail"><strong>Email</strong></label>
           <input type="text" placeholder="Introduce el correo" name="mail" required autofocus v-model="email">
           <label for="psw"><strong>Contraseña</strong></label>
@@ -17,21 +17,6 @@
 </template>
 
 <style>
-.granContainerLogin {
-  height: 100vh;
-  background-image: url('defaultRecipePhoto.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  overflow-y: hidden;
-}
-
-.granContainerLogin form {
-  border: 5px solid #EEF2B6;
-  background-color: white;
-  opacity: 95%;
-  margin: 10%;
-}
 
 </style>
 
