@@ -46,19 +46,6 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
-button {
-  background-color: #73694F;
-  color: white !important;
-  padding: 14px 0;
-  margin: 10px 0;
-  border: none;
-  cursor: grab;
-  width: 48%;
-}
-button:hover {
-  opacity: 0.8;
-}
-
 .formcontainer {
   text-align: center;
   border: 5px solid #EEF2B6;
@@ -76,6 +63,20 @@ span.psw {
   float: right;
   padding-top: 0;
   padding-right: 15px;
+}
+
+button {
+  background-color: #73694F !important;
+  color: white !important;
+  padding: 14px 0;
+  margin: 10px 0;
+  border: none;
+  cursor: grab;
+  width: 48%;
+  opacity: 100% !important;
+}
+button:hover {
+  opacity: 0.8;
 }
 
 /* Change styles for span on extra small screens */
