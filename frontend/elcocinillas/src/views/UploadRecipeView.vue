@@ -258,7 +258,7 @@ export default {
       this.images = event.target.files[0];
       const path = "http://localhost:8000/imgUpload/";
       try{
-          const response = axios.post(path,this.images);
+          const response = axios.post(path,this.nombreReceta,this.images);
           console.log('Foto seleccionada:', this.images);
           this.imagesReceta = response.data.url;
       } catch (error){
