@@ -58,7 +58,7 @@ def get_all_recipes():
     return database.get_all_recipes()
 
 @app.post("/imgUpload/", response_model=str)
-def publi_img(nombre: str, file: UploadFile = File(...)):
+def publi_img(nombre: str = Form(...), file: UploadFile = File(...)):
 
     # Lee el archivo en memoria
     image_data = file.file.read()

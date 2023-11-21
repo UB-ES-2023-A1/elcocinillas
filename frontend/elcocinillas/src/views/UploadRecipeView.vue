@@ -58,7 +58,7 @@
 
         <div id="photoPicker">
           <label for="exampleFormControlFile1">¿Quieres acompañar tu receta con alguna foto?</label>
-          <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="handleFileChange">
+          <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="handleFileChange($event)">
         </div>
 
         <div class="btn-block">
@@ -254,12 +254,12 @@ export default {
       };
     },
     handleFileChange(event) {
-      const file = event.target.files[0];
+      this.file = event.target.files[0];
 
       // Crea un objeto FormData para enviar el archivo y otros datos
       const formData = new FormData();
       formData.append('nombre', this.nombreReceta);
-      formData.append('file', file);
+      formData.append('file', this.file);
       const path = "http://localhost:8000/imgUpload/";
 
       axios.post(path,formData).then((response) => {
