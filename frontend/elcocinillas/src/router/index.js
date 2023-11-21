@@ -1,10 +1,14 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Login from "../components/Login.vue";
-import Perfil from  "../components/Perfil.vue";
-import Recipe from "../components/Recipe.vue";
-import MainView from "../views/HomeView.vue";
+import Login from "@/components/Login.vue";
+import Perfil from "@/components/Perfil.vue";
 import RecipesView from "@/views/RecipesView.vue";
+import MainView from "@/views/HomeView.vue";
+import Recipe from "@/components/Recipe.vue";
+import Registre from "@/components/Registre.vue";
+import AboutView from "@/views/AboutView.vue";
+import TermsView from "@/views/TermsView.vue";
+import UploadReceta from "@/views/UploadRecipeView.vue";
 
 Vue.use(Router);
 
@@ -18,9 +22,19 @@ export default new Router({
       component: MainView,
     },
     {
+      path: "/registre",
+      name: "Registre",
+      component: Registre,
+    },
+    {
       path: "/userlogin",
       name: "Login",
       component: Login,
+    },
+    {
+      path:"/perfil",
+      name: "Perfil",
+      component: Perfil,
     },
     {
       path: "/recetas",
@@ -34,9 +48,19 @@ export default new Router({
       component: Recipe,
     },
     {
-      path: "/perfil",
-      name: "Perfil",
-      component: Perfil,
+      path: "/about",
+      name: "About",
+      component: AboutView,
+    },
+    {
+      path: "/t&c",
+      name: "Terms",
+      component: TermsView,
+    },
+    {
+      path: "/publicarReceta",
+      name: "UploadReceta",
+      component: UploadReceta,
     }
   ],
 });

@@ -30,6 +30,10 @@ def register(user: User):
 def get_receta(name: str):
     return database.get_recepta(name)
 
+@app.get("/recetas/{cadena}")
+def busca_recetas(cadena: str):
+    return database.busca_recetas(cadena)
+
 @app.get("/user/{username}")
 def get_user(username: str):
     return database.get_user(username)
@@ -41,7 +45,7 @@ def update_user(user_id: str, updated_user: User):
 @app.get("/recetas/",response_model=tuple)
 def get_recetas(user: str = Query(None),
     classe: str = Query(None),
-    tipo: str = Query(None),
+    tipo: List = Query([]),
     ingredientes: List = Query([]),
     time: int =  Query(None),
     dificultad: int = Query(None) ):

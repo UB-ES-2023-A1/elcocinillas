@@ -29,15 +29,16 @@ GET http://127.0.0.1:8000/user/Kd9WLagwJkVuBm5Ph2vrVWLNLg23
 Accept: application/json
 ###
 
-GET http://127.0.0.1:8000/recetas/
+GET http://127.0.0.1:8000/recetas/?classe=vegetariana
 Content-Type: application/json
 
-{
-  "classe": "vegetariana"
-}
 
 
 ###
 
 GET http://127.0.0.1:8000/todasrecetas/
+Accept: application/json
+
+###
+GET http://127.0.0.1:8000/recetas/Salso
 Accept: application/json

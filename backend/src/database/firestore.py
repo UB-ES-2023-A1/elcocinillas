@@ -3,6 +3,7 @@ import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
 from firebase_admin import auth, storage
+from fuzzywuzzy import fuzz, process
 
 current_directory = os.path.dirname(__file__)
 file_path = os.path.join(current_directory, 'elcocinillas.json')
@@ -41,14 +42,19 @@ def get_receptes(filtro):
     if filtro['user'] is not None:
         query = query.where("user", "==", filtro['user'])
     if filtro["classe"] is not None:
-        query = query.where("classe", "==", filtro["classe"])
-    if filtro["tipo"] is not None:
-        query = query.where("tipo", "==", filtro["tipo"])
-    if filtro["ingredientes"] is not None:
+        clases = [filtro["classe"],filtro["classe"].lower()]
+        query = query.where("classe", "in", clases)
+    if filtro["tipo"] != []:
+        tipos = []
+        for t in filtro["tipo"]:
+            tipos.append(t)
+            tipos.append(t.lower())
+        query = query.where("tipo", "in", tipos)
+    if filtro["ingredientes"] != []:
         for ingrediente in filtro["ingredientes"]:
             query = query.where("ingredientes", "array_contains", ingrediente)
     if filtro["time"] is not None:
-        query = query.where("time", "==", filtro["time"])
+        query = query.where("time", "<=", filtro["time"])
     if filtro["dificultad"] is not None:
         query = query.where("dificultad", "==", filtro["dificultad"])
 
@@ -74,6 +80,33 @@ def get_recepta(name_recepta):
     else:
         print("No such document!")
         return -1
+
+
+def busca_recetas(cadena):
+    coleccion = db.collection("receptes")
+    recetas = coleccion.stream()
+
+    data = [doc.to_dict() for doc in recetas]
+    resultados = []
+    for doc in data:
+        if cadena in doc["nombre"]:
+            resultados.append(doc)
+
+    if len(resultados) > 0:
+        return resultados
+    else:
+        nombres = [doc["nombre"] for doc in data]
+        respuesta = process.extract(cadena, nombres, limit=10)
+
+        for i in range(10):
+            name = respuesta[i][0]
+            query = coleccion.where("nombre","==",name)
+            ret = query.stream()
+            rec = [doc.to_dict() for doc in ret]
+            resultados.append(rec[0])
+
+        return resultados
+
         
 
 def getRecipeImages(recepta): 
