@@ -248,7 +248,7 @@ export default {
           tipo: this.tipoReceta,
           ingredientes: this.ingredientesReceta,
           pasos: this.pasosReceta,
-          images: "",
+          images: this.imagesReceta,
           time: this.timeReceta,
           dificultad: this.dificultadReceta
       };
