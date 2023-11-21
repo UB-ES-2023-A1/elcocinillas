@@ -77,3 +77,7 @@ def publi_receta(receta: Receta):
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=500, detail="Error en el servidor leer img: " + str(e))
+
+@app.get("/imgReceta/{nombre_receta}")
+def get_image_url(nombre_receta: str):
+    return database.getRecipeImages(nombre_receta)

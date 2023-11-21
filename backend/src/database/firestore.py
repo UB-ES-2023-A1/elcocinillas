@@ -110,22 +110,15 @@ def busca_recetas(cadena):
         
 
 def getRecipeImages(recepta): 
-    # Crea una lista para almacenar las URL de las imágenes
-    image_urls = []
-
     # Conecta al bucket de almacenamiento
     bucket = storage.bucket()
-    folder_path = ruta_recetas + recepta.nombre
-    blobs = bucket.list_blobs(prefix=folder_path)
+    folder_path = ruta_recetas + recepta
+    blob = bucket.blob(prefix=folder_path)
 
-    for blob in blobs:
-        # Genera la URL del blob
-        image_url = blob.public_url
-        # Agrega la URL a la lista de imágenes
-        image_urls.append(image_url)
-
+    # Genera la URL del blob
+    image_url = blob.public_url
     # Devuelve la lista de URLs de imágenes
-    return image_urls
+    return image_url
 
 def updateImg(receta):
     doc_ref = db.collection("receptes").document(receta['nombre'])
@@ -147,7 +140,7 @@ def uploadImg(nombre, file):
         blob = bucket.blob(ruta_recetas + nombre)
 
         blob.upload_from_string(file, content_type="image/jpeg")
-        
+
         return blob.public_url
     except Exception as e:
         # Captura cualquier excepción y maneja el error
