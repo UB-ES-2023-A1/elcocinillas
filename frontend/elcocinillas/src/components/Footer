@@ -1,19 +1,19 @@
 <div id="footer" style="clear:both;">
     <div class="social-media-foot">
         <a target="_blank" title="Facebook El Cocinillas" href="http://www.facebook.com/ElCocinillas">
-            <span class="fa fa-facebook" aria-hidden="true"></span>
+            <span class="elcoci-facebook" aria-hidden="true"></span>
         </a>
         <a target="_blank" title="Twitter El Cocinillas" href="http://www.twitter.com/elcocinillas">
-            <span class="fa fa-twitter" aria-hidden="true"></span>
+            <span class="elcoci-twitter" aria-hidden="true"></span>
         </a>
         <a target="_blank" title="Instagram El Cocinillas" href="https://www.instagram.com/elcocinillas/">
-            <span class="fa fa-instagram" aria-hidden="true"></span>
+            <span class="elcoci-instagram" aria-hidden="true"></span>
         </a>
         <a target="_blank" title="Youtube El Cocinillas" href="https://www.youtube.com/user/ElCocinillas">
-            <span class="fa fa-youtube" aria-hidden="true"></span>
+            <span class="elcoci-youtube" aria-hidden="true"></span>
         </a>
         <a target="_blank" title="RSS El Cocinillas" href="/en/rss/">
-            <span class="fa fa-rss" aria-hidden="true"></span>
+            <span class="elcoci-rss" aria-hidden="true"></span>
         </a>
     </div>
     <div style="padding: 10px; color: #fff; text-align: center;">
