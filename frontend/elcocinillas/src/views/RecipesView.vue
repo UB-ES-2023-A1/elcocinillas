@@ -1,11 +1,12 @@
 <template>
-  <div id="app" >
-    <div id="filters">
+  <div id="app">
+    {{ this.$chosen}}
+    <div id="filters" @click="getRecipesFromDB()">
       <Filters style="float:left"/>
     </div>
     <div id="recipes">
-      <h1 id="title" @click="login()">RECETAS</h1>
-      <div class="d-flex flex-row flex-wrap">
+      <h1 id="title">Recetas</h1>
+      <div class="d-flex flex-row flex-wrap" :key="$globalData.recipesKey">
         <recipe-card v-for="rp in this.recipes"
                     v-bind:key="rp.id"
                     v-bind:recipeName="rp.nombre">
@@ -26,8 +27,6 @@
 }
 
 #filters{
-  background-repeat: repeat;
-  background-size: 200px;
   place-items: left;
   text-align: left;
   border-left: 20px;
@@ -60,50 +59,36 @@ import Filters from "@/components/FiltersComp.vue";
 import axios from "axios";
 export default {
   components: {RecipeCard, Filters},
-  props : {
-    filtros : {
-      type : Object
-    }
-  },
   data() {
     return {
-      recipes: []
+      recipes: [],
     }
   },
-
   created() {
-    this.diets = this.$chosen.diets;
-    this.dishes = this.$chosen.dishes;
-      /*
-    if (this.filtros == null){
-      this.getAllRecipesFromDB();
-    } else{*/
-      this.getRecipesFromDB();
-   // }
+    this.getRecipesFromDB();
   },
-
   methods : {
     login(){
       this.$globalData.logged = !this.$globalData.logged;
     },
     getRecipesFromDB() {
       const path = "http://localhost:8000/recetas/";
-
       axios.get(path, {
         params: {
-          "user": 'Guillem',
-          "classe": 'vegetariana'
+          "classe": this.$chosen.diet,
+          "tipo": this.$chosen.dishes,
+          //"time": this.$chosen.time,
         }
       })
       .then(response => {
         console.log("metodo todasRecetas() llamada OK");
         this.recipes = response.data;
+        this.$globalData.recipesKey += 1;
       })
       .catch(error => {
         console.error("Error fetching recipes:", error);
       });
     },
-
     getAllRecipesFromDB() {
       const path = "http://localhost:8000/todasrecetas/";
       axios.get(path)
@@ -114,7 +99,7 @@ export default {
           .catch((error) => {
             console.error("Error fetching recipes:", error);
           })
-    }
+    },
   }
 };
 </script>

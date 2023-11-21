@@ -18,19 +18,21 @@
 
 <style scoped>
 * {
-  margin: 5px;
+  margin: 1vh;
 }
 .image{
-  margin-top: 20px;
+  margin-top: 4vh;
 }
 .description {
+  display: flex;
   margin: auto;
-  width: 75%;
+  place-content: center;
+  text-align: center;
   position: relative;
-  left: 50px;
+  font-size: 2.5vh;
 }
 h1 {
-  font-size: 50px;
+  font-size: 7.5vh;
   color: black;
   text-shadow: 2px 2px white;
 }

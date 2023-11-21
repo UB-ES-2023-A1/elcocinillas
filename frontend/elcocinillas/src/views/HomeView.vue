@@ -1,5 +1,5 @@
 <template>
-  <div class="pos" @mouseover="updateData">
+  <div class="pos">
     <div>
       <div class="column left">
         <ColumnComp>
@@ -23,9 +23,9 @@
           <template #description> 
             <ul>
               <li v-for="diet in optionsDiets" v-bind:key="diet.id"
-              :style="[$chosen.diets.includes(diet) ? 
+              :style="[$chosen.diet === diet ? 
               {'background-color': clicked} :
-              {'background-color': notClicked}]"
+              {'background-color': notClicked, 'color': 'black'}]"
               @click="addDiet(diet)">
               {{ diet }}
               </li>
@@ -44,7 +44,7 @@
               <li v-for="dish in optionsDishes" v-bind:key="dish.id"
               :style="[$chosen.dishes.includes(dish) ? 
               {'background-color': clicked} :
-              {'background-color': notClicked}]"
+              {'background-color': notClicked, 'color': 'black'}]"
               @click="addDish(dish)">
               {{ dish }}
               </li>
@@ -66,7 +66,6 @@
 <style scoped>
 a {
   text-decoration: none;
-  color: inherit;
 }
 img{
   margin-bottom: 30px;
@@ -75,22 +74,22 @@ img{
   display: grid;
 }
 h1 {
-  font-size: 35px;
+  font-size: 10vh;
   text-shadow: 2px 2px lightsteelblue;
   color: black;
 }
 h2 {
-  font-size: 35px;
-  color: white;
+  font-size: 5vh;
+  color: black;
   text-shadow: 2px black;
 }
 .column {
   width: 33.3333%;
   float: left;
-  height: 450px;
+  height: 75vh;
 }
 #slider{
-  width: 50%;
+  width: 30vh;
 }
 .left {
   background-color: white;
@@ -102,7 +101,7 @@ h2 {
   background-color: white;
 }
 img {
-  height: 180px;
+  height: 30vh;
   transition: 1s;
 }
 img:hover {
@@ -110,14 +109,12 @@ img:hover {
   transition: 1s;
 }
 .to-recipes {
-  position: relative;
-  background-image: url("../assets/food-mural-2.jpg");
   color: white;
-  background-size: 400px;
+  background-color: '#73694f';
   font-size: 16px;
   padding: 10px 20px 10px;
-  height: 75px;
-  width: 300px;
+  height: 12vh;
+  width: 50vh;
   text-align: center;
   margin: auto;
   margin-top: 20px;
@@ -126,27 +123,27 @@ img:hover {
 }
 .to-recipes:hover{
   filter: brightness(1.1);
-  background-size: 250px;
-  background-repeat: repeat;
   transform: rotate(-3deg);
   transition: 0.2s;
 }
 ul{
   height: 100px;
   list-style-type: none;
+  padding: 0;
 }
 li{
-  height:fit-content;
-  width: 150px;
+  height: 4vh;
+  width: 30vh;
+  font-size: 2.5vh;
   color: white;
-  background-color: bisque;
-  text-align: center;
   margin: 2px;
   border-radius: 20px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
   box-shadow: 2px 2px black;
   cursor: pointer;
   transition: 0.2s;
-  transform: translateX(-15px)
 }
 li:hover{
   margin-bottom: 5px;
@@ -171,17 +168,13 @@ export default {
         diets: [],
         dishes: [],
 
-        clicked: '#44d9de',
-        notClicked: 'lightgray',
+        clicked: '#76ded9',
+        notClicked: 'white',
       }
     },
     methods: {
       addDiet(diet){
-        if (this.$chosen.diets.includes(diet)){
-          this.$chosen.diets = this.$chosen.diets.filter((d) => d !== diet)
-        } else {
-          this.$chosen.diets.push(diet);
-        }
+        this.$chosen.diet = diet;
       },
       addDish(dish){
         if (this.$chosen.dishes.includes(dish)){
@@ -190,15 +183,6 @@ export default {
           this.$chosen.dishes.push(dish);
         }
       },
-      updateData() {
-
-      },
-      /*toLink(link){
-        window.location = encodeURI(link
-            + '%' + this.time
-            + '%' + this.diets
-            + '%' + this.dishes);
-      }*/
-      }
+    }
   };
 </script>

@@ -1,15 +1,18 @@
 <template>
   <div id="nav">
-    <div style="float: left; width: 33%;">
-      <div id="search" style="display: flex;">
+    <div style="float: left; display: flex;">
+      <div class="link" @mouseenter="logoStart()" @mouseleave="logoEnd()">
         <router-link to="/">
           <img src="../assets/cheff.png" id="logo">
+          El Cocinillas
         </router-link>
+      </div>
+      <div id="search" style="display: flex;">
         <input type="search" id="search">
         <img class="imgUp" src="../assets/search.png">
       </div>
     </div>
-    <div style="float: right; width: 33%; overflow: visible;">
+    <div style="float: right;">
       <div class="link">
         <router-link to="/recetas">
           <img class="imgUp" src="../assets/recipe.png">
@@ -56,35 +59,39 @@
 a {
   text-decoration: none;
   color: inherit;
+  font-size: 2.5vh;
 }
 #logo{
-  width: fit-content;
-  margin-left: 30px;
-  margin-right: 5px;
+  width: 5vh;
+  transform: scale(1.1);
+  margin-left: 2vh;
+  margin-right: 1vh;
   position: relative;
-  top: 5px;
+  top: -2px;
   transition: 0.2;
 }
 #logo:hover{
-  transform: rotate(30deg) scale(1.1) translate(5px);
+  transform: rotate(30deg) scale(1.1) translate(2vh);
   transition: 0.2s;
 }
 #nav {
-  height: fit-content;
+  height: 5.5vh;
   background-color: #73694f;
   width: 100%;
-  overflow: visible;
+  z-index: 1;
 }
 .link {
-  line-height: 40px;
-  width: 150px;
-  margin-left: 5px;
-  margin-right: 5px;
+  line-height: 5vh;
+  width: fit-content;
+  margin-left: 1vh;
+  margin-right: 2vh;
   display: inline-block;
   text-align: center;
   border-radius: 15px;
   color:white;
   cursor: pointer;
+  padding-right: 2vh;
+  padding-left: 2vh;
 }
 .link:hover{
   color:black;
@@ -92,7 +99,7 @@ a {
   background-color: white;
 }
 img{
-  height: 30px;
+  height: 5vh;
   filter: invert(95%);
 }
 .link:hover img{
@@ -100,9 +107,9 @@ img{
 }
 #search{
   height: 90%; 
-  width: 140px;
+  width: 25vh;
   margin: auto;
-  margin-left: 10px;
+  margin-left: 2vh;
   border-radius: 20px;
   border: none;
 }
@@ -120,7 +127,7 @@ img{
 .imgUp{
   position: relative;
   transform: scale(0.7);
-  top: -2px;
+  top: -0.25vh;
 }
 ul{
   list-style-type: none;
@@ -159,6 +166,14 @@ export default {
     darkMode(){
       if(this.globalData.darkMode) this.$globalData.background = this.$globalData.backgroundDark;
       else this.$globalData.background = this.globalData.backgroundlight;
+    },
+    logoStart(){
+      document.getElementById("logo").style.transform = "rotate(40deg) scale(1.2) translate(5px)";
+      document.getElementById("logo").style.transition = "0.2s";
+    },
+    logoEnd(){
+      document.getElementById("logo").style.transform = "scale(1)";
+      document.getElementById("logo").style.transition = "0.2s";
     }
   }
 }

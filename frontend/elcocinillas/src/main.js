@@ -29,15 +29,15 @@ Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 
 Vue.prototype.$globalData = Vue.observable({
-  y: 0,
   diets: ['Vegana', 'Vegetariana', 'Omnívora'],
   dishes: ['Ensalada', 'Hamburguesa', 'Postre'],
   logged: false,
   darkMode: false,
+  recipesKey: 0
 });
 Vue.prototype.$chosen = Vue.observable({
   time: 0,
-  diets: [],
+  diet: null,
   dishes: []
 });
 
