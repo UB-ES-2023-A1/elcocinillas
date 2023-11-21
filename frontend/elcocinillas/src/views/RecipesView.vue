@@ -92,25 +92,26 @@ export default {
   },
 
   created() {
-    if (this.filtros == null){
-      this.getAllRecipesFromDB();
-    } else{
-      this.getRecipesFromDB();
-    }
+    this.getRecipesFromDB();
     console.log("isUserlogged : ", this.$globalData.logged)
   },
 
   methods : {
+      login(){
+      this.$globalData.logged = !this.$globalData.logged;
+    },
     getRecipesFromDB() {
       const path = "http://localhost:8000/recetas/";
 
       axios.get(path, {
         params: {
-          "classe": 'Vegetariana'
+          "classe": this.$chosen.diet,
+          "tipo": this.$chosen.dishes,
+          //"time": this.$chosen.time,
         }
       })
       .then(response => {
-        console.log("metodo todasRecetas() llamada OK");
+        console.log("Llamada con filtros a recetas existosa.");
         this.recipes = response.data;
       })
       .catch(error => {
