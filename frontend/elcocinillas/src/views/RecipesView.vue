@@ -81,7 +81,7 @@ export default {
         }
       })
       .then(response => {
-        console.log("metodo todasRecetas() llamada OK");
+        console.log("Llamada con filtros a recetas existosa.");
         this.recipes = response.data;
         this.$globalData.recipesKey += 1;
       })
