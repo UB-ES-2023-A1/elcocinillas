@@ -7,7 +7,7 @@
                    v-bind:recipeName="rp.nombre">
       </recipe-card>
     </div>
-    <button id="boton-flotante" @click="uploadRecipe">
+    <button id="boton-flotante" :disabled="usuarioLogeado" @click="uploadRecipe">
         <router-link to="/publicarReceta" id="boton-flotante-inner">+</router-link>
     </button>
   </div>
@@ -66,6 +66,7 @@ export default {
   },
   data() {
     return {
+      usuarioLogeado : this.$globalData.logged,
       recipes: []
     }
   },
@@ -110,7 +111,12 @@ export default {
     },
 
     uploadRecipe() {
-      this.$router.push('/publicarReceta')
+      console.log("isLogged click: ", this.$globalData.logged);
+      if(this.$globalData.logged){
+        this.$router.push('/publicarReceta')
+      } else{
+        alert("Inicia sesión para poder publicar una receta");
+      }
     }
   }
 };
