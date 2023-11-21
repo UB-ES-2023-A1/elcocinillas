@@ -13,7 +13,11 @@
         </recipe-card>
       </div>
     </div>
+    <button id="boton-flotante" @click="uploadRecipe">
+        <router-link to="/publicarReceta" id="boton-flotante-inner">+</router-link>
+    </button>
   </div>
+
 </template>
 
 <style>
@@ -27,7 +31,6 @@
 }
 
 #filters{
-  place-items: left;
   text-align: left;
   border-left: 20px;
   width:25%;
@@ -50,7 +53,30 @@
 #title {
   font-weight: bold;
   margin-bottom: 80px;
+  color: #5c5540;
+  text-align: center;
+  font-size: xxx-large;
+  margin-right: 10%;
 }
+
+#boton-flotante {
+  position: fixed;
+  height: 55px;
+  width: 55px;
+  bottom: 8%;
+  right: 8%;
+  padding: 10px;
+  background-color: #73694F;
+  border: none;
+  border-radius: 50%;
+}
+
+#boton-flotante-inner{
+  color: #ffffff;
+  font-size: 24px;
+  text-decoration: none;
+}
+
 </style>
 
 <script>
@@ -61,34 +87,37 @@ export default {
   components: {RecipeCard, Filters},
   data() {
     return {
-      recipes: [],
+      recipes: []
     }
   },
+
   created() {
-    this.getRecipesFromDB();
+    if (this.filtros == null){
+      this.getAllRecipesFromDB();
+    } else{
+      this.getRecipesFromDB();
+    }
+    console.log("isUserlogged : ", this.$globalData.logged)
   },
+
   methods : {
-    login(){
-      this.$globalData.logged = !this.$globalData.logged;
-    },
     getRecipesFromDB() {
       const path = "http://localhost:8000/recetas/";
+
       axios.get(path, {
         params: {
-          "classe": this.$chosen.diet,
-          "tipo": this.$chosen.dishes,
-          //"time": this.$chosen.time,
+          "classe": 'Vegetariana'
         }
       })
       .then(response => {
-        console.log("Llamada con filtros a recetas existosa.");
+        console.log("metodo todasRecetas() llamada OK");
         this.recipes = response.data;
-        this.$globalData.recipesKey += 1;
       })
       .catch(error => {
         console.error("Error fetching recipes:", error);
       });
     },
+
     getAllRecipesFromDB() {
       const path = "http://localhost:8000/todasrecetas/";
       axios.get(path)
@@ -100,6 +129,10 @@ export default {
             console.error("Error fetching recipes:", error);
           })
     },
+
+    uploadRecipe() {
+      this.$router.push('/publicarReceta')
+    }
   }
 };
 </script>

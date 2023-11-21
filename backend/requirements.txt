@@ -1,10 +1,10 @@
 annotated-types==0.5.0
 anyio==3.7.1
 CacheControl==0.13.1
-ruamel-yaml==0.15.46
+ruamel-yaml>=0.15.46
 cachetools==5.3.1
 certifi==2023.7.22
-pyqt5==5.12
+pyqt5>=5.12
 cffi==1.15.0
 charset-normalizer==3.3.0
 click==8.1.7
@@ -47,3 +47,4 @@ typing_extensions>=4.7.0
 uritemplate==4.1.1
 urllib3==2.0.6
 uvicorn==0.22.0
+fuzzywuzzy==0.18.0
