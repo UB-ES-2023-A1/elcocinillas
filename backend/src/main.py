@@ -60,16 +60,11 @@ def get_all_recipes():
 @app.post("/imgUpload/", response_model=str)
 def publi_img(nombre: str, file: UploadFile = File(...)):
 
-    receta = database.get_recepta(nombre)
-
     # Lee el archivo en memoria
     image_data = file.file.read()
 
     # Sube la imagen a Firebase Storage y obtén la URL
-    image_url = database.uploadImg(receta, image_data)
-
-
-    receta['images'] = image_url
+    image_url = database.uploadImg(nombre, image_data)
     
     return image_url
 
