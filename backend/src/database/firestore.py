@@ -7,7 +7,9 @@ from fuzzywuzzy import fuzz, process
 
 current_directory = os.path.dirname(__file__)
 file_path = os.path.join(current_directory, 'elcocinillas.json')
+
 cred = credentials.Certificate(file_path)
+
 ruta_recetas = "imgRecetas/"
 firebase_admin.initialize_app(cred, {
     'storageBucket': 'elcocinillas-93ebe.appspot.com'

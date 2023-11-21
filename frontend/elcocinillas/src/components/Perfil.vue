@@ -1,73 +1,142 @@
 <template>
-  <div class="main-container">
-    <aside class="left-aside">
-    </aside>
-  <!-- 
-    <aside class="left-aside">
-      <p> Amigos </p>
-      <p> Seguidores </p>
-      <p> Recetas guardadas </p>
-    </aside>
-  --> 
-    <div class="center">
-      <div class="container">
-        <img src="../assets/user.png" alt="User imagen">
-        <h2>{{ this.userName }}</h2>
-        <form @submit.prevent="modificarInformacion">
-          <label for="newcorreo">Correo:</label> <br>
-          <input type="email" v-model="correo" required> <br>
-
-          <label for="contrasena">Contraseña:</label><br>
-          <input type="password" v-model="contrasena" required><br>
-
-          <button type="submit">Modificar Información</button>
-        </form>
+  <div class="background-container">
+    <div class="container">
+      <div class="center">
+        <div>
+          <div class="userImage">
+            <img src="../assets/user.png" alt="User imagen">
+          </div>
+          <div class="userName">
+            <h2>{{ this.userName }}</h2>
+          </div>
+          <form @submit.prevent="modificarInformacion">
+            <div class="inputBox">
+              <input class="input" type="email" v-model="correo" required>
+              <label class="label" for="newcorreo">Correo:</label>
+            </div>
+            <div class="inputBox">
+              <input class="input" type="password" v-model="contrasena" required>
+              <label class="label" for="contrasena">Contraseña:</label>
+            </div>
+            <div class="botonContainer">
+              <button class="boton" type="submit">Modificar Información</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-.main-container {
-  display: flex; /* Utilizamos Flexbox para la disposición */
-  margin-top: 10vh;
+html, body {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
 }
-
-.center {
-  flex-basis: 70%; /* Define el ancho del centro (ajusta según tus necesidades) */
-  display: flex;
-  justify-content: center;
-  align-items: center; /* Centra verticalmente el contenido del centro */
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: 10% 30% 30% 10%;
+    grid-template-areas: 
+          "header"
+          "sidebar"
+          "main"
+          "section"
+          "content"
+          "footer";
+  }
+}
+.inputBox {
+  margin: 2rem;
+  font-size: 1.25rem;
+  position: relative;
+  --primary: #13CFB9;
+}
+.input {
+  all: unset;
+  color: black;
+  padding: 1rem;
+  border: 1px solid #9e9e9e;
+  border-radius: 10px;
+  transition: 150ms
+    cubic-bezier(0.4, 0, 0.2, 1);
 
 }
-.left-aside {
-  padding-top: 10px;
-  background-color: #76DED9;
-  flex-basis: 15%;
+.label {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  color: black;
+  pointer-events: none;
+  transition: 150ms
+    cubic-bezier(0.4, 0, 0.2, 1);
+}
+.input:focus {
+  border: 1px solid
+    var(--primary);
+}
+.input:is(:focus, :valid) ~ label {
+  transform: translateY(-140%)
+  scale(1);
+  padding-inline:  0.3rem;
+  color: var(--primary);
+  font-weight: bold;
+
+}
+.userImage {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.center {
+    background-color: rgba(255, 255, 255, 0.6); 
+    border-radius: 10px; 
+    padding: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.left-aside p {
-  margin-top: 10px; /* Ajusta el valor según la cantidad de margen deseada */
-}
-input {
-  margin: 10px;
-}
-img, h2 {
-  margin-bottom: 15px;
-}
-button {
-  margin-top: 25px;
-}
-.container {
-  display: block;
+.userName {
+  border: 3px solid black;
+  border-radius: 10px;
   text-align: center;
-  padding: 20px; /* Añade relleno al contenedor si es necesario */
+}
+.background-container {
+  min-height: 96vh;
+  background-image: url('../assets/background.avif');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.botonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
 }
+.boton {
+  font-size: 16px;
+  margin-top: 1rem;
+  padding: 15px 30px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 2px solid #13CFB9;
+  color: #13CFB9;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
 
+/* Cambio de estilos al pasar el ratón por encima */
+.boton:hover {
+  background-color: #13CFB9;
+  color: #ffffff;
+}
+  
 </style>
 
 <script>
@@ -82,7 +151,6 @@ export default {
       correo: '',
       contrasena: '',
       newcorreo: store.state.correo,
-
     }
   },
   methods: {
