@@ -102,11 +102,14 @@ export default {
     },
     getRecipesFromDB() {
       const path = "http://localhost:8000/recetas/";
+      const tipos = this.$chosen.dishes;
+      const listaComoCadena = tipos.join(',');
 
       axios.get(path, {
         params: {
           "classe": this.$chosen.diet,
-          "tipo": this.$chosen.dishes,
+          "tipo": encodeURI(listaComoCadena),
+
           //"time": this.$chosen.time,
         }
       })
