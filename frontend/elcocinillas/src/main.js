@@ -38,7 +38,7 @@ Vue.prototype.$globalData = Vue.observable({
 });
 Vue.prototype.$chosen = Vue.observable({
   time: 0,
-  diets: [],
+  diet: null,
   dishes: [],
   logged: false,
 });
