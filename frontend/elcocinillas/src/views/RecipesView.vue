@@ -1,11 +1,11 @@
 <template>
   <div id="app">
-    {{ this.$chosen}}
+
     <div id="filters" @click="getRecipesFromDB()">
       <Filters style="float:left"/>
     </div>
     <div id="recipes">
-      <h1 id="title">Recetas</h1>
+      <h2 id="title">Recetas</h2>
       <div class="d-flex flex-row flex-wrap" :key="$globalData.recipesKey">
         <recipe-card v-for="rp in this.recipes"
                     v-bind:key="rp.id"
