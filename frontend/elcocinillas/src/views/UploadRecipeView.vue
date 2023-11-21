@@ -261,14 +261,13 @@ export default {
       formData.append('nombre', this.nombreReceta);
       formData.append('file', file);
       const path = "http://localhost:8000/imgUpload/";
-      try{
-          const response = axios.post(path,formData);
+
+      axios.post(path,formData).then((response) => {
           console.log('Foto seleccionada:', this.images);
           this.imagesReceta = response.data.url;
-      } catch (error){
+      }).catch ((error) =>{
           console.error(error);
-      }
-
+      })
     },
 
   },

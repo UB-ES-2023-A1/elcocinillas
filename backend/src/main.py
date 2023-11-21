@@ -59,7 +59,6 @@ def get_all_recipes():
 
 @app.post("/imgUpload/", response_model=str)
 def publi_img(nombre: str, file: UploadFile = File(...)):
-    print("Entra al método")
 
     receta = database.get_recepta(nombre)
 
