@@ -1,103 +1,93 @@
 <template>
-  <div>
-    <section class="h-100 gradient-form" style="background-color: #76ded9">
-      <header>
-        <div class="p-3 text-left">
-          <h1 class="mb-3">El Cocinillas</h1>
-        </div>
-        <div class="mb-6 text-md-right">
-          <button
-            class="btn btn-outline-info"
-            style="background-color: #13cf89"
-            type="button"
-          >
-            Volver a inicio
-          </button>
-        </div>
-      </header>
-    </section>
-    <section class="h-100 gradient-form" style="background-color: #eef2b6">
-      <div class="row h-100">
-        <div class="col">
-          <div
-            class="card rounded-3 text-black"
-            style="background-color: #eef2b6"
-          >
-            <div class="row g-0 justify-content-center">
-              <div class="col-lg-6">
-                <div
-                  class="card-body p-md-5 mx-md-4"
-                  style="background-color: #eef2b6"
-                >
-                  <div class="text-center">
-                    <h4 class="mt-1 mb-5 pb-1">Registro</h4>
-                  </div>
-                  <form>
-                    <p>Nombre de usuario</p>
-                    <div class="form-outline mb-4">
-                      <input
-                        id="form2Example22"
-                        class="form-control"
-                        required=""
-                        type="password"
-                        placeholder="Nombre de usuario"
-                      />
-                    </div>
-                    <p>Email</p>
-                    <div class="form-outline mb-4">
-                      <input
-                        id="form2Example11"
-                        class="form-control"
-                        required=""
-                        type="email"
-                        autofocus=""
-                        placeholder="Email"
-                      />
-                    </div>
-                    <p>Contrase&ntilde;a</p>
-                    <div class="form-outline mb-4">
-                      <input
-                        id="form2Example22"
-                        class="form-control"
-                        required=""
-                        type="password"
-                        placeholder="Contrase&ntilde;a"
-                      />
-                    </div>
-                    <p>Confirmar contrase&ntilde;a</p>
-                    <div class="form-outline mb-4">
-                      <input
-                        id="form2Example22"
-                        class="form-control"
-                        required=""
-                        type="password"
-                        placeholder="Contrase&ntilde;a"
-                      />
-                    </div>
-                    <div class="text-center pt-1 mb-5 pb-1">
-                      <button
-                        class="btn btn-success btn-block"
-                        style="background-color: #5c5540"
-                        type="button"
-                      >
-                        Crear cuenta
-                      </button>
-                    </div>
-                    <p>
-                      <span style="text-decoration: underline; color: #0000ff"
-                        >&iquest;Ya tienes una cuenta?</span
-                      >
-                    </p>
-                  </form>
-                </div>
-              </div>
-            </div>
+  <body id="granContainerRegistre">
+    <div>
+      <form @submit.prevent="checkLogin" class="formcontainer">
+        <h2 id="title">Registro</h2>
+        <div>
+          <div class="inner-container">
+            <label for="mail"><strong>Email</strong></label>
+            <input type="text" placeholder="Introduce el correo" name="mail" required autofocus v-model="email">
+            <label for="psw"><strong>Contraseña</strong></label>
+            <input type="password" placeholder="Introduce la contraseña" name="psw" required v-model="password">
+            <label for="psw"><strong>Repite la contraseña</strong></label>
+            <input type="password" placeholder="Introduce de nuevo la contraseña" name="psw" required v-model="passwordBis">
+            <a @click="goToLogin" style="color: #73694F">¿Ya tienes cuenta? Inicia sesión</a>
           </div>
+          <button type="submit"><strong>Crear cuenta</strong></button>
         </div>
-      </div>
-    </section>
-  </div>
+      </form>
+    </div>
+  </body>
 </template>
+
+<style>
+#granContainerRegistre {
+  height: 100vh;
+  background-image: url('../img/defaultRecipePhoto.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  text-align: center;
+}
+
+#title {
+  font-weight: bold;
+  color: #5c5540;
+  text-align:center;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 16px 8px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #73694F;
+  color: white !important;
+  padding: 14px 0;
+  margin: 10px 0;
+  border: none;
+  cursor: grab;
+  width: 48%;
+}
+button:hover {
+  opacity: 0.8;
+}
+
+.formcontainer {
+  text-align: center;
+  border: 5px solid #EEF2B6;
+  background-color: white;
+  opacity: 95%;
+  width: 80%;
+  display: inline-block;
+  margin: 5%;
+}
+.inner-container {
+  padding: 16px 0;
+  text-align:left;
+}
+span.psw {
+  float: right;
+  padding-top: 0;
+  padding-right: 15px;
+}
+
+/* Change styles for span on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+}
+
+</style>
+
 <script>
 import { getAuth, createAccount } from "firebase/auth";
 import router from "@/router";
@@ -109,6 +99,7 @@ export default {
       actual_path: "http://localhost:8000/",
       email: "",
       password: "",
+      passwordBis: "",
       addUserForm: {
         username: null,
         password: null,
@@ -132,8 +123,9 @@ export default {
         }
       }
     },
-    goBackToMain() {
-      router.push("/");
+
+    goToLogin(){
+      router.push("/userlogin");
     },
   },
 };
