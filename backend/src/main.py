@@ -58,22 +58,20 @@ def get_all_recipes():
     return database.get_all_recipes()
 
 @app.post("/imgUpload/", response_model=str)
-def publi_img(nombre: str = Form(...), files: List[UploadFile] = File(...)):
+def publi_img(nombre: str = Form(...), file: UploadFile = File(...)):
 
     receta = database.get_recepta(nombre)
 
     image_urls = []
-    for file in files:
-        # Lee el archivo en memoria
-        image_data = file.file.read()
 
-        # Sube la imagen a Firebase Storage y obtén la URL
-        image_url = database.uploadImg(receta, image_data)
+    # Lee el archivo en memoria
+    image_data = file.file.read()
 
-        # Agrega la URL de la imagen a la lista de URLs
-        image_urls.append(image_url)
+    # Sube la imagen a Firebase Storage y obtén la URL
+    image_url = database.uploadImg(receta, image_data)
 
-    receta['images'] = image_urls
+
+    receta['images'] = image_url
     database.updateImg(receta)
     
     return "Tot bene"
