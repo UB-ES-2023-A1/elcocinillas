@@ -62,8 +62,6 @@ def publi_img(nombre: str, file: UploadFile = File(...)):
 
     receta = database.get_recepta(nombre)
 
-    image_urls = []
-
     # Lee el archivo en memoria
     image_data = file.file.read()
 

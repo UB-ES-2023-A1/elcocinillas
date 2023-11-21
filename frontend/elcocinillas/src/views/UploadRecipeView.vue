@@ -264,7 +264,7 @@ export default {
 
       axios.post(path,formData).then((response) => {
           console.log('Foto seleccionada:', this.images);
-          this.imagesReceta = response.data.url;
+          this.imagesReceta = response.data;
       }).catch ((error) =>{
           console.error(error);
       })
