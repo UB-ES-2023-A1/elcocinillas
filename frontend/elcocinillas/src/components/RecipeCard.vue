@@ -1,7 +1,7 @@
 <template>
   <div class="card text-left border-light cardStyle"  @click="openRecipe">
-    <!--<img class="card-img-top" v-if="NotImage" src="../img/defaultRecipePhoto.png">-->
-    <img class="card-img-top"  src=imageUrl>
+    <!--<img class="card-img-top" src="../img/defaultRecipePhoto.png">-->
+    <img class="card-img-top"  :src=imageUrl>
     <div class="card-body">
       <p class="card-text">{{ recipeName }}</p>
     </div>

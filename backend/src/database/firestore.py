@@ -89,10 +89,9 @@ def get_recepta(name_recepta):
     if doc.exists:
         resposta = doc.to_dict()
 
-        #Le paso el id de la receta encontrada
-        urls = get_imagenes_receta(resposta[id])
-
-        resposta['images'] = urls
+        bucket = storage.bucket()
+        blob = bucket.blob(ruta_recetas + name_recepta)
+        resposta['images'] = [blob.generate_signed_url(method='GET', expiration=3600)]
 
         return resposta
     else:
