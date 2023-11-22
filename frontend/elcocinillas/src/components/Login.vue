@@ -21,6 +21,7 @@
 </style>
 
 <script>
+import { store } from '../store'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import router from "@/router";
 export default {
@@ -50,12 +51,11 @@ export default {
             this.email,
             this.password
           );
+          store.commit('setinitSession', { isLogged: true })
           alert("Sesión iniciada con éxito");
-          // Manejar el éxito del inicio de sesión (redirección, etc.)
-          this.$globalData.logged = true;
           router.push("/recetas");
         } catch (error) {
-          this.$globalData.logged = false;
+          store.commit('setinitSession', {isLogged: false})
           alert("Error en el inicio de sesión: email o contraseñas incorrectos");
           // Manejar el error del inicio de sesión
         }

@@ -8,9 +8,7 @@
                    v-bind:imageUrl="rp.images">
       </recipe-card>
     </div>
-    <button id="boton-flotante" @click="uploadRecipe">
-        <router-link to="/publicarReceta" id="boton-flotante-inner">+</router-link>
-    </button>
+    <button id="boton-flotante" @click="goToUploadRecipe">+</button>
   </div>
 
 </template>
@@ -45,19 +43,14 @@
   background-color: #73694F;
   border: none;
   border-radius: 50%;
+  font-size: x-large;
 }
-
-#boton-flotante-inner{
-  color: #ffffff;
-  font-size: 24px;
-  text-decoration: none;
-}
-
 </style>
 
 <script>
 import RecipeCard from "@/components/RecipeCard.vue";
 import axios from "axios";
+import { store } from '../store'
 export default {
   components: {RecipeCard},
   props : {
@@ -67,17 +60,18 @@ export default {
   },
   data() {
     return {
+      usuarioLogeado : store.state.initSession,
       recipes: []
     }
   },
 
   created() {
+    console.log("Creadted recipes: " , this.usuarioLogeado);
     if (this.filtros == null){
       this.getAllRecipesFromDB();
     } else{
       this.getRecipesFromDB();
     }
-    console.log("isUserlogged : ", this.$globalData.logged)
   },
 
   methods : {
@@ -110,8 +104,14 @@ export default {
           })
     },
 
-    uploadRecipe() {
-      this.$router.push('/publicarReceta')
+    goToUploadRecipe() {
+      console.log("isLogged click: ", this.usuarioLogeado != null);
+      if(this.usuarioLogeado){
+        console.log("ir a recetas");
+        this.$router.push('/publicarReceta')
+      } else{
+        alert("Inicia sesión para poder publicar una receta");
+      }
     }
   }
 };

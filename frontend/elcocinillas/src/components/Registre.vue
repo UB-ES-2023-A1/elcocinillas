@@ -1,16 +1,18 @@
 <template>
   <body id="granContainerRegistre">
     <div>
-      <form @submit.prevent="checkLogin" class="formcontainer">
+      <form @submit.prevent="checkRegistro" class="formcontainer">
         <h2 id="title">Registro</h2>
         <div>
           <div class="inner-container">
+            <label for="mail"><strong>Nombre de usuario</strong></label>
+            <input type="text" placeholder="Introduce tu nombre de usuario" required autofocus v-model="userName">
             <label for="mail"><strong>Email</strong></label>
-            <input type="text" placeholder="Introduce el correo" name="mail" required autofocus v-model="email">
+            <input type="text" placeholder="Introduce el correo" name="mail" required v-model="userEmail">
             <label for="psw"><strong>Contraseña</strong></label>
-            <input type="password" placeholder="Introduce la contraseña" name="psw" required v-model="password">
+            <input type="password" placeholder="Introduce la contraseña" name="psw" required v-model="userPassword">
             <label for="psw"><strong>Repite la contraseña</strong></label>
-            <input type="password" placeholder="Introduce de nuevo la contraseña" name="psw" required v-model="passwordBis">
+            <input type="password" placeholder="Introduce de nuevo la contraseña" name="psw" required v-model="userPasswordBis">
             <a @click="goToLogin" style="color: #73694F">¿Ya tienes cuenta? Inicia sesión</a>
           </div>
           <button type="submit"><strong>Crear cuenta</strong></button>
@@ -90,39 +92,48 @@ button:hover {
 </style>
 
 <script>
-import { getAuth, createAccount } from "firebase/auth";
 import router from "@/router";
+import axios from "axios";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Registro",
   data() {
     return {
-      actual_path: "http://localhost:8000/",
-      email: "",
-      password: "",
-      passwordBis: "",
-      addUserForm: {
-        username: null,
-        password: null,
-      },
+      userName: null,
+      userEmail: null,
+      userPassword: null,
+      userPasswordBis: null
     };
   },
   methods: {
     async checkRegistro() {
-      if (this.email == "") {
-        alert("Se necesita email del usuario.");
-      } else if (this.password == "") {
-        alert("Se necesita contraseña");
+      if (this.userPassword != this.userPasswordBis) {
+        alert("Las contraseñas no coinciden");
+      } else if(this.userPassword.length < 6){
+        alert("La contraseña debe tener 6 carácteres como mínimo");
       } else {
-        try {
-          await createAccount(getAuth(), this.email, this.password);
-          alert("Sesión iniciada con éxito");
-          // Manejar el éxito del inicio de sesión (redirección, etc.)
-        } catch (error) {
-          alert(error.message);
-          // Manejar el error del inicio de sesión
-        }
+        const path = "http://localhost:8000/register/";
+        console.log("registro: ", )
+
+        axios.post(path, this.getDatosUsuario())
+            .then((response) => {
+              console.log('OK crear usuario:', response.data);
+              this.recipes = response.data;
+              alert("¡Felicidades! Te has registrado en El Cocinillas")
+            })
+            .catch((error) => {
+              console.error('KO registro:', error);
+              alert("Se ha producido un error. Inténtalo de nuevo más tarde")
+            })
       }
+    },
+
+    getDatosUsuario() {
+      return {
+        userID: this.userName,
+        email: this.userEmail,
+        password: this.userPassword
+      };
     },
 
     goToLogin(){
