@@ -36,15 +36,7 @@ Flujo de trabajo para colgar y obtener imagenes.
 def create_recepta(recepta):
     try:
         doc_ref = db.collection(u'receptes').document(recepta.nombre)
-        dict_receta = recepta.__dict__
-        dict_receta["id"] = str(uuid.uuid4())
-
-        #Recorremos todas las imagenes y las subimos
-        lista_imagenes = dict_receta["images"]
-        for i in range(len(lista_imagenes)):
-            uploadImg(dict_receta["id"], lista_imagenes[i])
-
-        doc_ref.set(dict_receta)
+        doc_ref.set(recepta.__dict__)
         return 200
     except Exception as e:
         print(f"Error al crear la recepta: {e}")
@@ -161,8 +153,7 @@ def updateImg(receta):
 def uploadImg(nombre, file):
     try:
         bucket = storage.bucket()
-        prefix = ruta_recetas + nombre
-        blob = bucket.blob(prefix=prefix)
+        blob = bucket.blob(ruta_recetas + nombre)
 
         blob.upload_from_string(file, content_type="image/jpeg")
 
