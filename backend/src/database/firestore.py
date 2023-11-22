@@ -46,9 +46,13 @@ def get_receptes(filtro):
         query = query.where("classe", "in", clases)
     if filtro["tipo"] != []:
         tipos = []
-        for t in filtro["tipo"]:
-            tipos.append(t)
-            tipos.append(t.lower())
+        for f in filtro["tipo"]:
+            tipos_filtro = f.split(",")
+            print(tipos_filtro)
+            for t in tipos_filtro:
+                tipos.append(t)
+                tipos.append(t.lower())
+        print(tipos)
         query = query.where("tipo", "in", tipos)
     if filtro["ingredientes"] != []:
         for ingrediente in filtro["ingredientes"]:
