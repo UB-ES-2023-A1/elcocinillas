@@ -22,29 +22,15 @@
 </style>
 
 <script>
-import axios from "axios";
-
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "RecipeCard",
   props: {
-    recipeName : String
-  },
-  data(){
-      return{
-          imageUrl: ''
-      }
-  },
-  created() {
-      const path = "http://localhost:8000/imgReceta/" + this.props.recipeName();
-      axios.get(path).then(response => {
-          this.imageUrl = response.data
-      }).catch(error => {
-        console.error("Error fetching image:", error);
-      })
+    recipeName : String,
+    imageUrl: String
   },
 
-    methods : {
+  methods : {
     openRecipe() {
       this.$router.push('/recetas/'+this.recipeName)
     }
