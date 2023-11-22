@@ -110,7 +110,7 @@ export default {
       if (this.userPassword != this.userPasswordBis) {
         alert("Las contraseñas no coinciden");
       } else if(this.userPassword.length < 6){
-        alert("La contraseña debe tener 6 carácteres como mínimo");
+        alert("La contraseña debe tener 6 caracteres como mínimo");
       } else {
         const path = "http://localhost:8000/register/";
         console.log("registro: ", )

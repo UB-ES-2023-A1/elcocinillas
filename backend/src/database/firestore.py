@@ -196,10 +196,5 @@ def get_user(username):
 
 def update_user(user_id, updated_user):
     user = auth.get_user(user_id)
-    if user.userID == user_id:
-        # Actualiza los campos del usuario
-        user.email = updated_user.email
-        user.password = updated_user.password
-        return {"message": "Usuario actualizado con éxito"}
-
-    return {"error": "Usuario no encontrado"}
+    new_user = auth.update_user(user_id, email = updated_user.email, password=updated_user.password)
+    return new_user

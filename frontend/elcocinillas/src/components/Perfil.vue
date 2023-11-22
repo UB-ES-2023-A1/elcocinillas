@@ -142,6 +142,7 @@ html, body {
 <script>
 import { store } from '../store'
 import axios from 'axios';
+import router from "@/router";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Perfil",
@@ -153,25 +154,32 @@ export default {
       newcorreo: store.state.correo,
     }
   },
+
+  created() {
+    console.log("perfil", this.userName);
+  },
   methods: {
     modificarInformacion() {
-      const obj = {
-        userID: "leuis123",
+      const url = 'http://localhost:8000/user/'+ store.state.userName
+      axios.put(url, this.getDatosPerfilUsuario())
+          .then((response) => {
+            console.log('Ok modificar datos:', response.data);
+            window.alert('Datos modificados correctamente');
+            router.push("/recetas");
+          })
+          .catch((error) => {
+            console.error('KO modificar datos:', error);
+            alert("Se ha producido un error. Inténtalo de nuevo más tarde")
+          })
+    },
+
+    getDatosPerfilUsuario() {
+      return {
+        userID: store.state.userName,
         email: this.correo,
-        password: this.contrasena,
+        password: this.contrasena
       };
-      try {
-        
-        const url = 'http://localhost:8000/user/'+ this.newcorreo
-        console.error(url);
-        const respuesta = axios.put(url, {data: obj});
-        window.alert('Datos modificados correctamente');
-        
-        console.log(respuesta.data);
-      } catch (error) {
-        console.error('Error al modificar la información:', error);
-      }
-    }
+    },
   },
 };
 </script>
