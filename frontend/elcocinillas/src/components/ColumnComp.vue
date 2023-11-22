@@ -2,9 +2,9 @@
   <div style="margin: 1vh">
     <section class="col-section">
       <section class="hidden col-section">
-        <h1 class="heading">
+        <p class="heading">
           <slot name="heading"></slot>
-        </h1>
+        </p>
         <p class="image">
           <slot name="image"></slot>
         </p>
@@ -29,6 +29,7 @@
   font-size: 2.5vh;
 }
 .heading {
+  margin-top: 12%;
   font-size: 7.5vh;
   color: black;
   text-shadow: 2px 2px white;

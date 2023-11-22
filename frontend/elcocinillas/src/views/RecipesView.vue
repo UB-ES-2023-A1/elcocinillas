@@ -5,7 +5,7 @@
       <Filters style="float:left"/>
     </div>
     <div id="recipes">
-      <h2 id="title">Recetas</h2>
+      <p id="titleRecipesView">Recetas</p>
       <div class="d-flex flex-row flex-wrap" :key="$globalData.recipesKey">
         <recipe-card v-for="rp in this.recipes"
                     v-bind:key="rp.id"
@@ -50,13 +50,13 @@
   overflow: hidden;
 }
 
-#title {
+#titleRecipesView {
   font-weight: bold;
   margin-bottom: 80px;
   color: #5c5540;
   text-align: center;
   font-size: xxx-large;
-  margin-right: 10%;
+  margin-top: 2%;
 }
 
 #boton-flotante {

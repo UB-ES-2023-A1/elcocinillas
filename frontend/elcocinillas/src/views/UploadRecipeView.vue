@@ -1,77 +1,80 @@
 <template>
-  <body class="univ">
-    <div class="univ testbox">
-      <form id="form" class="univ" @submit.prevent="uploadRecipe">
-        <div class="univ banner">
-          <h1 id="title" style="font-weight: bold;">Publicar receta</h1>
-        </div>
-        <div class="univ item">
-          <label class="univ" for="name">Nombre receta<span> *</span></label>
-          <input class="univ bordered ur-input" id="name" type="text" required v-model="nombreReceta"/>
-        </div>
+  <body>
+  <div id="testboxPublicar">
+    <form @submit.prevent="uploadRecipe">
+      <div id="bannerPublicar">
+        <p style="font-weight: bold; font-size: xxx-large; color: white" >Publicar receta</p>
+      </div>
+      <div class="itemPublicar">
+        <label for="name">Nombre receta<span> *</span></label>
+        <input type="text" required v-model="nombreReceta"/>
+      </div>
 
-        <div class="univ item">
-          <p>Escoge la dieta<span> *</span></p>
-          <select class="univ bordered" v-model="tipoReceta">
-            <option selected value=""></option>
-            <option value="Vegana" >Vegana</option>
-            <option value="Vegetariana">Vegetariana</option>
-            <option value="Omnívora">Omnívora</option>
-          </select>
-        </div>
+      <div class="itemPublicar">
+        <p>Escoge la dieta<span> *</span></p>
+        <select v-model="tipoReceta">
+          <option selected value=""></option>
+          <option value="Vegana" >Vegana</option>
+          <option value="Vegetariana">Vegetariana</option>
+          <option value="Omnívora">Omnívora</option>
+        </select>
+      </div>
 
-        <div class="univ item">
-          <p>¿De qué clase dirías que es tu plato?<span> *</span></p>
-          <select class="univ bordered" v-model="classeReceta">
-            <option selected value=""></option>
-            <option value="Hamburguesa" >Hamburguesa</option>
-            <option value="Postre">Postre</option>
-            <option value="Ensalada">Ensalada</option>
-          </select>
-        </div>
+      <div class="itemPublicar">
+        <p>¿De qué clase dirías que es tu plato?<span> *</span></p>
+        <select v-model="classeReceta">
+          <option selected value=""></option>
+          <option value="Hamburguesa" >Hamburguesa</option>
+          <option value="Postre">Postre</option>
+          <option value="Ensalada">Ensalada</option>
+        </select>
+      </div>
 
-        <div class="univ item">
-          <label class="univ" for="visit">¿Cuáles son los ingredientes necesarios?<span> *</span></label>
-          <textarea class="univ bordered" id="visit" rows="4" required v-model="ingredientesReceta"></textarea>
-        </div>
-        <div class="item">
-          <label class="univ" for="visit">Describe los pasos para elaborar la receta<span> *</span></label>
-          <textarea lcass="univ" id="visit" rows="6" required v-model="pasosReceta"></textarea>
-        </div>
+      <div class="itemPublicar">
+        <label for="visit">¿Cuáles son los ingredientes necesarios?<span> *</span></label>
+        <textarea rows="10" required v-model="ingredientesReceta"></textarea>
+      </div>
+      <div class="itemPublicar">
+        <label for="visit">Describe los pasos para elaborar la receta<span> *</span></label>
+        <textarea rows="10" required v-model="pasosReceta"></textarea>
+      </div>
 
-        <div class="univ item">
-          <p>Dificultad<span> *</span></p>
-          <select class="univ bordered" v-model="dificultadReceta">
-            <option selected value="0">0</option>
-            <option value="1" >1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
-        </div>
+      <div class="itemPublicar">
+        <p>Dificultad<span> *</span></p>
+        <select v-model="dificultadReceta">
+          <option selected value="0">0</option>
+          <option value="1" >1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
 
-        <div class="univ" id="timeSlider">
-          <label class="univ" for="phone">Tiempo máximo (minutos): {{ timeReceta }} <span>minutos</span></label>
-          <input class="univ bordered slider ur-input" type="range" min="0" max="120" id="myRange" v-model="timeReceta">
-        </div>
+      <div id="timeSliderPublicar">
+        <label for="phone">Tiempo máximo (minutos): {{ timeReceta }} <span>minutos</span></label>
+        <input type="range" min="0" max="120" class="slider" id="myRange" v-model="timeReceta">
+      </div>
 
-        <div class="univ" id="photoPicker">
-          <label class="univ" for="exampleFormControlFile1">¿Quieres acompañar tu receta con alguna foto?</label>
-          <input class="univ bordered ur-input form-control-file" type="file" id="exampleFormControlFile1" @change="handleFileChange">
-        </div>
+      <div id="photoPickerPublicar">
+        <label for="exampleFormControlFile1">¿Quieres acompañar tu receta con alguna foto?</label>
+        <input type="file" class="form-control-file" @change="handleFileChange">
+      </div>
 
-        <div class="univ btn-block">
-          <button class="ur-button" type="submit">Publicar</button>
-        </div>
-      </form>
-    </div>
+      <div class="btn-block" id="btnPublicar">
+        <button type="submit">Publicar</button>
+      </div>
+    </form>
+  </div>
   </body>
 </template>
 
 <style>
-.univ{
+body {
+  min-height: 100%;
   font-family: "Lato", sans-serif;
+}
+body, div, form, input, select, textarea, label {
   padding: 0;
   margin: 0;
   outline: none;
@@ -79,8 +82,7 @@
   color: #666;
   line-height: 22px;
 }
-
-#title{
+h1 {
   position: absolute;
   margin: 0;
   font-size: 40px;
@@ -88,51 +90,21 @@
   z-index: 2;
   line-height: 83px;
 }
-#form {
-  width: 100%;
-  padding: 20px;
-  border-radius: 6px;
-  background: #fff;
-  box-shadow: 0 0 8px  #73694F;
-}
-.bordered{
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-.ur-input {
-  width: calc(100% - 10px);
-  padding: 5px;
-}
-.ur-textarea {
-  width: calc(100% - 12px);
-  padding: 5px;
-}
-.ur-button {
-  width: 150px;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background: #73694f;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 7%;
-}
-.ur-button:hover {
-  opacity: 70%;
-}
-input[type="range"] {
-  accent-color: #73694F;
-}
-.testbox {
+#testboxPublicar {
   display: flex;
   justify-content: center;
   align-items: center;
   height: inherit;
   padding: 20px;
 }
-.banner {
+form {
+  width: 100%;
+  padding: 20px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 0 8px  #73694F;
+}
+#bannerPublicar {
   position: relative;
   height: 400px;
   background-image: url("../img/defaultPhotoForm.jpg");
@@ -149,49 +121,69 @@ input[type="range"] {
   width: 100%;
   height: 100%;
 }
-.item:hover p, input:hover::placeholder {
+input, select, textarea {
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+input {
+  width: calc(100% - 10px);
+  padding: 5px;
+}
+
+textarea {
+  width: calc(100% - 12px);
+  padding: 5px;
+}
+.itemPublicar:hover p, input:hover::placeholder {
   color: #73694F;
 }
-.item input:hover, .item select:hover, .item textarea:hover {
+.itemPublicar input:hover, .itemPublicar select:hover, .itemPublicar textarea:hover {
   border: 1px solid transparent;
   box-shadow: 0 0 3px 0 #73694F;
   color: #73694F;
 }
-.item select {
+
+.itemPublicar select {
   min-width: 150px;
 }
-.item {
+
+.itemPublicar {
   position: relative;
   margin: 10px 0;
 }
-.item span {
+.itemPublicar span {
   color: red;
 }
+
 .btn-block {
   margin-top: 10px;
   text-align: center;
 }
-#timeSlider {
+#btnPublicar {
+  width: 150px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #73694F;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 7%;
+  margin-left: auto;
+  margin-right: auto;
+}
+button:hover {
+  opacity: 70%;
+}
+
+#timeSliderPublicar {
   margin: 25px 0;
 }
 
-@media (min-width: 568px) {
-  .name-item {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  .name-item input, .name-item div {
-    width: calc(50% - 20px);
-  }
-  .name-item div input {
-    width:97%;}
-  .name-item div label {
-    display:block;
-    padding-bottom:5px;
-  }
+input[type="range"] {
+  accent-color: #73694F;
 }
-
 
 </style>
 
@@ -234,15 +226,15 @@ export default {
 
     getDatosReceta() {
       return {
-          user: "Marcos",
-          nombre: this.nombreReceta,
-          classe: this.classeReceta,
-          tipo: this.tipoReceta,
-          ingredientes: this.ingredientesReceta,
-          pasos: this.pasosReceta,
-          images: "",
-          time: this.timeReceta,
-          dificultad: this.dificultadReceta
+        user: "Marcos",
+        nombre: this.nombreReceta,
+        classe: this.classeReceta,
+        tipo: this.tipoReceta,
+        ingredientes: this.ingredientesReceta,
+        pasos: this.pasosReceta,
+        images: "",
+        time: this.timeReceta,
+        dificultad: this.dificultadReceta
       };
     },
 

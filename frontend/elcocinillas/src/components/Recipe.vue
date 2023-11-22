@@ -1,34 +1,34 @@
 <template>
   <div id="app">
     <section id="headerSection">
-      <h2 id="title">{{ this.name }}</h2>
+      <p id="titleReceta">{{ this.name }}</p>
       <div class="container">
         <div class="row">
           <div class="col-sm border-right">
-            <h2>{{ this.user }}</h2>
-            <h4>usuario</h4>
+            <p style="font-size: xx-large">{{ this.user }}</p>
+            <p style="font-size: x-large">usuario</p>
           </div>
           <div class="col-sm border-right">
-            <h2>{{ this.time }}</h2>
-            <h4>minutos</h4>
+            <p style="font-size: xx-large">{{ this.time }}</p>
+            <p style="font-size: x-large">minutos</p>
           </div>
           <div class="col-sm">
-            <h2>{{ this.dificultad }} / 5</h2>
-            <h4>Dificultad</h4>
+            <p style="font-size: xx-large">{{ this.dificultad }} / 5</p>
+            <p style="font-size: x-large">Dificultad</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="sections">
-      <h4>INGREDIENTES (4 personas):</h4>
+    <section class="sectionsReceta">
+      <p style="font-size: x-large">INGREDIENTES (4 personas):</p>
       <hr id="solidDividerYellow" />
       <p>{{ this.ingredientes }}</p>
 
     </section>
 
-    <section class="sections">
-      <h4>ELABORACIÓN DE LA RECETA</h4>
+    <section class="sectionsReceta">
+      <p style="font-size: x-large">ELABORACIÓN DE LA RECETA</p>
       <hr id="solidDividerYellow" />
       <p>Estos son los pasos que tienes que seguir</p>
       <p>{{ this.steps }}</p>
@@ -43,9 +43,9 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-left: 10%;
-  margin-right: 10%;
   margin-top: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 #headerSection {
@@ -53,15 +53,16 @@
   margin-bottom: 10%;
 }
 
-#title {
+#titleReceta {
   font-weight: bold;
+  margin-top: 12px;
   margin-bottom: 80px;
   color: #5c5540;
   text-align: center;
   font-size: xxx-large;
 }
 
-.sections {
+.sectionsReceta {
   color: #5c5540;
   margin-bottom: 10%;
   text-align: left;
