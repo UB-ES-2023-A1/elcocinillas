@@ -10,7 +10,7 @@
           <input type="password" placeholder="Introduce la contraseña" name="psw" required v-model="password">
           <a @click="createAccount" style="color: #73694F">¿No tienes cuenta? Regístrate</a>
         </div>
-        <button type="submit"><strong>Iniciar sesión</strong></button>
+        <button type="submit" class="reg-button"><strong>Iniciar sesión</strong></button>
       </div>
     </form>
   </body>
