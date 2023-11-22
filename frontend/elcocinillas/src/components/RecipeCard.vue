@@ -32,18 +32,19 @@ export default {
   },
   data(){
       return{
-          imageURL: ''
+          imageUrl: ''
       }
   },
-  methods : {
-    created(){
-        const path = "http://localhost:8000/imgReceta/" + this.$props.recipeName;
-        axios.get(path).then(response => {
-            this.imageURL = response.data;
-        }).catch(error =>{
+  created() {
+      const path = "http://localhost:8000/imgReceta/" + this.props.recipeName();
+      axios.get(path).then(response => {
+          this.imageUrl = response.data
+      }).catch(error => {
         console.error("Error fetching image:", error);
       })
-    },
+  },
+
+    methods : {
     openRecipe() {
       this.$router.push('/recetas/'+this.recipeName)
     }
