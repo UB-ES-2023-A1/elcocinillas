@@ -5,9 +5,9 @@ Vue.use(Vuex)
 
 export const store =  new Vuex.Store({
   state: {
-    initSession: true,
-    userName: "Juan",
-    correo: "lluis.alcala98@gmail.com",
+    initSession: false,
+    userName: null,
+    correo: null,
   },
   mutations: {
     setUsername(state, name) {
