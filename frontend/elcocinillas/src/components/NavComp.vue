@@ -112,6 +112,7 @@ img{
   margin-left: 2vh;
   border-radius: 20px;
   border: none;
+  background-color: white;
 }
 #settings{
   float: right;
