@@ -205,12 +205,14 @@ input[type="range"] {
 
 <script>
 import axios from "axios";
+import {store} from "@/store";
+import router from "@/router";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   data() {
     return {
-      usuario: null, //TODO: recoger usuario de vuex
+      usuario: store.state.userName,
       nombreReceta: null,
       classeReceta: "",
       tipoReceta: "",
@@ -233,6 +235,7 @@ export default {
             console.log('Ok publicar receta:', response.data);
             this.recipes = response.data;
             alert("¡Felicidades! Tu receta se ha publicado")
+            router.push("/recetas");
           })
           .catch((error) => {
             console.error('KO publicar receta:', error);
@@ -242,7 +245,7 @@ export default {
 
     getDatosReceta() {
       return {
-          user: "Marcos",
+          user: this.usuario,
           nombre: this.nombreReceta,
           classe: this.classeReceta,
           tipo: this.tipoReceta,
