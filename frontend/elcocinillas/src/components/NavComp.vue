@@ -109,7 +109,6 @@ a {
   height: 90%; 
   width: 25vh;
   margin: auto;
-  margin-left: 2vh;
   border-radius: 20px;
   border: none;
   background-color: white;

@@ -113,13 +113,13 @@
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background: #EEF2B6;
+  background: #73694f;
+  color: white;
   font-size: 16px;
   cursor: pointer;
   margin-top: 7%;
 }
 .ur-button:hover {
-  background: #eef2b6;
   opacity: 70%;
 }
 input[type="range"] {
