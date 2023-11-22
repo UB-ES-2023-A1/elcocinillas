@@ -4,6 +4,7 @@ from firebase_admin import firestore
 from firebase_admin import credentials
 from firebase_admin import auth, storage
 from fuzzywuzzy import fuzz, process
+import uuid
 
 current_directory = os.path.dirname(__file__)
 file_path = os.path.join(current_directory, 'elcocinillas.json')
@@ -16,11 +17,34 @@ firebase_admin.initialize_app(cred, {
 })
 
 db = firestore.client()    
+"""
+Flujo de trabajo para colgar y obtener imagenes.
+--------------------------------------------------
+1.- Para subir receta con imagenes:
+    - Llega una receta con una lista de archivos con imagenes:
+        * Se recorre la lista de imagenes y se cuelgan en Storage,
+        (Cada receta tendra una carpeta con las imagenes correspondientes)
+        (Cada carpeta tendra el nombre del id asignado a la receta)
 
+    - Lectura de una receta:
+        * Se busca la receta correspondiente
+        * Se busca la carpeta en storage asociada al id de la receta
+        * Para cada imagen de la carpeta se crea la ruta URL publica de acceso
+            y estas url se añaden al campo imagenes de la receta
+
+"""
 def create_recepta(recepta):
     try:
         doc_ref = db.collection(u'receptes').document(recepta.nombre)
-        doc_ref.set(recepta.__dict__)
+        dict_receta = recepta.__dict__
+        dict_receta["id"] = str(uuid.uuid4())
+
+        #Recorremos todas las imagenes y las subimos
+        lista_imagenes = dict_receta["images"]
+        for i in range(len(lista_imagenes)):
+            uploadImg(dict_receta["id"], lista_imagenes[i])
+
+        doc_ref.set(dict_receta)
         return 200
     except Exception as e:
         print(f"Error al crear la recepta: {e}")
@@ -33,6 +57,7 @@ def get_all_recipes():
     data = [doc.to_dict() for doc in recetas]
 
     return data
+
 def get_receptes(filtro):
     print(filtro)
 
@@ -72,14 +97,27 @@ def get_recepta(name_recepta):
     if doc.exists:
         resposta = doc.to_dict()
 
-        bucket = storage.bucket()
-        blob = bucket.blob(ruta_recetas + name_recepta)
-        resposta['images'] = [blob.generate_signed_url(method='GET', expiration=3600)]
+        #Le paso el id de la receta encontrada
+        urls = get_imagenes_receta(resposta[id])
+
+        resposta['images'] = urls
 
         return resposta
     else:
         print("No such document!")
         return -1
+
+def get_imagenes_receta(uuid):
+    bucket = storage.bucket()
+    prefix = ruta_recetas + uuid + "/"
+    blobs = bucket.list_blobs(prefix=prefix)
+    images_urls =[]
+
+    for blob in blobs:
+        image_url = blob.generate_signed_url(expiration=180)
+        images_urls.append(image_url)
+
+    return images_urls
 
 
 def busca_recetas(cadena):
@@ -107,20 +145,6 @@ def busca_recetas(cadena):
 
         return resultados
 
-        
-
-def getRecipeImages(recepta): 
-    # Conecta al bucket de almacenamiento
-    bucket = storage.bucket()
-    folder_path = ruta_recetas + recepta
-    blob = bucket.blob(prefix=folder_path)
-
-    # Genera la URL del blob
-    image_url = blob.public_url
-    # Devuelve la lista de URLs de imágenes
-    print(image_url)
-    return image_url
-
 def updateImg(receta):
     doc_ref = db.collection("receptes").document(receta['nombre'])
 
@@ -134,11 +158,11 @@ def updateImg(receta):
         return -1
 
 #images list{ruta_local_img}
-def uploadImg(nombre, file):
-
+def uploadImg(uuid, file):
     try:
         bucket = storage.bucket()
-        blob = bucket.blob(ruta_recetas + nombre)
+        prefix = ruta_recetas + uuid + "/"
+        blob = bucket.blob(prefix=prefix)
 
         blob.upload_from_string(file, content_type="image/jpeg")
 
