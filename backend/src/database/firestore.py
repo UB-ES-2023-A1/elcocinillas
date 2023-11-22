@@ -158,10 +158,10 @@ def updateImg(receta):
         return -1
 
 #images list{ruta_local_img}
-def uploadImg(uuid, file):
+def uploadImg(nombre, file):
     try:
         bucket = storage.bucket()
-        prefix = ruta_recetas + uuid + "/"
+        prefix = ruta_recetas + nombre
         blob = bucket.blob(prefix=prefix)
 
         blob.upload_from_string(file, content_type="image/jpeg")
