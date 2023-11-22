@@ -58,25 +58,15 @@ def get_all_recipes():
     return database.get_all_recipes()
 
 @app.post("/imgUpload/", response_model=str)
-def publi_img(nombre: str = Form(...), files: List[UploadFile] = File(...)):
+def publi_img(nombre: str = Form(...), file: UploadFile = File(...)):
 
-    receta = database.get_recepta(nombre)
+    # Lee el archivo en memoria
+    image_data = file.file.read()
 
-    image_urls = []
-    for file in files:
-        # Lee el archivo en memoria
-        image_data = file.file.read()
-
-        # Sube la imagen a Firebase Storage y obtén la URL
-        image_url = database.uploadImg(receta, image_data)
-
-        # Agrega la URL de la imagen a la lista de URLs
-        image_urls.append(image_url)
-
-    receta['images'] = image_urls
-    database.updateImg(receta)
+    # Sube la imagen a Firebase Storage y obtén la URL
+    image_url = database.uploadImg(nombre, image_data)
     
-    return "Tot bene"
+    return image_url
 
 @app.post("/receta", response_model=str)
 def publi_receta(receta: Receta):
@@ -87,3 +77,7 @@ def publi_receta(receta: Receta):
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=500, detail="Error en el servidor leer img: " + str(e))
+
+@app.get("/imgReceta/{nombre_receta}")
+def get_image_url(nombre_receta: str):
+    return database.getRecipeImages(nombre_receta)

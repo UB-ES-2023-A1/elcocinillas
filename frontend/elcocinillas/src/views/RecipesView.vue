@@ -4,7 +4,8 @@
     <div class="d-flex flex-row flex-wrap">
       <recipe-card v-for="rp in this.recipes"
                    v-bind:key="rp.id"
-                   v-bind:recipeName="rp.nombre">
+                   v-bind:recipeName="rp.nombre"
+                   v-bind:imageUrl="rp.images">
       </recipe-card>
     </div>
     <button id="boton-flotante" @click="uploadRecipe">

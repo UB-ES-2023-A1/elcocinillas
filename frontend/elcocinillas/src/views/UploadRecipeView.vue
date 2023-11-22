@@ -58,7 +58,7 @@
 
         <div id="photoPicker">
           <label for="exampleFormControlFile1">¿Quieres acompañar tu receta con alguna foto?</label>
-          <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="handleFileChange">
+          <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="handleFileChange($event)">
         </div>
 
         <div class="btn-block">
@@ -216,7 +216,7 @@ export default {
       tipoReceta: "",
       ingredientesReceta: "",
       pasosReceta: "",
-      imagesReceta: null,
+      imagesReceta: "",
       timeReceta: 15,
       dificultadReceta: 0
     };
@@ -248,16 +248,26 @@ export default {
           tipo: this.tipoReceta,
           ingredientes: this.ingredientesReceta,
           pasos: this.pasosReceta,
-          images: "",
+          images: this.imagesReceta,
           time: this.timeReceta,
           dificultad: this.dificultadReceta
       };
     },
-
     handleFileChange(event) {
-      this.images = event.target.files[0];
+      this.file = event.target.files[0];
 
-      console.log('Foto seleccionada:', this.images);
+      // Crea un objeto FormData para enviar el archivo y otros datos
+      const formData = new FormData();
+      formData.append('nombre', this.nombreReceta);
+      formData.append('file', this.file);
+      const path = "http://localhost:8000/imgUpload/";
+
+      axios.post(path,formData).then((response) => {
+          console.log('Foto seleccionada:', this.images);
+          this.imagesReceta = response.data;
+      }).catch ((error) =>{
+          console.error(error);
+      })
     },
 
   },
