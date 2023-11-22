@@ -1,18 +1,18 @@
 <template>
-  <body>
-    <div class="testbox">
-      <form @submit.prevent="uploadRecipe">
-        <div class="banner">
-          <h1 style="font-weight: bold;">Publicar receta</h1>
+  <body class="univ">
+    <div class="univ testbox">
+      <form id="form" class="univ" @submit.prevent="uploadRecipe">
+        <div class="univ banner">
+          <h1 id="title" style="font-weight: bold;">Publicar receta</h1>
         </div>
-        <div class="item">
-          <label for="name">Nombre receta<span> *</span></label>
-          <input id="name" type="text" required v-model="nombreReceta"/>
+        <div class="univ item">
+          <label class="univ" for="name">Nombre receta<span> *</span></label>
+          <input class="univ bordered ur-input" id="name" type="text" required v-model="nombreReceta"/>
         </div>
 
-        <div class="item">
+        <div class="univ item">
           <p>Escoge la dieta<span> *</span></p>
-          <select v-model="tipoReceta">
+          <select class="univ bordered" v-model="tipoReceta">
             <option selected value=""></option>
             <option value="Vegana" >Vegana</option>
             <option value="Vegetariana">Vegetariana</option>
@@ -20,9 +20,9 @@
           </select>
         </div>
 
-        <div class="item">
+        <div class="univ item">
           <p>¿De qué clase dirías que es tu plato?<span> *</span></p>
-          <select v-model="classeReceta">
+          <select class="univ bordered" v-model="classeReceta">
             <option selected value=""></option>
             <option value="Hamburguesa" >Hamburguesa</option>
             <option value="Postre">Postre</option>
@@ -30,18 +30,18 @@
           </select>
         </div>
 
-        <div class="item">
-          <label for="visit">¿Cuáles son los ingredientes necesarios?<span> *</span></label>
-          <textarea id="visit" rows="4" required v-model="ingredientesReceta"></textarea>
+        <div class="univ item">
+          <label class="univ" for="visit">¿Cuáles son los ingredientes necesarios?<span> *</span></label>
+          <textarea class="univ bordered" id="visit" rows="4" required v-model="ingredientesReceta"></textarea>
         </div>
         <div class="item">
-          <label for="visit">Describe los pasos para elaborar la receta<span> *</span></label>
-          <textarea id="visit" rows="6" required v-model="pasosReceta"></textarea>
+          <label class="univ" for="visit">Describe los pasos para elaborar la receta<span> *</span></label>
+          <textarea lcass="univ" id="visit" rows="6" required v-model="pasosReceta"></textarea>
         </div>
 
-        <div class="item">
+        <div class="univ item">
           <p>Dificultad<span> *</span></p>
-          <select v-model="dificultadReceta">
+          <select class="univ bordered" v-model="dificultadReceta">
             <option selected value="0">0</option>
             <option value="1" >1</option>
             <option value="2">2</option>
@@ -51,18 +51,18 @@
           </select>
         </div>
 
-        <div id="timeSlider">
-          <label for="phone">Tiempo máximo (minutos): {{ timeReceta }} <span>minutos</span></label>
-          <input type="range" min="0" max="120" class="slider" id="myRange" v-model="timeReceta">
+        <div class="univ" id="timeSlider">
+          <label class="univ" for="phone">Tiempo máximo (minutos): {{ timeReceta }} <span>minutos</span></label>
+          <input class="univ bordered slider ur-input" type="range" min="0" max="120" id="myRange" v-model="timeReceta">
         </div>
 
-        <div id="photoPicker">
-          <label for="exampleFormControlFile1">¿Quieres acompañar tu receta con alguna foto?</label>
-          <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="handleFileChange">
+        <div class="univ" id="photoPicker">
+          <label class="univ" for="exampleFormControlFile1">¿Quieres acompañar tu receta con alguna foto?</label>
+          <input class="univ bordered ur-input form-control-file" type="file" id="exampleFormControlFile1" @change="handleFileChange">
         </div>
 
-        <div class="btn-block">
-          <button type="submit">Publicar</button>
+        <div class="univ btn-block">
+          <button class="ur-button" type="submit">Publicar</button>
         </div>
       </form>
     </div>
@@ -70,11 +70,8 @@
 </template>
 
 <style>
-body {
-  min-height: 100%;
+.univ{
   font-family: "Lato", sans-serif;
-}
-body, div, form, input, select, textarea, label {
   padding: 0;
   margin: 0;
   outline: none;
@@ -82,7 +79,8 @@ body, div, form, input, select, textarea, label {
   color: #666;
   line-height: 22px;
 }
-h1 {
+
+#title{
   position: absolute;
   margin: 0;
   font-size: 40px;
@@ -90,19 +88,49 @@ h1 {
   z-index: 2;
   line-height: 83px;
 }
+#form {
+  width: 100%;
+  padding: 20px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 0 8px  #73694F;
+}
+.bordered{
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.ur-input {
+  width: calc(100% - 10px);
+  padding: 5px;
+}
+.ur-textarea {
+  width: calc(100% - 12px);
+  padding: 5px;
+}
+.ur-button {
+  width: 150px;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #EEF2B6;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 7%;
+}
+.ur-button:hover {
+  background: #eef2b6;
+  opacity: 70%;
+}
+input[type="range"] {
+  accent-color: #73694F;
+}
 .testbox {
   display: flex;
   justify-content: center;
   align-items: center;
   height: inherit;
   padding: 20px;
-}
-form {
-  width: 100%;
-  padding: 20px;
-  border-radius: 6px;
-  background: #fff;
-  box-shadow: 0 0 8px  #73694F;
 }
 .banner {
   position: relative;
@@ -121,20 +149,6 @@ form {
   width: 100%;
   height: 100%;
 }
-input, select, textarea {
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-input {
-  width: calc(100% - 10px);
-  padding: 5px;
-}
-
-textarea {
-  width: calc(100% - 12px);
-  padding: 5px;
-}
 .item:hover p, input:hover::placeholder {
   color: #73694F;
 }
@@ -143,11 +157,9 @@ textarea {
   box-shadow: 0 0 3px 0 #73694F;
   color: #73694F;
 }
-
 .item select {
   min-width: 150px;
 }
-
 .item {
   position: relative;
   margin: 10px 0;
@@ -155,32 +167,12 @@ textarea {
 .item span {
   color: red;
 }
-
 .btn-block {
   margin-top: 10px;
   text-align: center;
 }
-button {
-  width: 150px;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background: #EEF2B6;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 7%;
-}
-button:hover {
-  background: #eef2b6;
-  opacity: 70%;
-}
-
 #timeSlider {
   margin: 25px 0;
-}
-
-input[type="range"] {
-  accent-color: #73694F;
 }
 
 @media (min-width: 568px) {

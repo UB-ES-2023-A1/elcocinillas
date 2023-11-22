@@ -6,14 +6,14 @@
         <div>
           <div class="inner-container">
             <label for="mail"><strong>Email</strong></label>
-            <input type="text" placeholder="Introduce el correo" name="mail" required autofocus v-model="email">
+            <input class="reg-input" type="text" placeholder="Introduce el correo" name="mail" required autofocus v-model="email">
             <label for="psw"><strong>Contraseña</strong></label>
-            <input type="password" placeholder="Introduce la contraseña" name="psw" required v-model="password">
+            <input class="reg-input" type="password" placeholder="Introduce la contraseña" name="psw" required v-model="password">
             <label for="psw"><strong>Repite la contraseña</strong></label>
-            <input type="password" placeholder="Introduce de nuevo la contraseña" name="psw" required v-model="passwordBis">
+            <input class="reg-input" type="password" placeholder="Introduce de nuevo la contraseña" name="psw" required v-model="passwordBis">
             <a @click="goToLogin" style="color: #73694F">¿Ya tienes cuenta? Inicia sesión</a>
           </div>
-          <button type="submit"><strong>Crear cuenta</strong></button>
+          <button class="reg-button" type="submit"><strong>Crear cuenta</strong></button>
         </div>
       </form>
     </div>
@@ -30,14 +30,12 @@
   display: block;
   text-align: center;
 }
-
 #title {
   font-weight: bold;
   color: #5c5540;
   text-align:center;
 }
-
-input[type=text], input[type=password] {
+.reg-input[type=text], input[type=password] {
   width: 100%;
   padding: 16px 8px;
   margin: 8px 0;
@@ -45,7 +43,6 @@ input[type=text], input[type=password] {
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
-
 .formcontainer {
   text-align: center;
   border: 5px solid #EEF2B6;
@@ -64,8 +61,7 @@ span.psw {
   padding-top: 0;
   padding-right: 15px;
 }
-
-button {
+.reg-button {
   background-color: #73694F !important;
   color: white !important;
   padding: 14px 0;
@@ -75,7 +71,7 @@ button {
   width: 48%;
   opacity: 100% !important;
 }
-button:hover {
+.reg-button:hover {
   opacity: 0.8;
 }
 

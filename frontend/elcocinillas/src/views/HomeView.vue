@@ -112,6 +112,7 @@ a {
   margin: auto;
   margin-top: 20px;
   border-radius: 10px;
+  border-style: solid;
   top: -20px;
 }
 .to-recipes:hover{

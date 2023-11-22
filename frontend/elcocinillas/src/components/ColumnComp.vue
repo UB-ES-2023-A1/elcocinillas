@@ -34,7 +34,6 @@
   text-shadow: 2px 2px white;
 }
 .col-section {
-  place-items: center;
   text-align: center;
 }
 .hidden {
