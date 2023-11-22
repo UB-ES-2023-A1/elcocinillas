@@ -156,6 +156,7 @@ def uploadImg(nombre, file):
         blob = bucket.blob(ruta_recetas + nombre)
 
         blob.upload_from_string(file, content_type="image/jpeg")
+        blob.make_public()
 
         return blob.public_url
     except Exception as e:
