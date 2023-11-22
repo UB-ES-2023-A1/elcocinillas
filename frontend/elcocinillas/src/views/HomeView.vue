@@ -3,9 +3,9 @@
     <div>
       <div class="column left">
         <ColumnComp>
-          <template #heading>Tiempo Cocción</template>
+          <template #heading>Tiempo</template>
           <template #image>
-            <img src="../assets/clock.png" alt="Health Icon" />
+            <img src="../assets/clock.png" alt="Health Icon" class="image"/>
           </template>
           <template #description>
             Tiempo máximo (minutos): {{ time }}
@@ -18,11 +18,11 @@
         <ColumnComp>
           <template #heading>Dieta</template>
           <template #image>
-            <img src="../assets/diet.png" alt="Health Icon" />
+            <img src="../assets/diet.png" alt="Health Icon" class="image"/>
           </template>
           <template #description> 
-            <ul>
-              <li v-for="diet in optionsDiets" v-bind:key="diet.id"
+            <ul class="main-ul">
+              <li class="main-li" v-for="diet in optionsDiets" v-bind:key="diet.id"
               :style="[$chosen.diet === diet ? 
               {'background-color': clicked} :
               {'background-color': notClicked, 'color': 'black'}]"
@@ -37,11 +37,11 @@
         <ColumnComp>
           <template #heading>Plato</template>
           <template #image>
-            <img src="../assets/food-plate-1.png" alt="Health Icon"/>
+            <img src="../assets/food-plate-1.png" alt="Health Icon" class="image"/>
           </template>
           <template #description>
-            <ul>
-              <li v-for="dish in optionsDishes" v-bind:key="dish.id"
+            <ul class="main-ul">
+              <li class="main-li" v-for="dish in optionsDishes" v-bind:key="dish.id"
               :style="[$chosen.dishes.includes(dish) ? 
               {'background-color': clicked} :
               {'background-color': notClicked, 'color': 'black'}]"
@@ -55,7 +55,7 @@
     </div>
     <button class="to-recipes">
       <router-link to="/recetas">
-        <h2>
+        <h2 class="to-recipes-text">
           Ver Recetas
         </h2>
       </router-link>
@@ -67,18 +67,10 @@
 a {
   text-decoration: none;
 }
-img{
-  margin-bottom: 30px;
-}
 .pos{
   display: grid;
 }
-h1 {
-  font-size: 10vh;
-  text-shadow: 2px 2px lightsteelblue;
-  color: black;
-}
-h2 {
+.to-recipes-text {
   font-size: 5vh;
   color: black;
   text-shadow: 2px black;
@@ -100,11 +92,12 @@ h2 {
 .right {
   background-color: white;
 }
-img {
+.image {
   height: 30vh;
+  margin-bottom: 30px;
   transition: 1s;
 }
-img:hover {
+.image:hover {
   transform: scale(1.1);
   transition: 1s;
 }
@@ -126,12 +119,12 @@ img:hover {
   transform: rotate(-3deg);
   transition: 0.2s;
 }
-ul{
+.main-ul{
   height: 100px;
   list-style-type: none;
   padding: 0;
 }
-li{
+.main-li{
   height: 4vh;
   width: 30vh;
   font-size: 2.5vh;
@@ -145,7 +138,7 @@ li{
   cursor: pointer;
   transition: 0.2s;
 }
-li:hover{
+.main-li:hover{
   margin-bottom: 5px;
   box-shadow: 5px 5px black;
   transition: 0.2s;
@@ -174,7 +167,8 @@ export default {
     },
     methods: {
       addDiet(diet){
-        this.$chosen.diet = diet;
+        if (this.$chosen.diet === diet) this.$chosen.diet = null;
+        else this.$chosen.diet = diet;
       },
       addDish(dish){
         if (this.$chosen.dishes.includes(dish)){

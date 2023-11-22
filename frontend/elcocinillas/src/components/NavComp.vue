@@ -3,43 +3,43 @@
     <div style="float: left; display: flex;">
       <div class="link" @mouseenter="logoStart()" @mouseleave="logoEnd()">
         <router-link to="/">
-          <img src="../assets/cheff.png" id="logo">
+          <img class="image" src="../assets/cheff.png" id="logo">
           El Cocinillas
         </router-link>
       </div>
       <div id="search" style="display: flex;">
         <input type="search" id="search">
-        <img class="imgUp" src="../assets/search.png">
+        <img class="image imgUp" src="../assets/search.png">
       </div>
     </div>
     <div style="float: right;">
       <div class="link">
         <router-link to="/recetas">
-          <img class="imgUp" src="../assets/recipe.png">
+          <img class="image imgUp" src="../assets/recipe.png">
           Recetas
         </router-link>
       </div>
       <div class="link" v-if="$globalData.logged">
         <router-link to="/perfil">
-          <img class="imgUp" src="../assets/perfil.png">
+          <img class="image imgUp" src="../assets/perfil.png">
           Perfil
         </router-link>
       </div>
       <div class="link" v-if="$globalData.logged" @click="logoff()">
         <router-link to="/">
-          <img class="imgUp" src="../assets/exit.png">
+          <img class="image imgUp" src="../assets/exit.png">
           Cerrar Sesión
         </router-link>
       </div>
       <div class="link" v-if="!$globalData.logged">
         <router-link to="/userlogin">
-          <img class="imgUp" src="../assets/enter.png">
+          <img class="image imgUp" src="../assets/enter.png">
           Iniciar Sesión
         </router-link>
       </div>
       <div class="link" v-if="!$globalData.logged">
         <router-link to="/registre">
-          <img class="imgUp" src="../assets/enter.png">
+          <img class="image imgUp" src="../assets/enter.png">
           Registrarse
         </router-link>
       </div>
@@ -98,7 +98,7 @@ a {
   font-weight: bold;
   background-color: white;
 }
-img{
+.image{
   height: 5vh;
   filter: invert(95%);
 }
@@ -129,22 +129,6 @@ img{
   position: relative;
   transform: scale(0.7);
   top: -0.25vh;
-}
-ul{
-  list-style-type: none;
-  background-color: lightgray;
-  box-shadow: 0px 5px 5px 0px lightgray;
-}
-li{
-  width: 180px;
-}
-li:hover{
-  filter: scale(1.1);
-}
-.dropdown-content {
-  position: absolute;
-  left: -140px;
-  top: 35px;
 }
 </style>
 

@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <section>
-      <section class="hidden">
+  <div style="margin: 1vh">
+    <section class="col-section">
+      <section class="hidden col-section">
         <h1 class="heading">
           <slot name="heading"></slot>
         </h1>
@@ -17,9 +17,6 @@
 </template>
 
 <style scoped>
-* {
-  margin: 1vh;
-}
 .image{
   margin-top: 4vh;
 }
@@ -31,14 +28,14 @@
   position: relative;
   font-size: 2.5vh;
 }
-h1 {
+.heading {
   font-size: 7.5vh;
   color: black;
   text-shadow: 2px 2px white;
 }
-section {
-  display: grid;
+.col-section {
   place-items: center;
+  text-align: center;
 }
 .hidden {
   opacity: 0;

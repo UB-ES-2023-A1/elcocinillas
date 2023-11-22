@@ -76,7 +76,6 @@
   font-size: 24px;
   text-decoration: none;
 }
-
 </style>
 
 <script>
