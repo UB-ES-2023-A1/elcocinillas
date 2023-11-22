@@ -118,6 +118,7 @@ def getRecipeImages(recepta):
     # Genera la URL del blob
     image_url = blob.public_url
     # Devuelve la lista de URLs de imágenes
+    print(image_url)
     return image_url
 
 def updateImg(receta):
