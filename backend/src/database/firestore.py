@@ -173,7 +173,7 @@ def signup(mail, passwd, username):
             email = mail, 
             password = passwd
             )
-        return 200
+        return "200"
     except ValueError as e:
         return f"Error en el registro: {str(e)}"
     except auth.EmailAlreadyExistsError as e:
