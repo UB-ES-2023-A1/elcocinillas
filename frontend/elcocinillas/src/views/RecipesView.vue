@@ -12,9 +12,7 @@
         </recipe-card>
       </div>
     </div>
-    <button id="boton-flotante" @click="uploadRecipe">
-        <router-link to="/publicarReceta" id="boton-flotante-inner">+</router-link>
-    </button>
+    <button id="boton-flotante" @click="goToUploadRecipe">+</button>
   </div>
 
 </template>
@@ -68,6 +66,7 @@
   background-color: #73694F;
   border: none;
   border-radius: 50%;
+  font-size: x-large;
 }
 
 #boton-flotante-inner{
@@ -81,10 +80,12 @@
 import RecipeCard from "@/components/RecipeCard.vue";
 import Filters from "@/components/FiltersComp.vue";
 import axios from "axios";
+import { store } from '../store'
 export default {
   components: {RecipeCard, Filters},
   data() {
     return {
+      usuarioLogeado : store.state.initSession,
       recipes: []
     }
   },
@@ -148,6 +149,15 @@ export default {
       .catch(error => {
         console.error("Error fetching recipes:", error);
       });
+    },
+    goToUploadRecipe() {
+      console.log("isLogged click: ", this.usuarioLogeado != null);
+      if(this.usuarioLogeado){
+        console.log("ir a recetas");
+        this.$router.push('/publicarReceta')
+      } else{
+        alert("Inicia sesión para poder publicar una receta");
+      }
     }
   }
 };

@@ -21,6 +21,7 @@
 </style>
 
 <script>
+import { store } from '../store'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import router from "@/router";
 export default {
@@ -44,21 +45,24 @@ export default {
       } else if (this.password == "") {
         alert("Se necesita contraseña");
       } else {
-        try {
-          await signInWithEmailAndPassword(
-            getAuth(),
-            this.email,
-            this.password
-          );
-          alert("Sesión iniciada con éxito");
-          // Manejar el éxito del inicio de sesión (redirección, etc.)
-          this.$globalData.logged = true;
-          router.push("/recetas");
-        } catch (error) {
-          this.$globalData.logged = false;
-          alert("Error en el inicio de sesión: email o contraseñas incorrectos");
-          // Manejar el error del inicio de sesión
-        }
+        signInWithEmailAndPassword(getAuth(), this.email, this.password)
+            .then((userCredential) => {
+              // El inicio de sesión fue exitoso
+              const user = userCredential.user;
+              console.log("Usuario autenticado:", user);
+              const uid = user.uid;
+              store.state.userName = uid;
+              store.commit('setinitSession', { isLogged: true })
+              alert("Sesión iniciada con éxito");
+              router.push("/recetas");
+              console.log("usuerName: ", store.state.userName)
+            })
+            .catch((error) => {
+              // Maneja errores de inicio de sesión
+              console.error("Error de inicio de sesión:", error.message);
+              store.commit('setinitSession', {isLogged: false})
+              alert("Error en el inicio de sesión: email o contraseñas incorrectos");
+            });
       }
     },
 
