@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <section>
-      <section class="hidden">
-        <h1 class="heading">
+  <div style="margin: 1vh">
+    <section class="col-section">
+      <section class="hidden col-section">
+        <p class="heading">
           <slot name="heading"></slot>
-        </h1>
+        </p>
         <p class="image">
           <slot name="image"></slot>
         </p>
@@ -17,27 +17,25 @@
 </template>
 
 <style scoped>
-* {
-  padding: 0;
-  margin: 5px;
-}
 .image{
-  margin-top: 20px;
+  margin-top: 4vh;
 }
 .description {
-  align-content: center;
-  width: 75%;
+  display: flex;
+  margin: auto;
+  place-content: center;
+  text-align: center;
   position: relative;
-  left: 50px;
+  font-size: 2.5vh;
 }
-h1 {
-  font-size: 50px;
+.heading {
+  margin-top: 12%;
+  font-size: 7.5vh;
   color: black;
   text-shadow: 2px 2px white;
 }
-section {
-  display: grid;
-  place-items: center;
+.col-section {
+  text-align: center;
 }
 .hidden {
   opacity: 0;

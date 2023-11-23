@@ -1,12 +1,17 @@
-<template>
-  <div class="about">
-    <v-card
-      width="400"
-      title="This is a title"
-      subtitle="This is a subtitle"
-      text="This is content"
-    ></v-card>
-  </div>
-</template>
+    <template>
+      <div>
+        <div v-if="usuarioLogeado">If true</div>
+      </div>
+    </template>
 
-<script></script>
+    <script>
+    import { store } from '../store'
+    export default {
+      // eslint-disable-next-line vue/multi-word-component-names
+      data(){
+        return {
+          usuarioLogeado : store.state.initSession,
+        }
+      },
+    }
+    </script>

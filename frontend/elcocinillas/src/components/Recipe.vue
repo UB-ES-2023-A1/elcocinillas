@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    {{ $globalData.navKey }}
     <section id="headerSection">
       <h2 id="title">{{ this.name }}</h2>
       <div class="container">

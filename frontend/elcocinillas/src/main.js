@@ -1,14 +1,12 @@
 import BootstrapVue from "bootstrap-vue";
 import "@/../bootstrap/css/bootstrap.css";
 import Vue from "vue";
-import vuetify from "@/plugins/vuetify";
 import "./plugins/bootstrap-vue";
 import App from "./App.vue";
 import router from "./router";
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import store from "./store";
-
 
 // Configura tus credenciales de Firebase
 const firebaseConfig = {
@@ -29,18 +27,28 @@ export { auth };
 
 Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
+export const bus = new Vue();
 
 Vue.prototype.$globalData = Vue.observable({
+  diets: ['Vegana', 'Vegetariana', 'Omnívora'],
+  dishes: ['Ensalada', 'Hamburguesa', 'Postre'],
+  logged: false,
+  darkMode: false,
+  recipesKey: 0,
+  navKey: 0,
+  searchQuery:''
+});
+Vue.prototype.$chosen = Vue.observable({
   time: 0,
-  diets: [],
-  dishes: []
+  diet: null,
+  dishes: [],
+  logged: false,
 });
 
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
   store,
-  vuetify,
   router,
   components: { App },
   template: "<App/>",

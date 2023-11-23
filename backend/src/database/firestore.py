@@ -4,10 +4,13 @@ from firebase_admin import firestore
 from firebase_admin import credentials
 from firebase_admin import auth, storage
 from fuzzywuzzy import fuzz, process
+import uuid
 
 current_directory = os.path.dirname(__file__)
 file_path = os.path.join(current_directory, 'elcocinillas.json')
+
 cred = credentials.Certificate(file_path)
+
 ruta_recetas = "imgRecetas/"
 firebase_admin.initialize_app(cred, {
     'storageBucket': 'elcocinillas-93ebe.appspot.com'
@@ -31,23 +34,30 @@ def get_all_recipes():
     data = [doc.to_dict() for doc in recetas]
 
     return data
+
 def get_receptes(filtro):
-    print(filtro)
 
     recetas_ref = db.collection("receptes")
     query = recetas_ref
 
     if filtro['user'] is not None:
         query = query.where("user", "==", filtro['user'])
-    if filtro["classe"] is not None:
-        query = query.where("classe", "==", filtro["classe"])
     if filtro["tipo"] is not None:
-        query = query.where("tipo", "==", filtro["tipo"])
-    if filtro["ingredientes"] is not None:
+        tipos = [filtro["tipo"],filtro["tipo"].lower()]
+        query = query.where("tipo", "in", tipos)
+    if filtro["classe"] != []:
+        classes = []
+        for f in filtro["classe"]:
+            classes_filtro = f.split(",")
+            for c in classes_filtro:
+                classes.append(c)
+                classes.append(c.lower())
+        query = query.where("classe", "in", classes)
+    if filtro["ingredientes"] != []:
         for ingrediente in filtro["ingredientes"]:
             query = query.where("ingredientes", "array_contains", ingrediente)
-    if filtro["time"] is not None:
-        query = query.where("time", "==", filtro["time"])
+    if filtro["time"] != 0:
+        query = query.where("time", "<=", filtro["time"])
     if filtro["dificultad"] is not None:
         query = query.where("dificultad", "==", filtro["dificultad"])
 
@@ -74,51 +84,38 @@ def get_recepta(name_recepta):
         print("No such document!")
         return -1
 
+def get_imagenes_receta(uuid):
+    bucket = storage.bucket()
+    prefix = ruta_recetas + uuid + "/"
+    blobs = bucket.list_blobs(prefix=prefix)
+    images_urls =[]
 
-def busca_recetas(cadena):
+    for blob in blobs:
+        image_url = blob.generate_signed_url(expiration=180)
+        images_urls.append(image_url)
+
+    return images_urls
+
+
+def busca_recetas(cadena, distancia = 50):
+
     coleccion = db.collection("receptes")
     recetas = coleccion.stream()
 
     data = [doc.to_dict() for doc in recetas]
     resultados = []
-    for doc in data:
-        if cadena in doc["nombre"]:
-            resultados.append(doc)
 
-    if len(resultados) > 0:
-        return resultados
-    else:
-        nombres = [doc["nombre"] for doc in data]
-        respuesta = process.extract(cadena, nombres, limit=10)
+    nombres = [doc["nombre"] for doc in data]
+    respuesta = process.extract(cadena, nombres, limit=len(nombres))
 
-        for i in range(10):
-            name = respuesta[i][0]
-            query = coleccion.where("nombre","==",name)
+    for name, score in respuesta:
+        if score >= distancia:
+            query = coleccion.where("nombre", "==", name)
             ret = query.stream()
             rec = [doc.to_dict() for doc in ret]
             resultados.append(rec[0])
 
-        return resultados
-
-        
-
-def getRecipeImages(recepta): 
-    # Crea una lista para almacenar las URL de las imágenes
-    image_urls = []
-
-    # Conecta al bucket de almacenamiento
-    bucket = storage.bucket()
-    folder_path = ruta_recetas + recepta.nombre
-    blobs = bucket.list_blobs(prefix=folder_path)
-
-    for blob in blobs:
-        # Genera la URL del blob
-        image_url = blob.public_url
-        # Agrega la URL a la lista de imágenes
-        image_urls.append(image_url)
-
-    # Devuelve la lista de URLs de imágenes
-    return image_urls
+    return resultados
 
 def updateImg(receta):
     doc_ref = db.collection("receptes").document(receta['nombre'])
@@ -133,14 +130,14 @@ def updateImg(receta):
         return -1
 
 #images list{ruta_local_img}
-def uploadImg(recepta, file):
-
+def uploadImg(nombre, file):
     try:
         bucket = storage.bucket()
-        blob = bucket.blob(ruta_recetas + recepta['nombre'])
+        blob = bucket.blob(ruta_recetas + nombre)
 
         blob.upload_from_string(file, content_type="image/jpeg")
-        
+        blob.make_public()
+
         return blob.public_url
     except Exception as e:
         # Captura cualquier excepción y maneja el error
@@ -157,7 +154,7 @@ def signup(mail, passwd, username):
             email = mail, 
             password = passwd
             )
-        return 200
+        return "200"
     except ValueError as e:
         return f"Error en el registro: {str(e)}"
     except auth.EmailAlreadyExistsError as e:
@@ -180,10 +177,5 @@ def get_user(username):
 
 def update_user(user_id, updated_user):
     user = auth.get_user(user_id)
-    if user.userID == user_id:
-        # Actualiza los campos del usuario
-        user.email = updated_user.email
-        user.password = updated_user.password
-        return {"message": "Usuario actualizado con éxito"}
-
-    return {"error": "Usuario no encontrado"}
+    new_user = auth.update_user(user_id, email = updated_user.email, password=updated_user.password)
+    return new_user

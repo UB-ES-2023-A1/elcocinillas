@@ -1,95 +1,27 @@
 <template>
-  <div>
-    <section class="h-100 gradient-form" style="background-color: #76ded9">
-      <header>
-        <div class="p-3 text-left">
-          <h1 class="mb-3">El Cocinillas</h1>
+  <body id="granContainerRegistre">
+    <form @submit.prevent="checkLogin" class="formcontainer">
+      <h2 id="title">Inicio de sesión</h2>
+      <div>
+        <div class="inner-container">
+          <label for="mail"><strong>Email</strong></label>
+          <input type="text" placeholder="Introduce el correo" name="mail" required autofocus v-model="email">
+          <label for="psw"><strong>Contraseña</strong></label>
+          <input type="password" placeholder="Introduce la contraseña" name="psw" required v-model="password">
+          <a @click="createAccount" style="color: #73694F">¿No tienes cuenta? Regístrate</a>
         </div>
-        <div class="mb-6 text-md-right">
-          <button
-            class="btn btn-outline-info"
-            @click="goBackToMain"
-            type="button"
-            style="background-color: #13cf89"
-          >
-            Volver a inicio
-          </button>
-        </div>
-      </header>
-    </section>
-    <section class="h-100 gradient-form" style="background-color: #eef2b6">
-      <div class="row h-100">
-        <div class="col">
-          <div
-            class="card rounded-3 text-black"
-            style="background-color: #eef2b6"
-          >
-            <div class="row g-0 justify-content-center">
-              <div class="col-lg-6">
-                <div
-                  class="card-body p-md-5 mx-md-4"
-                  style="background-color: #eef2b6"
-                >
-                  <div class="text-center">
-                    <h4 class="mt-1 mb-5 pb-1">Sign In</h4>
-                  </div>
-
-                  <form>
-                    <p>Email</p>
-
-                    <div class="form-outline mb-4">
-                      <input
-                        type="email"
-                        id="form2Example11"
-                        class="form-control"
-                        placeholder="Email"
-                        required
-                        autofocus
-                        v-model="email"
-                      />
-                    </div>
-                    <p>Pasword</p>
-                    <div class="form-outline mb-4">
-                      <input
-                        type="password"
-                        id="form2Example22"
-                        class="form-control"
-                        placeholder="Password"
-                        required
-                        v-model="password"
-                      />
-                    </div>
-
-                    <div class="text-center pt-1 mb-5 pb-1">
-                      <button
-                        class="btn btn-primary btn-block"
-                        @click="checkLogin()"
-                        type="button"
-                        style="background-color: #73694f"
-                      >
-                        Sign in
-                      </button>
-                      <button
-                        class="btn btn-success btn-block"
-                        @click="createAccount()"
-                        type="button"
-                        style="background-color: #5c5540"
-                      >
-                        Create Account
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <button type="submit" class="reg-button"><strong>Iniciar sesión</strong></button>
       </div>
-    </section>
-  </div>
+    </form>
+  </body>
 </template>
 
+<style>
+
+</style>
+
 <script>
+import { store } from '../store'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import router from "@/router";
 export default {
@@ -113,23 +45,29 @@ export default {
       } else if (this.password == "") {
         alert("Se necesita contraseña");
       } else {
-        try {
-          await signInWithEmailAndPassword(
-            getAuth(),
-            this.email,
-            this.password
-          );
-          alert("Sesión iniciada con éxito");
-          // Manejar el éxito del inicio de sesión (redirección, etc.)
-        } catch (error) {
-          alert(error.message);
-          // Manejar el error del inicio de sesión
-        }
+        signInWithEmailAndPassword(getAuth(), this.email, this.password)
+            .then((userCredential) => {
+              // El inicio de sesión fue exitoso
+              const user = userCredential.user;
+              console.log("Usuario autenticado:", user);
+              const uid = user.uid;
+              store.state.userName = uid;
+              store.state.initSession = true;
+              alert("Sesión iniciada con éxito");
+              this.$globalData.navKey += 1;
+              this.$globalData.logged = true;
+              router.push("/recetas");
+              console.log("usuerName: ", store.state.userName)
+            })
+            .catch((error) => {
+              // Maneja errores de inicio de sesión
+              console.error("Error de inicio de sesión:", error.message);
+              store.commit('setinitSession', {isLogged: false})
+              alert("Error en el inicio de sesión: email o contraseñas incorrectos");
+            });
       }
     },
-    goBackToMain() {
-      router.push("/");
-    },
+
     createAccount(){
       router.push("/registre");
     },
@@ -137,4 +75,4 @@ export default {
 };
 </script>
 
-<style scoped></style>
+
