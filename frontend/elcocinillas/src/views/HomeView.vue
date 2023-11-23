@@ -8,9 +8,14 @@
             <img src="../assets/clock.png" alt="Health Icon" class="image"/>
           </template>
           <template #description>
-            Tiempo máximo (minutos): {{ time }}
-            <input type="range" min="0" max="60" value="30" 
-            class="slider" id="slider" v-model="time">
+            <div id="time-desc">
+              <div>
+                <h4 style="font-size: 2.5vh;">Tiempo máximo (minutos): {{ time }}</h4>
+              </div>
+              <input type="range" min="0" max="60" value=30
+              class="slider" id="slider" v-model="time" style="margin-bottom: 10px;"
+              @input="updateTime(time);">
+            </div>
           </template>
         </ColumnComp>
       </div>
@@ -70,11 +75,6 @@ a {
 .pos{
   display: grid;
 }
-.to-recipes-text {
-  font-size: 5vh;
-  color: black;
-  text-shadow: 2px black;
-}
 .column {
   width: 33.3333%;
   float: left;
@@ -101,24 +101,30 @@ a {
   transform: scale(1.1);
   transition: 1s;
 }
+.time-desc{
+  display: grid;
+  font-size: 4vh;
+}
 .to-recipes {
-  color: white;
-  background-color: '#73694f';
-  font-size: 16px;
-  padding: 10px 20px 10px;
+  background-color: #73694f;
   height: 12vh;
   width: 50vh;
-  text-align: center;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 2vh;
   border-radius: 10px;
-  border-style: solid;
   top: -20px;
 }
 .to-recipes:hover{
   filter: brightness(1.1);
   transform: rotate(-3deg);
   transition: 0.2s;
+}
+.to-recipes-text {
+  font-size: 4vh;
+  color: white;
+  text-shadow: 2px black;
+  position: relative;
+  top: 0.5vh;
 }
 .main-ul{
   height: 100px;
@@ -138,6 +144,8 @@ a {
   box-shadow: 2px 2px black;
   cursor: pointer;
   transition: 0.2s;
+  display: grid;
+  align-items: center;
 }
 .main-li:hover{
   margin-bottom: 5px;
@@ -178,6 +186,12 @@ export default {
           this.$chosen.dishes.push(dish);
         }
       },
+      updateTime(t){
+        this.$chosen.time = t;
+      },
+    },
+    created(){
+      this.time = this.$chosen.time;
     }
   };
 </script>

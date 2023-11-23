@@ -1,9 +1,9 @@
 <template>
   <div class="filtros">
-    <h3>Filtros</h3>
+    <h3 class="filters-h3">Filtros</h3>
     <div class="section">
-      <h2 class="filters-2">Tiempo: {{ time }} minutos</h2>
-      <input type="range" min="0" max="60" value="30" 
+      <h2 class="filters-h2">Tiempo: {{ time }} minutos</h2>
+      <input type="range" min="0" max="60" value=30
       class="slider" id="slider" v-model="time" style="margin-bottom: 10px;"
       @input="updateTime(time);">
     </div>
@@ -49,8 +49,7 @@
   margin-bottom: 2vh;
 }
 .filters-h2{
-  width: 30vh;
-  font-size: larger;
+  font-size: 3vh;
   text-align: center;
   text-shadow: 1px 1px 2px white;
   border-radius: 2vh;
@@ -66,19 +65,23 @@
   padding: 0;
 }
 .filters-li{
-  height:fit-content;
+  height: 4vh;
+  width: 30vh;
+  font-size: 2.5vh;
   color: white;
-  margin: 0.25vh;
-  border-radius: 20px;
+  margin: 2px;
+  border-radius: 20vh;
   border-style: solid;
   border-width: 1px;
   border-color: black;
   box-shadow: 2px 2px black;
   cursor: pointer;
   transition: 0.2s;
+  display: grid;
+  align-items: center;
 }
 .filters-li:hover{
-  margin-bottom: 5px;
+  margin-bottom: 2vh;
   box-shadow: 5px 5px black;
   transition: 0.2s;
 }
@@ -96,7 +99,6 @@ export default {
     }
   },
   created(){
-    if (this.$chosen.dishes.length === 0) this.$chosen.dishes = this.$globalData.dishes;
     this.diet = this.$chosen.diet;
     this.dishes = this.$chosen.dishes;
     this.time = this.$chosen.time;

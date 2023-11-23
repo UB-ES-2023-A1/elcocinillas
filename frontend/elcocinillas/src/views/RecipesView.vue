@@ -1,11 +1,10 @@
 <template>
   <div id="app">
-
     <div id="filters" @click="getRecipesFromDB()">
       <Filters style="float:left"/>
     </div>
     <div id="recipes">
-      <p id="titleRecipesView">Recetas</p>
+      <h2 id="title">Recetas</h2>
       <div class="d-flex flex-row flex-wrap" :key="$globalData.recipesKey">
         <recipe-card v-for="rp in this.recipes"
                     v-bind:key="rp.id"
@@ -33,7 +32,7 @@
 #filters{
   text-align: left;
   border-left: 20px;
-  width:25%;
+  width:25vh;
   border-radius: 10px;
 }
 
@@ -50,13 +49,13 @@
   overflow: hidden;
 }
 
-#titleRecipesView {
+#title {
   font-weight: bold;
   margin-bottom: 80px;
   color: #5c5540;
   text-align: center;
   font-size: xxx-large;
-  margin-top: 2%;
+  margin-right: 10%;
 }
 
 #boton-flotante {
@@ -90,25 +89,23 @@ export default {
     }
   },
 
-  created() {
+  mounted() {
     this.getRecipesFromDB();
-    console.log("isUserlogged : ", this.$globalData.logged)
   },
 
   methods : {
-      login(){
+    login(){
       this.$globalData.logged = !this.$globalData.logged;
     },
     getRecipesFromDB() {
       const path = "http://localhost:8000/recetas/";
-      const tipos = this.$chosen.dishes;
-      const listaComoCadena = tipos.join(',');
 
+      const classes = this.$chosen.dishes;
+      const listaComoCadena = classes.join(',');
       axios.get(path, {
         params: {
-          "classe": this.$chosen.diet,
-          "tipo": encodeURI(listaComoCadena),
-
+          "tipo": this.$chosen.diet,
+          "classe": encodeURI(listaComoCadena),
           //"time": this.$chosen.time,
         }
       })
