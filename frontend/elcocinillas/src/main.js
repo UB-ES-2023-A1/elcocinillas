@@ -27,6 +27,7 @@ export { auth };
 
 Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
+export const bus = new Vue();
 
 Vue.prototype.$globalData = Vue.observable({
   diets: ['Vegana', 'Vegetariana', 'Omnívora'],
@@ -34,7 +35,8 @@ Vue.prototype.$globalData = Vue.observable({
   logged: false,
   darkMode: false,
   recipesKey: 0,
-  navKey: 0
+  navKey: 0,
+  searchQuery:''
 });
 Vue.prototype.$chosen = Vue.observable({
   time: 0,

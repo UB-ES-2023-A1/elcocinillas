@@ -56,7 +56,7 @@ def get_receptes(filtro):
     if filtro["ingredientes"] != []:
         for ingrediente in filtro["ingredientes"]:
             query = query.where("ingredientes", "array_contains", ingrediente)
-    if filtro["time"] is not 0:
+    if filtro["time"] != 0:
         query = query.where("time", "<=", filtro["time"])
     if filtro["dificultad"] is not None:
         query = query.where("dificultad", "==", filtro["dificultad"])
@@ -97,30 +97,25 @@ def get_imagenes_receta(uuid):
     return images_urls
 
 
-def busca_recetas(cadena):
+def busca_recetas(cadena, distancia = 50):
+
     coleccion = db.collection("receptes")
     recetas = coleccion.stream()
 
     data = [doc.to_dict() for doc in recetas]
     resultados = []
-    for doc in data:
-        if cadena in doc["nombre"]:
-            resultados.append(doc)
 
-    if len(resultados) > 0:
-        return resultados
-    else:
-        nombres = [doc["nombre"] for doc in data]
-        respuesta = process.extract(cadena, nombres, limit=10)
+    nombres = [doc["nombre"] for doc in data]
+    respuesta = process.extract(cadena, nombres, limit=len(nombres))
 
-        for i in range(10):
-            name = respuesta[i][0]
-            query = coleccion.where("nombre","==",name)
+    for name, score in respuesta:
+        if score >= distancia:
+            query = coleccion.where("nombre", "==", name)
             ret = query.stream()
             rec = [doc.to_dict() for doc in ret]
             resultados.append(rec[0])
 
-        return resultados
+    return resultados
 
 def updateImg(receta):
     doc_ref = db.collection("receptes").document(receta['nombre'])

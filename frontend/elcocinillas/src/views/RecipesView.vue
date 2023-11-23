@@ -81,18 +81,22 @@
 import RecipeCard from "@/components/RecipeCard.vue";
 import Filters from "@/components/FiltersComp.vue";
 import axios from "axios";
-import { store } from '../store'
+import { store } from '../store';
+import { bus } from '../main';
+
 export default {
   components: {RecipeCard, Filters},
   data() {
     return {
       usuarioLogeado : store.state.initSession,
-      recipes: []
+      recipes: [],
+
     }
   },
 
   mounted() {
     this.getRecipesFromDB();
+    bus.$on('busqueda', this.handleBusqueda);
   },
 
   methods : {
@@ -156,17 +160,16 @@ export default {
     uploadRecipe() {
       this.$router.push('/publicarReceta')
     },
-
-    getSearchedRecipe(){
-      const path = "http://localhost:8000/receta/" + 'Sush';
-      axios.get(path)
-      .then(response => {
-        console.log("Llamada por nombre exitosa.");
+    handleBusqueda() {
+      const path = "http://localhost:8000/recetas/";
+      axios.get(path + this.$globalData.searchQuery)
+      .then((response) => {
+        console.log("metodo búsqueda llamada OK");
         this.recipes = response.data;
       })
-      .catch(error => {
+      .catch((error) => {
         console.error("Error fetching recipes:", error);
-      });
+      })
     },
     goToUploadRecipe() {
       console.log("isLogged click: ", this.usuarioLogeado != null);

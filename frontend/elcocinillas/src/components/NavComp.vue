@@ -8,8 +8,8 @@
         </router-link>
       </div>
       <div id="search" style="display: flex;">
-        <input type="search" id="search">
-        <img class="image imgUp" src="../assets/search.png">
+        <input type="search" id="search" v-model="searchQuery" >
+        <img class="image imgUp" src="../assets/search.png" @click="realizarBusqueda">
       </div>
     </div>
     <div style="float: right;">
@@ -125,12 +125,15 @@ a {
 
 <script>
 import { store } from '../store'
+import { bus } from '../main';
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   data(){
     return {
       showingSettings: false,
       usuarioLogeado : store.state.initSession,
+      searchQuery: '',
     }
   },
   methods: {
@@ -148,7 +151,11 @@ export default {
     },
     getInit(){
       return store.state.initSession;
-    }
+    },
+    realizarBusqueda() {
+      this.$globalData.searchQuery = this.searchQuery;
+      bus.$emit('busqueda');
+    },
   },
 }
 </script>
