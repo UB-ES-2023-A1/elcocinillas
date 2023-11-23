@@ -90,7 +90,6 @@ export default {
   },
 
   mounted() {
-    this.getRecipesFromDB();
   },
 
   methods : {
@@ -98,6 +97,10 @@ export default {
       this.$globalData.logged = !this.$globalData.logged;
     },
     getRecipesFromDB() {
+      if (this.$chosen.diet === null && this.$chosen.dishes.length === 0){
+        this.getAllRecipesFromDB();
+        return;
+      }
       const path = "http://localhost:8000/recetas/";
 
       const classes = this.$chosen.dishes;
@@ -132,6 +135,18 @@ export default {
 
     uploadRecipe() {
       this.$router.push('/publicarReceta')
+    },
+
+    getSearchedRecipe(){
+      const path = "http://localhost:8000/receta/" + 'Sush';
+      axios.get(path)
+      .then(response => {
+        console.log("Llamada por nombre exitosa.");
+        this.recipes = response.data;
+      })
+      .catch(error => {
+        console.error("Error fetching recipes:", error);
+      });
     }
   }
 };
