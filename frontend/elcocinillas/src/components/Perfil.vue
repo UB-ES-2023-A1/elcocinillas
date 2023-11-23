@@ -42,6 +42,7 @@
           "footer";
   }
 }
+
 .inputBox {
   margin: 2rem;
   font-size: 1.25rem;
@@ -72,8 +73,8 @@
     var(--primary);
 }
 .input:is(:focus, :valid) ~ label {
-  transform: translateY(-140%)
-  scale(1);
+  transform: translateY(-160%)
+  scale(1.2);
   padding-inline:  0.3rem;
   color: var(--primary);
   font-weight: bold;
@@ -87,19 +88,21 @@
 }
 .center {
     background-color: rgba(255, 255, 255, 0.6); 
-    border-radius: 10px; 
+    border: 5px solid #EEF2B6;
+    border-radius: 5px;
     padding: 10%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+.container {
+  margin-top: 10rem;
+}
 .userName {
-  border: 3px solid black;
-  border-radius: 10px;
   text-align: center;
 }
 .background-container {
-  min-height: 96vh;
+  min-height: 100vh;
   background-image: url('../assets/background.avif');
   background-size: cover;
   background-position: center;
@@ -122,7 +125,7 @@
   text-align: center;
   text-decoration: none;
   cursor: pointer;
-  border: 2px solid #13CFB9;
+  border: 2px solid;
   color: #13CFB9;
   border-radius: 5px;
   transition: background-color 0.3s, color 0.3s;
