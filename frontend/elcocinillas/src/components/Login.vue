@@ -54,6 +54,7 @@ export default {
               store.state.userName = uid;
               store.commit('setinitSession', { isLogged: true })
               alert("Sesión iniciada con éxito");
+              this.$globalData.logged = true;
               router.push("/recetas");
               console.log("usuerName: ", store.state.userName)
             })

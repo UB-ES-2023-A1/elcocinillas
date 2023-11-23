@@ -104,9 +104,9 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100%;
+
   margin: 0;
-  overflow: hidden;
+  overflow: visible;
 }
 .botonContainer {
   display: flex;

@@ -132,11 +132,13 @@ a {
 </style>
 
 <script>
+import { store } from '../store'
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   data(){
     return {
-      showingSettings: false
+      showingSettings: false,
+      usuarioLogeado : store.state.initSession,
     }
   },
   methods: {
