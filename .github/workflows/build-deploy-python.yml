@@ -28,7 +28,7 @@ jobs:
           pip install pytest
 
       - name: Test with pytest
-        run: python -m pytest /backend/tests
+        run: python -m pytest ./backend/tests
 
   docker:
     runs-on: ubuntu-latest
