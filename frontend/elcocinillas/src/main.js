@@ -9,7 +9,6 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import store from "./store";
 
-
 // Configura tus credenciales de Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyCellSmTsQmrbM4idiIlLuR7s2kqXGuPh8",
@@ -31,8 +30,15 @@ Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 
 Vue.prototype.$globalData = Vue.observable({
-  time: 0,
-  diets: [],
+  diets: ['Vegana', 'Vegetariana', 'Omnívora'],
+  dishes: ['Ensalada', 'Hamburguesa', 'Postre'],
+  logged: false,
+  darkMode: false,
+  recipesKey: 0
+});
+Vue.prototype.$chosen = Vue.observable({
+  time: 30,
+  diet: null,
   dishes: [],
   logged: false,
 });
