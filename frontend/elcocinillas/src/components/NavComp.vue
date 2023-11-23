@@ -1,101 +1,166 @@
 <template>
-  <nav>
-    {{ filterDiet }}
-    <a href="#">
-      <router-link to="/">Home</router-link>
-    </a>
-    <a href="#">
-      <router-link to="/recetas">Recetas</router-link>
-    </a>
-    <a href="#">
-      <router-link to="/userlogin">Log In</router-link>
-    </a>
-    <a href="#">
-      <router-link to="/t&c">T&C</router-link>
-    </a>
-    <div class="animation start-home"></div>
-  </nav>
+  <div id="nav">
+    <div style="float: left; display: flex;">
+      <div class="link" @mouseenter="logoStart()" @mouseleave="logoEnd()">
+        <router-link to="/">
+          <img class="image" src="../assets/cheff.png" id="logo">
+          El Cocinillas
+        </router-link>
+      </div>
+      <div id="search" style="display: flex;">
+        <input type="search" id="search">
+        <img class="image imgUp" src="../assets/search.png">
+      </div>
+    </div>
+    <div style="float: right;">
+      <div class="link">
+        <router-link to="/recetas">
+          <img class="image imgUp" src="../assets/recipe.png">
+          Recetas
+        </router-link>
+      </div>
+      <div class="link" v-if="$globalData.logged">
+        <router-link to="/perfil">
+          <img class="image imgUp" src="../assets/perfil.png">
+          Perfil
+        </router-link>
+      </div>
+      <div class="link" v-if="$globalData.logged" @click="logoff()">
+        <router-link to="/">
+          <img class="image imgUp" src="../assets/exit.png">
+          Cerrar Sesión
+        </router-link>
+      </div>
+      <div class="link" v-if="!$globalData.logged">
+        <router-link to="/userlogin">
+          <img class="image imgUp" src="../assets/enter.png">
+          Iniciar Sesión
+        </router-link>
+      </div>
+      <div class="link" v-if="!$globalData.logged">
+        <router-link to="/registre">
+          <img class="image imgUp" src="../assets/enter.png">
+          Registrarse
+        </router-link>
+      </div>
+      <!--
+      <div id="settings" v-show="false">
+        <img src="../assets/settings.png" class="rotate" @click="settings()">
+        <ul id="setts" class="dropdown-content" v-if="false">
+          <li>Dark mode <input type="checkbox"></li>
+        </ul>
+      </div>
+      -->
+    </div>
+  </div>
 </template>
 
 <style scoped>
-nav {
-  position: relative;
-  text-align: center;
-  height: fit-content;
-  width: 100%;
-  background-color: #cc9966;
-}
-nav a {
-  line-height: 40px;
-  display: inline-block;
-  position: relative;
-  z-index: 1;
+a {
   text-decoration: none;
-  text-align: center;
-  color: white;
+  color: inherit;
+  font-size: 2.5vh;
 }
-nav a:hover {
-  color: black;
-  font-weight: bold;
+#logo{
+  width: 5vh;
+  transform: scale(1.1);
+  margin-left: 2vh;
+  margin-right: 1vh;
+  position: relative;
+  top: -2px;
+  transition: 0.2;
 }
-nav .animation {
-  position: absolute;
-  height: 100%;
-  top: 0;
-  border-radius: 5px;
+#logo:hover{
+  transform: rotate(30deg) scale(1.1) translate(2vh);
   transition: 0.2s;
-
 }
-a:nth-child(1) {
-  width: 100px;
+#nav {
+  height: 5.5vh;
+  background-color: #73694f;
+  width: 100%;
+  z-index: 1;
 }
-a:nth-child(2) {
-  width: 100px;
+.link {
+  line-height: 5vh;
+  width: fit-content;
+  margin-left: 1vh;
+  margin-right: 2vh;
+  display: inline-block;
+  text-align: center;
+  border-radius: 15px;
+  color:white;
+  cursor: pointer;
+  padding-right: 2vh;
+  padding-left: 2vh;
 }
-a:nth-child(3) {
-  width: 100px;
-}
-a:nth-child(4) {
-  width: 100px;
-}
-a:nth-child(5) {
-  width: 100px;
-}
-a:nth-child(1):hover ~ .animation {
-  width: 100px;
-  left: 432px;
+.link:hover{
+  color:black;
+  font-weight: bold;
   background-color: white;
 }
-a:nth-child(2):hover ~ .animation {
-  width: 100px;
-  left: 530px;
+.image{
+  height: 5vh;
+  filter: invert(95%);
+}
+.link:hover img{
+  filter: invert(5%);
+}
+#search{
+  height: 90%; 
+  width: 25vh;
+  margin: auto;
+  border-radius: 20px;
+  border: none;
   background-color: white;
 }
-a:nth-child(3):hover ~ .animation {
-  width: 100px;
-  left: 630px;
-  background-color: white;
+#settings{
+  float: right;
+  position: relative;
+  top: 5px;
+  margin-right: 10px;
+  cursor: pointer;
 }
-a:nth-child(4):hover ~ .animation {
-  width: 100px;
-  left: 730px;
-  background-color: white;
+.rotate:hover{
+  transform: rotate(90deg);
+  transition: 1s;
 }
-a:nth-child(5):hover ~ .animation {
-  width: 100px;
-  left: 400px;
-  background-color: #c7c292;
-}
-span {
-  color: #2bd6b4;
+.imgUp{
+  position: relative;
+  transform: scale(0.7);
+  top: -0.25vh;
 }
 </style>
 
 <script>
+import { store } from '../store'
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
-  props: [
-    'filterDiet'
-  ]
+  data(){
+    return {
+      showingSettings: false,
+      usuarioLogeado : store.state.initSession,
+    }
+  },
+  methods: {
+    logoff(){
+      this.$globalData.logged = false;
+    },
+    settings(){
+      this.showingSettings = !this.showingSettings;
+      document.getElementById("setts").style.display = "block";
+    },
+    darkMode(){
+      if(this.globalData.darkMode) this.$globalData.background = this.$globalData.backgroundDark;
+      else this.$globalData.background = this.globalData.backgroundlight;
+    },
+    logoStart(){
+      document.getElementById("logo").style.transform = "rotate(40deg) scale(1.2) translate(5px)";
+      document.getElementById("logo").style.transition = "0.2s";
+    },
+    logoEnd(){
+      document.getElementById("logo").style.transform = "scale(1)";
+      document.getElementById("logo").style.transition = "0.2s";
+    }
+  }
 }
 </script>

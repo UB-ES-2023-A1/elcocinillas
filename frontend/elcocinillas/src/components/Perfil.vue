@@ -29,11 +29,6 @@
 </template>
 
 <style scoped>
-html, body {
-  height: 100%;
-  margin: 0;
-  overflow: hidden;
-}
 @media (max-width: 768px) {
   .container {
     grid-template-columns: 1fr;
@@ -98,7 +93,6 @@ html, body {
     align-items: center;
     justify-content: center;
 }
-
 .userName {
   border: 3px solid black;
   border-radius: 10px;
@@ -110,6 +104,9 @@ html, body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
+  margin: 0;
+  overflow: visible;
 }
 .botonContainer {
   display: flex;
