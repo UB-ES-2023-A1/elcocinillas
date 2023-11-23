@@ -51,7 +51,6 @@ def get_all_recipes():
     return data
 
 def get_receptes(filtro):
-    print(filtro)
 
     recetas_ref = db.collection("receptes")
     query = recetas_ref
@@ -72,7 +71,7 @@ def get_receptes(filtro):
     if filtro["ingredientes"] != []:
         for ingrediente in filtro["ingredientes"]:
             query = query.where("ingredientes", "array_contains", ingrediente)
-    if filtro["time"] is not None:
+    if filtro["time"] is not 0:
         query = query.where("time", "<=", filtro["time"])
     if filtro["dificultad"] is not None:
         query = query.where("dificultad", "==", filtro["dificultad"])

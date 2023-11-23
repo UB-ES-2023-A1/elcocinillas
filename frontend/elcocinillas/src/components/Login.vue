@@ -52,8 +52,9 @@ export default {
               console.log("Usuario autenticado:", user);
               const uid = user.uid;
               store.state.userName = uid;
-              store.commit('setinitSession', { isLogged: true })
+              store.state.initSession = true;
               alert("Sesión iniciada con éxito");
+              this.$globalData.navKey += 1;
               this.$globalData.logged = true;
               router.push("/recetas");
               console.log("usuerName: ", store.state.userName)
