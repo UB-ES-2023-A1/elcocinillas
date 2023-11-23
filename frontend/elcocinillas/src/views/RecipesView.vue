@@ -105,23 +105,40 @@ export default {
         return;
       }
       const path = "http://localhost:8000/recetas/";
-
       const classes = this.$chosen.dishes;
       const listaComoCadena = classes.join(',');
-      axios.get(path, {
-        params: {
-          "tipo": this.$chosen.diet,
-          "classe": encodeURI(listaComoCadena),
-          //"time": this.$chosen.time,
-        }
-      })
-      .then(response => {
-        console.log("Llamada con filtros a recetas existosa.");
-        this.recipes = response.data;
-      })
-      .catch(error => {
-        console.error("Error fetching recipes:", error);
-      });
+      if (this.$chosen.dishes.length === 0){
+        axios.get(path, {
+          params: {
+            "tipo": this.$chosen.diet,
+            "time": this.$chosen.time,
+          }
+          })
+          .then(response => {
+            console.log("Llamada con filtros a recetas existosa.");
+            this.recipes = response.data;
+          })
+          .catch(error => {
+            console.error("Error fetching recipes:", error);
+          });
+      }
+      else{
+        axios.get(path, {
+          params: {
+            "tipo": this.$chosen.diet,
+            "classe": encodeURI(listaComoCadena),
+            "time": this.$chosen.time,
+          }
+        })
+        .then(response => {
+          console.log("Llamada con filtros a recetas existosa.");
+          this.recipes = response.data;
+        })
+        .catch(error => {
+          console.error("Error fetching recipes:", error);
+        });
+      }
+
     },
 
     getAllRecipesFromDB() {
