@@ -17,22 +17,7 @@ firebase_admin.initialize_app(cred, {
 })
 
 db = firestore.client()    
-"""
-Flujo de trabajo para colgar y obtener imagenes.
---------------------------------------------------
-1.- Para subir receta con imagenes:
-    - Llega una receta con una lista de archivos con imagenes:
-        * Se recorre la lista de imagenes y se cuelgan en Storage,
-        (Cada receta tendra una carpeta con las imagenes correspondientes)
-        (Cada carpeta tendra el nombre del id asignado a la receta)
 
-    - Lectura de una receta:
-        * Se busca la receta correspondiente
-        * Se busca la carpeta en storage asociada al id de la receta
-        * Para cada imagen de la carpeta se crea la ruta URL publica de acceso
-            y estas url se añaden al campo imagenes de la receta
-
-"""
 def create_recepta(recepta):
     try:
         doc_ref = db.collection(u'receptes').document(recepta.nombre)
