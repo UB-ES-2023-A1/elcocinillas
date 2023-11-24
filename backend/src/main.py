@@ -12,7 +12,7 @@ app = FastAPI()
 # Configura CORS para permitir solicitudes desde tu aplicación Vue
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Reemplaza con la URL de tu frontend Vue
+    allow_origins=["https://ub-es-2023-a1.github.io"],  # Reemplaza con la URL de tu frontend Vue
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
