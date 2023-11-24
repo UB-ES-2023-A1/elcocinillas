@@ -3,9 +3,7 @@ from firebase_admin import credentials, auth
 import os
 
 # Inicializa la aplicación Firebase con tus credenciales
-current_directory = os.path.dirname(__file__)
-file_path = os.path.join(current_directory, 'elcocinillas.json')
-firebase_admin.initialize_app(file_path)
+
 
 import requests
 
