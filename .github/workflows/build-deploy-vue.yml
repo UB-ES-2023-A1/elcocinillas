@@ -23,6 +23,7 @@ jobs:
         run: |
           cd ./frontend/elcocinillas
           npm install --force
+          npm install vuex
           npm install cypress --save-dev
 
       - name: Run Cypress tests
