@@ -10,9 +10,9 @@
           <input id="name" type="text" required v-model="nombreReceta"/>
         </div>
 
-        <div class="item">
+        <div class="item"> 
           <p>Escoge la dieta<span> *</span></p>
-          <select v-model="tipoReceta">
+          <select v-model="tipoReceta" data-cy="escoge_dieta"> 
             <option selected value=""></option>
             <option value="Vegana" >Vegana</option>
             <option value="Vegetariana">Vegetariana</option>
@@ -22,7 +22,7 @@
 
         <div class="item">
           <p>¿De qué clase dirías que es tu plato?<span> *</span></p>
-          <select v-model="classeReceta">
+          <select v-model="classeReceta" data-cy="escoge_plato">
             <option selected value=""></option>
             <option value="Hamburguesa" >Hamburguesa</option>
             <option value="Postre">Postre</option>
@@ -32,16 +32,16 @@
 
         <div class="item">
           <label for="visit">¿Cuáles son los ingredientes necesarios?<span> *</span></label>
-          <textarea id="visit" rows="4" required v-model="ingredientesReceta"></textarea>
+          <textarea id="visit" rows="4" required v-model="ingredientesReceta" data-cy="ingredientes"></textarea>
         </div>
         <div class="item">
           <label for="visit">Describe los pasos para elaborar la receta<span> *</span></label>
-          <textarea id="visit" rows="6" required v-model="pasosReceta"></textarea>
+          <textarea id="visit" rows="6" required v-model="pasosReceta" data-cy="descripcion"></textarea>
         </div>
 
         <div class="item">
           <p>Dificultad<span> *</span></p>
-          <select v-model="dificultadReceta">
+          <select v-model="dificultadReceta" data-cy="dificultad">
             <option selected value="0">0</option>
             <option value="1" >1</option>
             <option value="2">2</option>
@@ -263,7 +263,8 @@ export default {
       const formData = new FormData();
       formData.append('nombre', this.nombreReceta);
       formData.append('file', this.file);
-      const path = "http://localhost:8000/imgUpload/";
+      //const path = "http://localhost:8000/imgUpload/";
+      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/imgUpload";
 
       axios.post(path,formData).then((response) => {
           console.log('Foto seleccionada:', this.images);

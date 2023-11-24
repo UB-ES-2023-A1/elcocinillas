@@ -1,6 +1,6 @@
 import requests
 
-API_URL = "http://127.0.0.1:8000"
+API_URL = "http://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io"
 
 #TESTS CORRECTOS:
 def test_post_receta_user1():

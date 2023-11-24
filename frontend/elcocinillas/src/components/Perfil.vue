@@ -11,11 +11,11 @@
           </div>
           <form @submit.prevent="modificarInformacion">
             <div class="inputBox">
-              <input class="input" type="email" v-model="correo" required>
+              <input class="input" type="email" v-model="correo" required data-cy="email_modificar">
               <label class="label" for="newcorreo">Correo:</label>
             </div>
             <div class="inputBox">
-              <input class="input" type="password" v-model="contrasena" required>
+              <input class="input" type="password" v-model="contrasena" required data-cy="psswd_modificar">
               <label class="label" for="contrasena">Contraseña:</label>
             </div>
             <div class="botonContainer">
@@ -160,7 +160,8 @@ export default {
   },
   methods: {
     modificarInformacion() {
-      const url = 'http://localhost:8000/user/'+ store.state.userName
+      //const url = 'http://localhost:8000/user/'+ store.state.userName;
+      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/user/' + store.state.userName;
       axios.put(url, this.getDatosPerfilUsuario())
           .then((response) => {
             console.log('Ok modificar datos:', response.data);

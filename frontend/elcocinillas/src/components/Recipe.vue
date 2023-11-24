@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    {{ $globalData.navKey }}
     <section id="headerSection">
       <h2 id="title">{{ this.name }}</h2>
       <div class="container">
@@ -38,15 +37,17 @@
 </template>
 
 <style scoped>
+
+
 #app {
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-left: 10%;
-  margin-right: 10%;
   margin-top: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 #headerSection {
@@ -101,7 +102,8 @@ export default {
 
   methods: {
     getRecipe() {
-      const pathReceta = "http://localhost:8000/receta/"+this.nombreReceta;
+      //const pathReceta = "http://localhost:8000/receta/"+this.nombreReceta;
+      const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta;
       const urlCodificada = encodeURI(pathReceta);
       axios
         .get(urlCodificada)

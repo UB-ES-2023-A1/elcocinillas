@@ -1,13 +1,7 @@
-import firebase_admin
-from firebase_admin import credentials, auth
-
-# Inicializa la aplicación Firebase con tus credenciales
-cred = credentials.Certificate('..\\src\\database\\elcocinillas.json')
-firebase_admin.initialize_app(cred)
 
 import requests
 
-API_URL = "http://127.0.0.1:8000"
+API_URL = "http://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io"
 #"userID": "testcorrecto2", "email": "buenas@yahoo.com", "password": "123456"
 #TEST:
 def test_post_receta_invalid1():
