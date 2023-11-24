@@ -38,15 +38,17 @@
 </template>
 
 <style scoped>
+
+
 #app {
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-left: 10%;
-  margin-right: 10%;
   margin-top: 5%;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 #headerSection {
