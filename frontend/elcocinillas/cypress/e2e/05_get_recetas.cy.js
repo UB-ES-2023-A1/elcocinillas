@@ -1,7 +1,7 @@
 //TESTS GENERALES
 describe('Get recetas', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:8080/elcocinillas/');
+    cy.visit('https://ub-es-2023-a1.github.io/elcocinillas/');
   });
 
   it('Seleccionar opciones en el filtro', () => {

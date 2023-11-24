@@ -1,6 +1,6 @@
 describe('Modificar datos', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:8080/elcocinillas/');
+    cy.visit('https://ub-es-2023-a1.github.io/elcocinillas/');
     cy.get('[data-cy=iniciar_sesion]').click()
     cy.url().should('include', '/userlogin');
   });
