@@ -1,5 +1,5 @@
 <template>
-  <div id="nav">
+  <div id="nav" :key="$globalData.navKey">
     <div style="float: left; display: flex;">
       <div class="link" @mouseenter="logoStart()" @mouseleave="logoEnd()">
         <router-link to="/">
@@ -8,8 +8,8 @@
         </router-link>
       </div>
       <div id="search" style="display: flex;">
-        <input type="search" id="search">
-        <img class="image imgUp" src="../assets/search.png">
+        <input type="search" id="search" v-model="searchQuery" >
+        <img class="image imgUp" src="../assets/search.png" @click="realizarBusqueda">
       </div>
     </div>
     <div style="float: right;">
@@ -19,38 +19,30 @@
           Recetas
         </router-link>
       </div>
-      <div class="link" v-if="$globalData.logged" data-cy="clic_perfil">
+      <div class="link" v-if="getInit()" data-cy="clic_perfil">
         <router-link to="/perfil">
           <img class="image imgUp" src="../assets/perfil.png">
           Perfil
         </router-link>
       </div>
-      <div class="link" v-if="$globalData.logged" @click="logoff()">
+      <div class="link" v-if="getInit()" @click="logoff()">
         <router-link to="/">
           <img class="image imgUp" src="../assets/exit.png">
           Cerrar Sesión
         </router-link>
       </div>
-      <div class="link" data-cy="iniciar_sesion" v-if="!$globalData.logged">
+      <div class="link" data-cy="iniciar_sesion" v-if="!getInit()">
         <router-link to="/userlogin">
           <img class="image imgUp" src="../assets/enter.png">
           Iniciar Sesión
         </router-link>
       </div>
-      <div class="link" v-if="!$globalData.logged">
+      <div class="link" v-if="!getInit()">
         <router-link to="/registre">
           <img class="image imgUp" src="../assets/enter.png">
           Registrarse
         </router-link>
       </div>
-      <!--
-      <div id="settings" v-show="false">
-        <img src="../assets/settings.png" class="rotate" @click="settings()">
-        <ul id="setts" class="dropdown-content" v-if="false">
-          <li>Dark mode <input type="checkbox"></li>
-        </ul>
-      </div>
-      -->
     </div>
   </div>
 </template>
@@ -133,25 +125,21 @@ a {
 
 <script>
 import { store } from '../store'
+import { bus } from '../main';
+
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   data(){
     return {
       showingSettings: false,
       usuarioLogeado : store.state.initSession,
+      searchQuery: '',
     }
   },
   methods: {
     logoff(){
       this.$globalData.logged = false;
-    },
-    settings(){
-      this.showingSettings = !this.showingSettings;
-      document.getElementById("setts").style.display = "block";
-    },
-    darkMode(){
-      if(this.globalData.darkMode) this.$globalData.background = this.$globalData.backgroundDark;
-      else this.$globalData.background = this.globalData.backgroundlight;
+      store.state.initSession = false;
     },
     logoStart(){
       document.getElementById("logo").style.transform = "rotate(40deg) scale(1.2) translate(5px)";
@@ -160,7 +148,14 @@ export default {
     logoEnd(){
       document.getElementById("logo").style.transform = "scale(1)";
       document.getElementById("logo").style.transition = "0.2s";
-    }
-  }
+    },
+    getInit(){
+      return store.state.initSession;
+    },
+    realizarBusqueda() {
+      this.$globalData.searchQuery = this.searchQuery;
+      bus.$emit('busqueda');
+    },
+  },
 }
 </script>
