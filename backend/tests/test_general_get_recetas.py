@@ -1,13 +1,8 @@
-import firebase_admin
-from firebase_admin import credentials, auth
-import os
-
-# Inicializa la aplicación Firebase con tus credenciales
 
 
 import requests
 
-API_URL = "http://https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io"
+API_URL = "http://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io"
 
 #TEST CORRECTOS:
 def test_get_recetas():

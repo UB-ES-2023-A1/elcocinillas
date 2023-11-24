@@ -1,16 +1,8 @@
-import firebase_admin
-from firebase_admin import credentials, auth
-import os
 
-# Inicializa la aplicación Firebase con tus credenciales
-current_directory = os.path.dirname(__file__)
-file_path = os.path.join(current_directory, 'elcocinillas.json')
-firebase_admin.initialize_app(file_path)
 
 import requests
 
-API_URL = "http://127.0.0.1:8000"
-
+API_URL = "http://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io"
 #TESTS CORRECTOS:
 def test_register_user1():
     # Especifica el UID del usuario que deseas eliminar
