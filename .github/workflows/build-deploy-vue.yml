@@ -6,8 +6,31 @@ on:
       - main
 
 jobs:
+  TestCypress:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          cd ./frontend/elcocinillas
+          npm install
+
+      - name: Run Cypress tests
+        run: |
+          cd ./frontend/elcocinillas
+          npm run cypress:run 
+
   BuildandDeploy:
     runs-on: ubuntu-latest
+    needs: TestCypress
 
     permissions:
       contents: read
