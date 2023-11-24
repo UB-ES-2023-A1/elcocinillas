@@ -2,13 +2,12 @@
 describe('Test login', () => {
   beforeEach(() => {
     // visitar la URL de la página principal antes de cada prueba
-    cy.visit('http://localhost:8080/elcocinillas/userlogin');
+    cy.visit('http://localhost:8080/elcocinillas/');
+    cy.get('[data-cy=iniciar_sesion]').click()
+    cy.url().should('include', '/userlogin');
   });
 
   it('login al usuario correcto', () => {
-    // buscar en el top bar el menú de login y hacer clic
-    cy.contains('Log In').click();
-
     // buscar los campos de entrada de usuario y contraseña
     cy.get('input[name="mail"]').type('usuariodeprueba@gmail.com');
     cy.get('input[name="psw"]').type('123456');
@@ -16,21 +15,14 @@ describe('Test login', () => {
     // buscar el botón de iniciar sesión y hacer clic
     cy.get('form').submit();
 
-    // espera a que se complete la autenticación
-    cy.contains('Sesión iniciada con éxito'); // verifica que se muestra el mensaje de inicio de sesión
+    cy.on('window:alert', (alertMessage) => {
+      expect(alertMessage).to.equal('Sesión iniciada con éxito');
+    });
+    cy.on('window:confirm', () => true);
+    cy.url().should('include', '/recetas');
   });
-},
-
-//test incorrecto de prueba
-describe('Test login 2', () => {
-  beforeEach(() => {
-    // visitar la URL de la página principal antes de cada prueba
-    cy.visit('http://localhost:8080/elcocinillas/userlogin');
-  });
-
   it('intento de login al usuario incorrecto', () => {
     // buscar en el top bar el menú de login y hacer clic
-    cy.contains('Log In').click();
 
     // buscar los campos de entrada de usuario y contraseña
     cy.get('input[name="mail"]').type('usuariodepruebaerroneo@gmail.com');
@@ -40,8 +32,34 @@ describe('Test login 2', () => {
     cy.get('form').submit();
 
     // espera a que se complete la autenticación
-    cy.contains('Error en el inicio de sesión: email o contraseñas incorrectos'); // verifica que se muestra el mensaje de inicio de sesión
+    cy.on('window:alert', (alertMessage) => {
+      expect(alertMessage).to.equal('Error en el inicio de sesión: email o contraseñas incorrectos');
+    });
   });
-}
+  it('intento de login sin poner contraseña', () => {
+    // buscar los campos de entrada de usuario y contraseña
+    cy.get('input[name="mail"]').type('usuariodeprueba@gmail.com');
+    //cy.get('input[name="psw"]').type('123456');
 
-));
+    // buscar el botón de iniciar sesión y hacer clic
+    cy.get('form').submit();
+
+    cy.get('[placeholder="Introduce la contraseña"]:invalid').should('exist')
+
+    cy.url().should('include', '/userlogin');
+  });
+
+  it('intento de login sin poner email', () => {
+    // buscar los campos de entrada de usuario y contraseña
+    //cy.get('input[name="mail"]').type('usuariodeprueba@gmail.com');
+    cy.get('input[name="psw"]').type('123456');
+
+    // buscar el botón de iniciar sesión y hacer clic
+    cy.get('form').submit();
+
+    // Verifica que se muestra el mensaje de registro fallido
+    cy.get('[placeholder="Introduce el correo"]:invalid').should('exist')
+
+    cy.url().should('include', '/userlogin');
+  });
+  });

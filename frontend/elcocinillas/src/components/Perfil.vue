@@ -11,11 +11,11 @@
           </div>
           <form @submit.prevent="modificarInformacion">
             <div class="inputBox">
-              <input class="input" type="email" v-model="correo" required>
+              <input class="input" type="email" v-model="correo" required data-cy="email_modificar">
               <label class="label" for="newcorreo">Correo:</label>
             </div>
             <div class="inputBox">
-              <input class="input" type="password" v-model="contrasena" required>
+              <input class="input" type="password" v-model="contrasena" required data-cy="psswd_modificar">
               <label class="label" for="contrasena">Contraseña:</label>
             </div>
             <div class="botonContainer">

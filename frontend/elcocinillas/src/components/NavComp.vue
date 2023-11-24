@@ -19,7 +19,7 @@
           Recetas
         </router-link>
       </div>
-      <div class="link" v-if="$globalData.logged">
+      <div class="link" v-if="$globalData.logged" data-cy="clic_perfil">
         <router-link to="/perfil">
           <img class="image imgUp" src="../assets/perfil.png">
           Perfil
@@ -31,7 +31,7 @@
           Cerrar Sesión
         </router-link>
       </div>
-      <div class="link" v-if="!$globalData.logged">
+      <div class="link" data-cy="iniciar_sesion" v-if="!$globalData.logged">
         <router-link to="/userlogin">
           <img class="image imgUp" src="../assets/enter.png">
           Iniciar Sesión
