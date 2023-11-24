@@ -1,4 +1,5 @@
 import firebase_admin
+import os
 from firebase_admin import credentials, auth
 
 # Inicializa la aplicación Firebase con tus credenciales

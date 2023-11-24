@@ -1,5 +1,6 @@
 import firebase_admin
 from firebase_admin import credentials, auth
+import os
 
 # Inicializa la aplicación Firebase con tus credenciales
 current_directory = os.path.dirname(__file__)
