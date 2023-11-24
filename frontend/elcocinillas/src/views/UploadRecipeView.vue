@@ -263,7 +263,8 @@ export default {
       const formData = new FormData();
       formData.append('nombre', this.nombreReceta);
       formData.append('file', this.file);
-      const path = "http://localhost:8000/imgUpload/";
+      //const path = "http://localhost:8000/imgUpload/";
+      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/imgUpload";
 
       axios.post(path,formData).then((response) => {
           console.log('Foto seleccionada:', this.images);

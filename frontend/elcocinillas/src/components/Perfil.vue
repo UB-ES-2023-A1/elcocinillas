@@ -160,7 +160,8 @@ export default {
   },
   methods: {
     modificarInformacion() {
-      const url = 'http://localhost:8000/user/'+ store.state.userName
+      //const url = 'http://localhost:8000/user/'+ store.state.userName;
+      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/user/' + store.state.userName;
       axios.put(url, this.getDatosPerfilUsuario())
           .then((response) => {
             console.log('Ok modificar datos:', response.data);
