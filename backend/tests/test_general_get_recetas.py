@@ -9,7 +9,7 @@ firebase_admin.initialize_app(file_path)
 
 import requests
 
-API_URL = "http://127.0.0.1:8000"
+API_URL = "http://https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io"
 
 #TEST CORRECTOS:
 def test_get_recetas():
