@@ -73,7 +73,7 @@ def publi_receta(receta: Receta):
     try:
         # Intenta crear la receta en la base de datos
         database.create_recepta(receta)
-        return "200"
+        return 200
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=500, detail="Error en el servidor leer img: " + str(e))

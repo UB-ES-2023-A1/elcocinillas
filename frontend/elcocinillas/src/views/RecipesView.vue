@@ -104,7 +104,7 @@ export default {
       this.$globalData.logged = !this.$globalData.logged;
     },
     getRecipesFromDB() {
-      if (this.$chosen.diet === null && this.$chosen.dishes.length === 0 && this.$chosen.dishes.time === 0){
+      if (this.$chosen.diet === null && this.$chosen.dishes.length === 0 && this.$chosen.time === 0){
         this.getAllRecipesFromDB();
         return;
       }

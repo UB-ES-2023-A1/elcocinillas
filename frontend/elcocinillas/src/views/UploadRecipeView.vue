@@ -228,7 +228,8 @@ export default {
     uploadRecipe() {
       console.log("Click en submit", this.getDatosReceta());
 
-      const path = "http://localhost:8000/receta/";
+      //const path = "http://localhost:8000/receta/";
+      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/";
 
       axios.post(path, this.getDatosReceta())
           .then((response) => {
