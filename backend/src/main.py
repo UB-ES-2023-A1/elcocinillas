@@ -32,15 +32,28 @@ def get_receta(name: str):
 
 @app.get("/recetas/{cadena}")
 def busca_recetas(cadena: str):
-    return database.busca_recetas(cadena)
+    try:
+        return database.busca_recetas(cadena)
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor buscar recetas: " + str(e))
 
 @app.get("/user/{username}")
 def get_user(username: str):
-    return database.get_user(username)
+    try:
+        return database.get_user(username)
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor obtener usuario: " + str(e))
 
 @app.put("/user/{user_id}")
 def update_user(user_id: str, updated_user: User):
-    return database.update_user(user_id,updated_user)
+    try:
+        database.update_user(user_id,updated_user)
+        return 200
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor actualizar usuario: " + str(e))
 
 @app.get("/recetas/",response_model=tuple)
 def get_recetas(user: str = Query(None),
@@ -49,8 +62,13 @@ def get_recetas(user: str = Query(None),
     ingredientes: list = Query([]),
     time: int =  Query(None),
     dificultad: int = Query(None) ):
-    filtro = {"user": user ,"classe": classe,"tipo": tipo,"ingredientes": ingredientes, "time": time, "dificultad": dificultad}
-    return database.get_receptes(filtro)
+
+    try:
+        filtro = {"user": user ,"classe": classe,"tipo": tipo,"ingredientes": ingredientes, "time": time, "dificultad": dificultad}
+        return database.get_receptes(filtro)
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor leer recetas con filtros: " + str(e))
 
 
 @app.get("/todasrecetas/")
