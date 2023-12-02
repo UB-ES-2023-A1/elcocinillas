@@ -24,11 +24,20 @@ def index():
 
 @app.post("/register/", response_model=str)
 def register(user: User):
-    return database.signup(user.email, user.password, user.userID)
+    try:
+        database.signup(user.email, user.password, user.userID)
+        return 200
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor registro: " + str(e))
     
 @app.get("/receta/{name}")
 def get_receta(name: str):
-    return database.get_recepta(name)
+    try:
+        return database.get_recepta(name)
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor obtener receta: " + str(e))
 
 @app.get("/recetas/{cadena}")
 def busca_recetas(cadena: str):
