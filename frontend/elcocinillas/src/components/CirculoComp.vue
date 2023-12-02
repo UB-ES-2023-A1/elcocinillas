@@ -1,5 +1,5 @@
 <template>
-  <div class="circulo">
+  <div class="circulo" :style="{ backgroundColor: colorFondo }">
     <p class="texto-superior">{{ textoSuperior }}</p>
     <p class="texto-inferior">{{ textoInferior }}</p>
   </div>
@@ -9,7 +9,7 @@
 .circulo {
   width: 100px; /* Ajusta el tamaño según tus necesidades */
   height: 100px; /* Ajusta el tamaño según tus necesidades */
-  background-color: #3498db; /* Color del círculo */
+  background-color: backgroundColor; /* Color del círculo */
   border-radius: 50%; /* Hace que el elemento sea redondo */
   display: flex;
   flex-direction: column;
@@ -34,6 +34,7 @@ export default {
   props: {
     textoSuperior: String,
     textoInferior: String,
+    colorFondo: String
   },
 };
 </script>

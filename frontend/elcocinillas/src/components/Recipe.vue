@@ -30,13 +30,13 @@
       <div class="container">
         <div class="row">
           <div class="col-sm d-flex justify-content-center">
-            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" />
+            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" colorFondo="red"/>
           </div>
           <div class="col-sm d-flex justify-content-center">
-            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" />
+            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" colorFondo="red"/>
           </div>
           <div class="col-sm d-flex justify-content-center">
-            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" />
+            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" colorFondo="red"/>
           </div>
         </div>
       </div>
