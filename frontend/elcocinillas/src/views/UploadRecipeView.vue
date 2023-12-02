@@ -31,9 +31,10 @@
         </div>
 
         <div class="item" id="ingredientes">
-          <label for="visit">¿Cuáles son los ingredientes necesarios?<span> *</span></label>
-          <textarea id="visit" rows="1" required v-model="ingredientesReceta" data-cy="ingredientes"></textarea>
-          <button type="button" @click="agregarCampo()">+</button>
+          <label for="visit">¿Cuáles son los ingredientes necesarios? (Clica el botón para añadir más ingredientes)<span> *</span></label>
+          <textarea id="visit" rows="1" required data-cy="ingredientes"></textarea>
+          <textarea id="visit" rows="1" required data-cy="ingredientes"></textarea>
+          <button type="button" @click="agregarCampo()" id="botonIngredientes">Añadir ingrediente</button>
         </div>
         <div class="item">
           <label for="visit">Describe los pasos para elaborar la receta<span> *</span></label>
@@ -121,6 +122,12 @@ form {
   position: absolute;
   width: 100%;
   height: 100%;
+}
+#botonIngredientes{
+  background-color: #EEF2B6;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
 }
 input, select, textarea {
   margin-bottom: 10px;
@@ -218,7 +225,7 @@ export default {
       nombreReceta: null,
       classeReceta: "",
       tipoReceta: "",
-      ingredientesReceta: "",
+      ingredientesReceta: [],
       pasosReceta: "",
       imagesReceta: "",
       timeReceta: 15,
@@ -278,8 +285,10 @@ export default {
 
     agregarCampo() {
       var camposDiv = document.getElementById('ingredientes');
-      var nuevoCampo = document.createElement('input');
-      nuevoCampo.type = 'text';
+      var nuevoCampo = document.createElement('textarea');
+      nuevoCampo.rows = 1
+      nuevoCampo.style.width = 'calc(100% - 12px)';
+      nuevoCampo.style.border = '1px solid #ccc'
       nuevoCampo.name = 'nextIngredientes';
       camposDiv.appendChild(nuevoCampo);
       camposDiv.appendChild(document.createElement('br'));
