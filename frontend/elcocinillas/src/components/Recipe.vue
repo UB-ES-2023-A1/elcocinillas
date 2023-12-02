@@ -24,7 +24,22 @@
       <h4>INGREDIENTES (4 personas):</h4>
       <hr id="solidDividerYellow" />
       <p>{{ this.ingredientes }}</p>
+    </section>
 
+    <section id="headerSection">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm d-flex justify-content-center">
+            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" />
+          </div>
+          <div class="col-sm d-flex justify-content-center">
+            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" />
+          </div>
+          <div class="col-sm d-flex justify-content-center">
+            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" />
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="sections">
@@ -78,9 +93,13 @@
 </style>
 
 <script>
+import CirculoComp from "@/components/CirculoComp.vue";
 import axios from "axios";
 export default {
-  // eslint-disable-next-line vue/multi-word-component-names
+  components: {
+    CirculoComp,
+  },
+  //eslint-disable-next-line vue/multi-word-component-names
   name: "Recipe",
   props: {
     nombreReceta : String
@@ -114,8 +133,9 @@ export default {
           this.time = response.data.time;
           this.name = response.data.nombre;
           this.dificultad = response.data.dificultad;
-          this.urlImagen = response.data.images.toString();
+          this.urlImagen = response.data.images;
           this.user = response.data.user;
+          console.log(this.urlImagen[0])
         })
         .catch((error) => {
           console.error("Error fetching recipes:", error);

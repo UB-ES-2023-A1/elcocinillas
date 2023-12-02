@@ -18,7 +18,7 @@
 
 </template>
 
-<style>
+<style scoped>
 #app {
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
