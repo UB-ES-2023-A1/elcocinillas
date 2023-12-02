@@ -11,7 +11,7 @@
         </div>
 
         <div class="item"> 
-          <p>Escoge la dieta<span> *</span></p>
+          <p>Escoge la dieta</p>
           <select v-model="tipoReceta" data-cy="escoge_dieta"> 
             <option selected value=""></option>
             <option value="Vegana" >Vegana</option>
@@ -21,7 +21,7 @@
         </div>
 
         <div class="item">
-          <p>¿De qué clase dirías que es tu plato?<span> *</span></p>
+          <p>¿De qué clase dirías que es tu plato?</p>
           <select v-model="classeReceta" data-cy="escoge_plato">
             <option selected value=""></option>
             <option value="Hamburguesa" >Hamburguesa</option>
@@ -30,9 +30,10 @@
           </select>
         </div>
 
-        <div class="item">
+        <div class="item" id="ingredientes">
           <label for="visit">¿Cuáles son los ingredientes necesarios?<span> *</span></label>
-          <textarea id="visit" rows="4" required v-model="ingredientesReceta" data-cy="ingredientes"></textarea>
+          <textarea id="visit" rows="1" required v-model="ingredientesReceta" data-cy="ingredientes"></textarea>
+          <button type="button" @click="agregarCampo()">+</button>
         </div>
         <div class="item">
           <label for="visit">Describe los pasos para elaborar la receta<span> *</span></label>
@@ -61,15 +62,15 @@
           <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="handleFileChange($event)">
         </div>
 
-        <div class="btn-block">
-          <button type="submit">Publicar</button>
+        <div id="divBotonFormulario">
+          <button id="botonFormulario" type="submit">Publicar</button>
         </div>
       </form>
     </div>
   </body>
 </template>
 
-<style>
+<style scoped>
 body {
   min-height: 100%;
   font-family: "Lato", sans-serif;
@@ -156,22 +157,23 @@ textarea {
   color: red;
 }
 
-.btn-block {
-  margin-top: 10px;
+#divBotonFormulario{
   text-align: center;
 }
-button {
+
+#botonFormulario{
+  text-align: center;
   width: 150px;
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background: #EEF2B6;
   font-size: 16px;
   cursor: pointer;
   margin-top: 7%;
+  background-color: #73694F;
+  color: white;
 }
-button:hover {
-  background: #eef2b6;
+#botonFormulario:hover {
   opacity: 70%;
 }
 
@@ -274,6 +276,14 @@ export default {
       })
     },
 
+    agregarCampo() {
+      var camposDiv = document.getElementById('ingredientes');
+      var nuevoCampo = document.createElement('input');
+      nuevoCampo.type = 'text';
+      nuevoCampo.name = 'nextIngredientes';
+      camposDiv.appendChild(nuevoCampo);
+      camposDiv.appendChild(document.createElement('br'));
+    }
   },
 };
 

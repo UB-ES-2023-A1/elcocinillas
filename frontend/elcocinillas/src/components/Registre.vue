@@ -22,7 +22,15 @@
   </body>
 </template>
 
-<style>
+<style scoped>
+form {
+  width: 100%;
+  padding: 20px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 0 8px  #73694F;
+}
+
 #granContainerRegistre {
   height: 100vh;
   background-image: url('../img/defaultRecipePhoto.png');

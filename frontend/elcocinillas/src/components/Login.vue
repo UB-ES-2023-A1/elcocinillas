@@ -16,7 +16,81 @@
   </body>
 </template>
 
-<style>
+<style scoped>
+form {
+  width: 100%;
+  padding: 20px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 0 8px  #73694F;
+}
+
+#granContainerRegistre {
+  height: 100vh;
+  background-image: url('../img/defaultRecipePhoto.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: block;
+  text-align: center;
+}
+
+#title {
+  font-weight: bold;
+  color: #5c5540;
+  text-align:center;
+}
+
+input[type=text], input[type=password] {
+  width: 100%;
+  padding: 16px 8px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.formcontainer {
+  text-align: center;
+  border: 5px solid #EEF2B6;
+  background-color: white;
+  opacity: 95%;
+  width: 80%;
+  display: inline-block;
+  margin: 5%;
+  margin-top: 10%;
+}
+.inner-container {
+  padding: 16px 0;
+  text-align:left;
+}
+span.psw {
+  float: right;
+  padding-top: 0;
+  padding-right: 15px;
+}
+
+button {
+  background-color: #73694F !important;
+  color: white !important;
+  padding: 14px 0;
+  margin: 10px 0;
+  border: none;
+  cursor: grab;
+  width: 48%;
+  opacity: 100% !important;
+}
+button:hover {
+  opacity: 0.8;
+}
+
+/* Change styles for span on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+    display: block;
+    float: none;
+  }
+}
 
 </style>
 
