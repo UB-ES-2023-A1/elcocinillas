@@ -289,9 +289,12 @@ export default {
       nuevoCampo.rows = 1
       nuevoCampo.style.width = 'calc(100% - 12px)';
       nuevoCampo.style.border = '1px solid #ccc'
+      nuevoCampo.style.padding = '5px'
+      nuevoCampo.style.marginBottom = '10px'
+      nuevoCampo.style.borderRadius = '3px'
       nuevoCampo.name = 'nextIngredientes';
-      camposDiv.appendChild(nuevoCampo);
-      camposDiv.appendChild(document.createElement('br'));
+      camposDiv.insertBefore(nuevoCampo, camposDiv.lastChild);
+      camposDiv.insertBefore(document.createElement('br'), nuevoCampo);
     }
   },
 };
