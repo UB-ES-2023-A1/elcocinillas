@@ -30,13 +30,13 @@
       <div class="container">
         <div class="row">
           <div class="col-sm d-flex justify-content-center">
-            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" colorFondo="red"/>
+            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" colorFondo="#76DED9"/>
           </div>
           <div class="col-sm d-flex justify-content-center">
-            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" colorFondo="red"/>
+            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" colorFondo="#EEF2B6"/>
           </div>
           <div class="col-sm d-flex justify-content-center">
-            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" colorFondo="red"/>
+            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" colorFondo="#73694F"/>
           </div>
         </div>
       </div>
