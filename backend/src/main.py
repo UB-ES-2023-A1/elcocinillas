@@ -81,3 +81,7 @@ def publi_receta(receta: Receta):
 @app.get("/imgReceta/{nombre_receta}")
 def get_image_url(nombre_receta: str):
     return database.getRecipeImages(nombre_receta)
+
+@app.delete("/eliminar_receta/{nombre_receta}")
+def eliminar_receta(nombre_receta: str):
+    return 200
