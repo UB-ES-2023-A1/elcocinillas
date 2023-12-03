@@ -91,7 +91,7 @@ def publi_receta(receta: Receta):
 def get_image_url(nombre_receta: str):
     return database.getRecipeImages(nombre_receta)
 
-@app.delete("eliminar_cuenta/{nombre_usuario}")
+@app.delete("/eliminar_cuenta/{nombre_usuario}")
 def delete_account(nombre_usuario: str):
     try:
         database.delete_user(nombre_usuario)
