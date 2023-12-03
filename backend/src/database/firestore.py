@@ -179,3 +179,6 @@ def update_user(user_id, updated_user):
     user = auth.get_user(user_id)
     new_user = auth.update_user(user_id, email = updated_user.email, password=updated_user.password)
     return new_user
+
+def delete_user(user_id):
+    auth.delete_user(user_id)
