@@ -42,3 +42,7 @@ Accept: application/json
 ###
 GET http://127.0.0.1:8000/recetas/Salso
 Accept: application/json
+
+###
+DELETE http://127.0.0.1:8000/eliminar_receta/Brueba
+Accept: application/json
