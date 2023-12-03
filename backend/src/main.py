@@ -90,3 +90,12 @@ def publi_receta(receta: Receta):
 @app.get("/imgReceta/{nombre_receta}")
 def get_image_url(nombre_receta: str):
     return database.getRecipeImages(nombre_receta)
+
+@app.delete("eliminar_cuenta/{nombre_usuario}")
+def delete_account(nombre_usuario: str):
+    try:
+        database.delete_user(nombre_usuario)
+        return 200
+    except Exception as e:
+        #Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor eliminando usuario: " + str(e))
