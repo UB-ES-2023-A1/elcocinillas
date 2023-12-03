@@ -84,4 +84,9 @@ def get_image_url(nombre_receta: str):
 
 @app.delete("/eliminar_receta/{nombre_receta}")
 def eliminar_receta(nombre_receta: str):
-    return 200
+   try:
+        database.delete_recipe(nombre_receta)
+        return 200
+   except Exception as e:
+       # Captura cualquier excepción y maneja el error
+       return HTTPException(status_code=422, detail="Error en el eliminado de recetas: " + str(e))
