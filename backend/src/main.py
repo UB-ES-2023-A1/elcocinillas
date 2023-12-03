@@ -25,6 +25,13 @@ def index():
 @app.post("/register/", response_model=str)
 def register(user: User):
     return database.signup(user.email, user.password, user.userID)
+
+"""
+@app.delete("/receta/{nombreReceta}", response_model=str)
+def register(nombreReceta: string):
+    return database.deleteReceta(nombreReceta)
+    """
+
     
 @app.get("/receta/{name}")
 def get_receta(name: str):
@@ -43,12 +50,14 @@ def update_user(user_id: str, updated_user: User):
     return database.update_user(user_id,updated_user)
 
 @app.get("/recetas/",response_model=tuple)
-def get_recetas(user: str = Query(None),
+def get_recetas(
+    user: str = Query(None),
     classe: list = Query([]),
     tipo: str = Query(None),
     ingredientes: list = Query([]),
     time: int =  Query(None),
-    dificultad: int = Query(None) ):
+    dificultad: int = Query(None) 
+    ):
     filtro = {"user": user ,"classe": classe,"tipo": tipo,"ingredientes": ingredientes, "time": time, "dificultad": dificultad}
     return database.get_receptes(filtro)
 
