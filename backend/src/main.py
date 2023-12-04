@@ -90,3 +90,12 @@ def publi_receta(receta: Receta):
 @app.get("/imgReceta/{nombre_receta}")
 def get_image_url(nombre_receta: str):
     return database.getRecipeImages(nombre_receta)
+
+@app.put("/follow/{user}/{following}")
+def follow_user(user:str,following:str):
+    try:
+        database.follow_user(user,following)
+        return 200
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor al seguir usuario: " + str(e))
