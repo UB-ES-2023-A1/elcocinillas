@@ -192,7 +192,7 @@ def follow_user(user,follow):
     else:
         coleccion_ref = db.collection("followers")
         new_doc = coleccion_ref.document(user)
-        new_doc.set({"User":user,"Following":[follow]})
+        new_doc.set({"Following":[follow]})
 
 def unfollow_user(user,unfollow):
     doc_ref = db.collection("followers").document(user)
