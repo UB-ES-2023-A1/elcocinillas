@@ -179,3 +179,37 @@ def update_user(user_id, updated_user):
     user = auth.get_user(user_id)
     new_user = auth.update_user(user_id, email = updated_user.email, password=updated_user.password)
     return new_user
+
+def follow_user(user,follow):
+    doc_ref = db.collection("followers").document(user)
+    doc = doc_ref.get()
+
+    if doc.exists:
+        lista = doc.get("Following")
+        lista.append(follow)
+        doc_ref.update({"Following":lista})
+
+    else:
+        coleccion_ref = db.collection("followers")
+        new_doc = coleccion_ref.document(user)
+        new_doc.set({"User":user,"Following":[follow]})
+
+
+def get_following(user):
+    doc_ref = db.collection("followers").document(user)
+    doc = doc_ref.get()
+
+    if doc.exists:
+        lista = doc.get("Following")
+        return lista
+    else:
+        return []
+      
+def delete_recipe(recipe_name):
+    doc_ref = db.collection("receptes")
+    query = doc_ref.where("nombre","==",recipe_name)
+    docs = query.stream()
+
+    for doc in docs:
+        doc.reference.delete()
+
