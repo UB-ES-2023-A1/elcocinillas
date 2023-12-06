@@ -169,4 +169,12 @@ def comentar_receta(comment: Comment):
         return 200
     except Exception as e:
         # Captura cualquier excepción y maneja el error
-        return HTTPException(status_code=422, detail="Error en el servidor leer img: " + str(e))
+        return HTTPException(status_code=422, detail="Error en el servidor publicar comentario: " + str(e))
+
+@app.get("/comments_by_recipe/{recipe_name}")
+def comentarios_de_receta(recipe_name: str):
+    try:
+        return database.get_comments_by_recipe(recipe_name)
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor obtener comentarios de receta: " + str(e))

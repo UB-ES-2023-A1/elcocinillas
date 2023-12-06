@@ -227,3 +227,13 @@ def delete_recipe(recipe_name):
 def add_comment(comment):
     doc_ref = db.collection(u'comentarios').document()
     doc_ref.set(comment.__dict__)
+
+def get_comments_by_recipe(recipe):
+    col_ref = db.collection("comentarios")
+    query = col_ref
+    query = query.where("Receta","==",recipe)
+    result = query.stream()
+    comments = [comment.to_dict() for comment in result]
+
+    return comments
+
