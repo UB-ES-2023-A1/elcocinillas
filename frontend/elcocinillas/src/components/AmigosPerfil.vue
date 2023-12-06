@@ -20,7 +20,7 @@
                             <li>
                                 {{ user }}
                             </li>
-                            <button id="button" type="button" class="btn btn-danger"><span>Eliminar amigo</span></button>
+                            <button @click="eliminarAmigo(user)" id="button" type="button" class="btn btn-danger"><span>Eliminar amigo</span></button>
                         </div>
                     </ul>
                 </div>
@@ -161,20 +161,64 @@ ul li:last-child {
 </style>
 <script>
 // eslint-disable-next-line vue/multi-word-component-names
+import axios from 'axios';
+import { store } from '../store';
 import NavPerfil from "./NavPerfil";
 export default {
     name: "AmigosPerfil",
     components: { NavPerfil },
     data() {
         return {
-            users: ["Beatriz", "Asier", "Sam", "Diego", "Lluís"]
+            users: []
         }
+    },
+    mounted() {
+
+        this.listarAmigos();
+
     },
     methods:{
         delUser(index) {
             this.users.splice(index, 1);
             alert("Se ha actualizado la lista de Amigos");
-        }
+        },
+        eliminarAmigo(nombre){
+            const unfollow = '/' + nombre
+            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/user/' + store.state.userName + unfollow;
+            axios.delete(url)
+            .then((response) => {
+                console.log('Ok modificar datos:', response.data);
+                window.alert('Datos modificados correctamente');
+            })
+            .catch((error) => {
+                console.error('KO modificar datos:', error);
+                alert("Se ha producido un error. Inténtalo de nuevo más tarde")
+            })
+        },
+        listarAmigos(){
+            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/siguiendo/' + store.state.userName;
+            axios.get(url)
+            .then((response) => {
+                this.users = response.data;
+            })
+            .catch((error) => {
+                alert("Error al actualizar lista de amigos")
+                console.error('KO modificar datos:', error);
+            })
+        },
+        seguirAmigo(nombre){
+            const follow = '/' + nombre;
+            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/seguir/' + store.state.userName + follow;
+            axios.put(url)
+            .then((response) => {
+                window.alert('Has empezado a seguir a: ${nombre}');
+                console.log("Respuesta: ", response.data)
+            })
+            .catch((error) => {
+                console.error('KO modificar datos:', error);
+                alert("Se ha producido un error. Inténtalo de nuevo más tarde")
+            })
+        },
     }
 }
 </script>

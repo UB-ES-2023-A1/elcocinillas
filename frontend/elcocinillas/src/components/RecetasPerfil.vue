@@ -165,6 +165,7 @@ border-bottom: none; /* No agrega borde inferior al último elemento li */
 <script>
 // eslint-disable-next-line vue/multi-word-component-names
 import NavPerfil from "./NavPerfil";
+import axios from 'axios';
 export default {
   name: "RecetasPerfil",
   components: { NavPerfil },

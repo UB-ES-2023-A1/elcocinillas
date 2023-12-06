@@ -149,7 +149,7 @@
 </style>
 
 <script>
-import { store } from '../store'
+import { store } from '../store';
 import axios from 'axios';
 import router from "@/router";
 import NavPerfil from "./NavPerfil";
