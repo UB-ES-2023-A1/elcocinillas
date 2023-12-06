@@ -192,7 +192,7 @@ def follow_user(user,follow):
     else:
         coleccion_ref = db.collection("followers")
         new_doc = coleccion_ref.document(user)
-        new_doc.set({"User":user,"Following":[follow]})
+        new_doc.set({"Following":[follow]})
 
 
 def get_following(user):
@@ -212,4 +212,18 @@ def delete_recipe(recipe_name):
 
     for doc in docs:
         doc.reference.delete()
+
+def save_recipe(user,recipe):
+    doc_ref = db.collection("recetas_guardadas").document(user)
+    doc = doc_ref.get()
+
+    if doc.exists:
+        lista = doc.get("Recetas")
+        lista.append(recipe)
+        doc_ref.update({"Recetas": lista})
+
+    else:
+        coleccion_ref = db.collection("recetas_guardadas")
+        new_doc = coleccion_ref.document(user)
+        new_doc.set({"User": user, "Recetas": [recipe]})
 

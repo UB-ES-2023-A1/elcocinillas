@@ -149,3 +149,12 @@ def eliminar_receta(nombre_receta: str):
    except Exception as e:
        # Captura cualquier excepción y maneja el error
        return HTTPException(status_code=422, detail="Error en el eliminado de recetas: " + str(e))
+
+@app.put("/guardar/{user}/{recipe}")
+def follow_user(user:str,recipe:str):
+    try:
+        database.follow_user(user,recipe)
+        return 200
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor al guardar receta: " + str(e))
