@@ -134,7 +134,6 @@ export default {
       name: null,
       dificultad: 0,
       urlImagen: null,
-      user: null
       user: null,
       v: null,
       blueish: '#76ded9',
