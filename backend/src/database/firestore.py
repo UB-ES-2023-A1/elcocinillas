@@ -236,7 +236,7 @@ def save_recipe(user,recipe):
     else:
         coleccion_ref = db.collection("recetas_guardadas")
         new_doc = coleccion_ref.document(user)
-        new_doc.set({"User": user, "Recetas": [recipe]})
+        new_doc.set({"Recetas": [recipe]})
 
 
 def get_saved_recipes(user):
