@@ -158,3 +158,11 @@ def follow_user(user:str,recipe:str):
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor al guardar receta: " + str(e))
+
+@app.get("/guardadas/{user}")
+def get_following(user:str):
+    try:
+        return database.get_saved_recipes(user)
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor al buscar lista de recetas guardadas: " + str(e))
