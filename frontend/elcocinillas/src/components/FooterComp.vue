@@ -17,10 +17,10 @@
                 <span class="elcoci-rss" aria-hidden="true"></span>
             </h1>
         </div>
-        <div style="padding: 10px; color: #fff; text-align: center;">
+        <div style="padding: 10px; color: #76DED9; text-align: center;">
             <h1 href="/about/">Acerca de</h1> | <h1 href="/more/customer-service/">Atención al Cliente</h1> | <h1 href="/more/elcocinillas/">Zona Profesional</h1> | <h1 href="/more/contact">Contacto</h1>
         </div>
-        <div style="font-size: x-small; padding: 5px; color: #fff; text-align: center;">
+        <div style="font-size: x-small; padding: 5px; color: #76DED9; text-align: center;">
             <h1 href="/more/privacy-notice/">Privacidad</h1> |
             <h1 href="https://www.iubenda.com/privacy-policy/37587182/cookie-policy">Política de Cookies</h1> |
             <h1 class="iubenda-cs-preferences-link" href="#" data-iub-enabled="1">Preferencias de Rastreo</h1> |
