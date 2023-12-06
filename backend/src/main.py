@@ -117,7 +117,10 @@ def publi_receta(receta: Receta):
 
 @app.get("/imgReceta/{nombre_receta}")
 def get_image_url(nombre_receta: str):
-    return database.getRecipeImages(nombre_receta)
+    try:
+        return database.getRecipeImages(nombre_receta)
+    except Exception as e:
+        return HTTPException(status_code=422, detail="Error en el servidor leer img: " + str(e))
 
 @app.put("/seguir/{user}/{following}")
 def follow_user(user:str,following:str):
@@ -136,10 +139,7 @@ def get_following(user:str):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor al buscar lista de siguiendo: " + str(e))
 
-    try:
-        return database.getRecipeImages(nombre_receta)
-    except Exception as e:
-        return HTTPException(status_code=422, detail="Error en el servidor leer img: " + str(e))
+
 
 @app.delete("/eliminar_receta/{nombre_receta}")
 def eliminar_receta(nombre_receta: str):
