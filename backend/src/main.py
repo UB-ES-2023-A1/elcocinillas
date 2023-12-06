@@ -22,7 +22,7 @@ app.add_middleware(
 def index():
     return ""
 
-@app.post("/register/", response_model=str)
+@app.post("/register/", response_model=int)
 def register(user: User):
     try:
         database.signup(user.email, user.password, user.userID)
@@ -90,7 +90,7 @@ def get_all_recipes():
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor leer todas recetas: " + str(e))
 
-@app.post("/imgUpload/", response_model=str)
+@app.post("/imgUpload/", response_model=int)
 def publi_img(nombre: str = Form(...), file: UploadFile = File(...)):
     try:
         # Lee el archivo en memoria
@@ -105,7 +105,7 @@ def publi_img(nombre: str = Form(...), file: UploadFile = File(...)):
         return HTTPException(status_code=422, detail="Error en el servidor subir img: " + str(e))
 
 
-@app.post("/receta", response_model=str)
+@app.post("/receta", response_model=int)
 def publi_receta(receta: Receta):
     try:
         # Intenta crear la receta en la base de datos
