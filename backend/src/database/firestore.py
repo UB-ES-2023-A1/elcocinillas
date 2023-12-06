@@ -204,6 +204,12 @@ def get_following(user):
         return lista
     else:
         return []
+      
+def delete_recipe(recipe_name):
+    doc_ref = db.collection("receptes")
+    query = doc_ref.where("nombre","==",recipe_name)
+    docs = query.stream()
 
-
+    for doc in docs:
+        doc.reference.delete()
 

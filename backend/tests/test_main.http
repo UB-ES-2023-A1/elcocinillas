@@ -49,4 +49,5 @@ Accept: application/json
 
 ###
 GET http://127.0.0.1:8000/siguiendo/Pepe
+DELETE http://127.0.0.1:8000/eliminar_receta/Brueba
 Accept: application/json
