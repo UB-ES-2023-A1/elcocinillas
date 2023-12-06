@@ -114,7 +114,7 @@ export default {
       } else {
         //const path = "http://localhost:8000/register/";
         const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/register/";
-        console.log("registro: ", )
+        console.log("registro: ")
 
         axios.post(path, this.getDatosUsuario())
             .then((response) => {
