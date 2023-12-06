@@ -192,7 +192,7 @@ def follow_user(user,follow):
     else:
         coleccion_ref = db.collection("followers")
         new_doc = coleccion_ref.document(user)
-        new_doc.set({"User":user,"Following":[follow]})
+        new_doc.set({"Following":[follow]})
 
 def unfollow_user(user,unfollow):
     doc_ref = db.collection("followers").document(user)
@@ -224,3 +224,6 @@ def delete_recipe(recipe_name):
     for doc in docs:
         doc.reference.delete()
 
+def add_comment(comment):
+    doc_ref = db.collection(u'comentarios').document()
+    doc_ref.set(comment.__dict__)

@@ -5,6 +5,7 @@ from database import firestore as database
 from fastapi.middleware.cors import CORSMiddleware
 from models.user import User
 from models.receta import Receta
+from models.comments import Comment
 from models.filtros import FiltroRecetas
 
 app = FastAPI()
@@ -158,3 +159,14 @@ def eliminar_receta(nombre_receta: str):
    except Exception as e:
        # Captura cualquier excepción y maneja el error
        return HTTPException(status_code=422, detail="Error en el eliminado de recetas: " + str(e))
+
+
+@app.post("/comment/", response_model=str)
+def comentar_receta(comment: Comment):
+    try:
+        # Intenta crear la receta en la base de datos
+        database.add_comment(comment)
+        return 200
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor leer img: " + str(e))
