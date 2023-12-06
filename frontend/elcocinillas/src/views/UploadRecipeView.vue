@@ -30,7 +30,7 @@
           </select>
         </div>
 
-        <div class="item" id="ingredientes">
+        <div class="item" id="ingredientesContainer">
           <label for="visit">¿Cuáles son los ingredientes necesarios? (Clica el botón para añadir más ingredientes)<span> *</span></label>
           <textarea id="visit" rows="1" required data-cy="ingredientes"></textarea>
           <textarea id="visit" rows="1" required data-cy="ingredientes"></textarea>
@@ -235,6 +235,7 @@ export default {
 
   methods: {
     uploadRecipe() {
+      this.updateIngredientes();
       console.log("Click en submit", this.getDatosReceta());
 
       const path = "http://localhost:8000/receta/";
@@ -284,7 +285,7 @@ export default {
     },
 
     agregarCampo() {
-      var camposDiv = document.getElementById('ingredientes');
+      var camposDiv = document.getElementById('ingredientesContainer');
       var nuevoCampo = document.createElement('textarea');
       nuevoCampo.rows = 1
       nuevoCampo.style.width = 'calc(100% - 12px)';
@@ -295,6 +296,19 @@ export default {
       nuevoCampo.name = 'nextIngredientes';
       camposDiv.insertBefore(nuevoCampo, camposDiv.lastChild);
       camposDiv.insertBefore(document.createElement('br'), nuevoCampo);
+    },
+
+    updateIngredientes(){
+      var ingredientesContainer = document.getElementById('ingredientesContainer');
+      var textAreas = ingredientesContainer.getElementsByTagName('textarea');
+
+      for (var i = 0; i < textAreas.length; i++) {
+        var valorTextArea = textAreas[i].value;
+        if(valorTextArea !== "" && valorTextArea.length !== 0){
+          this.ingredientesReceta.push(valorTextArea);
+          console.log('Valor del TextArea:', valorTextArea);
+        }
+      }
     }
   },
 };
