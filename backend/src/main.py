@@ -178,3 +178,11 @@ def comentarios_de_receta(recipe_name: str):
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor obtener comentarios de receta: " + str(e))
+
+@app.get("/comments_by_user/{user}")
+def comentarios_de_usuario(user: str):
+    try:
+        return database.get_comments_by_recipe(user)
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor obtener comentarios de usuario: " + str(e))

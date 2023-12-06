@@ -237,3 +237,12 @@ def get_comments_by_recipe(recipe):
 
     return comments
 
+def get_comments_by_user(user):
+    col_ref = db.collection("comentarios")
+    query = col_ref
+    query = query.where("User", "==", user)
+    result = query.stream()
+    comments = [comment.to_dict() for comment in result]
+
+    return comments
+
