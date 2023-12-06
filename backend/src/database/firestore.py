@@ -227,3 +227,14 @@ def save_recipe(user,recipe):
         new_doc = coleccion_ref.document(user)
         new_doc.set({"User": user, "Recetas": [recipe]})
 
+
+def get_saved_recipes(user):
+    doc_ref = db.collection("recetas_guardadas").document(user)
+    doc = doc_ref.get()
+
+    if doc.exists:
+        lista = doc.get("Recetas")
+        return lista
+    else:
+        return []
+
