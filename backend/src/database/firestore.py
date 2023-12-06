@@ -179,3 +179,11 @@ def update_user(user_id, updated_user):
     user = auth.get_user(user_id)
     new_user = auth.update_user(user_id, email = updated_user.email, password=updated_user.password)
     return new_user
+
+def delete_recipe(recipe_name):
+    doc_ref = db.collection("receptes")
+    query = doc_ref.where("nombre","==",recipe_name)
+    docs = query.stream()
+
+    for doc in docs:
+        doc.reference.delete()
