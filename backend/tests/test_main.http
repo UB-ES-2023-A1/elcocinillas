@@ -32,8 +32,6 @@ Accept: application/json
 GET http://127.0.0.1:8000/recetas/?classe=vegetariana
 Content-Type: application/json
 
-
-
 ###
 
 GET http://127.0.0.1:8000/todasrecetas/
@@ -49,5 +47,8 @@ Accept: application/json
 
 ###
 GET http://127.0.0.1:8000/siguiendo/Pepe
+Accept: application/json
+
+###
 DELETE http://127.0.0.1:8000/eliminar_receta/Brueba
 Accept: application/json
