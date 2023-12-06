@@ -187,7 +187,7 @@ def follow_user(user,follow):
     if doc.exists:
         lista = doc.get("Following")
         lista.append(follow)
-        doc.update({"Following":lista})
+        doc_ref.update({"Following":lista})
 
     else:
         coleccion_ref = db.collection("followers")
