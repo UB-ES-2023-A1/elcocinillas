@@ -160,7 +160,7 @@ def eliminar_receta(nombre_receta: str):
        return HTTPException(status_code=422, detail="Error en el eliminado de recetas: " + str(e))
 
 @app.put("/guardar/{user}/{recipe}")
-def follow_user(user:str,recipe:str):
+def save_recipe(user:str,recipe:str):
     try:
         database.save_recipe(user,recipe)
         return 200
@@ -169,7 +169,7 @@ def follow_user(user:str,recipe:str):
         return HTTPException(status_code=422, detail="Error en el servidor al guardar receta: " + str(e))
 
 @app.get("/guardadas/{user}")
-def get_following(user:str):
+def get_saved(user:str):
     try:
         return database.get_saved_recipes(user)
     except Exception as e:
