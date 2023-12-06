@@ -23,7 +23,7 @@ app.add_middleware(
 def index():
     return ""
 
-@app.post("/register/", response_model=str)
+@app.post("/register/", response_model=int)
 def register(user: User):
     try:
         database.signup(user.email, user.password, user.userID)
@@ -106,7 +106,7 @@ def publi_img(nombre: str = Form(...), file: UploadFile = File(...)):
         return HTTPException(status_code=422, detail="Error en el servidor subir img: " + str(e))
 
 
-@app.post("/receta", response_model=str)
+@app.post("/receta", response_model=int)
 def publi_receta(receta: Receta):
     try:
         # Intenta crear la receta en la base de datos
@@ -161,7 +161,7 @@ def eliminar_receta(nombre_receta: str):
        return HTTPException(status_code=422, detail="Error en el eliminado de recetas: " + str(e))
 
 
-@app.post("/comment/", response_model=str)
+@app.post("/comment/", response_model=int)
 def comentar_receta(comment: Comment):
     try:
         # Intenta crear la receta en la base de datos
@@ -182,7 +182,7 @@ def comentarios_de_receta(recipe_name: str):
 @app.get("/comments_by_user/{user}")
 def comentarios_de_usuario(user: str):
     try:
-        return database.get_comments_by_recipe(user)
+        return database.get_comments_by_user(user)
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor obtener comentarios de usuario: " + str(e))
