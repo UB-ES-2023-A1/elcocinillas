@@ -131,6 +131,15 @@ def follow_user(user:str,following:str):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor al seguir usuario: " + str(e))
 
+@app.put("/dejar_seguir/{user}/{unfollowing}")
+def unfollow_user(user: str, unfollowing: str):
+    try:
+        database.unfollow_user(user,unfollowing)
+        return 200
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor al dejar de seguir usuario: " + str(e))
+
 @app.get("/siguiendo/{user}")
 def get_following(user:str):
     try:

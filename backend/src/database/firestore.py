@@ -194,6 +194,17 @@ def follow_user(user,follow):
         new_doc = coleccion_ref.document(user)
         new_doc.set({"Following":[follow]})
 
+def unfollow_user(user,unfollow):
+    doc_ref = db.collection("followers").document(user)
+    doc = doc_ref.get()
+
+    if doc.exists:
+        lista = doc.get("Following")
+        if unfollow in lista:
+            lista.remove(unfollow)
+            doc_ref.update({"Following": lista})
+
+
 
 def get_following(user):
     doc_ref = db.collection("followers").document(user)
