@@ -65,7 +65,8 @@ def update_user(user_id: str, updated_user: User):
         return HTTPException(status_code=422, detail="Error en el servidor actualizar usuario: " + str(e))
 
 @app.get("/recetas/",response_model=tuple)
-def get_recetas(user: str = Query(None),
+def get_recetas(
+    user: str = Query(None),
     classe: list = Query([]),
     tipo: str = Query(None),
     ingredientes: list = Query([]),
@@ -78,6 +79,7 @@ def get_recetas(user: str = Query(None),
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor leer recetas con filtros: " + str(e))
+
 
 
 @app.get("/todasrecetas/")
