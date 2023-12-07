@@ -168,3 +168,12 @@ def valorar_receta(receta: str, val: int):
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en la valoración de receta: " + str(e))
+
+@app.put("/dejar_de_guardar/{user}/{receta}")
+def unsave_recipe(user: str, receta: str):
+    try:
+        database.unsave_recipe(user,receta)
+        return 200
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor al dejar de guardar receta: " + str(e))
