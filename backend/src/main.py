@@ -91,7 +91,7 @@ def get_all_recipes():
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor leer todas recetas: " + str(e))
 
-@app.post("/imgUpload/", response_model=str)
+@app.post("/imgUpload/", response_model=int)
 def publi_img(nombre: str = Form(...), file: UploadFile = File(...)):
     try:
         # Lee el archivo en memoria
@@ -161,6 +161,7 @@ def eliminar_receta(nombre_receta: str):
        return HTTPException(status_code=422, detail="Error en el eliminado de recetas: " + str(e))
 
 
+
 @app.post("/comment/", response_model=int)
 def comentar_receta(comment: Comment):
     try:
@@ -186,3 +187,21 @@ def comentarios_de_usuario(user: str):
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor obtener comentarios de usuario: " + str(e))
+
+@app.put("/valorar/{receta}/{val}")
+def valorar_receta(receta: str, val: int):
+    try:
+        database.valorar_receta(receta,val)
+        return 200
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en la valoración de receta: " + str(e))
+
+@app.put("/dejar_de_guardar/{user}/{receta}")
+def unsave_recipe(user: str, receta: str):
+    try:
+        database.unsave_recipe(user,receta)
+        return 200
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor al dejar de guardar receta: " + str(e))
