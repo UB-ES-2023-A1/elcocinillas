@@ -242,10 +242,52 @@ def save_recipe(user,recipe):
 def get_saved_recipes(user):
     doc_ref = db.collection("recetas_guardadas").document(user)
     doc = doc_ref.get()
-
     if doc.exists:
         lista = doc.get("Recetas")
         return lista
     else:
         return []
 
+def unsave_recipe(user,recipe):
+    doc_ref = db.collection("recetas_guardadas").document(user)
+    doc = doc_ref.get()
+    if doc.exists:
+        lista = doc.get("Recetas")
+        if recipe in lista:
+        lista.remove(recipe)
+        doc_ref.update({"Recetas": lista})
+    
+      
+def add_comment(comment):
+    doc_ref = db.collection(u'comentarios').document()
+    doc_ref.set(comment.__dict__)
+
+def get_comments_by_recipe(recipe):
+    col_ref = db.collection("comentarios")
+    query = col_ref
+    query = query.where("Receta","==",recipe)
+    result = query.stream()
+    comments = [comment.to_dict() for comment in result]
+
+    return comments
+
+def get_comments_by_user(user):
+    col_ref = db.collection("comentarios")
+    query = col_ref
+    query = query.where("User", "==", user)
+    result = query.stream()
+    comments = [comment.to_dict() for comment in result]
+
+    return comments
+
+def valorar_receta(receta, valoracion):
+    if (valoracion >= 0 and valoracion <= 5):
+        doc_ref = db.collection(u'receptes').document(receta)
+        doc = doc_ref.get()
+        if doc.exists:
+            val = doc.get("valoracion_media")
+            num = doc.get("num_valoraciones")
+            val = val*num + valoracion
+            new_num = num + 1
+            new_val = val/new_num
+            doc_ref.update({"valoracion_media": new_val,"num_valoraciones": new_num})
