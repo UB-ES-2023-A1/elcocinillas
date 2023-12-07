@@ -224,3 +224,16 @@ def delete_recipe(recipe_name):
     for doc in docs:
         doc.reference.delete()
 
+
+def unsave_recipe(user,recipe):
+    doc_ref = db.collection("recetas_guardadas").document(user)
+    doc = doc_ref.get()
+
+    if doc.exists:
+        lista = doc.get("Recetas")
+        if recipe in lista:
+            lista.remove(recipe)
+            doc_ref.update({"Recetas": lista})
+
+
+
