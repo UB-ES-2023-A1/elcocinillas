@@ -254,8 +254,8 @@ def unsave_recipe(user,recipe):
     if doc.exists:
         lista = doc.get("Recetas")
         if recipe in lista:
-        lista.remove(recipe)
-        doc_ref.update({"Recetas": lista})
+            lista.remove(recipe)
+            doc_ref.update({"Recetas": lista})
     
       
 def add_comment(comment):
