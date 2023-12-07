@@ -224,6 +224,17 @@ def delete_recipe(recipe_name):
     for doc in docs:
         doc.reference.delete()
 
+def valorar_receta(receta, valoracion):
+    if (valoracion >= 0 and valoracion <= 5):
+        doc_ref = db.collection(u'receptes').document(receta)
+        doc = doc_ref.get()
+        if doc.exists:
+            val = doc.get("valoracion_media")
+            num = doc.get("num_valoraciones")
+            val = val*num + valoracion
+            new_num = num + 1
+            new_val = val/new_num
+            doc_ref.update({"valoracion_media": new_val,"num_valoraciones": new_num})
 
 def unsave_recipe(user,recipe):
     doc_ref = db.collection("recetas_guardadas").document(user)
@@ -234,6 +245,3 @@ def unsave_recipe(user,recipe):
         if recipe in lista:
             lista.remove(recipe)
             doc_ref.update({"Recetas": lista})
-
-
-
