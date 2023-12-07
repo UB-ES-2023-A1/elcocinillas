@@ -20,7 +20,9 @@
                             <li>
                                 {{ user }}
                             </li>
-                            <button @click="eliminarAmigo(user, index)" id="button" type="button" class="btn btn-danger"><span>Eliminar amigo</span></button>
+                            <button @click="eliminarAmigo(user, index)" id="button" type="button" class="btn btn-danger">
+                                <span>Eliminar amigo</span>
+                            </button>
                         </div>
                     </ul>
                 </div>
@@ -177,10 +179,6 @@ export default {
         this.listarAmigos();
     },
     methods:{
-        delUser(index) {
-            this.users.splice(index, 1);
-            alert("Se ha actualizado la lista de Amigos");
-        },
         eliminarAmigo(nombre, index){
             const unfollow = '/' + nombre
             const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/dejar_seguir/' + store.state.userName + unfollow;
