@@ -224,6 +224,40 @@ def delete_recipe(recipe_name):
     for doc in docs:
         doc.reference.delete()
 
+def save_recipe(user,recipe):
+    doc_ref = db.collection("recetas_guardadas").document(user)
+    doc = doc_ref.get()
+
+    if doc.exists:
+        lista = doc.get("Recetas")
+        lista.append(recipe)
+        doc_ref.update({"Recetas": lista})
+
+    else:
+        coleccion_ref = db.collection("recetas_guardadas")
+        new_doc = coleccion_ref.document(user)
+        new_doc.set({"Recetas": [recipe]})
+
+
+def get_saved_recipes(user):
+    doc_ref = db.collection("recetas_guardadas").document(user)
+    doc = doc_ref.get()
+    if doc.exists:
+        lista = doc.get("Recetas")
+        return lista
+    else:
+        return []
+
+def unsave_recipe(user,recipe):
+    doc_ref = db.collection("recetas_guardadas").document(user)
+    doc = doc_ref.get()
+    if doc.exists:
+        lista = doc.get("Recetas")
+        if recipe in lista:
+        lista.remove(recipe)
+        doc_ref.update({"Recetas": lista})
+    
+      
 def add_comment(comment):
     doc_ref = db.collection(u'comentarios').document()
     doc_ref.set(comment.__dict__)
@@ -257,13 +291,3 @@ def valorar_receta(receta, valoracion):
             new_num = num + 1
             new_val = val/new_num
             doc_ref.update({"valoracion_media": new_val,"num_valoraciones": new_num})
-
-def unsave_recipe(user,recipe):
-    doc_ref = db.collection("recetas_guardadas").document(user)
-    doc = doc_ref.get()
-
-    if doc.exists:
-        lista = doc.get("Recetas")
-        if recipe in lista:
-            lista.remove(recipe)
-            doc_ref.update({"Recetas": lista})

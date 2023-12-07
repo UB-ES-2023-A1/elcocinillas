@@ -81,8 +81,6 @@ def get_recetas(
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor leer recetas con filtros: " + str(e))
 
-
-
 @app.get("/todasrecetas/")
 def get_all_recipes():
     try:
@@ -104,7 +102,6 @@ def publi_img(nombre: str = Form(...), file: UploadFile = File(...)):
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor subir img: " + str(e))
-
 
 @app.post("/receta", response_model=int)
 def publi_receta(receta: Receta):
@@ -149,8 +146,6 @@ def get_following(user:str):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor al buscar lista de siguiendo: " + str(e))
 
-
-
 @app.delete("/eliminar_receta/{nombre_receta}")
 def eliminar_receta(nombre_receta: str):
    try:
@@ -160,7 +155,22 @@ def eliminar_receta(nombre_receta: str):
        # Captura cualquier excepción y maneja el error
        return HTTPException(status_code=422, detail="Error en el eliminado de recetas: " + str(e))
 
+@app.put("/guardar/{user}/{recipe}")
+def save_recipe(user:str,recipe:str):
+    try:
+        database.save_recipe(user,recipe)
+        return 200
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor al guardar receta: " + str(e))
 
+@app.get("/guardadas/{user}")
+def get_saved(user:str):
+    try:
+        return database.get_saved_recipes(user)
+    except Exception as e:
+        # Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor al buscar lista de recetas guardadas: " + str(e))
 
 @app.post("/comment/", response_model=int)
 def comentar_receta(comment: Comment):
