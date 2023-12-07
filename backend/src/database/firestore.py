@@ -204,8 +204,6 @@ def unfollow_user(user,unfollow):
             lista.remove(unfollow)
             doc_ref.update({"Following": lista})
 
-
-
 def get_following(user):
     doc_ref = db.collection("followers").document(user)
     doc = doc_ref.get()
