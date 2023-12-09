@@ -7,14 +7,14 @@
 
 <style scoped>
 .circulo {
-  width: 100px; /* Ajusta el tamaño según tus necesidades */
-  height: 100px; /* Ajusta el tamaño según tus necesidades */
+  width: 130px; /* Ajusta el tamaño según tus necesidades */
+  height: 130px; /* Ajusta el tamaño según tus necesidades */
   border-radius: 50%; /* Hace que el elemento sea redondo */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: black;
 }
 
 .texto-superior,
