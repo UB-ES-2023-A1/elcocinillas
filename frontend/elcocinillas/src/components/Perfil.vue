@@ -1,8 +1,11 @@
 <template>
   <div class="background-container">
-    <div class="container">
-      <div class="center">
-        <div>
+    <div class="background-wraper">
+      <div class="navdiplay">
+          <NavPerfil class="sidebar"/>
+      </div>
+      <div class="container">
+        <div class="center">
           <div class="userImage">
             <img src="../assets/user.png" alt="User imagen">
           </div>
@@ -32,17 +35,39 @@
 @media (max-width: 768px) {
   .container {
     grid-template-columns: 1fr;
-    grid-template-rows: 10% 30% 30% 10%;
+    grid-template-rows: 25% 55% 20%;
     grid-template-areas: 
-          "header"
-          "sidebar"
-          "main"
-          "section"
-          "content"
-          "footer";
+      "sidebar"
+      "main"
+      "footer";
   }
 }
-
+.background-wraper {
+  display: flex;
+  margin-top: 3%;
+  height: 95vh;
+}
+.navdiplay {
+  flex: 0 1 auto;
+  margin-left: 5%;
+  margin-top: 5%;
+  margin-bottom: 10%;
+}
+.container {
+  margin-top: 5%;
+  margin-bottom: 10%;
+  margin-left: 15%;
+}
+.center {
+  background-color: rgba(255, 255, 255, 0.6); 
+  border: 5px solid #EEF2B6;
+  border-radius: 5px;
+  padding: 10%;
+  flex: 1 1 50%;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+}
 .inputBox {
   margin: 2rem;
   font-size: 1.25rem;
@@ -61,8 +86,8 @@
 }
 .label {
   position: absolute;
-  top: 1rem;
-  left: 1rem;
+  top: 0.5rem;
+  left: 35%;
   color: black;
   pointer-events: none;
   transition: 150ms
@@ -84,32 +109,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-}
-.center {
-    background-color: rgba(255, 255, 255, 0.6); 
-    border: 5px solid #EEF2B6;
-    border-radius: 5px;
-    padding: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.container {
-  margin-top: 10rem;
 }
 .userName {
   text-align: center;
 }
 .background-container {
-  min-height: 100vh;
   background-image: url('../assets/background.avif');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   margin: 0;
-  overflow: visible;
 }
 .botonContainer {
   display: flex;
@@ -140,12 +149,14 @@
 </style>
 
 <script>
-import { store } from '../store'
+import { store } from '../store';
 import axios from 'axios';
 import router from "@/router";
+import NavPerfil from "./NavPerfil";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Perfil",
+  components: { NavPerfil },
   data() {
     return {
       userName: store.state.userName,
