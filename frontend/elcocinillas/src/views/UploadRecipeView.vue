@@ -34,11 +34,13 @@
           <label for="visit">¿Cuáles son los ingredientes necesarios? (Clica el botón para añadir más ingredientes)<span> *</span></label>
           <textarea id="visit" rows="1" required data-cy="ingredientes"></textarea>
           <textarea id="visit" rows="1" required data-cy="ingredientes"></textarea>
-          <button type="button" @click="agregarCampo()" id="botonIngredientes">Añadir ingrediente</button>
+          <button type="button" @click="agregarCampoIngrediente()" id="botonIngredientes">Añadir ingrediente</button>
         </div>
-        <div class="item">
+        <div class="item" id="pasosContainer">
           <label for="visit">Describe los pasos para elaborar la receta<span> *</span></label>
-          <textarea id="visit" rows="6" required v-model="pasosReceta" data-cy="descripcion"></textarea>
+          <textarea id="visit" rows="1" required data-cy="descripcion"></textarea>
+          <textarea id="visit" rows="1" required data-cy="descripcion"></textarea>
+          <button type="button" @click="agregarCampoPaso()" id="botonIngredientes">Añadir paso</button>
         </div>
 
         <div class="item">
@@ -226,7 +228,7 @@ export default {
       classeReceta: "",
       tipoReceta: "",
       ingredientesReceta: [],
-      pasosReceta: "",
+      pasosReceta: [],
       imagesReceta: "",
       timeReceta: 15,
       dificultadReceta: 0
@@ -236,6 +238,7 @@ export default {
   methods: {
     uploadRecipe() {
       this.updateIngredientes();
+      this.updatePasos();
       console.log("Click en submit", this.getDatosReceta());
 
       //const path = "http://localhost:8000/receta/";
@@ -285,7 +288,7 @@ export default {
       })
     },
 
-    agregarCampo() {
+    agregarCampoIngrediente() {
       var camposDiv = document.getElementById('ingredientesContainer');
       var nuevoCampo = document.createElement('textarea');
       nuevoCampo.rows = 1
@@ -294,7 +297,23 @@ export default {
       nuevoCampo.style.padding = '5px'
       nuevoCampo.style.marginBottom = '10px'
       nuevoCampo.style.borderRadius = '3px'
+      nuevoCampo.style.color = '#666'
       nuevoCampo.name = 'nextIngredientes';
+      camposDiv.insertBefore(nuevoCampo, camposDiv.lastChild);
+      camposDiv.insertBefore(document.createElement('br'), nuevoCampo);
+    },
+
+    agregarCampoPaso() {
+      var camposDiv = document.getElementById('pasosContainer');
+      var nuevoCampo = document.createElement('textarea');
+      nuevoCampo.rows = 1
+      nuevoCampo.style.width = 'calc(100% - 12px)';
+      nuevoCampo.style.border = '1px solid #ccc'
+      nuevoCampo.style.padding = '5px'
+      nuevoCampo.style.marginBottom = '10px'
+      nuevoCampo.style.borderRadius = '3px'
+      nuevoCampo.style.color = '#666'
+      nuevoCampo.name = 'nextPaso';
       camposDiv.insertBefore(nuevoCampo, camposDiv.lastChild);
       camposDiv.insertBefore(document.createElement('br'), nuevoCampo);
     },
@@ -307,10 +326,23 @@ export default {
         var valorTextArea = textAreas[i].value;
         if(valorTextArea !== "" && valorTextArea.length !== 0){
           this.ingredientesReceta.push(valorTextArea);
-          console.log('Valor del TextArea:', valorTextArea);
+          console.log('Valor del ingrediente:', this.ingredientesReceta[i]);
         }
       }
-    }
+    },
+
+    updatePasos(){
+      var pasosContainer = document.getElementById('pasosContainer');
+      var textAreas = pasosContainer.getElementsByTagName('textarea');
+
+      for (var i = 0; i < textAreas.length; i++) {
+        var valorTextArea = textAreas[i].value;
+        if(valorTextArea !== "" && valorTextArea.length !== 0){
+          this.pasosReceta.push(valorTextArea);
+          console.log('Valor del paso:', this.pasosReceta[i]);
+        }
+      }
+    },
   },
 };
 
