@@ -38,8 +38,8 @@
         </div>
         <div class="item" id="pasosContainer">
           <label for="visit">Describe los pasos para elaborar la receta<span> *</span></label>
-          <textarea id="visit" rows="1" required data-cy="descripcion"></textarea>
-          <textarea id="visit" rows="1" required data-cy="descripcion"></textarea>
+          <textarea id="visit" rows="2" required data-cy="descripcion"></textarea>
+          <textarea id="visit" rows="2" required data-cy="descripcion"></textarea>
           <button type="button" @click="agregarCampoPaso()" id="botonIngredientes">Añadir paso</button>
         </div>
 
@@ -242,7 +242,7 @@ export default {
       console.log("Click en submit", this.getDatosReceta());
 
       //const path = "http://localhost:8000/receta/";
-      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/";
+      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta";
 
       axios.post(path, this.getDatosReceta())
           .then((response) => {
@@ -267,7 +267,9 @@ export default {
           pasos: this.pasosReceta,
           images: this.imagesReceta,
           time: this.timeReceta,
-          dificultad: this.dificultadReceta
+          dificultad: this.dificultadReceta,
+          valoracion_media: 0,
+          num_valoraciones: 0
       };
     },
     handleFileChange(event) {
@@ -277,7 +279,6 @@ export default {
       const formData = new FormData();
       formData.append('nombre', this.nombreReceta);
       formData.append('file', this.file);
-      //const path = "http://localhost:8000/imgUpload/";
       const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/imgUpload/";
 
       axios.post(path,formData).then((response) => {
@@ -306,7 +307,7 @@ export default {
     agregarCampoPaso() {
       var camposDiv = document.getElementById('pasosContainer');
       var nuevoCampo = document.createElement('textarea');
-      nuevoCampo.rows = 1
+      nuevoCampo.rows = 2
       nuevoCampo.style.width = 'calc(100% - 12px)';
       nuevoCampo.style.border = '1px solid #ccc'
       nuevoCampo.style.padding = '5px'
@@ -326,7 +327,6 @@ export default {
         var valorTextArea = textAreas[i].value;
         if(valorTextArea !== "" && valorTextArea.length !== 0){
           this.ingredientesReceta.push(valorTextArea);
-          console.log('Valor del ingrediente:', this.ingredientesReceta[i]);
         }
       }
     },
@@ -339,7 +339,6 @@ export default {
         var valorTextArea = textAreas[i].value;
         if(valorTextArea !== "" && valorTextArea.length !== 0){
           this.pasosReceta.push(valorTextArea);
-          console.log('Valor del paso:', this.pasosReceta[i]);
         }
       }
     },
