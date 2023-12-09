@@ -1,38 +1,49 @@
 <template>
   <div id="app">
     <section id="headerSection">
-      <h2 id="title">{{ this.name }}</h2>
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
-          <div class="col-sm border-right">
-            <h2>{{ this.time }}</h2>
-            <h4>minutos</h4>
-          </div>
-          <div class="col-sm border-right">
-            <div id="rate">
-              <!-- First loop for yellow stars -->
-              <span v-for="n in rating" :key="'yellow-' + n">
-                <img src="../assets/star1.png" style="width: 6vh;" 
-                @mouseover="stars(n)" @click="rate(n)">
-              </span>
-              <!-- Second loop for black stars -->
-              <span v-for="m in 5-rating" :key="'black-' + (m + rating)">
-                <img src="../assets/star0.png" style="width: 6vh;" 
-                @mouseover="stars(m + rating)">
-              </span>
-            </div>
-            <h4 v-if="!rated">¡Valora la receta!</h4>
-            <button class="button" id="delRating"
-            v-if="rated" @click="rated = false">
-              Borrar valoración
-            </button>
-          </div>
           <div class="col-sm">
-            <h2>{{ this.dificultad }} / 5</h2>
-            <h4>Dificultad</h4>
+            <h2 id="title">{{ this.name }}</h2>
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-sm border-right">
+                  <h2>{{ this.time }}</h2>
+                  <h4>minutos</h4>
+                </div>
+                <div class="col-sm border-right">
+                  <div id="rate">
+                    <!-- First loop for yellow stars -->
+                    <span v-for="n in rating" :key="'yellow-' + n">
+                <img src="../assets/star1.png" style="width: 6vh;"
+                     @mouseover="stars(n)" @click="rate(n)">
+              </span>
+                    <!-- Second loop for black stars -->
+                    <span v-for="m in 5-rating" :key="'black-' + (m + rating)">
+                <img src="../assets/star0.png" style="width: 6vh;"
+                     @mouseover="stars(m + rating)">
+              </span>
+                  </div>
+                  <h4 v-if="!rated">¡Valora la receta!</h4>
+                  <button class="button" id="delRating"
+                          v-if="rated" @click="rated = false">
+                    Borrar valoración
+                  </button>
+                </div>
+                <div class="col-sm">
+                  <h2>{{ this.dificultad }} / 5</h2>
+                  <h4>Dificultad</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm" id="imagenHeader">
+            <img src="../img/defaultRecipePhoto.png" class="img-fluid">
           </div>
         </div>
       </div>
+
+
     </section>
 
     <section class="sections">
@@ -41,17 +52,17 @@
       <p>{{ this.ingredientes }}</p>
     </section>
 
-    <section id="headerSection">
+    <section id="circulosSection">
       <div class="container">
         <div class="row">
           <div class="col-sm d-flex justify-content-center">
             <CirculoComp v-bind:texto-superior="this.user" textoInferior="Usuario" colorFondo="#76DED9"/>
           </div>
           <div class="col-sm d-flex justify-content-center">
-            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" colorFondo="#EEF2B6"/>
+            <CirculoComp v-bind:texto-superior="this.valoracionMedia" textoInferior="Valoracion" colorFondo="#EEF2B6"/>
           </div>
           <div class="col-sm d-flex justify-content-center">
-            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" colorFondo="#73694F"/>
+            <CirculoComp v-bind:texto-superior="this.tipo" textoInferior="Dieta" colorFondo="#73694F"/>
           </div>
         </div>
       </div>
@@ -111,12 +122,17 @@
   font-weight: bold;
   margin-bottom: 80px;
   color: #5c5540;
-  text-align: center;
   font-size: xxx-large;
+  text-align: left;
 }
 .sections {
   color: #5c5540;
   text-align: left;
+}
+
+#circulosSection{
+  margin-top: 7%;
+  margin-bottom: 7%;
 }
 
 #solidDividerYellow {
@@ -189,6 +205,10 @@ export default {
       dificultad: 0,
       urlImagen: null,
       user: null,
+      classe:null,
+      tipo:null,
+      valoracionMedia:null,
+
       v: null,
       blueish: '#76ded9',
 
@@ -211,7 +231,7 @@ export default {
       axios
         .get(urlCodificada)
         .then((response) => {
-          console.log("metodo getRecipe() llamada OK");
+          console.log("metodo getRecipe() llamada OK", response.data);
           this.ingredientes = response.data.ingredientes;
           this.steps = response.data.pasos;
           this.time = response.data.time;
@@ -219,6 +239,9 @@ export default {
           this.dificultad = response.data.dificultad;
           this.urlImagen = response.data.images;
           this.user = response.data.user;
+          this.tipo = response.data.tipo;
+          this.classe = response.data.classe;
+          this.valoracionMedia = response.data.valoracion_media;
           console.log(this.urlImagen[0])
         })
         .catch((error) => {
