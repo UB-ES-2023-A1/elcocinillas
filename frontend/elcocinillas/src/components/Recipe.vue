@@ -3,15 +3,15 @@
     <section id="headerSection">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-sm">
+          <div class="col">
             <h2 id="title">{{ this.name }}</h2>
-            <div class="container-fluid">
+            <div class="container" id="columnasDebajoTitulo">
               <div class="row">
-                <div class="col-sm border-right">
+                <div class="col border-right" style="padding-left: 0">
                   <h2>{{ this.time }}</h2>
                   <h4>minutos</h4>
                 </div>
-                <div class="col-sm border-right">
+                <div class="col-6 border-right">
                   <div id="rate">
                     <!-- First loop for yellow stars -->
                     <span v-for="n in rating" :key="'yellow-' + n">
@@ -38,12 +38,10 @@
             </div>
           </div>
           <div class="col-sm" id="imagenHeader">
-            <img src="../img/defaultRecipePhoto.png" class="img-fluid">
+            <img src="../img/defaultRecipePhoto.png" class="img-fluid rounded">
           </div>
         </div>
       </div>
-
-
     </section>
 
     <section class="sections">
@@ -108,14 +106,14 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 5%;
-  padding-left: 10%;
-  padding-right: 10%;
+  margin-top: 7%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 #headerSection {
   color: #5c5540;
-  margin-bottom: 10%;
+  margin-bottom: 8%;
 }
 
 #title {
@@ -124,10 +122,12 @@
   color: #5c5540;
   font-size: xxx-large;
   text-align: left;
+  margin-left: 4%;
 }
 .sections {
   color: #5c5540;
   text-align: left;
+  margin-left: 3%;
 }
 
 #circulosSection{
