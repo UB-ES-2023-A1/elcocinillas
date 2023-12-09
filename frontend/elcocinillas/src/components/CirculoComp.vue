@@ -18,7 +18,7 @@
 }
 
 .texto-superior{
-  font-size: x-large;
+  font-size: 20px;
   margin: 0;
 }
 .texto-inferior {

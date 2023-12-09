@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="col-sm" id="imagenHeader">
-            <img src="../img/defaultRecipePhoto.png" class="img-fluid rounded">
+            <img :src=this.urlImagen class="img-fluid rounded">
           </div>
         </div>
       </div>
