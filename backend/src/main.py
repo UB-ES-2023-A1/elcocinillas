@@ -98,7 +98,7 @@ def publi_img(nombre: str = Form(...), file: UploadFile = File(...)):
         # Sube la imagen a Firebase Storage y obtén la URL
         image_url = database.uploadImg(nombre, image_data)
 
-        return 200
+        return image_url
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor subir img: " + str(e))
