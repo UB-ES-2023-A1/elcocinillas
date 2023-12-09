@@ -5,10 +5,6 @@
       <div class="container">
         <div class="row">
           <div class="col-sm border-right">
-            <h2>{{ this.user }}</h2>
-            <h4>usuario</h4>
-          </div>
-          <div class="col-sm border-right">
             <h2>{{ this.time }}</h2>
             <h4>minutos</h4>
           </div>
@@ -49,7 +45,7 @@
       <div class="container">
         <div class="row">
           <div class="col-sm d-flex justify-content-center">
-            <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" colorFondo="#76DED9"/>
+            <CirculoComp v-bind:texto-superior="this.user" textoInferior="Usuario" colorFondo="#76DED9"/>
           </div>
           <div class="col-sm d-flex justify-content-center">
             <CirculoComp textoSuperior="Texto 1" textoInferior="Texto 2" colorFondo="#EEF2B6"/>

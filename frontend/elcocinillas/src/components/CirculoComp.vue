@@ -17,14 +17,13 @@
   color: black;
 }
 
-.texto-superior,
-.texto-inferior {
+.texto-superior{
+  font-size: x-large;
   margin: 0;
-  font-size: 14px;
 }
-
 .texto-inferior {
-  margin-top: 5px; /* Espaciado entre los textos */
+  font-size: 14px;
+  margin: 0;
 }
 </style>
 
