@@ -9,7 +9,6 @@
 .circulo {
   width: 100px; /* Ajusta el tamaño según tus necesidades */
   height: 100px; /* Ajusta el tamaño según tus necesidades */
-  background-color: backgroundColor; /* Color del círculo */
   border-radius: 50%; /* Hace que el elemento sea redondo */
   display: flex;
   flex-direction: column;
