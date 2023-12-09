@@ -22,7 +22,7 @@
   </body>
 </template>
 
-<style>
+<style scoped>
 #granContainerRegistre {
   height: 100vh;
   background-image: url('../img/defaultRecipePhoto.png');

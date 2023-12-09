@@ -12,6 +12,25 @@
             <h2>{{ this.time }}</h2>
             <h4>minutos</h4>
           </div>
+          <div class="col-sm border-right">
+            <div id="rate">
+              <!-- First loop for yellow stars -->
+              <span v-for="n in rating" :key="'yellow-' + n">
+                <img src="../assets/star1.png" style="width: 6vh;" 
+                @mouseover="stars(n)" @click="rate(n)">
+              </span>
+              <!-- Second loop for black stars -->
+              <span v-for="m in 5-rating" :key="'black-' + (m + rating)">
+                <img src="../assets/star0.png" style="width: 6vh;" 
+                @mouseover="stars(m + rating)">
+              </span>
+            </div>
+            <h4 v-if="!rated">¡Valora la receta!</h4>
+            <button class="button" id="delRating"
+            v-if="rated" @click="rated = false">
+              Borrar valoración
+            </button>
+          </div>
           <div class="col-sm">
             <h2>{{ this.dificultad }} / 5</h2>
             <h4>Dificultad</h4>
@@ -48,12 +67,34 @@
       <p>Estos son los pasos que tienes que seguir</p>
       <p>{{ this.steps }}</p>
     </section>
+
+    <section class="sections">
+      <h4>Comentar Receta:</h4>
+      <textarea id="comment" rows="3" v-model="v"></textarea>
+      <button class="button" id="cannotComment" 
+      v-if="v == null || v == ''">
+        Añadir Comentario
+      </button>
+      <button class="button" id="canComment" 
+      v-if="v != null && v != ''" @click="comment(v)">
+        Añadir Comentario
+      </button>
+    </section>
   </div>
 </template>
 
 <style scoped>
-
-
+#rate{
+  cursor: pointer;
+  margin-bottom: 2vh;
+}
+#delRating{
+  color: grey;
+}
+#delRating:hover{
+  box-shadow: 5px 5px black;
+  transition: 0.2s;
+}
 #app {
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -77,10 +118,8 @@
   text-align: center;
   font-size: xxx-large;
 }
-
 .sections {
   color: #5c5540;
-  margin-bottom: 10%;
   text-align: left;
 }
 
@@ -89,6 +128,47 @@
   width: 100%;
   opacity: 1;
   margin-bottom: 30px;
+}
+.button{
+  margin:auto;
+  height: 4vh;
+  width: 30vh;
+  font-size: 2.5vh;
+  color: white;
+  border-radius: 20px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+  cursor: pointer;
+  transition: 0.2s;
+  display: grid;
+  align-items: center;
+  margin-bottom: 0;
+}
+textarea{
+  padding: 0;
+  margin: 0;
+  outline: none;
+  font-size: 14px;
+  color: #666;
+  line-height: 22px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  width: calc(100% - 12px);
+  padding: 5px;
+}
+#cannotComment{
+  background-color: lightgray;
+}
+#canComment{
+  background-color: #76ded9;
+  box-shadow: 2px 2px black;
+  transition: 0.2s;
+}
+#canComment:hover{
+  box-shadow: 5px 5px black;
+  transition: 0.2s;
 }
 </style>
 
@@ -112,7 +192,15 @@ export default {
       name: null,
       dificultad: 0,
       urlImagen: null,
-      user: null
+      user: null,
+      v: null,
+      blueish: '#76ded9',
+
+      // Rating
+      rating: 0,
+      rated: false, 
+
+
     };
   },
   created() {
@@ -140,6 +228,16 @@ export default {
         .catch((error) => {
           console.error("Error fetching recipes:", error);
         });
+    },
+    stars(n){
+      if (!this.rated) this.rating = n;
+    },
+    rate(n){
+      alert('Valoración añadida: ' + n + ' estrellas!');
+      this.rated = true;
+    },
+    comment(v){
+      alert('Comentario añadido: "' + v + '"');
     },
   },
 };
