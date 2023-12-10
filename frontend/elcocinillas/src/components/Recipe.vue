@@ -5,30 +5,16 @@
         <div class="row">
           <div class="col">
             <h2 id="title">{{ this.name }}</h2>
+            <h5 id="subtitulo">by {{this.user}}</h5>
             <div class="container" id="columnasDebajoTitulo">
               <div class="row">
                 <div class="col border-right" style="padding-left: 0">
                   <h2>{{ this.time }}</h2>
                   <h4>minutos</h4>
                 </div>
-                <div class="col-6 border-right">
-                  <div id="rate">
-                    <!-- First loop for yellow stars -->
-                    <span v-for="n in rating" :key="'yellow-' + n">
-                <img src="../assets/star1.png" style="width: 6vh;"
-                     @mouseover="stars(n)" @click="rate(n)">
-              </span>
-                    <!-- Second loop for black stars -->
-                    <span v-for="m in 5-rating" :key="'black-' + (m + rating)">
-                <img src="../assets/star0.png" style="width: 6vh;"
-                     @mouseover="stars(m + rating)">
-              </span>
-                  </div>
-                  <h4 v-if="!rated">¡Valora la receta!</h4>
-                  <button class="button" id="delRating"
-                          v-if="rated" @click="rated = false">
-                    Borrar valoración
-                  </button>
+                <div class="col border-right" v-if="this.valoracionMedia !== 0">
+                  <h2>{{ this.valoracionMedia }} puntos</h2>
+                  <h4>{{ this.numValoraciones }} valoraciones</h4>
                 </div>
                 <div class="col-sm">
                   <h2>{{ this.dificultad }} / 5</h2>
@@ -36,6 +22,18 @@
                 </div>
               </div>
             </div>
+            <section id="circulosSection">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm d-flex justify-content-center" v-if="this.tipo === ''">
+                    <CirculoComp v-bind:texto-superior="this.tipo" textoInferior="Dieta" colorFondo="#EEF2B6"/>
+                  </div>
+                  <div class="col-sm d-flex justify-content-center" v-if="this.classe === ''">
+                    <CirculoComp v-bind:texto-superior="this.classe" textoInferior="Tipo" colorFondo="#73694F"/>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
           <div class="col-sm" id="imagenHeader">
             <img class="img-fluid rounded" :src=this.urlImagen>
@@ -50,27 +48,31 @@
       <p>{{ this.ingredientes }}</p>
     </section>
 
-    <section id="circulosSection">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm d-flex justify-content-center">
-            <CirculoComp v-bind:texto-superior="this.user" textoInferior="Usuario" colorFondo="#76DED9"/>
-          </div>
-          <div class="col-sm d-flex justify-content-center">
-            <CirculoComp v-bind:texto-superior="this.valoracionMedia" textoInferior="Valoracion" colorFondo="#EEF2B6"/>
-          </div>
-          <div class="col-sm d-flex justify-content-center">
-            <CirculoComp v-bind:texto-superior="this.tipo" textoInferior="Dieta" colorFondo="#73694F"/>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section class="sections">
       <h4>ELABORACIÓN DE LA RECETA</h4>
       <hr id="solidDividerYellow" />
       <p>Estos son los pasos que tienes que seguir</p>
       <p>{{ this.steps }}</p>
+    </section>
+
+    <section id="valoracion" class="sections">
+      <div id="rate">
+        <!-- First loop for yellow stars -->
+        <span v-for="n in rating" :key="'yellow-' + n">
+                      <img src="../assets/star1.png" style="width: 6vh;"
+                           @mouseover="stars(n)" @click="rate(n)">
+                    </span>
+        <!-- Second loop for black stars -->
+        <span v-for="m in 5-rating" :key="'black-' + (m + rating)">
+                      <img src="../assets/star0.png" style="width: 6vh;"
+                           @mouseover="stars(m + rating)">
+                    </span>
+      </div>
+      <h4 v-if="!rated">¡Valora la receta!</h4>
+      <button class="button" id="delRating"
+              v-if="rated" @click="rated = false">
+        Borrar valoración
+      </button>
     </section>
 
     <section class="sections">
@@ -89,6 +91,10 @@
 </template>
 
 <style scoped>
+#valoracion{
+  margin-top: 8%;
+  margin-bottom: 5%;
+}
 #rate{
   cursor: pointer;
   margin-bottom: 2vh;
@@ -118,10 +124,14 @@
 
 #title {
   font-weight: bold;
-  margin-bottom: 80px;
   color: #5c5540;
   font-size: xxx-large;
   text-align: left;
+  margin-left: 4%;
+}
+#subtitulo{
+  text-align: left;
+  margin-bottom: 20%;
   margin-left: 4%;
 }
 .sections {
@@ -131,7 +141,7 @@
 }
 
 #circulosSection{
-  margin-top: 7%;
+  margin-top: 15%;
   margin-bottom: 7%;
 }
 
@@ -207,16 +217,15 @@ export default {
       user: null,
       classe:null,
       tipo:null,
-      valoracionMedia:null,
+      valoracionMedia: 0,
+      numValoraciones: 0,
 
       v: null,
       blueish: '#76ded9',
 
       // Rating
       rating: 0,
-      rated: false, 
-
-
+      rated: false,
     };
   },
   created() {
@@ -241,8 +250,10 @@ export default {
           this.user = response.data.user;
           this.tipo = response.data.tipo;
           this.classe = response.data.classe;
+          this.numValoraciones = response.data.num_valoraciones;
           this.valoracionMedia = response.data.valoracion_media;
-          console.log("URL de la imagen es:" + this.urlImagen)
+          console.log(this.urlImagen[0])
+          this.valoracionMedia = this.valoracionMedia.toFixed(2);
         })
         .catch((error) => {
           console.error("Error fetching recipes:", error);
