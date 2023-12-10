@@ -36,7 +36,7 @@
             </section>
           </div>
           <div class="col-sm" id="imagenHeader">
-            <img src="../img/defaultPhotoForm.jpg" class="img-fluid rounded">
+            <img class="img-fluid rounded" :src=this.urlImagen>
           </div>
         </div>
       </div>
@@ -234,8 +234,8 @@ export default {
 
   methods: {
     getRecipe() {
-      //const pathReceta = "http://localhost:8000/receta/"+this.nombreReceta;
-      const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta;
+      //const pathReceta = "http://localhost:8000/receta/"+this.nombreReceta + "/";
+      const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
       const urlCodificada = encodeURI(pathReceta);
       axios
         .get(urlCodificada)
@@ -253,7 +253,6 @@ export default {
           this.numValoraciones = response.data.num_valoraciones;
           this.valoracionMedia = response.data.valoracion_media;
           console.log(this.urlImagen[0])
-
           this.valoracionMedia = this.valoracionMedia.toFixed(2);
         })
         .catch((error) => {
