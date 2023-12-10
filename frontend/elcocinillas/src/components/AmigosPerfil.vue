@@ -11,7 +11,7 @@
                     </div>
                     <div class="c-input">
                         <input v-model="nombreAmigo" type="text" placeholder="Busqueda Amigo">
-                        <button @click="seguirAmigo(nombreAmigo)">Añadir Amigo</button>
+                        <button @click="busqueda()">Añadir Amigo</button>
                     </div>
                 </div>
                 <div class="c-body">
@@ -172,7 +172,8 @@ export default {
     data() {
         return {
             nombreAmigo: "",
-            users: this.listarAmigos()
+            users: this.listarAmigos(),
+            usuariosFiltrados: [],
         }
     },
     created() {
@@ -181,7 +182,7 @@ export default {
     methods:{
         eliminarAmigo(nombre, index){
             const unfollow = '/' + nombre
-            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/dejar_seguir/' + store.state.userName + unfollow;
+            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/dejar_seguir/' + store.state.userName + unfollow + '/';
             axios.put(url)
             .then((response) => {
                 console.log('Ok modificar datos:', response.data);
@@ -194,7 +195,7 @@ export default {
             })
         },
         listarAmigos(){
-            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/siguiendo/' + store.state.userName;
+            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/siguiendo/' + store.state.userName + '/';
             axios.get(url)
             .then((response) => {
                 this.users = response.data;
@@ -206,7 +207,7 @@ export default {
         },
         seguirAmigo(nombre){
             const follow = '/' + nombre;
-            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/seguir/' + store.state.userName + follow;
+            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/seguir/' + store.state.userName + follow + '/';
             axios.put(url)
             .then((response) => {
                 window.alert('Has empezado a seguir a: ', nombre);
@@ -217,6 +218,18 @@ export default {
                 console.error('KO modificar datos:', error);
                 alert("Se ha producido un error. Inténtalo de nuevo más tarde")
             })
+        },
+        busqueda(){
+            if(this.nombreAmigo !== ""){
+                this.usuariosFiltrados = this.users.filter(usuario =>
+                usuario.toLowerCase().includes(this.nombreAmigo.toLowerCase())
+
+            );
+            this.users = this.usuariosFiltrados;
+            }else{
+                this.usuariosFiltrados = [];
+                this.listarAmigos();
+            }
         },
     }
 }
