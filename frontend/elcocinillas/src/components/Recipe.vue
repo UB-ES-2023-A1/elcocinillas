@@ -4,8 +4,14 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col">
-            <h2 id="title">{{ this.name }}</h2>
-            <h5 id="subtitulo">by {{this.user}}</h5>
+            <div id="contenedorNombre">
+              <h2 id="title">{{ this.name }}</h2>
+              <img src="../img/mark.png" style="height: 30px; color: #eef2b6">
+            </div>
+            <div id="contenedorUsuario">
+              <h5 id="subtitulo">by {{this.user}}</h5>
+              <img src="../img/person_add.png">
+            </div>
             <div class="container" id="columnasDebajoTitulo">
               <div class="row">
                 <div class="col border-right" style="padding-left: 0">
@@ -122,17 +128,32 @@
   margin-bottom: 8%;
 }
 
+#contenedorNombre{
+  display: flex;
+  align-items: center;
+}
+
 #title {
   font-weight: bold;
   color: #5c5540;
   font-size: xxx-large;
   text-align: left;
   margin-left: 4%;
+  margin-right: 10px;
+  margin-bottom: 0;
 }
+
+#contenedorUsuario{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10%;
+}
+
 #subtitulo{
   text-align: left;
-  margin-bottom: 10%;
   margin-left: 4%;
+  margin-right: 10px;
+  margin-bottom: 0;
 }
 .sections {
   color: #5c5540;
