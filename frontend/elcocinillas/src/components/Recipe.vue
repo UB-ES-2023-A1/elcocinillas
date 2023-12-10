@@ -12,7 +12,7 @@
                   <h2>{{ this.time }}</h2>
                   <h4>minutos</h4>
                 </div>
-                <div class="col border-right" v-if="this.valoracionMedia !== 0">
+                <div class="col border-right" v-if="this.valoracionMedia !== undefined && this.valoracionMedia !== 0">
                   <h2>{{ this.valoracionMedia }} puntos</h2>
                   <h4>{{ this.numValoraciones }} valoraciones</h4>
                 </div>
@@ -25,11 +25,11 @@
             <section id="circulosSection">
               <div class="container">
                 <div class="row">
-                  <div class="col-sm d-flex justify-content-center" v-if="this.tipo === ''">
-                    <CirculoComp v-bind:texto-superior="this.tipo" textoInferior="Dieta" colorFondo="#EEF2B6"/>
+                  <div class="col-sm d-flex justify-content-center" v-if="this.tipo !== '' && this.tipo !== undefined">
+                    <CirculoComp v-bind:texto-superior="this.tipo" textoInferior="Tipo" colorFondo="#EEF2B6"/>
                   </div>
-                  <div class="col-sm d-flex justify-content-center" v-if="this.classe === ''">
-                    <CirculoComp v-bind:texto-superior="this.classe" textoInferior="Tipo" colorFondo="#73694F"/>
+                  <div class="col-sm d-flex justify-content-center" v-if="this.classe !== '' && this.classe !== undefined ">
+                    <CirculoComp v-bind:texto-superior="this.classe" textoInferior="Dieta" colorFondo="#73694F"/>
                   </div>
                 </div>
               </div>
@@ -131,7 +131,7 @@
 }
 #subtitulo{
   text-align: left;
-  margin-bottom: 20%;
+  margin-bottom: 10%;
   margin-left: 4%;
 }
 .sections {
@@ -234,8 +234,8 @@ export default {
 
   methods: {
     getRecipe() {
-      //const pathReceta = "http://localhost:8000/receta/"+this.nombreReceta + "/";
-      const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
+      const pathReceta = "http://localhost:8000/receta/"+this.nombreReceta + "/";
+      //const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
       const urlCodificada = encodeURI(pathReceta);
       axios
         .get(urlCodificada)
@@ -253,7 +253,10 @@ export default {
           this.numValoraciones = response.data.num_valoraciones;
           this.valoracionMedia = response.data.valoracion_media;
           console.log(this.urlImagen[0])
-          this.valoracionMedia = this.valoracionMedia.toFixed(2);
+
+          if(this.valoracionMedia !== null && this.valoracionMedia !== undefined){
+            this.valoracionMedia = this.valoracionMedia.toFixed(2);
+          }
         })
         .catch((error) => {
           console.error("Error fetching recipes:", error);
