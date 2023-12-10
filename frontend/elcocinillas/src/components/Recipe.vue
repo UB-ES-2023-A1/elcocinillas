@@ -22,6 +22,18 @@
                 </div>
               </div>
             </div>
+            <section id="circulosSection">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm d-flex justify-content-center" v-if="this.tipo === ''">
+                    <CirculoComp v-bind:texto-superior="this.tipo" textoInferior="Dieta" colorFondo="#EEF2B6"/>
+                  </div>
+                  <div class="col-sm d-flex justify-content-center" v-if="this.classe === ''">
+                    <CirculoComp v-bind:texto-superior="this.classe" textoInferior="Tipo" colorFondo="#73694F"/>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
           <div class="col-sm" id="imagenHeader">
             <img src="../img/defaultPhotoForm.jpg" class="img-fluid rounded">
@@ -34,22 +46,6 @@
       <h4>INGREDIENTES (4 personas):</h4>
       <hr id="solidDividerYellow" />
       <p>{{ this.ingredientes }}</p>
-    </section>
-
-    <section id="circulosSection">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm d-flex justify-content-center">
-            <CirculoComp v-bind:texto-superior="this.user" textoInferior="Usuario" colorFondo="#76DED9"/>
-          </div>
-          <div class="col-sm d-flex justify-content-center">
-            <CirculoComp v-bind:texto-superior="this.valoracionMedia" textoInferior="Valoracion" colorFondo="#EEF2B6"/>
-          </div>
-          <div class="col-sm d-flex justify-content-center">
-            <CirculoComp v-bind:texto-superior="this.tipo" textoInferior="Dieta" colorFondo="#73694F"/>
-          </div>
-        </div>
-      </div>
     </section>
 
     <section class="sections">
@@ -145,7 +141,7 @@
 }
 
 #circulosSection{
-  margin-top: 7%;
+  margin-top: 15%;
   margin-bottom: 7%;
 }
 
