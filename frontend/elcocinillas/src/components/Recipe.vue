@@ -18,7 +18,7 @@
                   <h2>{{ this.time }}</h2>
                   <h4>minutos</h4>
                 </div>
-                <div class="col border-right" v-if="this.valoracionMedia !== undefined && this.valoracionMedia !== 0">
+                <div class="col border-right" v-if="this.valoracionMedia !== undefined && this.valoracionMedia > 0">
                   <h2>{{ this.valoracionMedia }} puntos</h2>
                   <h4>{{ this.numValoraciones }} valoraciones</h4>
                 </div>
