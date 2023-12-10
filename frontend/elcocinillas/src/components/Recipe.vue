@@ -5,30 +5,16 @@
         <div class="row">
           <div class="col">
             <h2 id="title">{{ this.name }}</h2>
+            <h5 id="subtitulo">by {{this.user}}</h5>
             <div class="container" id="columnasDebajoTitulo">
               <div class="row">
                 <div class="col border-right" style="padding-left: 0">
                   <h2>{{ this.time }}</h2>
                   <h4>minutos</h4>
                 </div>
-                <div class="col-6 border-right">
-                  <div id="rate">
-                    <!-- First loop for yellow stars -->
-                    <span v-for="n in rating" :key="'yellow-' + n">
-                <img src="../assets/star1.png" style="width: 6vh;"
-                     @mouseover="stars(n)" @click="rate(n)">
-              </span>
-                    <!-- Second loop for black stars -->
-                    <span v-for="m in 5-rating" :key="'black-' + (m + rating)">
-                <img src="../assets/star0.png" style="width: 6vh;"
-                     @mouseover="stars(m + rating)">
-              </span>
-                  </div>
-                  <h4 v-if="!rated">¡Valora la receta!</h4>
-                  <button class="button" id="delRating"
-                          v-if="rated" @click="rated = false">
-                    Borrar valoración
-                  </button>
+                <div class="col border-right" v-if="this.valoracionMedia !== 0">
+                  <h2>{{ this.valoracionMedia }} puntos</h2>
+                  <h4>{{ this.numValoraciones }} valoraciones</h4>
                 </div>
                 <div class="col-sm">
                   <h2>{{ this.dificultad }} / 5</h2>
@@ -38,7 +24,7 @@
             </div>
           </div>
           <div class="col-sm" id="imagenHeader">
-            <img :src=this.urlImagen class="img-fluid rounded">
+            <img src="../img/defaultPhotoForm.jpg" class="img-fluid rounded">
           </div>
         </div>
       </div>
@@ -73,6 +59,26 @@
       <p>{{ this.steps }}</p>
     </section>
 
+    <section id="valoracion" class="sections">
+      <div id="rate">
+        <!-- First loop for yellow stars -->
+        <span v-for="n in rating" :key="'yellow-' + n">
+                      <img src="../assets/star1.png" style="width: 6vh;"
+                           @mouseover="stars(n)" @click="rate(n)">
+                    </span>
+        <!-- Second loop for black stars -->
+        <span v-for="m in 5-rating" :key="'black-' + (m + rating)">
+                      <img src="../assets/star0.png" style="width: 6vh;"
+                           @mouseover="stars(m + rating)">
+                    </span>
+      </div>
+      <h4 v-if="!rated">¡Valora la receta!</h4>
+      <button class="button" id="delRating"
+              v-if="rated" @click="rated = false">
+        Borrar valoración
+      </button>
+    </section>
+
     <section class="sections">
       <h4>Comentar Receta:</h4>
       <textarea id="comment" rows="3" v-model="v"></textarea>
@@ -89,6 +95,10 @@
 </template>
 
 <style scoped>
+#valoracion{
+  margin-top: 8%;
+  margin-bottom: 5%;
+}
 #rate{
   cursor: pointer;
   margin-bottom: 2vh;
@@ -118,10 +128,14 @@
 
 #title {
   font-weight: bold;
-  margin-bottom: 80px;
   color: #5c5540;
   font-size: xxx-large;
   text-align: left;
+  margin-left: 4%;
+}
+#subtitulo{
+  text-align: left;
+  margin-bottom: 20%;
   margin-left: 4%;
 }
 .sections {
@@ -207,16 +221,15 @@ export default {
       user: null,
       classe:null,
       tipo:null,
-      valoracionMedia:null,
+      valoracionMedia: 0,
+      numValoraciones: 0,
 
       v: null,
       blueish: '#76ded9',
 
       // Rating
       rating: 0,
-      rated: false, 
-
-
+      rated: false,
     };
   },
   created() {
@@ -241,8 +254,11 @@ export default {
           this.user = response.data.user;
           this.tipo = response.data.tipo;
           this.classe = response.data.classe;
+          this.numValoraciones = response.data.num_valoraciones;
           this.valoracionMedia = response.data.valoracion_media;
           console.log(this.urlImagen[0])
+
+          this.valoracionMedia = this.valoracionMedia.toFixed(2);
         })
         .catch((error) => {
           console.error("Error fetching recipes:", error);
