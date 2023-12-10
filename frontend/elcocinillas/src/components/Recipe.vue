@@ -51,14 +51,18 @@
     <section class="sections">
       <h4>INGREDIENTES (4 personas):</h4>
       <hr id="solidDividerYellow" />
-      <p>{{ this.ingredientes }}</p>
+      <ul v-for="ingrediente in this.ingredientes" :key="ingrediente.id">
+        <li>{{ ingrediente }}</li>
+      </ul>
     </section>
 
     <section class="sections">
       <h4>ELABORACIÓN DE LA RECETA</h4>
       <hr id="solidDividerYellow" />
       <p>Estos son los pasos que tienes que seguir</p>
-      <p>{{ this.steps }}</p>
+      <ul v-for="step in steps" :key="step.id">
+        <li>{{ step }}</li>
+      </ul>
     </section>
 
     <section id="valoracion" class="sections">
