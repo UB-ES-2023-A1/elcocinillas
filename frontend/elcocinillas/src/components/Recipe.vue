@@ -41,8 +41,11 @@
               </div>
             </section>
           </div>
-          <div class="col-sm" id="imagenHeader">
+          <div class="col-sm" id="imagenHeader" v-if="this.urlImagen !== undefined && this.urlImagen !== null && this.urlImagen !==''">
             <img class="img-fluid rounded" :src=this.urlImagen>
+          </div>
+          <div class="col-sm" id="imagenHeaderBis" v-if="this.urlImagen === undefined || this.urlImagen === null || this.urlImagen ===''">
+            <img class="img-fluid rounded" src="../img/default_img_recipe.jpg">
           </div>
         </div>
       </div>
@@ -56,7 +59,7 @@
       </ul>
     </section>
 
-    <section class="sections">
+    <section class="sections" id="pasosText">
       <h4>ELABORACIÓN DE LA RECETA</h4>
       <hr id="solidDividerYellow" />
       <p>Estos son los pasos que tienes que seguir</p>
@@ -175,6 +178,9 @@
   width: 100%;
   opacity: 1;
   margin-bottom: 30px;
+}
+#pasosText{
+  margin-top: 5%;
 }
 .button{
   margin:auto;
