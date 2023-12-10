@@ -38,7 +38,7 @@
             </div>
           </div>
           <div class="col-sm" id="imagenHeader">
-            <img :src=this.urlImagen class="img-fluid rounded">
+            <img class="img-fluid rounded" :src=this.urlImagen>
           </div>
         </div>
       </div>
@@ -225,8 +225,8 @@ export default {
 
   methods: {
     getRecipe() {
-      //const pathReceta = "http://localhost:8000/receta/"+this.nombreReceta;
-      const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta;
+      //const pathReceta = "http://localhost:8000/receta/"+this.nombreReceta + "/";
+      const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
       const urlCodificada = encodeURI(pathReceta);
       axios
         .get(urlCodificada)
@@ -242,7 +242,7 @@ export default {
           this.tipo = response.data.tipo;
           this.classe = response.data.classe;
           this.valoracionMedia = response.data.valoracion_media;
-          console.log(this.urlImagen[0])
+          console.log("URL de la imagen es:" + this.urlImagen)
         })
         .catch((error) => {
           console.error("Error fetching recipes:", error);
