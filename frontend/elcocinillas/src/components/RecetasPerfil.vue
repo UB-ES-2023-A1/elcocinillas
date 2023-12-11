@@ -11,7 +11,7 @@
                     </div>
                     <div class="c-input">
                         <input v-model="nombreReceta" type="text" placeholder="Busqueda Receta">
-                        <button>Buscar Receta</button>
+                        <button @click="busqueda()">Buscar Receta</button>
                     </div>
                 </div>
                 <div class="c-body">
@@ -173,7 +173,9 @@ export default {
     data() {
         return {
           nombreReceta: "",
-          recetas: this.listarRecetas()
+          recetas: [],
+          recetasFiltradas: [],
+
         }
     },
     created() {
@@ -182,7 +184,7 @@ export default {
     methods:{
       eliminarReceta(nombre, index){
         const receta = '/' + nombre
-        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/dejar_de_guardar/' + store.state.userName + receta;
+        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/dejar_de_guardar/' + store.state.userName + receta + '/';
         axios.put(url)
         .then((response) => {
           console.log('Ok modificar datos:', response.data);
@@ -195,16 +197,28 @@ export default {
         })
       },
       listarRecetas(){
-        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/guardadas/' + store.state.userName;
+        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/guardadas/' + store.state.userName + '/';
         axios.get(url)
         .then((response) => {
           this.recetas = response.data;
-          this.listarRecetas();
+
         })
         .catch((error) => {
-          alert("Error al actualizar lista de recetas")
+          alert("Error al actualizar lista de recetas");
           console.error('KO modificar datos:', error);
         })
+      },
+      busqueda(){
+        if(this.nombreReceta !== ""){
+          this.recetasFiltradas = this.recetas.filter(receta =>
+            receta.toLowerCase().includes(this.nombreReceta.toLowerCase())
+
+          );
+          this.recetas = this.recetasFiltradas;
+        }else{
+          this.recetasFiltradas = [];
+          this.listarRecetas();
+        }
       },
     }
 }
