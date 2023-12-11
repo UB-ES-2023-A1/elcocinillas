@@ -180,5 +180,127 @@ def update_user(user_id, updated_user):
     new_user = auth.update_user(user_id, email = updated_user.email, password=updated_user.password)
     return new_user
 
+def follow_user(user,follow):
+    doc_ref = db.collection("followers").document(user)
+    doc = doc_ref.get()
+
+    if doc.exists:
+        lista = doc.get("Following")
+        lista.append(follow)
+        doc_ref.update({"Following":lista})
+
+    else:
+        coleccion_ref = db.collection("followers")
+        new_doc = coleccion_ref.document(user)
+        new_doc.set({"Following":[follow]})
+
+def unfollow_user(user,unfollow):
+    doc_ref = db.collection("followers").document(user)
+    doc = doc_ref.get()
+
+    if doc.exists:
+        lista = doc.get("Following")
+        if unfollow in lista:
+            lista.remove(unfollow)
+            doc_ref.update({"Following": lista})
+
+def get_following(user):
+    doc_ref = db.collection("followers").document(user)
+    doc = doc_ref.get()
+
+    if doc.exists:
+        lista = doc.get("Following")
+        return lista
+    else:
+        return []
+
+def delete_recipe(recipe_name):
+    doc_ref = db.collection("receptes")
+    query = doc_ref.where("nombre","==",recipe_name)
+    docs = query.stream()
+
+    for doc in docs:
+        doc.reference.delete()
+
+def save_recipe(user,recipe):
+    doc_ref = db.collection("recetas_guardadas").document(user)
+    doc = doc_ref.get()
+
+    if doc.exists:
+        lista = doc.get("Recetas")
+        lista.append(recipe)
+        doc_ref.update({"Recetas": lista})
+
+    else:
+        coleccion_ref = db.collection("recetas_guardadas")
+        new_doc = coleccion_ref.document(user)
+        new_doc.set({"Recetas": [recipe]})
+
+
+def get_saved_recipes(user):
+    doc_ref = db.collection("recetas_guardadas").document(user)
+    doc = doc_ref.get()
+    if doc.exists:
+        lista = doc.get("Recetas")
+        return lista
+    else:
+        return []
+
+def unsave_recipe(user,recipe):
+    doc_ref = db.collection("recetas_guardadas").document(user)
+    doc = doc_ref.get()
+    if doc.exists:
+        lista = doc.get("Recetas")
+        if recipe in lista:
+            lista.remove(recipe)
+            doc_ref.update({"Recetas": lista})
+
+
+def add_comment(comment):
+    doc_ref = db.collection(u'comentarios').document()
+    doc_ref.set(comment.__dict__)
+
+def get_comments_by_recipe(recipe):
+    col_ref = db.collection("comentarios")
+    query = col_ref
+    query = query.where("Receta","==",recipe)
+    result = query.stream()
+    comments = [comment.to_dict() for comment in result]
+
+    return comments
+
+def get_comments_by_user(user):
+    col_ref = db.collection("comentarios")
+    query = col_ref
+    query = query.where("User", "==", user)
+    result = query.stream()
+    comments = [comment.to_dict() for comment in result]
+
+    return comments
+
+def valorar_receta(receta, valoracion):
+    if (valoracion >= 0 and valoracion <= 5):
+        doc_ref = db.collection(u'receptes').document(receta)
+        doc = doc_ref.get()
+        if doc.exists:
+            val = doc.get("valoracion_media")
+            num = doc.get("num_valoraciones")
+            val = val*num + valoracion
+            new_num = num + 1
+            new_val = val/new_num
+            doc_ref.update({"valoracion_media": new_val,"num_valoraciones": new_num})
+
+
 def delete_user(user_id):
     auth.delete_user(user_id)
+    col_ref = db.collection("following")
+    ret = col_ref.stream()
+    fol = [doc.to_dict() for doc in ret]
+    for d in fol:
+        unfollow_user(d.id, user_id)
+
+    doc_ref = db.collection("following").document(user_id)
+    doc = doc_ref.get()
+    if doc.exists:
+        doc_ref.delete()
+

@@ -113,8 +113,8 @@ export default {
         alert("La contraseña debe tener 6 caracteres como mínimo");
       } else {
         //const path = "http://localhost:8000/register/";
-        const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/register";
-        console.log("registro: ", )
+        const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/register/";
+        console.log("registro: ")
 
         axios.post(path, this.getDatosUsuario())
             .then((response) => {

@@ -8,6 +8,8 @@ import Recipe from "@/components/Recipe.vue";
 import Registre from "@/components/Registre.vue";
 import AboutView from "@/views/AboutView.vue";
 import TermsView from "@/views/TermsView.vue"
+import RecetasPerfil from "@/components/RecetasPerfil.vue"
+import AmigosPerfil from "@/components/AmigosPerfil.vue"
 import UploadReceta from "@/views/UploadRecipeView.vue";
 
 
@@ -62,6 +64,17 @@ export default new Router({
       path: "/t&c",
       name: "Terms",
       component: TermsView,
-    }
+    },
+    {
+      path: "/amigosPerfil",
+      name: "AmigosPerfil",
+      component: AmigosPerfil,
+    },
+    {
+      path: "/recetasPerfil",
+      name: "RecetasPerfil",
+      component: RecetasPerfil,
+    },
+    
   ],
 });
