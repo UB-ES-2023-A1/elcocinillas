@@ -32,7 +32,7 @@ def register(user: User):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor registro: " + str(e))
     
-@app.get("/receta/{name}")
+@app.get("/receta/{name}/")
 def get_receta(name: str):
     try:
         return database.get_recepta(name)
@@ -40,7 +40,7 @@ def get_receta(name: str):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor obtener receta: " + str(e))
 
-@app.get("/recetas/{cadena}")
+@app.get("/recetas/{cadena}/")
 def busca_recetas(cadena: str):
     try:
         return database.busca_recetas(cadena)
@@ -48,7 +48,7 @@ def busca_recetas(cadena: str):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor buscar recetas: " + str(e))
 
-@app.get("/user/{username}")
+@app.get("/user/{username}/")
 def get_user(username: str):
     try:
         return database.get_user(username)
@@ -56,7 +56,7 @@ def get_user(username: str):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor obtener usuario: " + str(e))
 
-@app.put("/user/{user_id}")
+@app.put("/user/{user_id}/")
 def update_user(user_id: str, updated_user: User):
     try:
         database.update_user(user_id,updated_user)
@@ -103,7 +103,7 @@ def publi_img(nombre: str = Form(...), file: UploadFile = File(...)):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor subir img: " + str(e))
 
-@app.post("/receta", response_model=int)
+@app.post("/receta/", response_model=int)
 def publi_receta(receta: Receta):
     try:
         # Intenta crear la receta en la base de datos
@@ -113,14 +113,14 @@ def publi_receta(receta: Receta):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor leer img: " + str(e))
 
-@app.get("/imgReceta/{nombre_receta}")
+@app.get("/imgReceta/{nombre_receta}/")
 def get_image_url(nombre_receta: str):
     try:
         return database.getRecipeImages(nombre_receta)
     except Exception as e:
         return HTTPException(status_code=422, detail="Error en el servidor leer img: " + str(e))
 
-@app.put("/seguir/{user}/{following}")
+@app.put("/seguir/{user}/{following}/")
 def follow_user(user:str,following:str):
     try:
         database.follow_user(user,following)
@@ -129,7 +129,7 @@ def follow_user(user:str,following:str):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor al seguir usuario: " + str(e))
 
-@app.put("/dejar_seguir/{user}/{unfollowing}")
+@app.put("/dejar_seguir/{user}/{unfollowing}/")
 def unfollow_user(user: str, unfollowing: str):
     try:
         database.unfollow_user(user,unfollowing)
@@ -138,7 +138,7 @@ def unfollow_user(user: str, unfollowing: str):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor al dejar de seguir usuario: " + str(e))
 
-@app.get("/siguiendo/{user}")
+@app.get("/siguiendo/{user}/")
 def get_following(user:str):
     try:
         return database.get_following(user)
@@ -146,7 +146,7 @@ def get_following(user:str):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor al buscar lista de siguiendo: " + str(e))
 
-@app.delete("/eliminar_receta/{nombre_receta}")
+@app.delete("/eliminar_receta/{nombre_receta}/")
 def eliminar_receta(nombre_receta: str):
    try:
         database.delete_recipe(nombre_receta)
@@ -155,7 +155,7 @@ def eliminar_receta(nombre_receta: str):
        # Captura cualquier excepción y maneja el error
        return HTTPException(status_code=422, detail="Error en el eliminado de recetas: " + str(e))
 
-@app.put("/guardar/{user}/{recipe}")
+@app.put("/guardar/{user}/{recipe}/")
 def save_recipe(user:str,recipe:str):
     try:
         database.save_recipe(user,recipe)
@@ -164,7 +164,7 @@ def save_recipe(user:str,recipe:str):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor al guardar receta: " + str(e))
 
-@app.get("/guardadas/{user}")
+@app.get("/guardadas/{user}/")
 def get_saved(user:str):
     try:
         return database.get_saved_recipes(user)
@@ -182,7 +182,7 @@ def comentar_receta(comment: Comment):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor publicar comentario: " + str(e))
 
-@app.get("/comments_by_recipe/{recipe_name}")
+@app.get("/comments_by_recipe/{recipe_name}/")
 def comentarios_de_receta(recipe_name: str):
     try:
         return database.get_comments_by_recipe(recipe_name)
@@ -190,7 +190,7 @@ def comentarios_de_receta(recipe_name: str):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor obtener comentarios de receta: " + str(e))
 
-@app.get("/comments_by_user/{user}")
+@app.get("/comments_by_user/{user}/")
 def comentarios_de_usuario(user: str):
     try:
         return database.get_comments_by_user(user)
@@ -198,7 +198,7 @@ def comentarios_de_usuario(user: str):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor obtener comentarios de usuario: " + str(e))
 
-@app.put("/valorar/{receta}/{val}")
+@app.put("/valorar/{receta}/{val}/")
 def valorar_receta(receta: str, val: int):
     try:
         database.valorar_receta(receta,val)
@@ -207,7 +207,7 @@ def valorar_receta(receta: str, val: int):
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en la valoración de receta: " + str(e))
 
-@app.put("/dejar_de_guardar/{user}/{receta}")
+@app.put("/dejar_de_guardar/{user}/{receta}/")
 def unsave_recipe(user: str, receta: str):
     try:
         database.unsave_recipe(user,receta)
