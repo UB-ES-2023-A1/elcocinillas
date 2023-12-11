@@ -56,6 +56,7 @@
       </div>
     </section>
 
+    
     <section class="sections">
       <h4>INGREDIENTES (4 personas):</h4>
       <hr id="solidDividerYellow" />
@@ -72,13 +73,14 @@
         <li>{{ step }}</li>
       </ul>
     </section>
+    
 
     <section id="valoracion" class="sections">
       <div id="rate">
         <!-- First loop for yellow stars -->
         <span v-for="n in rating" :key="'yellow-' + n">
                       <img src="../assets/star1.png" style="width: 6vh;"
-                           @mouseover="stars(n)" @click="rate(n)">
+                           @mouseover="stars(n)" @click="addRating()">
                     </span>
         <!-- Second loop for black stars -->
         <span v-for="m in 5-rating" :key="'black-' + (m + rating)">
@@ -95,20 +97,40 @@
 
     <section class="sections">
       <h4>Comentar Receta:</h4>
-      <textarea id="comment" rows="3" v-model="v"></textarea>
+      <textarea class="comment" rows="3" v-model="cText"></textarea>
       <button class="button" id="cannotComment" 
-      v-if="v == null || v == ''">
+      v-if="cText == null || cText == ''">
         Añadir Comentario
       </button>
       <button class="button" id="canComment" 
-      v-if="v != null && v != ''" @click="comment(v)">
+      v-if="cText != null && cText != ''" @click="addComment()">
         Añadir Comentario
       </button>
+    </section>
+
+    <section class="sections">
+      <h4>Comentarios:</h4>
+      <div v-for="c in this.comments" v-bind:key="c.id">
+        <!--
+        <span v-for="n in userRating" :key="'yellow-' + n">
+          <img src="../assets/star1.png" style="width: 3vh;">
+        </span>
+        <span v-for="m in 5-userRating" :key="'black-' + (m + rating)">
+          <img src="../assets/star0.png" style="width: 3vh;">
+        </span>
+        -->
+        <span style="font-weight: 600; padding-left: 2vh;">{{ c.User }}</span>
+        <p>{{ c.Texto }}</p>
+      </div>
     </section>
   </div>
 </template>
 
 <style scoped>
+p{
+  padding-top: 1vh;
+  padding-left: 2vh;
+}
 #valoracion{
   margin-top: 8%;
   margin-bottom: 5%;
@@ -233,7 +255,8 @@ textarea{
 <script>
 import CirculoComp from "@/components/CirculoComp.vue";
 import axios from "axios";
-import { store } from '../store';
+import { store } from '../store'
+//import router from "@/router";
 export default {
   components: {
     CirculoComp,
@@ -245,6 +268,11 @@ export default {
   },
   data() {
     return {
+      //path: "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/";
+      path: "http://localhost:8000/",
+      userName: store.state.userName,
+      recipe: null,
+
       ingredientes: null,
       steps: null,
       time: 0,
@@ -256,7 +284,7 @@ export default {
       tipo:null,
       valoracionMedia: 0,
       numValoraciones: 0,
-
+      
       //seguir user o recepta
       userSeguid: false,
       receptaSeguida: false,
@@ -267,14 +295,75 @@ export default {
       // Rating
       rating: 0,
       rated: false,
+      userRating: 3,
+
+      // Comments (getting)
+      comments: null,
+
+      // Comment (setting)
+      cUser: null,
+      cText: null,
+      cReci: null,
     };
   },
   created() {
+    this.recipe = window.location.href.substr(this.path.length + 'elcocinillas/recetas/'.length);
     this.getRecipe();
+    this.getComments();
     this.sigoUser();
     this.sigoReceta();
   },
   methods: {
+    addRating(){
+      if(store.state.initSession == false){
+        alert('Debes iniciar sesión para añadir una valoración.');
+      } else {
+        axios.put(this.path + 'valorar/' + this.recipe + '/' + this.rating + '/')
+          .then((response) => {
+            console.log('Rating added successfully', response.data);
+            alert("¡Felicidades! Tu valoración se ha añadido.")
+            this.getRecipe();
+          })
+          .catch((error) => {
+            console.error('Error adding rating:', error);
+            alert("Se ha producido un error. Inténtalo de nuevo más tarde.")
+          })
+      }
+    },
+    getCommentData(){
+      return {
+        Receta: this.recipe,
+        Texto: this.cText,
+        User: this.userName,
+      };
+    },
+    addComment(){
+      if(store.state.initSession == false){
+        alert('Debes iniciar sesión para añadir un comentario.');
+      } else {
+        axios.post(this.path + 'comment/', this.getCommentData())
+            .then((response) => {
+              console.log('Comment added successfully', response.data);
+              alert("¡Felicidades! Tu comentario se ha añadido.")
+              this.getComments();
+            })
+            .catch((error) => {
+              console.error('Error adding comment:', error);
+              alert("Se ha producido un error. Inténtalo de nuevo más tarde.")
+            })
+      }
+    },
+    getComments(){
+      const path = "http://localhost:8000/comments_by_recipe/" + this.nombreReceta + "/";
+      axios.get(path)
+          .then((response) => {
+            console.log("Comments fetched successfully.");
+            this.comments = response.data;
+          })
+          .catch((error) => {
+            console.error("Error fetching comments:", error);
+          })
+    },
     getRecipe() {
       const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
       const urlCodificada = encodeURI(pathReceta);
