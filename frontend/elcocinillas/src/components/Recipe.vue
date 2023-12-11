@@ -1,39 +1,51 @@
 <template>
   <div id="app">
     <section id="headerSection">
-      <h2 id="title">{{ this.name }}</h2>
-      <div class="container">
+      <div class="container-fluid">
         <div class="row">
-          <div class="col-sm border-right">
-            <h2>{{ this.user }}</h2>
-            <h4>usuario</h4>
-          </div>
-          <div class="col-sm border-right">
-            <h2>{{ this.time }}</h2>
-            <h4>minutos</h4>
-          </div>
-          <div class="col-sm border-right">
-            <div id="rate">
-              <!-- First loop for yellow stars -->
-              <span v-for="n in rating" :key="'yellow-' + n">
-                <img src="../assets/star1.png" style="width: 6vh;" 
-                @mouseover="stars(n)" @click="rate(n)">
-              </span>
-              <!-- Second loop for black stars -->
-              <span v-for="m in 5-rating" :key="'black-' + (m + rating)">
-                <img src="../assets/star0.png" style="width: 6vh;" 
-                @mouseover="stars(m + rating)">
-              </span>
+          <div class="col">
+            <div id="contenedorNombre">
+              <h2 id="title">{{ this.name }}</h2>
+              <img src="../img/mark.png" style="height: 30px; color: #eef2b6">
             </div>
-            <h4 v-if="!rated">¡Valora la receta!</h4>
-            <button class="button" id="delRating"
-            v-if="rated" @click="rated = false">
-              Borrar valoración
-            </button>
+            <div id="contenedorUsuario">
+              <h5 id="subtitulo">by {{this.user}}</h5>
+              <img src="../img/person_add.png">
+            </div>
+            <div class="container" id="columnasDebajoTitulo">
+              <div class="row">
+                <div class="col border-right" style="padding-left: 0">
+                  <h2>{{ this.time }}</h2>
+                  <h4>minutos</h4>
+                </div>
+                <div class="col border-right" v-if="this.valoracionMedia !== undefined && this.valoracionMedia > 0">
+                  <h2>{{ this.valoracionMedia }} puntos</h2>
+                  <h4>{{ this.numValoraciones }} valoraciones</h4>
+                </div>
+                <div class="col-sm">
+                  <h2>{{ this.dificultad }} / 5</h2>
+                  <h4>Dificultad</h4>
+                </div>
+              </div>
+            </div>
+            <section id="circulosSection">
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm d-flex justify-content-center" v-if="this.tipo !== '' && this.tipo !== undefined">
+                    <CirculoComp v-bind:texto-superior="this.tipo" textoInferior="Tipo" colorFondo="#EEF2B6"/>
+                  </div>
+                  <div class="col-sm d-flex justify-content-center" v-if="this.classe !== '' && this.classe !== undefined ">
+                    <CirculoComp v-bind:texto-superior="this.classe" textoInferior="Dieta" colorFondo="#73694F"/>
+                  </div>
+                </div>
+              </div>
+            </section>
           </div>
-          <div class="col-sm">
-            <h2>{{ this.dificultad }} / 5</h2>
-            <h4>Dificultad</h4>
+          <div class="col-sm" id="imagenHeader" v-if="this.urlImagen !== undefined && this.urlImagen !== null && this.urlImagen !==''">
+            <img class="img-fluid rounded" :src=this.urlImagen>
+          </div>
+          <div class="col-sm" id="imagenHeaderBis" v-if="this.urlImagen === undefined || this.urlImagen === null || this.urlImagen ===''">
+            <img class="img-fluid rounded" src="../img/default_img_recipe.jpg">
           </div>
         </div>
       </div>
@@ -42,14 +54,38 @@
     <section class="sections">
       <h4>INGREDIENTES (4 personas):</h4>
       <hr id="solidDividerYellow" />
-      <p>{{ this.ingredientes }}</p>
+      <ul v-for="ingrediente in this.ingredientes" :key="ingrediente.id">
+        <li>{{ ingrediente }}</li>
+      </ul>
     </section>
 
-    <section class="sections">
+    <section class="sections" id="pasosText">
       <h4>ELABORACIÓN DE LA RECETA</h4>
       <hr id="solidDividerYellow" />
       <p>Estos son los pasos que tienes que seguir</p>
-      <p>{{ this.steps }}</p>
+      <ul v-for="step in steps" :key="step.id">
+        <li>{{ step }}</li>
+      </ul>
+    </section>
+
+    <section id="valoracion" class="sections">
+      <div id="rate">
+        <!-- First loop for yellow stars -->
+        <span v-for="n in rating" :key="'yellow-' + n">
+                      <img src="../assets/star1.png" style="width: 6vh;"
+                           @mouseover="stars(n)" @click="rate(n)">
+                    </span>
+        <!-- Second loop for black stars -->
+        <span v-for="m in 5-rating" :key="'black-' + (m + rating)">
+                      <img src="../assets/star0.png" style="width: 6vh;"
+                           @mouseover="stars(m + rating)">
+                    </span>
+      </div>
+      <h4 v-if="!rated">¡Valora la receta!</h4>
+      <button class="button" id="delRating"
+              v-if="rated" @click="rated = false">
+        Borrar valoración
+      </button>
     </section>
 
     <section class="sections">
@@ -68,12 +104,16 @@
 </template>
 
 <style scoped>
+#valoracion{
+  margin-top: 8%;
+  margin-bottom: 5%;
+}
 #rate{
   cursor: pointer;
   margin-bottom: 2vh;
 }
 #delRating{
-  color: gray;
+  color: grey;
 }
 #delRating:hover{
   box-shadow: 5px 5px black;
@@ -85,26 +125,52 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 5%;
-  padding-left: 10%;
-  padding-right: 10%;
+  margin-top: 7%;
+  padding-left: 5%;
+  padding-right: 5%;
 }
 
 #headerSection {
   color: #5c5540;
-  margin-bottom: 10%;
+  margin-bottom: 8%;
+}
+
+#contenedorNombre{
+  display: flex;
+  align-items: center;
 }
 
 #title {
   font-weight: bold;
-  margin-bottom: 80px;
   color: #5c5540;
-  text-align: center;
   font-size: xxx-large;
+  text-align: left;
+  margin-left: 4%;
+  margin-right: 10px;
+  margin-bottom: 0;
+}
+
+#contenedorUsuario{
+  display: flex;
+  align-items: center;
+  margin-bottom: 10%;
+}
+
+#subtitulo{
+  text-align: left;
+  margin-left: 4%;
+  margin-right: 10px;
+  margin-bottom: 0;
 }
 .sections {
   color: #5c5540;
   text-align: left;
+  margin-left: 3%;
+}
+
+#circulosSection{
+  margin-top: 15%;
+  margin-bottom: 7%;
 }
 
 #solidDividerYellow {
@@ -112,6 +178,9 @@
   width: 100%;
   opacity: 1;
   margin-bottom: 30px;
+}
+#pasosText{
+  margin-top: 5%;
 }
 .button{
   margin:auto;
@@ -122,7 +191,7 @@
   border-radius: 20px;
   border-style: solid;
   border-width: 1px;
-  border-color: gray;
+  border-color: grey;
   cursor: pointer;
   transition: 0.2s;
   display: grid;
@@ -157,9 +226,13 @@ textarea{
 </style>
 
 <script>
+import CirculoComp from "@/components/CirculoComp.vue";
 import axios from "axios";
 export default {
-  // eslint-disable-next-line vue/multi-word-component-names
+  components: {
+    CirculoComp,
+  },
+  //eslint-disable-next-line vue/multi-word-component-names
   name: "Recipe",
   props: {
     nombreReceta : String
@@ -173,14 +246,17 @@ export default {
       dificultad: 0,
       urlImagen: null,
       user: null,
+      classe:null,
+      tipo:null,
+      valoracionMedia: 0,
+      numValoraciones: 0,
+
       v: null,
       blueish: '#76ded9',
 
       // Rating
       rating: 0,
-      rated: false, 
-
-
+      rated: false,
     };
   },
   created() {
@@ -189,20 +265,29 @@ export default {
 
   methods: {
     getRecipe() {
-      const pathReceta = "http://localhost:8000/receta/"+this.nombreReceta;
-      //const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta;
+      const pathReceta = "http://localhost:8000/receta/"+this.nombreReceta + "/";
+      //const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
       const urlCodificada = encodeURI(pathReceta);
       axios
         .get(urlCodificada)
         .then((response) => {
-          console.log("metodo getRecipe() llamada OK");
+          console.log("metodo getRecipe() llamada OK", response.data);
           this.ingredientes = response.data.ingredientes;
           this.steps = response.data.pasos;
           this.time = response.data.time;
           this.name = response.data.nombre;
           this.dificultad = response.data.dificultad;
-          this.urlImagen = response.data.images.toString();
+          this.urlImagen = response.data.images;
           this.user = response.data.user;
+          this.tipo = response.data.tipo;
+          this.classe = response.data.classe;
+          this.numValoraciones = response.data.num_valoraciones;
+          this.valoracionMedia = response.data.valoracion_media;
+          console.log(this.urlImagen[0])
+
+          if(this.valoracionMedia !== null && this.valoracionMedia !== undefined){
+            this.valoracionMedia = this.valoracionMedia.toFixed(2);
+          }
         })
         .catch((error) => {
           console.error("Error fetching recipes:", error);
