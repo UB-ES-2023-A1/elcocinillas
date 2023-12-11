@@ -96,5 +96,5 @@ Accept: application/json
 
 
 ###
-DELETE http://127.0.0.1:8000/eliminar_cuenta/Mar
+DELETE http://127.0.0.1:8000/eliminar_cuenta/Julia/
 Accept: application/json

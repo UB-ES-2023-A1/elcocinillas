@@ -293,13 +293,14 @@ def valorar_receta(receta, valoracion):
 
 def delete_user(user_id):
     auth.delete_user(user_id)
-    col_ref = db.collection("following")
+    col_ref = db.collection("followers")
     ret = col_ref.stream()
-    fol = [doc.to_dict() for doc in ret]
+    fol = [{"id": doc.id, "datos":doc.to_dict()} for doc in ret]
+    print(fol)
     for d in fol:
-        unfollow_user(d.id, user_id)
+        unfollow_user(d["id"], user_id)
 
-    doc_ref = db.collection("following").document(user_id)
+    doc_ref = db.collection("followers").document(user_id)
     doc = doc_ref.get()
     if doc.exists:
         doc_ref.delete()
