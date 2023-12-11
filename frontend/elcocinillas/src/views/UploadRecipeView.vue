@@ -69,7 +69,7 @@
   </body>
 </template>
 
-<style>
+<style scoped>
 body {
   min-height: 100%;
   font-family: "Lato", sans-serif;

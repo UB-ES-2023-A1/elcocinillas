@@ -18,7 +18,7 @@
 
 </template>
 
-<style>
+<style scoped>
 #app {
   font-family: "Lato", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -68,12 +68,7 @@
   border: none;
   border-radius: 50%;
   font-size: x-large;
-}
-
-#boton-flotante-inner{
-  color: #ffffff;
-  font-size: 24px;
-  text-decoration: none;
+  color: white;
 }
 </style>
 
