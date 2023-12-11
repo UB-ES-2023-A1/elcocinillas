@@ -105,8 +105,6 @@ export default {
       }
       //const path = "http://localhost:8000/recetas/";
       const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/recetas/";
-      const path = "http://localhost:8000/recetas/";
-      //const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/recetas/";
       const classes = this.$chosen.dishes;
       const listaComoCadena = classes.join(',');
       if (this.$chosen.dishes.length === 0){
@@ -144,8 +142,8 @@ export default {
     },
 
     getAllRecipesFromDB() {
-      //const path = "http://localhost:8000/todasrecetas/";
-      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/todasrecetas/";
+      const path = "http://localhost:8000/todasrecetas/";
+      //const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/todasrecetas/";
       axios.get(path)
           .then((response) => {
             console.log("metodo todasRecetas() llamada OK");
@@ -160,8 +158,8 @@ export default {
       this.$router.push('/publicarReceta')
     },
     handleBusqueda() {
-      //const path = "http://localhost:8000/recetas/";
-      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/recetas/";
+      const path = "http://localhost:8000/recetas/";
+      //const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/recetas/";
       axios.get(path + this.$globalData.searchQuery)
       .then((response) => {
         console.log("metodo búsqueda llamada OK");
@@ -179,7 +177,7 @@ export default {
       } else{
         alert("Inicia sesión para poder publicar una receta");
       }
-    }
+    },
   }
 };
 </script>
