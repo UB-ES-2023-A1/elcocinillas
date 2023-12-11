@@ -110,6 +110,8 @@ export default {
       }
       //const path = "http://localhost:8000/recetas/";
       const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/recetas/";
+      const path = "http://localhost:8000/recetas/";
+      //const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/recetas/";
       const classes = this.$chosen.dishes;
       const listaComoCadena = classes.join(',');
       if (this.$chosen.dishes.length === 0){
