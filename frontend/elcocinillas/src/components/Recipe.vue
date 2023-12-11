@@ -51,7 +51,7 @@
       </div>
     </section>
 
-    <!--
+    
     <section class="sections">
       <h4>INGREDIENTES (4 personas):</h4>
       <hr id="solidDividerYellow" />
@@ -68,14 +68,14 @@
         <li>{{ step }}</li>
       </ul>
     </section>
-    -->
+    
 
     <section id="valoracion" class="sections">
       <div id="rate">
         <!-- First loop for yellow stars -->
         <span v-for="n in rating" :key="'yellow-' + n">
                       <img src="../assets/star1.png" style="width: 6vh;"
-                           @mouseover="stars(n)">
+                           @mouseover="stars(n)" @click="addRating()">
                     </span>
         <!-- Second loop for black stars -->
         <span v-for="m in 5-rating" :key="'black-' + (m + rating)">
@@ -303,6 +303,22 @@ export default {
   },
 
   methods: {
+    addRating(){
+      if(store.state.initSession == false){
+        alert('Debes iniciar sesión para añadir una valoración.');
+      } else {
+        axios.put(this.path + 'valorar/' + this.recipe + '/' + this.rating + '/')
+          .then((response) => {
+            console.log('Rating added successfully', response.data);
+            alert("¡Felicidades! Tu valoración se ha añadido.")
+            this.getRecipe();
+          })
+          .catch((error) => {
+            console.error('Error adding rating:', error);
+            alert("Se ha producido un error. Inténtalo de nuevo más tarde.")
+          })
+      }
+    },
     getCommentData(){
       return {
         Receta: this.recipe,
