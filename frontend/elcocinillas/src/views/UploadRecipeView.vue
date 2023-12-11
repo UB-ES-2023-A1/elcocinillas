@@ -228,7 +228,8 @@ export default {
     uploadRecipe() {
       console.log("Click en submit", this.getDatosReceta());
 
-      const path = "http://localhost:8000/receta/";
+      //const path = "http://localhost:8000/receta/";
+      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/";
 
       axios.post(path, this.getDatosReceta())
           .then((response) => {
@@ -264,7 +265,7 @@ export default {
       formData.append('nombre', this.nombreReceta);
       formData.append('file', this.file);
       //const path = "http://localhost:8000/imgUpload/";
-      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/imgUpload";
+      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/imgUpload/";
 
       axios.post(path,formData).then((response) => {
           console.log('Foto seleccionada:', this.images);
