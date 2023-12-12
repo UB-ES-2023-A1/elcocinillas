@@ -74,11 +74,11 @@ def get_recepta(name_recepta):
     doc = doc_ref.get()
     if doc.exists:
         resposta = doc.to_dict()
-
+        '''
         bucket = storage.bucket()
         blob = bucket.blob(ruta_recetas + name_recepta)
         resposta['images'] = [blob.generate_signed_url(method='GET', expiration=3600)]
-
+        '''
         return resposta
     else:
         print("No such document!")

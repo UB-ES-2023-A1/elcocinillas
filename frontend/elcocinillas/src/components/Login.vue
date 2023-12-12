@@ -131,7 +131,7 @@ export default {
               this.$globalData.navKey += 1;
               this.$globalData.logged = true;
               router.push("/recetas");
-              console.log("usuerName: ", store.state.userName)
+              console.log("userName: ", store.state.userName)
             })
             .catch((error) => {
               // Maneja errores de inicio de sesión

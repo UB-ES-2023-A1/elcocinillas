@@ -29,6 +29,10 @@ Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 export const bus = new Vue();
 
+Vue.prototype.$account = Vue.observable({
+  userID: null,
+  loggedIn: false,
+});
 Vue.prototype.$globalData = Vue.observable({
   diets: ['Vegana', 'Vegetariana', 'Omnívora'],
   dishes: ['Ensalada', 'Hamburguesa', 'Postre'],
