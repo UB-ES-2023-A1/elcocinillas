@@ -1,6 +1,6 @@
 <template>
-  <body id="granContainerRegistre">
-    <form @submit.prevent="checkLogin" class="formcontainer">
+  <body id="granContainerLogin">
+    <form @submit.prevent="checkLogin">
       <h2 id="title">Inicio de sesión</h2>
       <div>
         <div class="inner-container">
@@ -17,15 +17,8 @@
 </template>
 
 <style scoped>
-form {
-  width: 100%;
-  padding: 20px;
-  border-radius: 6px;
-  background: #fff;
-  box-shadow: 0 0 8px  #73694F;
-}
 
-#granContainerRegistre {
+body{
   height: 100vh;
   background-image: url('../img/defaultRecipePhoto.png');
   background-size: cover;
@@ -33,6 +26,20 @@ form {
   background-position: center;
   display: block;
   text-align: center;
+}
+
+form {
+  width: 90%;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 0 8px  #73694F;
+  text-align: center;
+  border: 5px solid #EEF2B6;
+  background-color: white;
+  opacity: 95%;
+  display: inline-block;
+  margin-top: 10%;
+  margin-left: 5%;
 }
 
 #title {
@@ -50,16 +57,6 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
-.formcontainer {
-  text-align: center;
-  border: 5px solid #EEF2B6;
-  background-color: white;
-  opacity: 95%;
-  width: 80%;
-  display: inline-block;
-  margin: 5%;
-  margin-top: 10%;
-}
 .inner-container {
   padding: 16px 0;
   text-align:left;
