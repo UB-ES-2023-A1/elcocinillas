@@ -1,5 +1,5 @@
 <template>
-  <body id="granContainerRegistre">
+  <body>
     <div>
       <form @submit.prevent="checkRegistro" class="formcontainer">
         <h2 id="title">Registro</h2>
@@ -23,7 +23,7 @@
 </template>
 
 <style scoped>
-#granContainerRegistre {
+body{
   height: 100vh;
   background-image: url('../img/defaultRecipePhoto.png');
   background-size: cover;
@@ -31,6 +31,19 @@
   background-position: center;
   display: block;
   text-align: center;
+}
+
+form {
+  width: 90%;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 0 8px  #73694F;
+  text-align: center;
+  border: 5px solid #EEF2B6;
+  background-color: white;
+  opacity: 95%;
+  display: inline-block;
+  margin-top: 5%;
 }
 
 #title {
@@ -48,15 +61,6 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
-.formcontainer {
-  text-align: center;
-  border: 5px solid #EEF2B6;
-  background-color: white;
-  opacity: 95%;
-  width: 80%;
-  display: inline-block;
-  margin: 5%;
-}
 .inner-container {
   padding: 16px 0;
   text-align:left;

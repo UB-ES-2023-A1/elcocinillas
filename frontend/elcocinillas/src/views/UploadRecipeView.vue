@@ -11,7 +11,7 @@
         </div>
 
         <div class="item"> 
-          <p>Escoge la dieta<span> *</span></p>
+          <p>Escoge la dieta</p>
           <select v-model="tipoReceta" data-cy="escoge_dieta"> 
             <option selected value=""></option>
             <option value="Vegana" >Vegana</option>
@@ -21,7 +21,7 @@
         </div>
 
         <div class="item">
-          <p>¿De qué clase dirías que es tu plato?<span> *</span></p>
+          <p>¿De qué clase dirías que es tu plato?</p>
           <select v-model="classeReceta" data-cy="escoge_plato">
             <option selected value=""></option>
             <option value="Hamburguesa" >Hamburguesa</option>
@@ -30,13 +30,17 @@
           </select>
         </div>
 
-        <div class="item">
-          <label for="visit">¿Cuáles son los ingredientes necesarios?<span> *</span></label>
-          <textarea id="visit" rows="4" required v-model="ingredientesReceta" data-cy="ingredientes"></textarea>
+        <div class="item" id="ingredientesContainer">
+          <label for="visit">¿Cuáles son los ingredientes necesarios? (Clica el botón para añadir más ingredientes)<span> *</span></label>
+          <textarea id="visit" rows="1" required data-cy="ingredientes"></textarea>
+          <textarea id="visit" rows="1" required data-cy="ingredientes"></textarea>
+          <button type="button" @click="agregarCampoIngrediente()" id="botonIngredientes">Añadir ingrediente</button>
         </div>
-        <div class="item">
+        <div class="item" id="pasosContainer">
           <label for="visit">Describe los pasos para elaborar la receta<span> *</span></label>
-          <textarea id="visit" rows="6" required v-model="pasosReceta" data-cy="descripcion"></textarea>
+          <textarea id="visit" rows="2" required data-cy="descripcion"></textarea>
+          <textarea id="visit" rows="2" required data-cy="descripcion"></textarea>
+          <button type="button" @click="agregarCampoPaso()" id="botonIngredientes">Añadir paso</button>
         </div>
 
         <div class="item">
@@ -61,8 +65,8 @@
           <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="handleFileChange($event)">
         </div>
 
-        <div class="btn-block">
-          <button type="submit">Publicar</button>
+        <div id="divBotonFormulario">
+          <button id="botonFormulario" type="submit">Publicar</button>
         </div>
       </form>
     </div>
@@ -121,6 +125,12 @@ form {
   width: 100%;
   height: 100%;
 }
+#botonIngredientes{
+  background-color: #EEF2B6;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+}
 input, select, textarea {
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -156,22 +166,23 @@ textarea {
   color: red;
 }
 
-.btn-block {
-  margin-top: 10px;
+#divBotonFormulario{
   text-align: center;
 }
-button {
+
+#botonFormulario{
+  text-align: center;
   width: 150px;
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background: #EEF2B6;
   font-size: 16px;
   cursor: pointer;
   margin-top: 7%;
+  background-color: #73694F;
+  color: white;
 }
-button:hover {
-  background: #eef2b6;
+#botonFormulario:hover {
   opacity: 70%;
 }
 
@@ -216,8 +227,8 @@ export default {
       nombreReceta: null,
       classeReceta: "",
       tipoReceta: "",
-      ingredientesReceta: "",
-      pasosReceta: "",
+      ingredientesReceta: [],
+      pasosReceta: [],
       imagesReceta: "",
       timeReceta: 15,
       dificultadReceta: 0
@@ -226,10 +237,12 @@ export default {
 
   methods: {
     uploadRecipe() {
+      this.updateIngredientes();
+      this.updatePasos();
       console.log("Click en submit", this.getDatosReceta());
 
       //const path = "http://localhost:8000/receta/";
-      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/";
+      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta";
 
       axios.post(path, this.getDatosReceta())
           .then((response) => {
@@ -254,7 +267,9 @@ export default {
           pasos: this.pasosReceta,
           images: this.imagesReceta,
           time: this.timeReceta,
-          dificultad: this.dificultadReceta
+          dificultad: this.dificultadReceta,
+          valoracion_media: 0,
+          num_valoraciones: 0
       };
     },
     handleFileChange(event) {
@@ -264,7 +279,6 @@ export default {
       const formData = new FormData();
       formData.append('nombre', this.nombreReceta);
       formData.append('file', this.file);
-      //const path = "http://localhost:8000/imgUpload/";
       const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/imgUpload/";
 
       axios.post(path,formData).then((response) => {
@@ -275,6 +289,59 @@ export default {
       })
     },
 
+    agregarCampoIngrediente() {
+      var camposDiv = document.getElementById('ingredientesContainer');
+      var nuevoCampo = document.createElement('textarea');
+      nuevoCampo.rows = 1
+      nuevoCampo.style.width = 'calc(100% - 12px)';
+      nuevoCampo.style.border = '1px solid #ccc'
+      nuevoCampo.style.padding = '5px'
+      nuevoCampo.style.marginBottom = '10px'
+      nuevoCampo.style.borderRadius = '3px'
+      nuevoCampo.style.color = '#666'
+      nuevoCampo.name = 'nextIngredientes';
+      camposDiv.insertBefore(nuevoCampo, camposDiv.lastChild);
+      camposDiv.insertBefore(document.createElement('br'), nuevoCampo);
+    },
+
+    agregarCampoPaso() {
+      var camposDiv = document.getElementById('pasosContainer');
+      var nuevoCampo = document.createElement('textarea');
+      nuevoCampo.rows = 2
+      nuevoCampo.style.width = 'calc(100% - 12px)';
+      nuevoCampo.style.border = '1px solid #ccc'
+      nuevoCampo.style.padding = '5px'
+      nuevoCampo.style.marginBottom = '10px'
+      nuevoCampo.style.borderRadius = '3px'
+      nuevoCampo.style.color = '#666'
+      nuevoCampo.name = 'nextPaso';
+      camposDiv.insertBefore(nuevoCampo, camposDiv.lastChild);
+      camposDiv.insertBefore(document.createElement('br'), nuevoCampo);
+    },
+
+    updateIngredientes(){
+      var ingredientesContainer = document.getElementById('ingredientesContainer');
+      var textAreas = ingredientesContainer.getElementsByTagName('textarea');
+
+      for (var i = 0; i < textAreas.length; i++) {
+        var valorTextArea = textAreas[i].value;
+        if(valorTextArea !== "" && valorTextArea.length !== 0){
+          this.ingredientesReceta.push(valorTextArea);
+        }
+      }
+    },
+
+    updatePasos(){
+      var pasosContainer = document.getElementById('pasosContainer');
+      var textAreas = pasosContainer.getElementsByTagName('textarea');
+
+      for (var i = 0; i < textAreas.length; i++) {
+        var valorTextArea = textAreas[i].value;
+        if(valorTextArea !== "" && valorTextArea.length !== 0){
+          this.pasosReceta.push(valorTextArea);
+        }
+      }
+    },
   },
 };
 
