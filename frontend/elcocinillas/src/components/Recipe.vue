@@ -152,14 +152,14 @@ p{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 7%;
   padding-left: 5%;
   padding-right: 5%;
 }
 
 #headerSection {
   color: #5c5540;
-  margin-bottom: 8%;
+  margin-bottom: 5%;
+  margin-top: 15px;
 }
 
 #contenedorNombre{
@@ -188,6 +188,9 @@ p{
   margin-left: 4%;
   margin-right: 10px;
   margin-bottom: 0;
+}
+#columnasDebajoTitulo{
+  text-align: center;
 }
 .sections {
   color: #5c5540;
