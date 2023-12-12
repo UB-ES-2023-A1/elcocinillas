@@ -39,7 +39,6 @@ form {
   opacity: 95%;
   display: inline-block;
   margin-top: 10%;
-  margin-left: 5%;
 }
 
 #title {
