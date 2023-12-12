@@ -84,7 +84,7 @@ Accept: application/json
 GET http://127.0.0.1:8000/comments_by_user/Pepe
 Accept: application/json
 
-
+###
 PUT http://127.0.0.1:8000/valorar/Crepes/4
 Accept: application/json
 
@@ -93,3 +93,8 @@ Accept: application/json
 PUT http://127.0.0.1:8000/dejar_de_guardar/Pepe/Tarta_de_Queso
 Accept: application/json
 
+
+
+###
+DELETE http://127.0.0.1:8000/eliminar_cuenta/Julia/
+Accept: application/json
