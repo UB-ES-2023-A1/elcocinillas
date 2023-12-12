@@ -103,7 +103,6 @@ export default {
         this.getAllRecipesFromDB();
         return;
       }
-      //const path = "http://localhost:8000/recetas/";
       const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/recetas/";
       const classes = this.$chosen.dishes;
       const listaComoCadena = classes.join(',');
@@ -142,8 +141,7 @@ export default {
     },
 
     getAllRecipesFromDB() {
-      const path = "http://localhost:8000/todasrecetas/";
-      //const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/todasrecetas/";
+      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/todasrecetas/";
       axios.get(path)
           .then((response) => {
             console.log("metodo todasRecetas() llamada OK");
@@ -158,8 +156,7 @@ export default {
       this.$router.push('/publicarReceta')
     },
     handleBusqueda() {
-      const path = "http://localhost:8000/recetas/";
-      //const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/recetas/";
+      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/recetas/";
       axios.get(path + this.$globalData.searchQuery)
       .then((response) => {
         console.log("metodo búsqueda llamada OK");
