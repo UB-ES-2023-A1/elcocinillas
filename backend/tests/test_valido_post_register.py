@@ -17,3 +17,5 @@ def test_post_register_valid2():
     }
     response = requests.post(f"{API_URL}/register/", json=registro)
     assert "200" in response.text
+
+

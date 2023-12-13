@@ -310,7 +310,6 @@ def delete_user(user_id):
     fol = [{"id": doc.id, "datos":doc.to_dict()} for doc in ret]
     for d in fol:
         unfollow_user(d["id"], user_id)
-
     doc_ref = db.collection("followers").document(user_id)
     doc = doc_ref.get()
     if doc.exists:
