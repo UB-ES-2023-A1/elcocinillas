@@ -149,7 +149,7 @@ a {
   height: 90%; 
   width: 25vh;
   margin: auto;
-  border-radius: 20px;
+  border-radius: 10vh;
   border: none;
   background-color: white;
 }

@@ -16,7 +16,10 @@
     <div id="new">
       <p>nueva receta</p>
     </div>
-    <img id="boton-flotante" src="../assets/plus.png" @click="goToUploadRecipe">
+    <img id="boton-flotante" src="../assets/plus.png" @click="goToUploadRecipe"
+    :style="[$settings.chosen == 'Dark Mode' ?
+    {'filter': 'invert(100%)', 'transition' : '0.2s'} :
+    {}]">
   </div>
 
 </template>
@@ -65,13 +68,8 @@
   width: 8vh;
   bottom: 10%;
   right: 4%;
-  margin: auto; 
-  background-color: white;
   cursor: pointer;
-  border: 2px solid white;
   border-radius: 50%;
-  font-size: x-large;
-  color: white;
   transition: 0.2s;
 }
 #boton-flotante:hover{
