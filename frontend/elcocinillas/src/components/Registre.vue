@@ -51,7 +51,6 @@ input[type=text], input[type=password] {
 .formcontainer {
   text-align: center;
   border: 5px solid #EEF2B6;
-  background-color: white;
   opacity: 95%;
   width: 80%;
   display: inline-block;
@@ -66,7 +65,6 @@ span.psw {
   padding-top: 0;
   padding-right: 15px;
 }
-
 button {
   background-color: #73694F !important;
   color: white !important;

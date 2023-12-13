@@ -100,16 +100,11 @@ a {
   font-size: 4vh;
   color: black;
   text-shadow: 2px black;
-  position: relative;
-  top: 0.5vh;
-
   height: 12vh;
   width: 50vh;
   margin: auto;
-  margin-top: 4vh;
-  margin-bottom: 4vh;
+  margin-bottom: 8vh;
   border-radius: 10vh;
-  top: -20px;
   transition: 0.2s;
 }
 .to-recipes:hover{
