@@ -296,7 +296,6 @@ def delete_user(user_id):
     col_ref = db.collection("followers")
     ret = col_ref.stream()
     fol = [{"id": doc.id, "datos":doc.to_dict()} for doc in ret]
-    print(fol)
     for d in fol:
         unfollow_user(d["id"], user_id)
 
