@@ -89,7 +89,7 @@ def get_all_recipes():
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor leer todas recetas: " + str(e))
 
-@app.post("/imgUpload/", response_model=int)
+@app.post("/imgUpload/", response_model=str)
 def publi_img(nombre: str = Form(...), file: UploadFile = File(...)):
     try:
         # Lee el archivo en memoria
@@ -123,8 +123,7 @@ def get_image_url(nombre_receta: str):
 @app.put("/seguir/{user}/{following}/")
 def follow_user(user:str,following:str):
     try:
-        database.follow_user(user,following)
-        return 200
+        return database.follow_user(user,following)
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor al seguir usuario: " + str(e))
@@ -149,8 +148,7 @@ def get_following(user:str):
 @app.delete("/eliminar_receta/{nombre_receta}/")
 def eliminar_receta(nombre_receta: str):
    try:
-        database.delete_recipe(nombre_receta)
-        return 200
+        return database.delete_recipe(nombre_receta)
    except Exception as e:
        # Captura cualquier excepción y maneja el error
        return HTTPException(status_code=422, detail="Error en el eliminado de recetas: " + str(e))
@@ -201,8 +199,7 @@ def comentarios_de_usuario(user: str):
 @app.put("/valorar/{receta}/{val}/")
 def valorar_receta(receta: str, val: int):
     try:
-        database.valorar_receta(receta,val)
-        return 200
+        return database.valorar_receta(receta,val)
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en la valoración de receta: " + str(e))
@@ -215,3 +212,12 @@ def unsave_recipe(user: str, receta: str):
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor al dejar de guardar receta: " + str(e))
+
+@app.delete("/eliminar_cuenta/{nombre_usuario}/")
+def delete_account(nombre_usuario: str):
+    try:
+        database.delete_user(nombre_usuario)
+        return 200
+    except Exception as e:
+        #Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor eliminando usuario: " + str(e))
