@@ -218,12 +218,14 @@ def get_following(user):
         return []
 
 def delete_recipe(recipe_name):
-    doc_ref = db.collection("receptes")
-    query = doc_ref.where("nombre","==",recipe_name)
-    docs = query.stream()
+    doc_ref = db.collection("receptes").document(recipe_name)
+    doc = doc_ref.get()
 
-    for doc in docs:
-        doc.reference.delete()
+    if doc.exists:
+        doc_ref.delete()
+        return 200
+    else:
+        return HTTPException(status_code=422, detail="Error en el eliminado de recetas: No existe la receta")
 
 def save_recipe(user,recipe):
     doc_ref = db.collection("recetas_guardadas").document(user)
