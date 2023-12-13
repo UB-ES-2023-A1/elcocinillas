@@ -13,6 +13,7 @@
 <style scoped>
 #router{
   padding-top: 5vh;
+  min-height: 81vh;
 }
 </style>
 
@@ -20,6 +21,7 @@
 import NavComp from "./components/NavComp.vue";
 import FooterComp from "./components/FooterComp.vue";
 
+/* eslint-disable vue/no-unused-components */
 export default {
   components: { NavComp, FooterComp },
 };
