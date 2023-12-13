@@ -62,7 +62,7 @@ GET http://127.0.0.1:8000/guardadas/Pepe
 Accept: application/json
 
 ###
-PUT http://127.0.0.1:8000/dejar_seguir/Pepe/Pedro
+PUT http://127.0.0.1:8000/dejar_seguir/Pepe/Julia/
 Accept: application/json
 
 ###
