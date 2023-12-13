@@ -260,6 +260,15 @@ def add_comment(comment):
     doc_ref = db.collection(u'comentarios').document()
     doc_ref.set(comment.__dict__)
 
+def get_macros_by_recipe(recipe):
+    col_ref = db.collection("macros")
+    query = col_ref
+    query = query.where("Receta","==",recipe)
+    result = query.stream()
+    macros = [macro.to_dict() for macro in result]
+
+    return macros
+
 def get_comments_by_recipe(recipe):
     col_ref = db.collection("comentarios")
     query = col_ref

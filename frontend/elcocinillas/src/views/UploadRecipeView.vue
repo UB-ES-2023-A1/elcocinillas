@@ -56,6 +56,21 @@
           <input type="range" min="0" max="120" class="slider" id="myRange" v-model="timeReceta">
         </div>
 
+        <div id="macros">
+          <div class="macro">
+            <label for="phone">Carbohidratos: {{ carbs }} <span>%</span></label>
+            <input type="range" min="0" max="100" class="slider" id="myRange" v-model="carbs">
+          </div>
+          <div class="macro">
+            <label for="phone">Grasas: {{ fat }} <span>%</span></label>
+            <input type="range" min="0" max="100" class="slider" id="myRange" v-model="fat">
+          </div>
+          <div class="macro">
+            <label for="phone">Proteinas: {{ protein }} <span>%</span></label>
+            <input type="range" min="0" max="100" class="slider" id="myRange" v-model="protein">
+          </div>
+        </div>
+
         <div id="photoPicker">
           <label for="exampleFormControlFile1">¿Quieres acompañar tu receta con alguna foto?</label>
           <input type="file" class="form-control-file" id="exampleFormControlFile1" @change="handleFileChange($event)">
@@ -70,6 +85,9 @@
 </template>
 
 <style scoped>
+#macros{
+  display: flex;
+}
 body {
   min-height: 100%;
   font-family: "Lato", sans-serif;
@@ -220,7 +238,10 @@ export default {
       pasosReceta: "",
       imagesReceta: "",
       timeReceta: 15,
-      dificultadReceta: 0
+      dificultadReceta: 0,
+      carbs: 33,
+      fat: 33,
+      protein: 33
     };
   },
 
@@ -228,8 +249,8 @@ export default {
     uploadRecipe() {
       console.log("Click en submit", this.getDatosReceta());
 
-      //const path = "http://localhost:8000/receta/";
-      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/";
+      const path = "http://localhost:8000/receta/";
+      //const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/";
 
       axios.post(path, this.getDatosReceta())
           .then((response) => {
@@ -254,7 +275,10 @@ export default {
           pasos: this.pasosReceta,
           images: this.imagesReceta,
           time: this.timeReceta,
-          dificultad: this.dificultadReceta
+          dificultad: this.dificultadReceta,
+          carbs: this.carbs,
+          fat: this.fat,
+          protein: this.protein
       };
     },
     handleFileChange(event) {
@@ -264,8 +288,8 @@ export default {
       const formData = new FormData();
       formData.append('nombre', this.nombreReceta);
       formData.append('file', this.file);
-      //const path = "http://localhost:8000/imgUpload/";
-      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/imgUpload/";
+      const path = "http://localhost:8000/imgUpload/";
+      //const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/imgUpload/";
 
       axios.post(path,formData).then((response) => {
           console.log('Foto seleccionada:', this.images);

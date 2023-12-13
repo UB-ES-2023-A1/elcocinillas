@@ -13,3 +13,6 @@ class Receta(BaseModel):
     dificultad: int
     valoracion_media: int = 0
     num_valoraciones: int = 0
+    carbs: int = 0
+    fat: int = 0
+    protein: int = 0

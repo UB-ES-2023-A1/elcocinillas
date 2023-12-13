@@ -42,6 +42,9 @@
                   <div class="col-sm d-flex justify-content-center" v-if="this.classe !== '' && this.classe !== undefined ">
                     <CirculoComp v-bind:texto-superior="this.classe" textoInferior="Dieta" colorFondo="#73694F"/>
                   </div>
+                  <div v-if="carbs !== 0 || fat !== 0 || protein !== 0">
+                    <Doughnut id="chart" :data="data" :options="options"/>
+                  </div>
                 </div>
               </div>
             </section>
@@ -56,7 +59,6 @@
       </div>
     </section>
 
-    
     <section class="sections">
       <h4>INGREDIENTES (4 personas):</h4>
       <hr id="solidDividerYellow" />
@@ -73,7 +75,6 @@
         <li>{{ step }}</li>
       </ul>
     </section>
-    
 
     <section id="valoracion" class="sections">
       <div id="rate">
@@ -127,6 +128,10 @@
 </template>
 
 <style scoped>
+#chart{
+  width: 35vh;
+  top: 50vh;
+}
 p{
   padding-top: 1vh;
   padding-left: 2vh;
@@ -256,10 +261,21 @@ textarea{
 import CirculoComp from "@/components/CirculoComp.vue";
 import axios from "axios";
 import { store } from '../store'
+import { Doughnut } from "vue-chartjs";
+import {
+  Chart as ChartJS,
+  Title,
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  ArcElement,
+} from "chart.js";
 //import router from "@/router";
 export default {
   components: {
-    CirculoComp,
+    CirculoComp, Doughnut
   },
   //eslint-disable-next-line vue/multi-word-component-names
   name: "Recipe",
@@ -284,6 +300,9 @@ export default {
       tipo:null,
       valoracionMedia: 0,
       numValoraciones: 0,
+      carbs: 0,
+      fat: 0,
+      protein: 0,
       
       //seguir user o recepta
       userSeguid: false,
@@ -304,6 +323,35 @@ export default {
       cUser: null,
       cText: null,
       cReci: null,
+
+      data: {
+        labels: ["Carbs", "Fat", "Protein"],
+        datasets: [{
+          data: [this.carbs, this.fat, this.protein],
+          backgroundColor: [
+              "rgb(255, 99, 132)",
+              "rgb(54, 162, 235)",
+              "rgb(255, 205, 86)",
+            ],
+            hoverOffset: 4,
+            borderWidth: 1,
+        }]
+      },
+      options: {
+        cutout: "60%",
+        radius: "90%",
+        plugins: {
+          legend: {
+            display: true,
+            position: 'bottom',
+            align: 'start',
+            labels: {
+              padding: 14,
+            }
+          },
+        },
+        responsive: true,
+      }
     };
   },
   created() {
@@ -382,6 +430,9 @@ export default {
           this.classe = response.data.classe;
           this.numValoraciones = response.data.num_valoraciones;
           this.valoracionMedia = response.data.valoracion_media;
+          this.carbs = response.data.carbs;
+          this.fat = response.data.fat;
+          this.protein = response.data.protein;
           console.log(this.urlImagen[0])
 
           if(this.valoracionMedia !== null && this.valoracionMedia !== undefined){
@@ -499,4 +550,15 @@ export default {
     },
   },
 };
+
+/* Macros Chart */
+ChartJS.register(
+  Title, 
+  Tooltip,
+  Legend,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  ArcElement
+);
 </script>
