@@ -24,7 +24,7 @@
 
 <style scoped>
 #granContainerRegistre {
-  height: 100vh;
+  height: fit-content;
   background-image: url('../img/defaultRecipePhoto.png');
   background-size: cover;
   background-repeat: no-repeat;
