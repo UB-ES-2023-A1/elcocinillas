@@ -24,7 +24,7 @@
 
 <style scoped>
 body{
-  height: 100vh;
+  height: fit-content;
   background-image: url('../img/defaultRecipePhoto.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -123,7 +123,10 @@ export default {
             .then((response) => {
               console.log('OK crear usuario:', response.data);
               this.recipes = response.data;
-              alert("¡Felicidades! Te has registrado en El Cocinillas")
+              alert("¡Felicidades! Te has registrado en El Cocinillas");
+
+              // Cookies:
+              document.cookie = "username = " + this.userName + "; initSession = true;";
             })
             .catch((error) => {
               console.error('KO registro:', error);

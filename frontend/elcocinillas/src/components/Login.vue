@@ -126,6 +126,9 @@ export default {
               alert("Sesión iniciada con éxito");
               router.push("/recetas");
               console.log("userName: ", store.state.userName)
+
+              // Cookies:
+              document.cookie = "username = " + store.state.userName + "; Path=/;";
             })
             .catch((error) => {
               // Maneja errores de inicio de sesión

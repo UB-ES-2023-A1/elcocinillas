@@ -4,6 +4,7 @@
   {'background-color': '#2b2b2b', 'color': 'white', 'transition' : '0.2s'} :
   {'background-color': 'white', 'color': '#2b2b2b', 'transition' : '0.2s'}]"
   >
+    <!--<p @click="cookies()">Press</p>-->
     <NavComp/>
     <router-view id="router"/>
     <FooterComp/>
@@ -24,5 +25,10 @@ import FooterComp from "./components/FooterComp.vue";
 /* eslint-disable vue/no-unused-components */
 export default {
   components: { NavComp, FooterComp },
+  methods: {
+    cookies(){
+      alert(document.cookie);
+    }
+  }
 };
 </script>

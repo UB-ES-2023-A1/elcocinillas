@@ -190,7 +190,7 @@ export default {
       this.$settings.chosen = s;
     },
     logoff(){
-      this.$globalData.logged = false;
+      document.cookie = "username = " + store.state.userName + "; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
       store.state.initSession = false;
     },
     logoStart(){
