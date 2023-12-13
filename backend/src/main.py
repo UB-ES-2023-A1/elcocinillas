@@ -123,8 +123,7 @@ def get_image_url(nombre_receta: str):
 @app.put("/seguir/{user}/{following}/")
 def follow_user(user:str,following:str):
     try:
-        database.follow_user(user,following)
-        return 200
+        return database.follow_user(user,following)
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor al seguir usuario: " + str(e))

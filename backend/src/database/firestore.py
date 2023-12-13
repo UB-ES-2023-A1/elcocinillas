@@ -195,6 +195,8 @@ def follow_user(user,follow):
         new_doc = coleccion_ref.document(user)
         new_doc.set({"Following":[follow]})
 
+    return 200
+
 def unfollow_user(user,unfollow):
     doc_ref = db.collection("followers").document(user)
     doc = doc_ref.get()
