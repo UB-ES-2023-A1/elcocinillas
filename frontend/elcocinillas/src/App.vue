@@ -1,15 +1,13 @@
 <template>
   <div>
-    <NavComp style="position: absolute;"></NavComp>
-    <router-view class="router"/>
+    <NavComp id="nav"></NavComp>
+    <router-view id="router"/>
   </div>
 </template>
 
 <style scoped>
-.router{
-  position: absolute;
-  margin-top: 40px;
-  width: 100%;
+#router{
+  padding-bottom: 2vh;
 }
 </style>
 

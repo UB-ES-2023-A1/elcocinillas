@@ -32,8 +32,6 @@ Accept: application/json
 GET http://127.0.0.1:8000/recetas/?classe=vegetariana
 Content-Type: application/json
 
-
-
 ###
 
 GET http://127.0.0.1:8000/todasrecetas/
@@ -49,5 +47,54 @@ Accept: application/json
 
 ###
 GET http://127.0.0.1:8000/siguiendo/Pepe
+Accept: application/json
+
+###
 DELETE http://127.0.0.1:8000/eliminar_receta/Brueba
+Accept: application/json
+
+###
+PUT http://127.0.0.1:8000/guardar/Pepe/Tarta_de_Queso
+Accept: application/json
+
+###
+GET http://127.0.0.1:8000/guardadas/Pepe
+Accept: application/json
+
+###
+PUT http://127.0.0.1:8000/dejar_seguir/Pepe/Pedro
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/comment/
+Content-Type: application/json
+
+{
+  "User": "Pepe",
+  "Receta": "Salchichas al vino",
+  "Texto": "Estan muy ricas"
+}
+
+###
+GET http://127.0.0.1:8000/comments_by_recipe/Queso
+Accept: application/json
+
+###
+GET http://127.0.0.1:8000/comments_by_user/Pepe
+Accept: application/json
+
+###
+PUT http://127.0.0.1:8000/valorar/Lecho/4/
+Accept: application/json
+
+###
+
+PUT http://127.0.0.1:8000/dejar_de_guardar/Pepe/Tarta_de_Queso
+Accept: application/json
+
+
+
+###
+DELETE http://127.0.0.1:8000/eliminar_cuenta/Julia/
 Accept: application/json
