@@ -124,6 +124,7 @@ export default {
             .then((response) => {
               console.log('OK crear usuario:', response.data);
               this.recipes = response.data;
+              router.push("/recetas");
               alert("¡Felicidades! Te has registrado en El Cocinillas")
             })
             .catch((error) => {

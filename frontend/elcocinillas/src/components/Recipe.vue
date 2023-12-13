@@ -322,7 +322,7 @@ export default {
       if(store.state.initSession == false){
         alert('Debes iniciar sesión para añadir una valoración.');
       } else {
-        axios.put(this.path + 'valorar/' + this.recipe + '/' + this.rating + '/')
+        axios.put(this.path + 'valorar/' + this.name + '/' + this.rating + '/')
           .then((response) => {
             console.log('Rating added successfully', response.data);
             alert("¡Felicidades! Tu valoración se ha añadido.")
@@ -336,7 +336,7 @@ export default {
     },
     getCommentData(){
       return {
-        Receta: this.recipe,
+        Receta: this.name,
         Texto: this.cText,
         User: this.userName,
       };
