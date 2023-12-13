@@ -1,5 +1,5 @@
 <template>
-  <div class="pos">
+  <div id="main">
     <div>
       <div class="column left">
         <ColumnComp>
@@ -58,13 +58,11 @@
         </ColumnComp>
       </div>
     </div>
-    <button class="to-recipes">
-      <router-link to="/recetas">
-        <h2 class="to-recipes-text">
-          Ver Recetas
-        </h2>
-      </router-link>
-    </button>
+    <router-link to="/recetas">
+      <button class="to-recipes">
+        Ver Recetas
+      </button>
+    </router-link>
   </div>
 </template>
 
@@ -72,7 +70,7 @@
 a {
   text-decoration: none;
 }
-.pos{
+#main{
   display: grid;
 }
 .column {
@@ -82,15 +80,6 @@ a {
 }
 #slider{
   width: 30vh;
-}
-.left {
-  background-color: white;
-}
-.center {
-  background-color: white;
-}
-.right {
-  background-color: white;
 }
 .image {
   height: 30vh;
@@ -106,32 +95,35 @@ a {
   font-size: 4vh;
 }
 .to-recipes {
-  background-color: #73694f;
-  height: 12vh;
-  width: 50vh;
-  margin: auto;
-  margin-top: 2vh;
-  border-radius: 10px;
-  top: -20px;
-}
-.to-recipes:hover{
-  filter: brightness(1.1);
-  transform: rotate(-3deg);
-  transition: 0.2s;
-}
-.to-recipes-text {
+  background-color: lightgray;
+  text-decoration: none;
   font-size: 4vh;
-  color: white;
+  color: black;
   text-shadow: 2px black;
   position: relative;
   top: 0.5vh;
+
+  height: 12vh;
+  width: 50vh;
+  margin: auto;
+  margin-top: 4vh;
+  margin-bottom: 4vh;
+  border-radius: 10vh;
+  top: -20px;
+  transition: 0.2s;
+}
+.to-recipes:hover{
+  background-color: #76ded9;
+  box-shadow: 5px 5px black;
+  color: white;
+  transition: 0.2s;
 }
 .main-ul{
   height: 100px;
   list-style-type: none;
   padding: 0;
 }
-.main-li{
+.main-li, button{
   height: 4vh;
   width: 30vh;
   font-size: 2.5vh;

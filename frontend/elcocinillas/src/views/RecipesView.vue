@@ -13,7 +13,10 @@
         </recipe-card>
       </div>
     </div>
-    <button id="boton-flotante" @click="goToUploadRecipe">+</button>
+    <div id="new">
+      <p>nueva receta</p>
+    </div>
+    <img id="boton-flotante" src="../assets/plus.png" @click="goToUploadRecipe">
   </div>
 
 </template>
@@ -21,10 +24,7 @@
 <style scoped>
 #app {
   font-family: "Lato", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   overflow: hidden;
 }
 
@@ -40,7 +40,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 5%;
@@ -50,25 +49,34 @@
 
 #title {
   font-weight: bold;
-  margin-bottom: 80px;
-  color: #5c5540;
+  margin-bottom: 2.5vh;
   text-align: center;
   font-size: xxx-large;
   margin-right: 10%;
 }
-
+#new{
+  position: fixed;
+  bottom: 17%;
+  right: 2.5%;
+}
 #boton-flotante {
   position: fixed;
-  height: 55px;
-  width: 55px;
-  bottom: 8%;
-  right: 8%;
-  padding: 10px;
-  background-color: #73694F;
-  border: none;
+  height: 8vh;
+  width: 8vh;
+  bottom: 10%;
+  right: 4%;
+  margin: auto; 
+  background-color: white;
+  cursor: pointer;
+  border: 2px solid white;
   border-radius: 50%;
   font-size: x-large;
   color: white;
+  transition: 0.2s;
+}
+#boton-flotante:hover{
+  transform: scale(1.05);
+  transition: 0.2s;
 }
 </style>
 

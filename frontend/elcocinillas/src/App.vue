@@ -1,14 +1,18 @@
 <template>
-  <div style="position: flex; direction: column">
+  <div
+  :style="[$settings.chosen == 'Dark Mode' ?
+  {'background-color': '#2b2b2b', 'color': 'white', 'transition' : '0.2s'} :
+  {'background-color': 'white', 'color': '#2b2b2b', 'transition' : '0.2s'}]"
+  >
     <NavComp/>
-    <router-view/>
+    <router-view id="router"/>
     <FooterComp/>
   </div>
 </template>
 
 <style scoped>
 #router{
-  padding-bottom: 2vh;
+  padding-top: 5vh;
 }
 </style>
 

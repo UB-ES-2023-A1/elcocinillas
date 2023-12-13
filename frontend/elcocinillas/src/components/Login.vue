@@ -16,7 +16,7 @@
   </body>
 </template>
 
-<style>
+<style scoped>
 
 </style>
 

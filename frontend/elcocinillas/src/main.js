@@ -29,6 +29,10 @@ Vue.use(BootstrapVue);
 Vue.config.productionTip = false;
 export const bus = new Vue();
 
+Vue.prototype.$settings = Vue.observable({
+  themes: ['Dark Mode', 'Light Mode'],
+  chosen: 'Light Mode',
+})
 Vue.prototype.$account = Vue.observable({
   userID: null,
   loggedIn: false,
