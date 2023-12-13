@@ -1,4 +1,5 @@
 import os
+from fastapi import HTTPException
 import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
@@ -213,7 +214,7 @@ def get_following(user):
         return lista
     else:
         return []
-      
+
 def delete_recipe(recipe_name):
     doc_ref = db.collection("receptes")
     query = doc_ref.where("nombre","==",recipe_name)
@@ -254,8 +255,8 @@ def unsave_recipe(user,recipe):
         if recipe in lista:
             lista.remove(recipe)
             doc_ref.update({"Recetas": lista})
-    
-      
+
+
 def add_comment(comment):
     doc_ref = db.collection(u'comentarios').document()
     doc_ref.set(comment.__dict__)
@@ -289,3 +290,25 @@ def valorar_receta(receta, valoracion):
             new_num = num + 1
             new_val = val/new_num
             doc_ref.update({"valoracion_media": new_val,"num_valoraciones": new_num})
+            return 200
+        else:
+            return HTTPException(status_code=422, detail="Error en la valoración de receta: No existe la receta")
+
+    else:
+        return HTTPException(status_code=422, detail="Error en la valoración de receta: Valoración no valida ")
+
+
+
+def delete_user(user_id):
+    auth.delete_user(user_id)
+    col_ref = db.collection("followers")
+    ret = col_ref.stream()
+    fol = [{"id": doc.id, "datos":doc.to_dict()} for doc in ret]
+    for d in fol:
+        unfollow_user(d["id"], user_id)
+
+    doc_ref = db.collection("followers").document(user_id)
+    doc = doc_ref.get()
+    if doc.exists:
+        doc_ref.delete()
+

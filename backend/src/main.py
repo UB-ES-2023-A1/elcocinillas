@@ -201,8 +201,7 @@ def comentarios_de_usuario(user: str):
 @app.put("/valorar/{receta}/{val}/")
 def valorar_receta(receta: str, val: int):
     try:
-        database.valorar_receta(receta,val)
-        return 200
+        return database.valorar_receta(receta,val)
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en la valoración de receta: " + str(e))
@@ -215,3 +214,12 @@ def unsave_recipe(user: str, receta: str):
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor al dejar de guardar receta: " + str(e))
+
+@app.delete("/eliminar_cuenta/{nombre_usuario}/")
+def delete_account(nombre_usuario: str):
+    try:
+        database.delete_user(nombre_usuario)
+        return 200
+    except Exception as e:
+        #Captura cualquier excepción y maneja el error
+        return HTTPException(status_code=422, detail="Error en el servidor eliminando usuario: " + str(e))
