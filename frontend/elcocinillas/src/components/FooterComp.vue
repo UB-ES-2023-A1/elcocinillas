@@ -17,16 +17,16 @@
                 <span class="elcoci-rss" aria-hidden="true"></span>
             </h1>
         </div>
-        <div style="padding: 10px; color: #76DED9; text-align: center;">
-            <h1 href="/about/">Acerca de</h1> | <h1 href="/more/customer-service/">Atención al Cliente</h1> | <h1 href="/more/elcocinillas/">Zona Profesional</h1> | <h1 href="/more/contact">Contacto</h1>
+        <div style="padding: 10px; color: #76DED9; text-align: center; column-count: 3">
+            <h4 href="/about/">Acerca de</h4>  <h4 href="/more/customer-service/">Atención al Cliente</h4> <h4 href="/more/elcocinillas/">Zona Profesional</h4> <h4 href="/more/contact">Contacto</h4>
         </div>
-        <div style="font-size: x-small; padding: 5px; color: #76DED9; text-align: center;">
-            <h1 href="/more/privacy-notice/">Privacidad</h1> |
-            <h1 href="https://www.iubenda.com/privacy-policy/37587182/cookie-policy">Política de Cookies</h1> |
-            <h1 class="iubenda-cs-preferences-link" href="#" data-iub-enabled="1">Preferencias de Rastreo</h1> |
-            <h1 href="javascript:void(0)" class="iubenda-ccpa-opt-out">Do Not Sell or Share My Personal Information</h1> |
-            <h1 href="/more/terms-of-use/">Términos de Uso</h1> |
-            <h1 href="/more/legal-information/">Información Legal</h1> |
+        <div style="font-size: x-small; padding: 5px; color: #76DED9; text-align: center; column-count: 3">
+            <h4 href="/more/privacy-notice/">Privacidad</h4>
+            <h4 href="https://www.iubenda.com/privacy-policy/37587182/cookie-policy">Política de Cookies</h4>
+            <h4 class="iubenda-cs-preferences-link" href="#" data-iub-enabled="1">Preferencias de Rastreo</h4>
+            <h4 href="javascript:void(0)" class="iubenda-ccpa-opt-out">Do Not Sell or Share My Personal Information</h4> 
+            <h4 href="/more/terms-of-use/">Términos de Uso</h4>
+            <h4 href="/more/legal-information/">Información Legal</h4>
         </div>
         <div style="text-align: center; padding-bottom: 20px;">
             <p>© 2023 El Cocinillas es propiedad de El Cocinillas inc.</p>
