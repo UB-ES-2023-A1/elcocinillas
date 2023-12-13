@@ -135,14 +135,14 @@
   text-decoration: none;
   cursor: pointer;
   border: 2px solid;
-  color: #13CFB9;
+  color: #73694F;
   border-radius: 5px;
   transition: background-color 0.3s, color 0.3s;
 }
 
 /* Cambio de estilos al pasar el ratón por encima */
 .boton:hover {
-  background-color: #13CFB9;
+  background-color: #6F4E40;
   color: #ffffff;
 }
   
@@ -171,8 +171,7 @@ export default {
   },
   methods: {
     modificarInformacion() {
-      //const url = 'http://localhost:8000/user/'+ store.state.userName;
-      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/user/' + store.state.userName;
+      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/user/' + store.state.userName + '/';
       axios.put(url, this.getDatosPerfilUsuario())
           .then((response) => {
             console.log('Ok modificar datos:', response.data);

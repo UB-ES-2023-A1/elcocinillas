@@ -157,14 +157,14 @@ p{
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 7%;
   padding-left: 5%;
   padding-right: 5%;
 }
 
 #headerSection {
   color: #5c5540;
-  margin-bottom: 8%;
+  margin-bottom: 5%;
+  margin-top: 15px;
 }
 
 #contenedorNombre{
@@ -193,6 +193,9 @@ p{
   margin-left: 4%;
   margin-right: 10px;
   margin-bottom: 0;
+}
+#columnasDebajoTitulo{
+  text-align: center;
 }
 .sections {
   color: #5c5540;
@@ -324,19 +327,6 @@ export default {
       cText: null,
       cReci: null,
 
-      data: {
-        labels: ["Carbs", "Fat", "Protein"],
-        datasets: [{
-          data: [this.carbs, this.fat, this.protein],
-          backgroundColor: [
-              "rgb(255, 99, 132)",
-              "rgb(54, 162, 235)",
-              "rgb(255, 205, 86)",
-            ],
-            hoverOffset: 4,
-            borderWidth: 1,
-        }]
-      },
       options: {
         cutout: "60%",
         radius: "90%",
@@ -413,7 +403,8 @@ export default {
           })
     },
     getRecipe() {
-      const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
+      const pathReceta = "http://localhost:8000/receta/" + this.nombreReceta + "/";
+      //const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
       const urlCodificada = encodeURI(pathReceta);
       axios
         .get(urlCodificada)
@@ -434,6 +425,20 @@ export default {
           this.fat = response.data.fat;
           this.protein = response.data.protein;
           console.log(this.urlImagen[0])
+
+          this.data = {
+            labels: ["Carbs", "Fat", "Protein"],
+            datasets: [{
+              data: [this.carbs, this.fat, this.protein],
+              backgroundColor: [
+                  "rgb(255, 99, 132)",
+                  "rgb(54, 162, 235)",
+                  "rgb(255, 205, 86)",
+                ],
+                hoverOffset: 4,
+                borderWidth: 1,
+            }]
+          };
 
           if(this.valoracionMedia !== null && this.valoracionMedia !== undefined){
             this.valoracionMedia = this.valoracionMedia.toFixed(2);
@@ -561,4 +566,8 @@ ChartJS.register(
   LinearScale,
   ArcElement
 );
+
+document.addEventListener('DOMContentLoaded', function() {
+  alert(this.carbs);
+}, false);
 </script>
