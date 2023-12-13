@@ -148,8 +148,7 @@ def get_following(user:str):
 @app.delete("/eliminar_receta/{nombre_receta}/")
 def eliminar_receta(nombre_receta: str):
    try:
-        database.delete_recipe(nombre_receta)
-        return 200
+        return database.delete_recipe(nombre_receta)
    except Exception as e:
        # Captura cualquier excepción y maneja el error
        return HTTPException(status_code=422, detail="Error en el eliminado de recetas: " + str(e))
