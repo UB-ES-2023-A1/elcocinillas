@@ -6,11 +6,16 @@
           <div class="col">
             <div id="contenedorNombre">
               <h2 id="title">{{ this.name }}</h2>
-              <img src="../img/mark.png" style="height: 30px; color: #eef2b6">
+              <img src="../img/mark.png" 
+              style="height: 30px;"
+              :style="{ filter: this.receptaSeguida ? 'invert(27%) sepia(99%) saturate(715%) hue-rotate(346deg) brightness(112%) contrast(104%)' : 'grayscale(100%)' }"
+              @click="seguirReceta()">
             </div>
             <div id="contenedorUsuario">
               <h5 id="subtitulo">by {{this.user}}</h5>
-              <img src="../img/person_add.png">
+              <img src="../img/person_add.png"
+              :style="{ filter: this.userSeguid ? 'invert(27%) sepia(99%) saturate(715%) hue-rotate(346deg) brightness(112%) contrast(104%)' : 'grayscale(100%)'}"
+              @click="seguirAmigo()">
             </div>
             <div class="container" id="columnasDebajoTitulo">
               <div class="row">
@@ -51,7 +56,7 @@
       </div>
     </section>
 
-    <!--
+    
     <section class="sections">
       <h4>INGREDIENTES (4 personas):</h4>
       <hr id="solidDividerYellow" />
@@ -68,14 +73,14 @@
         <li>{{ step }}</li>
       </ul>
     </section>
-    -->
+    
 
     <section id="valoracion" class="sections">
       <div id="rate">
         <!-- First loop for yellow stars -->
         <span v-for="n in rating" :key="'yellow-' + n">
                       <img src="../assets/star1.png" style="width: 6vh;"
-                           @mouseover="stars(n)">
+                           @mouseover="stars(n)" @click="addRating()">
                     </span>
         <!-- Second loop for black stars -->
         <span v-for="m in 5-rating" :key="'black-' + (m + rating)">
@@ -279,7 +284,12 @@ export default {
       tipo:null,
       valoracionMedia: 0,
       numValoraciones: 0,
+      
+      //seguir user o recepta
+      userSeguid: false,
+      receptaSeguida: false,
 
+      v: null,
       blueish: '#76ded9',
 
       // Rating
@@ -300,9 +310,26 @@ export default {
     this.recipe = window.location.href.substr(this.path.length + 'elcocinillas/recetas/'.length);
     this.getRecipe();
     this.getComments();
+    this.sigoUser();
+    this.sigoReceta();
   },
-
   methods: {
+    addRating(){
+      if(store.state.initSession == false){
+        alert('Debes iniciar sesión para añadir una valoración.');
+      } else {
+        axios.put(this.path + 'valorar/' + this.recipe + '/' + this.rating + '/')
+          .then((response) => {
+            console.log('Rating added successfully', response.data);
+            alert("¡Felicidades! Tu valoración se ha añadido.")
+            this.getRecipe();
+          })
+          .catch((error) => {
+            console.error('Error adding rating:', error);
+            alert("Se ha producido un error. Inténtalo de nuevo más tarde.")
+          })
+      }
+    },
     getCommentData(){
       return {
         Receta: this.recipe,
@@ -338,8 +365,7 @@ export default {
           })
     },
     getRecipe() {
-      const pathReceta = "http://localhost:8000/receta/" + this.nombreReceta + "/";
-      //const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
+      const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
       const urlCodificada = encodeURI(pathReceta);
       axios
         .get(urlCodificada)
@@ -372,6 +398,104 @@ export default {
     rate(n){
       alert('Valoración añadida: ' + n + ' estrellas!');
       this.rated = true;
+    },
+    comment(v){
+      alert('Comentario añadido: "' + v + '"');
+    },
+    sigoUser(){
+      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/siguiendo/' + store.state.userName + '/';
+      axios.get(url)
+        .then((response) => {
+          const usersSeguidos = response.data;
+          const usuarioBuscado = this.user;
+
+          usersSeguidos.forEach((usuario) => {
+            if (usuario === usuarioBuscado) {
+              // Si se encuentra el usuario, actualiza la propiedad a true
+              this.userSeguid = true;
+            }
+          });
+        })
+        .catch((error) => {
+            alert("Error al actualizar lista de amigos")
+            console.error('KO modificar datos:', error);
+        })
+    },
+    sigoReceta(){
+      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/guardadas/' + store.state.userName + '/';
+      axios.get(url)
+        .then((response) => {
+          const recetasSeguidas = response.data;
+          const recetaBuscada = this.name;
+
+          recetasSeguidas.forEach((receta) =>{
+            if(receta === recetaBuscada){
+              this.receptaSeguida = true;
+            }
+          });
+        })
+        .catch((error) => {
+          alert("Error al actualizar lista de recetas")
+          console.error('KO modificar datos:', error);
+        })
+    },
+    seguirReceta(){
+      if (this.receptaSeguida){
+        const receta = '/' + this.name;
+        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/dejar_de_guardar/' + store.state.userName + receta + '/';
+        axios.put(url)
+          .then((response) => {
+            console.log('Ok modificar datos:', response.data);
+            window.alert('Se ha eliminado la receta: '+ this.name + ' de tu lista de recetas');
+            this.receptaSeguida = false;
+          })
+          .catch((error) => {
+            console.error('KO modificar datos:', error);
+            alert("Se ha producido un error. Inténtalo de nuevo más tarde")
+          })
+      }else{
+        const receta = '/' + this.name;
+        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/guardar/' + store.state.userName + receta + '/';
+        axios.put(url)
+          .then((response) => {
+            console.log('Ok modificar datos:', response.data);
+            window.alert('Se ha añadido la receta: '+ this.name + ' a tu lista de recetas');
+            this.receptaSeguida = true;
+          })
+          .catch((error) => {
+            console.error('KO modificar datos:', error);
+            alert("Se ha producido un error. Inténtalo de nuevo más tarde")
+          })
+      }
+    },
+    seguirAmigo(){
+      if(this.userSeguid){
+        const unfollow = '/' + this.user;
+        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/dejar_seguir/' + store.state.userName + unfollow + '/';
+        axios.put(url)
+        .then((response) => {
+          console.log('Ok modificar datos:', response.data);
+          window.alert('Se ha eliminado a: '+ this.user + ' de tu lista de amigos');
+          this.userSeguid = false;
+        })
+        .catch((error) => {
+          console.error('KO modificar datos:', error);
+          alert("Se ha producido un error. Inténtalo de nuevo más tarde")
+        })
+      }else{
+        const follow = '/' + this.user;
+        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/seguir/' + store.state.userName + follow + '/';
+        axios.put(url)
+        .then((response) => {
+            window.alert('Has empezado a seguir a: '+ this.user);
+            console.log(response);
+            this.userSeguid = true;
+        })
+        .catch((error) => {
+            console.error('KO modificar datos:', error);
+            alert("Se ha producido un error. Inténtalo de nuevo más tarde");
+        })
+      }
     },
   },
 };

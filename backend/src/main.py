@@ -89,7 +89,7 @@ def get_all_recipes():
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor leer todas recetas: " + str(e))
 
-@app.post("/imgUpload/", response_model=int)
+@app.post("/imgUpload/", response_model=str)
 def publi_img(nombre: str = Form(...), file: UploadFile = File(...)):
     try:
         # Lee el archivo en memoria
