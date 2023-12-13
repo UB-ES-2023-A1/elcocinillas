@@ -1,4 +1,5 @@
 import os
+from fastapi import HTTPException
 import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
@@ -289,6 +290,13 @@ def valorar_receta(receta, valoracion):
             new_num = num + 1
             new_val = val/new_num
             doc_ref.update({"valoracion_media": new_val,"num_valoraciones": new_num})
+            return 200
+        else:
+            return HTTPException(status_code=422, detail="Error en la valoración de receta: No existe la receta")
+
+    else:
+        return HTTPException(status_code=422, detail="Error en la valoración de receta: Valoración no valida ")
+
 
 
 def delete_user(user_id):

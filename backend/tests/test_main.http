@@ -85,7 +85,7 @@ GET http://127.0.0.1:8000/comments_by_user/Pepe
 Accept: application/json
 
 ###
-PUT http://127.0.0.1:8000/valorar/Crepes/4
+PUT http://127.0.0.1:8000/valorar/Lecho/4/
 Accept: application/json
 
 ###
