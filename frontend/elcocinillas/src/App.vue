@@ -1,10 +1,16 @@
 <template>
-  <div style="position: flex; direction: column">
-    <NavComp/>
-    <router-view/>
+  <div>
+    <NavComp id="nav"></NavComp>
+    <router-view id="router"/>
     <FooterComp/>
   </div>
 </template>
+
+<style scoped>
+#router{
+  padding-bottom: 2vh;
+}
+</style>
 
 <script>
 import NavComp from "./components/NavComp.vue";

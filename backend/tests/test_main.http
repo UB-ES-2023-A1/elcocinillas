@@ -1,0 +1,100 @@
+POST http://127.0.0.1:8000/register/
+Content-Type: application/json
+
+{   
+    "email": "usuariodeprueba@gmail.com",
+    "password": "123456",
+    "userID": "12345"
+}
+
+###
+
+POST http://127.0.0.1:8000/receta
+Content-Type: application/json
+
+{   
+    "user": "12345",
+    "nombre": "Salsa de boletus",
+    "classe": "vegetariana",
+    "tipo": "italiana",
+    "ingredientes": ["boletus", "nata liquida", "cebolla"],
+    "pasos": ["cortar boletus y cebolla", "añadir nata y dejar reducir"],
+    "images": [],
+    "time": 30,
+    "dificultad": 2
+}
+###
+
+GET http://127.0.0.1:8000/user/Kd9WLagwJkVuBm5Ph2vrVWLNLg23
+Accept: application/json
+###
+
+GET http://127.0.0.1:8000/recetas/?classe=vegetariana
+Content-Type: application/json
+
+###
+
+GET http://127.0.0.1:8000/todasrecetas/
+Accept: application/json
+
+###
+GET http://127.0.0.1:8000/recetas/Salso
+Accept: application/json
+
+###
+PUT http://127.0.0.1:8000/seguir/Pepe/Julia/
+Accept: application/json
+
+###
+GET http://127.0.0.1:8000/siguiendo/Pepe
+Accept: application/json
+
+###
+DELETE http://127.0.0.1:8000/eliminar_receta/Prueba5/
+Accept: application/json
+
+###
+PUT http://127.0.0.1:8000/guardar/Pepe/Tortell%20reis/
+Accept: application/json
+
+###
+GET http://127.0.0.1:8000/guardadas/Pepe
+Accept: application/json
+
+###
+PUT http://127.0.0.1:8000/dejar_seguir/Pepe/Julia/
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8000/comment/
+Content-Type: application/json
+
+{
+  "User": "Julia",
+  "Receta": "Crepes",
+  "Texto": "A mi no me gustaron"
+}
+
+###
+GET http://127.0.0.1:8000/comments_by_recipe/Queso
+Accept: application/json
+
+###
+GET http://127.0.0.1:8000/comments_by_user/Pepe
+Accept: application/json
+
+###
+PUT http://127.0.0.1:8000/valorar/Lecho/3/
+Accept: application/json
+
+###
+
+PUT http://127.0.0.1:8000/dejar_de_guardar/Pepe/Tortell%20reis/
+Accept: application/json
+
+
+
+###
+DELETE http://127.0.0.1:8000/eliminar_cuenta/Julia/
+Accept: application/json

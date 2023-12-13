@@ -1,63 +1,46 @@
 <template>
-  <section>
-    <section class="hidden">
-      <h1>
-        <slot name="heading"></slot>
-      </h1>
-      <p class="image">
-        <slot name="image"></slot>
-      </p>
-      <p>
-        <slot name="description"></slot>
-      </p>
-    </section>
-    <router-link to="/diary/1">
-      <section class="hidden link">
-        <h2>Recipes</h2>
-        <img class="diaryImg" src="../assets/diary.png" />
+  <div style="margin: 1vh">
+    <section class="col-section">
+      <section class="hidden col-section">
+        <p class="heading">
+          <slot name="heading"></slot>
+        </p>
+        <p class="image">
+          <slot name="image"></slot>
+        </p>
       </section>
-    </router-link>
-  </section>
+    </section>
+    <div class="description">
+      <slot name="description"></slot>
+    </div>
+  </div>
 </template>
 
 <style scoped>
-* {
-  padding: 0;
-  margin: 0;
+.image{
+  margin-top: 4vh;
 }
-.link {
-  transition: 1s;
+.description {
+  display: flex;
+  margin: auto;
+  place-content: center;
+  text-align: center;
+  position: relative;
+  font-size: 2.5vh;
 }
-.link:hover {
-  transform: scale(1.05);
-  transition: 1s;
-}
-
-h1 {
-  font-size: 50px;
+.heading {
+  margin-top: 12%;
+  font-size: 7.5vh;
   color: black;
   text-shadow: 2px 2px white;
 }
-h2 {
-  font-size: 40px;
-  color: black;
-  text-shadow: 2px 2px white;
-  text-decoration: none;
-}
-.diaryImg {
-  height: 150px;
-  width: 200px;
-}
-section {
-  display: grid;
-  place-items: center;
-  align-content: center;
-  min-height: 100vh;
+.col-section {
+  text-align: center;
 }
 .hidden {
   opacity: 0;
   filter: blur(5px);
-  transform: translateX(-100%);
+  transform: translate(-100%);
   transition: all 1s;
 }
 .show {

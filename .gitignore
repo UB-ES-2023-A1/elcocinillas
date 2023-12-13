@@ -129,6 +129,7 @@ ENV/
 env.bak/
 venv.bak/
 
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -165,4 +166,4 @@ backend/.idea/
 frontend/elcocinillas/.vs
 
 frontend/elcocinillas/package-lock.json
-backend/src/database/elcocinillas.json
+/backend/src/pc_env/
