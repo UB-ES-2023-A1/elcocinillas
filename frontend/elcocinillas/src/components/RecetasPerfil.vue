@@ -10,8 +10,8 @@
                         Lista de Recetas
                     </div>
                     <div class="c-input">
-                        <input type="Busqueda Receta">
-                        <button>Buscar Receta</button>
+                        <input v-model="nombreReceta" type="text" placeholder="Busqueda Receta">
+                        <button @click="busqueda()">Buscar Receta</button>
                     </div>
                 </div>
                 <div class="c-body">
@@ -20,7 +20,7 @@
                             <li>
                                 {{ receta }}
                             </li>
-                            <button id="button" type="button" class="btn btn-danger" @click="delReceta(index)">
+                            <button id="button" type="button" class="btn btn-danger" @click="eliminarReceta(receta,index)">
                                 <span>Eliminar Receta</span>
                             </button>
                         </div>
@@ -164,22 +164,62 @@ border-bottom: none; /* No agrega borde inferior al último elemento li */
 </style>
 <script>
 // eslint-disable-next-line vue/multi-word-component-names
+import axios from 'axios';
+import { store } from '../store';
 import NavPerfil from "./NavPerfil";
 export default {
   name: "RecetasPerfil",
   components: { NavPerfil },
     data() {
         return {
-            recetas: ["Pollo con arroz", "Hamburguesa", 
-            "Patatas Bravas", "Pollo con Champiñones", 
-            "Setas a la brasa"]
+          nombreReceta: "",
+          recetas: [],
+          recetasFiltradas: [],
+
         }
     },
+    created() {
+      this.listarRecetas();
+    },
     methods:{
-        delReceta(index) {
-            this.recetas.splice(index, 1);
-            alert("Se ha actualizado la lista de Recetas");
+      eliminarReceta(nombre, index){
+        const receta = '/' + nombre
+        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/dejar_de_guardar/' + store.state.userName + receta + '/';
+        axios.put(url)
+        .then((response) => {
+          console.log('Ok modificar datos:', response.data);
+          window.alert('Datos modificados correctamente');
+          this.recetas.splice(index, 1);
+        })
+        .catch((error) => {
+          console.error('KO modificar datos:', error);
+          alert("Se ha producido un error. Inténtalo de nuevo más tarde")
+        })
+      },
+      listarRecetas(){
+        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/guardadas/' + store.state.userName + '/';
+        axios.get(url)
+        .then((response) => {
+          this.recetas = response.data;
+
+        })
+        .catch((error) => {
+          alert("Error al actualizar lista de recetas");
+          console.error('KO modificar datos:', error);
+        })
+      },
+      busqueda(){
+        if(this.nombreReceta !== ""){
+          this.recetasFiltradas = this.recetas.filter(receta =>
+            receta.toLowerCase().includes(this.nombreReceta.toLowerCase())
+
+          );
+          this.recetas = this.recetasFiltradas;
+        }else{
+          this.recetasFiltradas = [];
+          this.listarRecetas();
         }
+      },
     }
 }
 </script>

@@ -43,7 +43,7 @@ jobs:
           creds: ${{ secrets.USER_AZURE }}
 
       - run: |
-            az containerapp up --name elcocinillas-api --resource-group elcocinillasGroup --location westeurope --image leuis123/elcocinillas:latest --target-port 80 --ingress external --query properties.configuration.ingress.fqdn
+            az containerapp up --name elcocinillas-api --resource-group elcocinillasGroup --location westeurope --image leuis123/elcocinillas:latest --target-port 443 --ingress external --query properties.configuration.ingress.fqdn
 
   build:
     runs-on: ubuntu-latest

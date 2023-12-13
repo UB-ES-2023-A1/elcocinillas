@@ -1,4 +1,5 @@
 import os
+from fastapi import HTTPException
 import firebase_admin
 from firebase_admin import firestore
 from firebase_admin import credentials
@@ -74,11 +75,11 @@ def get_recepta(name_recepta):
     doc = doc_ref.get()
     if doc.exists:
         resposta = doc.to_dict()
-
+        '''
         bucket = storage.bucket()
         blob = bucket.blob(ruta_recetas + name_recepta)
         resposta['images'] = [blob.generate_signed_url(method='GET', expiration=3600)]
-
+        '''
         return resposta
     else:
         print("No such document!")
@@ -194,6 +195,8 @@ def follow_user(user,follow):
         new_doc = coleccion_ref.document(user)
         new_doc.set({"Following":[follow]})
 
+    return 200
+
 def unfollow_user(user,unfollow):
     doc_ref = db.collection("followers").document(user)
     doc = doc_ref.get()
@@ -204,8 +207,6 @@ def unfollow_user(user,unfollow):
             lista.remove(unfollow)
             doc_ref.update({"Following": lista})
 
-
-
 def get_following(user):
     doc_ref = db.collection("followers").document(user)
     doc = doc_ref.get()
@@ -215,14 +216,50 @@ def get_following(user):
         return lista
     else:
         return []
-      
-def delete_recipe(recipe_name):
-    doc_ref = db.collection("receptes")
-    query = doc_ref.where("nombre","==",recipe_name)
-    docs = query.stream()
 
-    for doc in docs:
-        doc.reference.delete()
+def delete_recipe(recipe_name):
+    doc_ref = db.collection("receptes").document(recipe_name)
+    doc = doc_ref.get()
+
+    if doc.exists:
+        doc_ref.delete()
+        return 200
+    else:
+        return HTTPException(status_code=422, detail="Error en el eliminado de recetas: No existe la receta")
+
+def save_recipe(user,recipe):
+    doc_ref = db.collection("recetas_guardadas").document(user)
+    doc = doc_ref.get()
+
+    if doc.exists:
+        lista = doc.get("Recetas")
+        lista.append(recipe)
+        doc_ref.update({"Recetas": lista})
+
+    else:
+        coleccion_ref = db.collection("recetas_guardadas")
+        new_doc = coleccion_ref.document(user)
+        new_doc.set({"Recetas": [recipe]})
+
+
+def get_saved_recipes(user):
+    doc_ref = db.collection("recetas_guardadas").document(user)
+    doc = doc_ref.get()
+    if doc.exists:
+        lista = doc.get("Recetas")
+        return lista
+    else:
+        return []
+
+def unsave_recipe(user,recipe):
+    doc_ref = db.collection("recetas_guardadas").document(user)
+    doc = doc_ref.get()
+    if doc.exists:
+        lista = doc.get("Recetas")
+        if recipe in lista:
+            lista.remove(recipe)
+            doc_ref.update({"Recetas": lista})
+
 
 def add_comment(comment):
     doc_ref = db.collection(u'comentarios').document()
@@ -257,13 +294,24 @@ def valorar_receta(receta, valoracion):
             new_num = num + 1
             new_val = val/new_num
             doc_ref.update({"valoracion_media": new_val,"num_valoraciones": new_num})
+            return 200
+        else:
+            return HTTPException(status_code=422, detail="Error en la valoración de receta: No existe la receta")
 
-def unsave_recipe(user,recipe):
-    doc_ref = db.collection("recetas_guardadas").document(user)
+    else:
+        return HTTPException(status_code=422, detail="Error en la valoración de receta: Valoración no valida ")
+
+
+
+def delete_user(user_id):
+    auth.delete_user(user_id)
+    col_ref = db.collection("followers")
+    ret = col_ref.stream()
+    fol = [{"id": doc.id, "datos":doc.to_dict()} for doc in ret]
+    for d in fol:
+        unfollow_user(d["id"], user_id)
+    doc_ref = db.collection("followers").document(user_id)
     doc = doc_ref.get()
-
     if doc.exists:
-        lista = doc.get("Recetas")
-        if recipe in lista:
-            lista.remove(recipe)
-            doc_ref.update({"Recetas": lista})
+        doc_ref.delete()
+
