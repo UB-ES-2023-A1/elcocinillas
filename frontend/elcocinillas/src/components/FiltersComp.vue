@@ -10,7 +10,7 @@
     <div class="section">
       <h2 class="filters-h2">Dietas:</h2>
       <ul class="filters-ul">
-        <li class="filters-li" v-for="diet in this.$globalData.diets" v-bind:key="diet.id"
+        <li class="filters-li" v-for="diet in this.$globalData.diets" v-bind:key="diet.id" data-cy="escoge_dieta_menu"
         :style="[$chosen.diet === diet ? 
         {'background-color': clicked} :
         {'background-color': notClicked, 'color': 'black'}]"
@@ -22,7 +22,7 @@
     <div class="section">
       <h2 class="filters-h2">Tipos de Plato:</h2>
       <ul class="filters-ul">
-        <li class="filters-li" v-for="dish in this.$globalData.dishes" v-bind:key="dish.id"
+        <li class="filters-li" v-for="dish in this.$globalData.dishes" v-bind:key="dish.id"  data-cy="escoge_plato"
         :style="[$chosen.dishes.includes(dish) ? 
         {'background-color': clicked} :
         {'background-color': notClicked, 'color': 'black'}]"
@@ -84,6 +84,10 @@
   margin-bottom: 2vh;
   box-shadow: 5px 5px black;
   transition: 0.2s;
+}
+input[type="range"] {
+  accent-color: #73694F;
+  width: 250px;
 }
 </style>
 
