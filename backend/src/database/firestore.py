@@ -258,14 +258,21 @@ def get_saved_recipes(user):
         return []
 
 def unsave_recipe(user,recipe):
-    doc_ref = db.collection("recetas_guardadas").document(user)
-    doc = doc_ref.get()
-    if doc.exists:
-        lista = doc.get("Recetas")
-        if recipe in lista:
-            lista.remove(recipe)
-            doc_ref.update({"Recetas": lista})
-
+    rec_ref = db.collection("receptes").document(recipe)
+    rec = rec_ref.get()
+    if rec.exists:
+        doc_ref = db.collection("recetas_guardadas").document(user)
+        doc = doc_ref.get()
+        if doc.exists:
+            lista = doc.get("Recetas")
+            if recipe in lista:
+                lista.remove(recipe)
+                doc_ref.update({"Recetas": lista})
+                return 200
+            else:
+                return HTTPException(status_code=422,detail="Error en el servidor al dejar de guardar receta: El usuario no tiene la receta guardada")
+    else:
+        return HTTPException(status_code=422, detail="Error en el servidor al dejar de guardar receta: La receta no existe")
 
 def add_comment(comment):
     doc_ref = db.collection(u'comentarios').document()

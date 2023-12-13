@@ -54,7 +54,7 @@ DELETE http://127.0.0.1:8000/eliminar_receta/Prueba5/
 Accept: application/json
 
 ###
-PUT http://127.0.0.1:8000/guardar/Pepe/Crec/
+PUT http://127.0.0.1:8000/guardar/Pepe/Tortell%20reis/
 Accept: application/json
 
 ###
@@ -85,12 +85,12 @@ GET http://127.0.0.1:8000/comments_by_user/Pepe
 Accept: application/json
 
 ###
-PUT http://127.0.0.1:8000/valorar/Lecho/4/
+PUT http://127.0.0.1:8000/valorar/Lecho/3/
 Accept: application/json
 
 ###
 
-PUT http://127.0.0.1:8000/dejar_de_guardar/Pepe/Tarta_de_Queso
+PUT http://127.0.0.1:8000/dejar_de_guardar/Pepe/Tortell%20reis/
 Accept: application/json
 
 
