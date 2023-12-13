@@ -71,9 +71,9 @@ POST http://127.0.0.1:8000/comment/
 Content-Type: application/json
 
 {
-  "User": "Pepe",
-  "Receta": "Salchichas al vino",
-  "Texto": "Estan muy ricas"
+  "User": "Julia",
+  "Receta": "Crepes",
+  "Texto": "A mi no me gustaron"
 }
 
 ###
