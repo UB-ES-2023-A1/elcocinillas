@@ -228,18 +228,24 @@ def delete_recipe(recipe_name):
         return HTTPException(status_code=422, detail="Error en el eliminado de recetas: No existe la receta")
 
 def save_recipe(user,recipe):
-    doc_ref = db.collection("recetas_guardadas").document(user)
-    doc = doc_ref.get()
+    rec_ref = db.collection("receptes").document(recipe)
+    rec = rec_ref.get()
+    if rec.exists:
+        doc_ref = db.collection("recetas_guardadas").document(user)
+        doc = doc_ref.get()
 
-    if doc.exists:
-        lista = doc.get("Recetas")
-        lista.append(recipe)
-        doc_ref.update({"Recetas": lista})
+        if doc.exists:
+            lista = doc.get("Recetas")
+            lista.append(recipe)
+            doc_ref.update({"Recetas": lista})
 
+        else:
+            coleccion_ref = db.collection("recetas_guardadas")
+            new_doc = coleccion_ref.document(user)
+            new_doc.set({"Recetas": [recipe]})
+        return 200
     else:
-        coleccion_ref = db.collection("recetas_guardadas")
-        new_doc = coleccion_ref.document(user)
-        new_doc.set({"Recetas": [recipe]})
+        return HTTPException(status_code=422, detail="Error en el servidor al guardar receta: No existe la receta ")
 
 
 def get_saved_recipes(user):

@@ -156,8 +156,7 @@ def eliminar_receta(nombre_receta: str):
 @app.put("/guardar/{user}/{recipe}/")
 def save_recipe(user:str,recipe:str):
     try:
-        database.save_recipe(user,recipe)
-        return 200
+        return database.save_recipe(user,recipe)
     except Exception as e:
         # Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor al guardar receta: " + str(e))

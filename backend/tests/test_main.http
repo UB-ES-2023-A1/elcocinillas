@@ -54,7 +54,7 @@ DELETE http://127.0.0.1:8000/eliminar_receta/Prueba5/
 Accept: application/json
 
 ###
-PUT http://127.0.0.1:8000/guardar/Pepe/Tarta_de_Queso
+PUT http://127.0.0.1:8000/guardar/Pepe/Crec/
 Accept: application/json
 
 ###
