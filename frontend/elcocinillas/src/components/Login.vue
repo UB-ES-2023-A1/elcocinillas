@@ -124,8 +124,6 @@ export default {
               store.state.userName = uid;
               store.state.initSession = true;
               alert("Sesión iniciada con éxito");
-              this.$globalData.navKey += 1;
-              this.$globalData.logged = true;
               router.push("/recetas");
               console.log("userName: ", store.state.userName)
             })

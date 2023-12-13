@@ -368,7 +368,8 @@ export default {
           })
     },
     getRecipe() {
-      const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
+      const pathReceta = "http://localhost:8000/receta/"
+      //const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
       const urlCodificada = encodeURI(pathReceta);
       axios
         .get(urlCodificada)

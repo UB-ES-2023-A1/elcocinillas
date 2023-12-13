@@ -33,17 +33,10 @@ Vue.prototype.$settings = Vue.observable({
   themes: ['Dark Mode', 'Light Mode'],
   chosen: 'Light Mode',
 })
-Vue.prototype.$account = Vue.observable({
-  userID: null,
-  loggedIn: false,
-});
+
 Vue.prototype.$globalData = Vue.observable({
   diets: ['Vegana', 'Vegetariana', 'Omnívora'],
   dishes: ['Ensalada', 'Hamburguesa', 'Postre'],
-  logged: false,
-  darkMode: false,
-  recipesKey: 0,
-  navKey: 0,
   searchQuery:''
 });
 Vue.prototype.$chosen = Vue.observable({
