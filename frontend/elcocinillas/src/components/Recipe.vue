@@ -11,7 +11,7 @@
               :style="{ filter: this.receptaSeguida ? 'invert(27%) sepia(99%) saturate(715%) hue-rotate(346deg) brightness(112%) contrast(104%)' : 'grayscale(100%)' }"
               @click="seguirReceta()">
             </div>
-            <div id="contenedorUsuario">
+            <div id="contenedorUsuario" data-cy="imagenAgregarAmigo">
               <h5 id="subtitulo">by {{this.user}}</h5>
               <img src="../img/person_add.png"
               :style="{ filter: this.userSeguid ? 'invert(27%) sepia(99%) saturate(715%) hue-rotate(346deg) brightness(112%) contrast(104%)' : 'grayscale(100%)'}"
