@@ -10,12 +10,8 @@
       ]
     },
     {
-      "name": "Atención al Cliente",
-      "id": 2
-    },
-    {
       "name": "Contacto",
-      "id": 3,
+      "id": 2,
       "list": [
         "Dirección de Oficinas: \n Gran Via de les Corts Catalanes, 585, L'Eixample, 08007 Barcelona",
         "Correo de Contacto: \n sblancpo108@alumnes.ub.edu",
@@ -24,7 +20,7 @@
     },
     {
       "name": "Información Legal",
-      "id": 4,
+      "id": 3,
       "paragraphs": [
         "Descargo de responsabilidad",
         "Referencia a la resolución de disputas de la UE",
@@ -39,15 +35,15 @@
     },
     {
       "name": "Política de Cookies",
-      "id": 5
+      "id": 4
     },
     {
       "name": "Privacidad",
-      "id": 6
+      "id": 5
     },
     {
       "name": "Términos & Condiciones",
-      "id": 7,
+      "id": 6,
       "img": "t&c.png",
       "paragraphs": [
         "Estos términos y condiciones describen las reglas y regulaciones para el uso del sitio web de El Cocinillas, ubicado en elcocinillas.com.",
