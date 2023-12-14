@@ -25,6 +25,9 @@
               <button class="boton" type="submit">Modificar Información</button>
             </div>
           </form>
+          <div class="delete">
+                <button @click="deleteAccount" class="boton" >Eliminar cuenta</button>
+          </div>
         </div>
       </div>
     </div>
@@ -179,7 +182,7 @@ export default {
             router.push("/recetas");
           })
           .catch((error) => {
-            console.error('KO modificar datos:', error);
+            console.error('KO modificar dato:', error);
             alert("Se ha producido un error. Inténtalo de nuevo más tarde")
           })
     },
@@ -190,6 +193,21 @@ export default {
         email: this.correo,
         password: this.contrasena
       };
+    },
+    deleteAccount(){
+      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/eliminar_cuenta/' + store.state.userName + '/';
+      axios.delete(url)
+          .then((response) => {
+              console.log('Ok eliminar usuario:', response.data);
+              window.alert('Usuario eliminado correctamente');
+              router.push("/recetas");
+              this.$globalData.logged = false;
+              store.state.initSession = false;
+          })
+          .catch((error) => {
+            console.error('KO eliminar usuario:', error);
+            alert("Se ha producido un error. Inténtalo de nuevo más tarde")
+          })
     },
   },
 };
