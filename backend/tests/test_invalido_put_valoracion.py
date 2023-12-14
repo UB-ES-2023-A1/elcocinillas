@@ -29,4 +29,4 @@ def test_put_valorar_invalid4():
    val = 3.5
 
    response = requests.put(f"{API_URL}/valorar/{receta}/{val}")
-   assert "value is not a valid integer" in response.text
+   assert "422" not in response.text

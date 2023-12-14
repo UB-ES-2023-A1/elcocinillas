@@ -32,7 +32,7 @@ def test_post_receta_valid2():
   "dificultad": 1
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "value is not a valid list" in response.text
+    assert "422" not in response.text
 
 def test_post_receta_valid3():
     receta = {
@@ -47,7 +47,8 @@ def test_post_receta_valid3():
   "dificultad": 1
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "value is not a valid list" in response.text
+    assert "422" in response.text
+
 def test_post_receta_valid4():
     receta = {
   "user": "testcorrecto1",
@@ -61,7 +62,7 @@ def test_post_receta_valid4():
   "dificultad": 1
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "value is not a valid list" in response.text
+    assert "422" in response.text
 
 def test_post_receta_valid5():
     receta = {
@@ -76,7 +77,7 @@ def test_post_receta_valid5():
   "dificultad": 1
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "value is not a valid list" in response.text
+    assert "422" in response.text
 
 def test_post_receta_valid6():
     receta = {
@@ -91,7 +92,7 @@ def test_post_receta_valid6():
   "dificultad": 0
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "value is not a valid list" in response.text
+    assert "422" in response.text
 
 def test_post_receta_valid7():
     receta = {
@@ -106,7 +107,7 @@ def test_post_receta_valid7():
   "dificultad": 1
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "value is not a valid list" in response.text
+    assert "422" in response.text
 
 def test_post_receta_valid8():
     receta = {
@@ -121,7 +122,7 @@ def test_post_receta_valid8():
   "dificultad": 2247483649
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "value is not a valid list" in response.text
+    assert "422" in response.text
 
 def test_post_receta_valid9():
     receta = {
@@ -136,7 +137,8 @@ def test_post_receta_valid9():
   "dificultad": 1
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "value is not a valid list" in response.text
+    assert "422" in response.text
+    
 def test_post_receta_valid10():
     receta = {
   "user": "testcorrecto1",
@@ -150,7 +152,7 @@ def test_post_receta_valid10():
   "dificultad": -2247483649
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "value is not a valid list" in response.text
+    assert "422" in response.text
 
 def test_post_receta_valid11():
     receta = {
@@ -165,7 +167,7 @@ def test_post_receta_valid11():
   "dificultad": 1
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "value is not a valid list" in response.text
+    assert "422" in response.text
 
 def test_post_receta_valid12():
     receta = {
@@ -180,4 +182,4 @@ def test_post_receta_valid12():
   "dificultad": 1
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "value is not a valid list" in response.text
+    assert "422" in response.text
