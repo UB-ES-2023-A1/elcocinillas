@@ -163,7 +163,7 @@ export default {
     },
     handleBusqueda() {
       const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/recetas/";
-      axios.get(path + this.$globalData.searchQuery)
+      axios.get(path + this.$globalData.searchQuery + "/")
       .then((response) => {
         console.log("metodo búsqueda llamada OK");
         this.recipes = response.data;

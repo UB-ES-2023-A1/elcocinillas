@@ -6,14 +6,14 @@
           <div class="col">
             <div id="contenedorNombre">
               <h2 id="title">{{ this.name }}</h2>
-              <img src="../img/mark.png" 
+              <img src="../img/mark.png" v-if="this.logged" data-cy="imagenGuardarReceta"
               style="height: 30px;"
               :style="{ filter: this.receptaSeguida ? 'invert(27%) sepia(99%) saturate(715%) hue-rotate(346deg) brightness(112%) contrast(104%)' : 'grayscale(100%)' }"
               @click="seguirReceta()">
             </div>
             <div id="contenedorUsuario">
               <h5 id="subtitulo">by {{this.user}}</h5>
-              <img src="../img/person_add.png"
+              <img src="../img/person_add.png" v-if="this.logged" data-cy="imagenAgregarAmigo"
               :style="{ filter: this.userSeguid ? 'invert(27%) sepia(99%) saturate(715%) hue-rotate(346deg) brightness(112%) contrast(104%)' : 'grayscale(100%)'}"
               @click="seguirAmigo()">
             </div>
@@ -319,7 +319,7 @@ export default {
       if(this.$globalData.logged == false){
         alert('Debes iniciar sesión para añadir una valoración.');
       } else {
-        axios.put(this.path + 'valorar/' + this.recipe + '/' + this.rating + '/')
+        axios.put(this.path + 'valorar/' + this.name + '/' + this.rating + '/')
           .then((response) => {
             console.log('Rating added successfully', response.data);
             alert("¡Felicidades! Tu valoración se ha añadido.")
@@ -333,7 +333,7 @@ export default {
     },
     getCommentData(){
       return {
-        Receta: this.recipe,
+        Receta: this.name,
         Texto: this.cText,
         User: this.userName,
       };
@@ -355,7 +355,7 @@ export default {
       }
     },
     getComments(){
-      const path = "http://localhost:8000/comments_by_recipe/" + this.nombreReceta + "/";
+      const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/comments_by_recipe/" + this.nombreReceta + "/";
       axios.get(path)
           .then((response) => {
             console.log("Comments fetched successfully.");

@@ -13,6 +13,7 @@
     <NavComp/>
     <router-view id="router"/>
     <FooterComp/>
+    <FooterComp/>
   </div>
 </template>
 

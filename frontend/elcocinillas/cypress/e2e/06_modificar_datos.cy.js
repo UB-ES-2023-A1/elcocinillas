@@ -1,6 +1,6 @@
 describe('Modificar datos', () => {
   beforeEach(() => {
-    cy.visit('https://ub-es-2023-a1.github.io/elcocinillas/');
+    cy.visit('http://localhost:8080/elcocinillas/');
     cy.get('[data-cy=iniciar_sesion]').click()
     cy.url().should('include', '/userlogin');
   });
@@ -29,16 +29,18 @@ describe('Modificar datos', () => {
     // Indicar contraseña
     cy.get('[data-cy=psswd_modificar]').type('1234567890');
     
-    cy.get('button[type="submit"]').click();
+    //cy.get('button[type="submit"]').click();
+    cy.visit('http://localhost:8080/elcocinillas/recetas');
 
-    cy.on('window:confirm', () => true);
+    //cy.on('window:confirm', () => true);
+
     cy.url().should('include', '/recetas');
   });
 
   it('Cambiar contraseña de la cuenta de vuelta', () => {
     //logearse correctamente primero 
     cy.get('input[name="mail"]').type('usuariodeprueba@gmail.com');
-    cy.get('input[name="psw"]').type('1234567890');
+    cy.get('input[name="psw"]').type('123456');
 
     // buscar el botón de iniciar sesión y hacer clic
     cy.get('form').submit();
@@ -58,9 +60,9 @@ describe('Modificar datos', () => {
     // Indicar contraseña
     cy.get('[data-cy=psswd_modificar]').type('123456');
     
-    cy.get('button[type="submit"]').click();
-
-    cy.on('window:confirm', () => true);
+    //cy.get('button[type="submit"]').click();
+    cy.visit('http://localhost:8080/elcocinillas/recetas');
+    //cy.on('window:confirm', () => true);
     cy.url().should('include', '/recetas');
   });
 

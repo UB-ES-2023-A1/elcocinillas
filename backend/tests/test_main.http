@@ -42,7 +42,7 @@ GET http://127.0.0.1:8000/recetas/Salso
 Accept: application/json
 
 ###
-PUT http://127.0.0.1:8000/seguir/Pepe/Pedro
+PUT http://127.0.0.1:8000/seguir/Pepe/Julia/
 Accept: application/json
 
 ###
@@ -50,11 +50,11 @@ GET http://127.0.0.1:8000/siguiendo/Pepe
 Accept: application/json
 
 ###
-DELETE http://127.0.0.1:8000/eliminar_receta/Brueba
+DELETE http://127.0.0.1:8000/eliminar_receta/Prueba5/
 Accept: application/json
 
 ###
-PUT http://127.0.0.1:8000/guardar/Pepe/Tarta_de_Queso
+PUT http://127.0.0.1:8000/guardar/Pepe/Tortell%20reis/
 Accept: application/json
 
 ###
@@ -62,7 +62,7 @@ GET http://127.0.0.1:8000/guardadas/Pepe
 Accept: application/json
 
 ###
-PUT http://127.0.0.1:8000/dejar_seguir/Pepe/Pedro
+PUT http://127.0.0.1:8000/dejar_seguir/Pepe/Julia/
 Accept: application/json
 
 ###
@@ -71,9 +71,9 @@ POST http://127.0.0.1:8000/comment/
 Content-Type: application/json
 
 {
-  "User": "Pepe",
-  "Receta": "Salchichas al vino",
-  "Texto": "Estan muy ricas"
+  "User": "Julia",
+  "Receta": "Crepes",
+  "Texto": "A mi no me gustaron"
 }
 
 ###
@@ -85,12 +85,12 @@ GET http://127.0.0.1:8000/comments_by_user/Pepe
 Accept: application/json
 
 ###
-PUT http://127.0.0.1:8000/valorar/Lecho/4/
+PUT http://127.0.0.1:8000/valorar/Lecho/3/
 Accept: application/json
 
 ###
 
-PUT http://127.0.0.1:8000/dejar_de_guardar/Pepe/Tarta_de_Queso
+PUT http://127.0.0.1:8000/dejar_de_guardar/Pepe/Tortell%20reis/
 Accept: application/json
 
 
