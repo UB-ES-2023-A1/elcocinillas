@@ -269,8 +269,8 @@ export default {
   },
   data() {
     return {
-      //path: "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/";
-      path: "http://localhost:8000/",
+      path: "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/";
+      //path: "http://localhost:8000/",
       userName: this.$cookies.username(),
       recipe: null,
 
@@ -366,8 +366,8 @@ export default {
           })
     },
     getRecipe() {
-      const pathReceta = "http://localhost:8000/receta/"
-      //const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
+      //const pathReceta = "http://localhost:8000/receta/"
+      const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
       const urlCodificada = encodeURI(pathReceta);
       axios
         .get(urlCodificada)
