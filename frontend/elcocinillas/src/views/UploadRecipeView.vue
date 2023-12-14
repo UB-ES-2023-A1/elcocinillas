@@ -20,7 +20,7 @@
           </select>
         </div>
 
-        <div class="item">
+        <div class="item"> 
           <p>¿De qué clase dirías que es tu plato?</p>
           <select v-model="classeReceta" data-cy="escoge_plato">
             <option selected value=""></option>
@@ -33,12 +33,10 @@
         <div class="item" id="ingredientesContainer">
           <label for="visit">¿Cuáles son los ingredientes necesarios? (Clica el botón para añadir más ingredientes)<span> *</span></label>
           <textarea id="visit" rows="1" required data-cy="ingredientes"></textarea>
-          <textarea id="visit" rows="1" required data-cy="ingredientes"></textarea>
           <button type="button" @click="agregarCampoIngrediente()" id="botonIngredientes">Añadir ingrediente</button>
         </div>
         <div class="item" id="pasosContainer">
           <label for="visit">Describe los pasos para elaborar la receta<span> *</span></label>
-          <textarea id="visit" rows="2" required data-cy="descripcion"></textarea>
           <textarea id="visit" rows="2" required data-cy="descripcion"></textarea>
           <button type="button" @click="agregarCampoPaso()" id="botonIngredientes">Añadir paso</button>
         </div>
