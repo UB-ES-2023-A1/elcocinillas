@@ -6,14 +6,14 @@
           <div class="col">
             <div id="contenedorNombre">
               <h2 id="title">{{ this.name }}</h2>
-              <img src="../img/mark.png" v-if="this.logged"
+              <img src="../img/mark.png" v-if="this.logged" data-cy="imagenGuardarReceta"
               style="height: 30px;"
               :style="{ filter: this.receptaSeguida ? 'invert(27%) sepia(99%) saturate(715%) hue-rotate(346deg) brightness(112%) contrast(104%)' : 'grayscale(100%)' }"
               @click="seguirReceta()">
             </div>
             <div id="contenedorUsuario">
               <h5 id="subtitulo">by {{this.user}}</h5>
-              <img src="../img/person_add.png" v-if="this.logged"
+              <img src="../img/person_add.png" v-if="this.logged" data-cy="imagenAgregarAmigo"
               :style="{ filter: this.userSeguid ? 'invert(27%) sepia(99%) saturate(715%) hue-rotate(346deg) brightness(112%) contrast(104%)' : 'grayscale(100%)'}"
               @click="seguirAmigo()">
             </div>

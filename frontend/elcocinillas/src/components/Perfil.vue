@@ -21,7 +21,7 @@
               <input class="input" type="password" v-model="contrasena" required data-cy="psswd_modificar">
               <label class="label" for="contrasena">Contraseña:</label>
             </div>
-            <div class="botonContainer">
+            <div class="botonContainer" data-cy="modificarInformacionBtn">
               <button class="boton" type="submit">Modificar Información</button>
             </div>
           </form>
