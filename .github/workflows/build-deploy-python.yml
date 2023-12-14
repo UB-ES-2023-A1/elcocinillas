@@ -66,7 +66,15 @@ jobs:
 
       - name: Test with pytest
         run: |
-          cd ./backend/src && uvicorn main:app --reload
-          python -m pytest ../tests
+          cd ./backend/src
+          nohup uvicorn main:app --reload > uvicorn.log 2>&1 &
 
+      - name: Esperar a que uvicorn se inicie
+        run: sleep 5
+      
+      - name: Realizar pruebas o cualquier otra tarea después de iniciar uvicorn
+        run: python -m pytest ./backend/tests
+
+      - name: Detener uvicorn al finalizar
+        run: pkill -f "uvicorn main:app"
 
