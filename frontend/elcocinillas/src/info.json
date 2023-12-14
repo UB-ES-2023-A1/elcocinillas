@@ -3,15 +3,17 @@
     {
       "name": "Acerca de",
       "id": 1,
-      "paragrahs": [
+      "paragraphs": [
         "El Cocinillas es una empresa emergente a con intención de convertirse en un líder en páginas de alimentación. Basándonos en crear una website fácil de usar, trabajamos por una mejor Internet para todos.",
         "Nuestra visión es construir un mundo donde el conocimiento sobre la cocina se comparta de forma libre pero segura. Queremos crear un ecosistema digital próspero.",
         "Creemos que el consentimiento es un derecho humano básico y que cualquier modelo de negocio exitoso basado en datos del futuro considera que el consentimiento y el cumplimiento de los datos son el centro de su empresa."
-      ]
+      ],
+      "list": []
     },
     {
       "name": "Contacto",
       "id": 2,
+      "paragrahs": [],
       "list": [
         "Dirección de Oficinas: \n Gran Via de les Corts Catalanes, 585, L'Eixample, 08007 Barcelona",
         "Correo de Contacto: \n sblancpo108@alumnes.ub.edu",
@@ -22,26 +24,21 @@
       "name": "Información Legal",
       "id": 3,
       "paragraphs": [
-        "Descargo de responsabilidad",
-        "Referencia a la resolución de disputas de la UE",
-        "La Comisión Europea proporciona una plataforma para la resolución de disputas (OS) en línea: https://ec.europa.eu/consumers/odr. Nuestra dirección de correo electrónico se puede encontrar aquí en el pie de imprenta.",
-        "Responsabilidad por el contenido",
-        "Como proveedor de servicios somos responsables según § 7 Abs.1 TMG de los contenidos propios de estas páginas según las leyes generales. Sin embargo, según los artículos 8 a 10 de la TMG, nosotros, como proveedores de servicios, no estamos obligados a controlar la información externa transmitida o almacenada ni a investigar circunstancias que indiquen una actividad ilegal. Las obligaciones de eliminar o bloquear el uso de información según la ley general no se verán afectadas. Sin embargo, una responsabilidad a este respecto sólo es posible a partir de la fecha en que se tiene conocimiento de una infracción específica. Tras la notificación de infracciones apropiadas, eliminaremos este contenido de inmediato.",
-        "Responsabilidad por enlaces",
-        "Nuestra oferta contiene enlaces a sitios web externos de terceros sobre cuyos contenidos no tenemos ninguna influencia. Por lo tanto, no podemos asumir ninguna responsabilidad por estos contenidos externos. El respectivo proveedor u operador de las páginas es siempre responsable del contenido de las páginas enlazadas. En el momento de la vinculación se comprobaron las páginas enlazadas para detectar posibles infracciones legales. El contenido ilegal no era reconocible en el momento del enlace. Sin embargo, un control permanente del contenido de las páginas enlazadas no es razonable sin pruebas concretas de una infracción. Tras la notificación de infracciones, eliminaremos dichos enlaces de inmediato.",
-        "Derechos de autor",
-        "Los contenidos y trabajos de estas páginas creados por los operadores del sitio están sujetos a la ley de derechos de autor alemana. La reproducción, procesamiento, distribución y cualquier tipo de explotación fuera de los límites del derecho de autor requieren el consentimiento por escrito del respectivo autor o creador. Las descargas y copias de este sitio son únicamente para uso privado y no comercial. Siempre que los contenidos de esta página no hayan sido creados por el operador, se consideran derechos de autor de terceros. En particular, se marcan como tales contenidos de terceros. Si aún tiene conocimiento de una infracción de derechos de autor, le solicitamos una nota. Tras la notificación de infracciones, eliminaremos dicho contenido de inmediato."
-      ]
+
+      ],
+      "list": []
     },
     {
       "name": "Política de Cookies",
       "id": 4,
       "paragrahs": [
-        "Como la mayoría de los sitios web comerciales, utilizamos cookies para rastrear el uso de nuestro Sitio. Las cookies son pequeños archivos de texto que se almacenan en su computadora o equipo cuando visita ciertas páginas en línea que registran sus preferencias. Cronometer y nuestros proveedores de servicios utilizan cookies para rastrear el uso de nuestro sitio y servicios en línea. Las cookies también se pueden utilizar para monitorear el tráfico, mejorar el Sitio, hacerlo más fácil y/o más relevante para su uso y mejorar el rendimiento de nuestra publicidad.", 
-        "Puede realizar elecciones personalizadas con respecto a las cookies empleadas en el Sitio en la sección Configuración. Sin embargo, es posible que ciertas funciones de nuestros Sitios u otros Servicios no funcionen si elimina o desactiva las cookies.",
-        "Muchas cookies de sesión son esenciales para que nuestro Sitio funcione correctamente, ya que normalmente le permiten moverse por nuestro Sitio y utilizar nuestras funciones. Las cookies persistentes permanecen en su dispositivo después de que cierra su navegador o hasta que lo elimina manualmente (en el caso de las primeras, la cantidad de tiempo que la cookie permanece en su dispositivo dependerá de la duración o “vida útil” de la cookie específica y de la configuración de su navegador).", 
-        "Las cookies persistentes nos ayudan a reconocerlo como un usuario existente de nuestro Sitio, por lo que es más fácil y conveniente regresar a nuestro Sitio o interactuar con nuestros Servicios sin iniciar sesión nuevamente. Además, las cookies persistentes también nos ayudan a reconocerlo cuando ve un recurso perteneciente a nuestro Sitio desde otro sitio web o aplicación (como un anuncio) y nos ayudan a registrar información sobre sus hábitos de navegación web durante la vida útil de la cookie persistente."
-      ]
+        "La Comisión Europea proporciona una plataforma para la resolución de disputas (OS) en línea: https://ec.europa.eu/consumers/odr. Nuestra dirección de correo electrónico se puede encontrar aquí en el pie de imprenta.",
+        "Como proveedor de servicios somos responsables según § 7 Abs.1 TMG de los contenidos propios de estas páginas según las leyes generales. Sin embargo, según los artículos 8 a 10 de la TMG, nosotros, como proveedores de servicios, no estamos obligados a controlar la información externa transmitida o almacenada ni a investigar circunstancias que indiquen una actividad ilegal. Las obligaciones de eliminar o bloquear el uso de información según la ley general no se verán afectadas. Sin embargo, una responsabilidad a este respecto sólo es posible a partir de la fecha en que se tiene conocimiento de una infracción específica. Tras la notificación de infracciones apropiadas, eliminaremos este contenido de inmediato.",
+        "Responsabilidad por enlaces",
+        "Nuestra oferta contiene enlaces a sitios web externos de terceros sobre cuyos contenidos no tenemos ninguna influencia. Por lo tanto, no podemos asumir ninguna responsabilidad por estos contenidos externos. El respectivo proveedor u operador de las páginas es siempre responsable del contenido de las páginas enlazadas. En el momento de la vinculación se comprobaron las páginas enlazadas para detectar posibles infracciones legales. El contenido ilegal no era reconocible en el momento del enlace. Sin embargo, un control permanente del contenido de las páginas enlazadas no es razonable sin pruebas concretas de una infracción. Tras la notificación de infracciones, eliminaremos dichos enlaces de inmediato.",
+        "Los contenidos y trabajos de estas páginas creados por los operadores del sitio están sujetos a la ley de derechos de autor alemana. La reproducción, procesamiento, distribución y cualquier tipo de explotación fuera de los límites del derecho de autor requieren el consentimiento por escrito del respectivo autor o creador. Las descargas y copias de este sitio son únicamente para uso privado y no comercial. Siempre que los contenidos de esta página no hayan sido creados por el operador, se consideran derechos de autor de terceros. En particular, se marcan como tales contenidos de terceros. Si aún tiene conocimiento de una infracción de derechos de autor, le solicitamos una nota. Tras la notificación de infracciones, eliminaremos dicho contenido de inmediato."
+      ],
+      "list": []
     },
     {
       "name": "Privacidad",
