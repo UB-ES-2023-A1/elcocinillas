@@ -24,6 +24,7 @@ jobs:
         run: |
             cd ./frontend/elcocinillas
             npm install
+            npm install cypress
 
       - name: Build Vue App
         run: |
