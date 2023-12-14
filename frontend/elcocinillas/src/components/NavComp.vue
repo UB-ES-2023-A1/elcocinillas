@@ -19,25 +19,25 @@
           Recetas
         </router-link>
       </div>
-      <div class="link" v-if=getInit() :key="this.log" data-cy="clic_perfil">
+      <div class="link" v-if=getInit() data-cy="clic_perfil">
         <router-link to="/perfil">
           <img class="image imgUp" src="../assets/perfil.png">
           Perfil
         </router-link>
       </div>
-      <div class="link" v-if=getInit() :key="this.log" @click="logoff()">
+      <div class="link" v-if=getInit() @click="logoff()">
         <router-link to="/">
           <img class="image imgUp" src="../assets/exit.png">
           Cerrar Sesión
         </router-link>
       </div>
-      <div class="link" data-cy="iniciar_sesion" v-if=!getInit() :key="this.log">
+      <div class="link" data-cy="iniciar_sesion" v-if=!getInit()>
         <router-link to="/userlogin">
           <img class="image imgUp" src="../assets/enter.png">
           Iniciar Sesión
         </router-link>
       </div>
-      <div class="link" v-if=!getInit() :key="this.log">
+      <div class="link" v-if=!getInit()>
         <router-link to="/registre">
           <img class="image imgUp" src="../assets/enter.png">
           Registrarse
@@ -171,7 +171,6 @@ a {
 </style>
 
 <script>
-import { store } from '../store';
 import { bus } from '../main';
 
 export default {
@@ -179,12 +178,11 @@ export default {
   data(){
     return {
       showingSettings: false,
-      usuarioLogeado : store.state.initSession,
+      usuarioLogeado: this.$cookies.username(),
       searchQuery: '',
       showNut: false,
       username: "",
       correo: "",
-      log: false,
     }
   },
   methods: {
@@ -192,7 +190,8 @@ export default {
       this.$settings.chosen = s;
     },
     logoff(){
-      this.deleteAll();
+      this.$cookies.deleteAll();
+      this.$globalData.updateSession();
     },
     logoStart(){
       document.getElementById("logo").style.transform = "rotate(40deg) scale(1.2) translate(5px)";
@@ -203,43 +202,11 @@ export default {
       document.getElementById("logo").style.transition = "0.2s";
     },
     getInit(){
-      this.log = this.find();
-      location.reload();
+      return this.$globalData.logged;
     },
     realizarBusqueda() {
       this.$globalData.searchQuery = this.searchQuery;
       bus.$emit('busqueda');
-    },
-    find(){
-      const value = `; ${document.cookie}`;
-      var resultado = '';
-      const parts = value.split(`; ${'initSession'}=`);
-      if (parts.length === 2){
-        resultado = parts.pop().split(';').shift();
-      }
-      if(resultado === 'true'){
-        return true;
-      } else {
-        return false;
-      }
-    },
-    logged(){
-      const cookies = document.cookie.split("; ");
-      const [name, value] = cookies.split("=");
-      if (name === "initSession") {
-        this.log = value;
-      }
-    },
-    deleteAll() {
-      const cookies = document.cookie.split(";");
-
-      for (let i = 0; i < cookies.length; i++) {
-          const cookie = cookies[i];
-          const eqPos = cookie.indexOf("=");
-          const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-          document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-      }
-      document.cookie = "initSession = false";
     },
   },
 }

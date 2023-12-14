@@ -149,7 +149,6 @@
 </style>
 
 <script>
-import { store } from '../store';
 import axios from 'axios';
 import router from "@/router";
 import NavPerfil from "./NavPerfil";
@@ -158,19 +157,11 @@ export default {
   name: "Perfil",
   components: { NavPerfil },
   data() {
-    return {
-      /*
-      userName: this.$cookies.find('userName'),
+    return {      
+      userName: this.$cookies.username(),
       correo: '',
       contrasena: '',
-      newcorreo: '',
-      */
-      
-      userName: store.state.userName,
-      correo: '',
-      contrasena: '',
-      newcorreo: store.state.correo,
-      
+      newcorreo: '', 
     }
   },
 
@@ -179,7 +170,7 @@ export default {
   },
   methods: {
     modificarInformacion() {
-      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/user/' + store.state.userName + '/';
+      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/user/' + this.userName + '/';
       axios.put(url, this.getDatosPerfilUsuario())
           .then((response) => {
             console.log('Ok modificar datos:', response.data);
@@ -194,7 +185,7 @@ export default {
 
     getDatosPerfilUsuario() {
       return {
-        userID: store.state.userName,
+        userID: this.username,
         email: this.correo,
         password: this.contrasena
       };

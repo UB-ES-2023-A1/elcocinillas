@@ -124,10 +124,11 @@ export default {
               router.push("/recetas");
               console.log("userName: ", uid)
 
-              // Cookies:
-              //this.$cookies.update(uid, true);
-              //this.update(uid, true);
-              document.cookie = "initSession = true";
+              // Cookies
+              this.$cookies.update(uid, true);
+
+              // Session
+              this.$globalData.updateSession();
             })
             .catch((error) => {
               // Maneja errores de inicio de sesión
@@ -139,11 +140,6 @@ export default {
 
     createAccount(){
       router.push("/registre");
-    },
-    update(userName, initSession){
-      document.cookie = "username = " + userName;
-      document.cookie = "initSession = " + initSession;
-      document.cookie = "path=/" ;
     },
   },
 };

@@ -125,8 +125,11 @@ export default {
               this.recipes = response.data;
               alert("¡Felicidades! Te has registrado en El Cocinillas");
 
-              // Cookies:
+              // Cookies
               this.$cookies.update(this.userName, true);
+
+              // Session
+              this.$globalData.updateSession();
             })
             .catch((error) => {
               console.error('KO registro:', error);
