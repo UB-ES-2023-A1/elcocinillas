@@ -65,6 +65,8 @@ jobs:
           pip install pytest
 
       - name: Test with pytest
-        run: python -m pytest ./backend/tests
+        run:|
+          cd ./backend/src && uvicorn main:app --reload
+          python -m pytest ../tests
 
 
