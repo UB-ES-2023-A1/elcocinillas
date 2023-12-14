@@ -159,10 +159,18 @@ export default {
   components: { NavPerfil },
   data() {
     return {
+      /*
+      userName: this.$cookies.find('userName'),
+      correo: '',
+      contrasena: '',
+      newcorreo: '',
+      */
+      
       userName: store.state.userName,
       correo: '',
       contrasena: '',
       newcorreo: store.state.correo,
+      
     }
   },
 

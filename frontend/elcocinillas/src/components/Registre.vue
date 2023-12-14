@@ -126,7 +126,7 @@ export default {
               alert("¡Felicidades! Te has registrado en El Cocinillas");
 
               // Cookies:
-              document.cookie = "username = " + this.userName + "; initSession = true;";
+              this.$cookies.update(this.userName, true);
             })
             .catch((error) => {
               console.error('KO registro:', error);

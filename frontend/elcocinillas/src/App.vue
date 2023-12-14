@@ -4,7 +4,7 @@
   {'background-color': '#2b2b2b', 'color': 'white', 'transition' : '0.2s'} :
   {'background-color': 'white', 'color': '#2b2b2b', 'transition' : '0.2s'}]"
   >
-    <!--<p @click="cookies()">Press</p>-->
+    <button @click="cookies()">Cookies</button>
     <NavComp/>
     <router-view id="router"/>
     <FooterComp/>
@@ -15,6 +15,10 @@
 #router{
   padding-top: 5vh;
   min-height: 81vh;
+}
+button{
+  position: fixed;
+  z-index: 100;
 }
 </style>
 
@@ -27,7 +31,7 @@ export default {
   components: { NavComp, FooterComp },
   methods: {
     cookies(){
-      alert(document.cookie);
+      alert(this.$cookies.logged());
     }
   }
 };

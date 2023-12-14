@@ -46,6 +46,40 @@ Vue.prototype.$chosen = Vue.observable({
   logged: false,
 });
 
+// Cookies
+Vue.prototype.$cookies = Vue.observable({
+  update: function(userName, initSession){
+    document.cookie = "username = " + userName;
+    document.cookie = "initSession = " + initSession;
+    document.cookie = "Path = /" ;
+  },
+  deleteAll: function() {
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+    document.cookie = "initSession = false";
+  },
+  find: function(name){
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  },
+  logged: function(){
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${'initSession'}=`);
+    if (parts.length === 2 && parts.pop().split(';').shift() == 'true') return true;
+    else return false;
+  },
+  test(){
+    return 2 + 2;
+  }
+});
+
 /* eslint-disable no-new */
 new Vue({
   el: "#app",
@@ -54,3 +88,5 @@ new Vue({
   components: { App },
   template: "<App/>",
 })
+
+
