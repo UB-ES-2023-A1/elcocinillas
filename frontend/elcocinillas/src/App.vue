@@ -31,7 +31,7 @@ export default {
   components: { NavComp, FooterComp },
   methods: {
     cookies(){
-      alert(this.$cookies.logged());
+      alert(document.cookie);
     }
   }
 };

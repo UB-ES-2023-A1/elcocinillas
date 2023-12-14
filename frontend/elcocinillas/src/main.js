@@ -47,6 +47,7 @@ Vue.prototype.$chosen = Vue.observable({
 });
 
 // Cookies
+/*
 Vue.prototype.$cookies = Vue.observable({
   update: function(userName, initSession){
     document.cookie = "username = " + userName;
@@ -72,13 +73,14 @@ Vue.prototype.$cookies = Vue.observable({
   logged: function(){
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${'initSession'}=`);
-    if (parts.length === 2 && parts.pop().split(';').shift() == 'true') return true;
+    if (parts.length === 2 && parts.pop().split(';').shift() === 'true') return true;
     else return false;
   },
   test(){
     return 2 + 2;
   }
 });
+*/
 
 /* eslint-disable no-new */
 new Vue({
