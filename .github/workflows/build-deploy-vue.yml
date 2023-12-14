@@ -21,21 +21,21 @@ jobs:
 
     - name: Install dependencies
       run: |
-        cd ./frontend/elcocinillas
-        npm install
+          cd ./frontend/elcocinillas
+          npm install
 
     - name: Build Vue App
       run: |
-        cd ./frontend/elcocinillas
-        nohup npm run serve > npm.log 2>&1 &
+          cd ./frontend/elcocinillas
+          nohup npm run serve > npm.log 2>&1 &
 
     - name: Esperar a que uvicorn se inicie
       run: sleep 5
 
     - name: Cypress setup
       run: |
-        cd ./frontend/elcocinillas
-        run: npx cypress run
+          cd ./frontend/elcocinillas
+          run: npx cypress run
 
   BuildandDeploy:
     runs-on: ubuntu-latest
