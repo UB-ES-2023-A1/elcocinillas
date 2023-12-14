@@ -30,16 +30,36 @@
         "Responsabilidad por enlaces",
         "Nuestra oferta contiene enlaces a sitios web externos de terceros sobre cuyos contenidos no tenemos ninguna influencia. Por lo tanto, no podemos asumir ninguna responsabilidad por estos contenidos externos. El respectivo proveedor u operador de las páginas es siempre responsable del contenido de las páginas enlazadas. En el momento de la vinculación se comprobaron las páginas enlazadas para detectar posibles infracciones legales. El contenido ilegal no era reconocible en el momento del enlace. Sin embargo, un control permanente del contenido de las páginas enlazadas no es razonable sin pruebas concretas de una infracción. Tras la notificación de infracciones, eliminaremos dichos enlaces de inmediato.",
         "Derechos de autor",
-        "Los contenidos y trabajos de estas páginas creados por los operadores del sitio están sujetos a la ley de derechos de autor alemana. La reproducción, procesamiento, distribución y cualquier tipo de explotación fuera de los límites del derecho de autor requieren el consentimiento por escrito del respectivo autor o creador. Las descargas y copias de este sitio son únicamente para uso privado y no comercial. Siempre que los contenidos de esta página no hayan sido creados por el operador, se consideran derechos de autor de terceros. En particular, se marcan como tales contenidos de terceros. Si aún tiene conocimiento de una infracción de derechos de autor, le solicitamos una nota. Tras la notificación de infracciones, eliminaremos dicho contenido de inmediato.",
+        "Los contenidos y trabajos de estas páginas creados por los operadores del sitio están sujetos a la ley de derechos de autor alemana. La reproducción, procesamiento, distribución y cualquier tipo de explotación fuera de los límites del derecho de autor requieren el consentimiento por escrito del respectivo autor o creador. Las descargas y copias de este sitio son únicamente para uso privado y no comercial. Siempre que los contenidos de esta página no hayan sido creados por el operador, se consideran derechos de autor de terceros. En particular, se marcan como tales contenidos de terceros. Si aún tiene conocimiento de una infracción de derechos de autor, le solicitamos una nota. Tras la notificación de infracciones, eliminaremos dicho contenido de inmediato."
       ]
     },
     {
       "name": "Política de Cookies",
-      "id": 4
+      "id": 4,
+      "paragrahs": [
+        "Como la mayoría de los sitios web comerciales, utilizamos cookies para rastrear el uso de nuestro Sitio. Las cookies son pequeños archivos de texto que se almacenan en su computadora o equipo cuando visita ciertas páginas en línea que registran sus preferencias. Cronometer y nuestros proveedores de servicios utilizan cookies para rastrear el uso de nuestro sitio y servicios en línea. Las cookies también se pueden utilizar para monitorear el tráfico, mejorar el Sitio, hacerlo más fácil y/o más relevante para su uso y mejorar el rendimiento de nuestra publicidad.", 
+        "Puede realizar elecciones personalizadas con respecto a las cookies empleadas en el Sitio en la sección Configuración. Sin embargo, es posible que ciertas funciones de nuestros Sitios u otros Servicios no funcionen si elimina o desactiva las cookies.",
+        "Muchas cookies de sesión son esenciales para que nuestro Sitio funcione correctamente, ya que normalmente le permiten moverse por nuestro Sitio y utilizar nuestras funciones. Las cookies persistentes permanecen en su dispositivo después de que cierra su navegador o hasta que lo elimina manualmente (en el caso de las primeras, la cantidad de tiempo que la cookie permanece en su dispositivo dependerá de la duración o “vida útil” de la cookie específica y de la configuración de su navegador).", 
+        "Las cookies persistentes nos ayudan a reconocerlo como un usuario existente de nuestro Sitio, por lo que es más fácil y conveniente regresar a nuestro Sitio o interactuar con nuestros Servicios sin iniciar sesión nuevamente. Además, las cookies persistentes también nos ayudan a reconocerlo cuando ve un recurso perteneciente a nuestro Sitio desde otro sitio web o aplicación (como un anuncio) y nos ayudan a registrar información sobre sus hábitos de navegación web durante la vida útil de la cookie persistente."
+      ]
     },
     {
       "name": "Privacidad",
-      "id": 5
+      "id": 5,
+      "paragraphs": [
+        "Recopilamos información personal directamente de usted con su consentimiento cuando deja un comentario o utiliza otras funciones interactivas en el Sitio o se comunica con nosotros en línea o por otros medios.", 
+        "Si deja un comentario en el Sitio, recopilamos su dirección de correo electrónico y dirección IP para confirmar que el comentario se originó en un usuario del Sitio y no en un bot u otro generador automatizado de spam.", 
+        "Si accede o envía una consulta a través de nuestro Sitio, se suscribe a un servicio, se registra para recibir materiales de marketing, participa en concursos, sorteos o promociones, o recibe otros Servicios, es posible que le solicitemos que proporcione cierta información personal, como su nombre, correo electrónico. dirección, número de teléfono y código postal, y posiblemente otra información personal.", 
+        "Tomamos medidas razonables para asegurarnos de que su información de contacto sea precisa, completa, actual y confiable. Usamos su información personal para comunicarnos con usted sobre Cronometer y nuestros Servicios y con fines de marketing directo, tales como:"
+      ],
+      "list": [
+        "Enviarle comunicaciones periódicas por correo electrónico y boletines informativos;",
+        "Responder a sus consultas;",
+        "Enviarle encuestas y otras comunicaciones de control de calidad;",
+        "Analizar preferencias, tendencias y estadísticas;",
+        "Informarle sobre nuestros nuevos productos, servicios y ofertas; y",
+        "Proporcionarle otra información de marketing de y sobre Cronometer."
+      ]
     },
     {
       "name": "Términos & Condiciones",
