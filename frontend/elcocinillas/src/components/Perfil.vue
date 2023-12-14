@@ -194,14 +194,14 @@ export default {
       };
     },
     deleteAccount(){
-      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/eliminar_cuenta/' + store.state.userName + '/';
+      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/eliminar_cuenta/' + this.userName + '/';
       axios.delete(url)
           .then((response) => {
               console.log('Ok eliminar usuario:', response.data);
               window.alert('Usuario eliminado correctamente');
               router.push("/recetas");
-              this.$globalData.logged = false;
-              store.state.initSession = false;
+              this.$cookies.deleteAll();
+              this.$globalData.updateSession();
           })
           .catch((error) => {
             console.error('KO eliminar usuario:', error);

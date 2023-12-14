@@ -4,12 +4,14 @@
   {'background-color': '#2b2b2b', 'color': 'white', 'transition' : '0.2s'} :
   {'background-color': 'white', 'color': '#2b2b2b', 'transition' : '0.2s'}]"
   >
+  <!--
     <div>
       <button @click="cookies()">Cookies</button>
       <button @click="username()">Username</button>
       <button @click="session()">Session</button>
       <button @click="logged()">Logged</button>
     </div>
+  -->
     <NavComp/>
     <router-view id="router"/>
     <FooterComp/>
@@ -39,6 +41,7 @@ export default {
     this.$globalData.updateSession();
   },
   methods: {
+    /*
     cookies(){
       alert(document.cookie);
     },
@@ -52,6 +55,7 @@ export default {
       this.$globalData.updateSession();
       alert(this.$globalData.logged);
     }
+    */
   }
 };
 </script>
