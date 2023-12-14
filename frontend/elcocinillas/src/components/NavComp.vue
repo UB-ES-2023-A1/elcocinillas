@@ -121,6 +121,12 @@ a {
   transform: scale(0.7);
   top: -0.25vh;
 }
+
+@media only screen and (max-width: 1154px) {
+  #nav {
+    height: 150px;
+  }
+}
 </style>
 
 <script>
