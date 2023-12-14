@@ -37,7 +37,7 @@ jobs:
       - name: Cypress setup
         run: |
             cd ./frontend/elcocinillas
-            run: npx cypress run
+            npx cypress run
 
       - name: Detener uvicorn al finalizar
         run: pkill -f "npm run serve"
