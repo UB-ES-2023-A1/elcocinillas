@@ -23,8 +23,8 @@
 </template>
 
 <style scoped>
-body{
-  height: 100vh;
+#granContainerRegistre {
+  height: fit-content;
   background-image: url('../img/defaultRecipePhoto.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -61,6 +61,15 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
+.formcontainer {
+  text-align: center;
+  border: 5px solid #EEF2B6;
+  background-color: white;
+  opacity: 95%;
+  width: 80%;
+  display: inline-block;
+  margin: 5%;
+}
 .inner-container {
   padding: 16px 0;
   text-align:left;
@@ -70,7 +79,6 @@ span.psw {
   padding-top: 0;
   padding-right: 15px;
 }
-
 button {
   background-color: #73694F !important;
   color: white !important;

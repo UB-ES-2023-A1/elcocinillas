@@ -1,5 +1,5 @@
 <template>
-  <div id="nav" :key="$globalData.navKey">
+  <div id="nav" :key="$globalData.navKey" @mouseleave="showNut = false">
     <div style="float: left; display: flex;">
       <div class="link" @mouseenter="logoStart()" @mouseleave="logoEnd()">
         <router-link to="/">
@@ -43,11 +43,43 @@
           Registrarse
         </router-link>
       </div>
+      <div id="nut" @mouseenter="showNut = true">
+        <img class="image" src="../assets/settings.png">
+      </div>
     </div>
+    <ul id="settings" v-if="showNut == true">
+      <li class="category">Tema:</li>
+      <li v-for="s in $settings.themes" v-bind:key="s"
+      @click="theme(s)" class="setting">
+        <img id="check" src="../assets/check.png" v-if="$settings.chosen == s">
+        {{ s }}
+      </li>
+    </ul>
   </div>
 </template>
 
 <style scoped>
+#check{
+  height: 2vh;
+}
+#settings{
+  position: fixed;
+  right: -81vh;
+  margin-top: 4.75vh;
+}
+.category{
+  border-bottom: 1px solid black;
+}
+.setting:hover{
+  background-color: #76ded9;
+  color: white;
+}
+li{
+  list-style-type: none;
+  background-color: lightgrey;
+  padding-left: 2vh;
+  padding-right: 2vh;
+}
 a {
   text-decoration: none;
   color: inherit;
@@ -67,28 +99,44 @@ a {
   transition: 0.2s;
 }
 #nav {
+  position: fixed;
   height: 5.5vh;
   background-color: #73694f;
   width: 100%;
   z-index: 1;
+  border-bottom: 1px solid black;
+}
+#nut {
+  position: relative;
+  transform: scale(0.75);
+  top: -0.1vh;
+  display: inline-block;
+  color:white;
+  cursor: pointer;
+  padding-right: 2vh;
+  padding-left: 2vh;
+  transition: 0.4s;
+}
+#nut:hover{
+  transform: rotate(45deg);
+  transition: 0.4s;
 }
 .link {
   line-height: 5vh;
   width: fit-content;
-  margin-left: 1vh;
-  margin-right: 2vh;
   display: inline-block;
   text-align: center;
   border-radius: 15px;
   color:white;
   cursor: pointer;
-  padding-right: 2vh;
-  padding-left: 2vh;
+  padding-right: 3vh;
+  padding-left: 3vh;
+  transition: 0.2s;
 }
 .link:hover{
   color:black;
-  font-weight: bold;
   background-color: white;
+  transition: 0.2s;
 }
 .image{
   height: 5vh;
@@ -101,7 +149,7 @@ a {
   height: 90%; 
   width: 25vh;
   margin: auto;
-  border-radius: 20px;
+  border-radius: 10vh;
   border: none;
   background-color: white;
 }
@@ -140,9 +188,13 @@ export default {
       showingSettings: false,
       usuarioLogeado : store.state.initSession,
       searchQuery: '',
+      showNut: false,
     }
   },
   methods: {
+    theme(s){
+      this.$settings.chosen = s;
+    },
     logoff(){
       this.$globalData.logged = false;
       store.state.initSession = false;
