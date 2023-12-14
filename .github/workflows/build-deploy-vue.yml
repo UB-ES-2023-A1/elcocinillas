@@ -24,20 +24,23 @@ jobs:
         run: |
             cd ./frontend/elcocinillas
             npm install
-            npx install cypress
+            npm install cypress
 
       - name: Build Vue App
         run: |
-            cd ./frontend/elcocinillas
+            cd ./frontend/elcocinillas/src
             nohup npm run serve > npm.log 2>&1 &
 
       - name: Esperar a que uvicorn se inicie
-        run: sleep 5
+        run: sleep 20
 
       - name: Cypress setup
         run: |
             cd ./frontend/elcocinillas
             run: npx cypress run
+
+      - name: Detener uvicorn al finalizar
+        run: pkill -f "npm run serve"
 
   BuildandDeploy:
     runs-on: ubuntu-latest
