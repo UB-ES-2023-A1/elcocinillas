@@ -2,7 +2,7 @@
   <div id="footer">
     <div id="views">
       <div class="view" v-for="v in views" v-bind:key="v">
-        <h1 @click="view(v.id)">{{ v.name }}</h1> | 
+        <h1 @click="view(v.id)">{{ v.name }}</h1> | &nbsp;
       </div>
     </div>
     <p>© 2023 El Cocinillas es propiedad de El Cocinillas inc.</p>

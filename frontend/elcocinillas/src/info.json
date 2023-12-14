@@ -2,7 +2,12 @@
   "views":[
     {
       "name": "Acerca de",
-      "id": 1
+      "id": 1,
+      "paragrahs": [
+        "El Cocinillas es una empresa emergente a con intención de convertirse en un líder en páginas de alimentación. Basándonos en crear una website fácil de usar, trabajamos por una mejor Internet para todos.",
+        "Nuestra visión es construir un mundo donde el conocimiento sobre la cocina se comparta de forma libre pero segura. Queremos crear un ecosistema digital próspero.",
+        "Creemos que el consentimiento es un derecho humano básico y que cualquier modelo de negocio exitoso basado en datos del futuro considera que el consentimiento y el cumplimiento de los datos son el centro de su empresa."
+      ]
     },
     {
       "name": "Atención al Cliente",
@@ -10,11 +15,27 @@
     },
     {
       "name": "Contacto",
-      "id": 3
+      "id": 3,
+      "list": [
+        "Dirección de Oficinas: \n Gran Via de les Corts Catalanes, 585, L'Eixample, 08007 Barcelona",
+        "Correo de Contacto: \n sblancpo108@alumnes.ub.edu",
+        "Número de Contacto: \n (+34)123 56 78 90"
+      ]
     },
     {
       "name": "Información Legal",
-      "id": 4
+      "id": 4,
+      "paragraphs": [
+        "Descargo de responsabilidad",
+        "Referencia a la resolución de disputas de la UE",
+        "La Comisión Europea proporciona una plataforma para la resolución de disputas (OS) en línea: https://ec.europa.eu/consumers/odr. Nuestra dirección de correo electrónico se puede encontrar aquí en el pie de imprenta.",
+        "Responsabilidad por el contenido",
+        "Como proveedor de servicios somos responsables según § 7 Abs.1 TMG de los contenidos propios de estas páginas según las leyes generales. Sin embargo, según los artículos 8 a 10 de la TMG, nosotros, como proveedores de servicios, no estamos obligados a controlar la información externa transmitida o almacenada ni a investigar circunstancias que indiquen una actividad ilegal. Las obligaciones de eliminar o bloquear el uso de información según la ley general no se verán afectadas. Sin embargo, una responsabilidad a este respecto sólo es posible a partir de la fecha en que se tiene conocimiento de una infracción específica. Tras la notificación de infracciones apropiadas, eliminaremos este contenido de inmediato.",
+        "Responsabilidad por enlaces",
+        "Nuestra oferta contiene enlaces a sitios web externos de terceros sobre cuyos contenidos no tenemos ninguna influencia. Por lo tanto, no podemos asumir ninguna responsabilidad por estos contenidos externos. El respectivo proveedor u operador de las páginas es siempre responsable del contenido de las páginas enlazadas. En el momento de la vinculación se comprobaron las páginas enlazadas para detectar posibles infracciones legales. El contenido ilegal no era reconocible en el momento del enlace. Sin embargo, un control permanente del contenido de las páginas enlazadas no es razonable sin pruebas concretas de una infracción. Tras la notificación de infracciones, eliminaremos dichos enlaces de inmediato.",
+        "Derechos de autor",
+        "Los contenidos y trabajos de estas páginas creados por los operadores del sitio están sujetos a la ley de derechos de autor alemana. La reproducción, procesamiento, distribución y cualquier tipo de explotación fuera de los límites del derecho de autor requieren el consentimiento por escrito del respectivo autor o creador. Las descargas y copias de este sitio son únicamente para uso privado y no comercial. Siempre que los contenidos de esta página no hayan sido creados por el operador, se consideran derechos de autor de terceros. En particular, se marcan como tales contenidos de terceros. Si aún tiene conocimiento de una infracción de derechos de autor, le solicitamos una nota. Tras la notificación de infracciones, eliminaremos dicho contenido de inmediato.",
+      ]
     },
     {
       "name": "Política de Cookies",
@@ -27,6 +48,7 @@
     {
       "name": "Términos & Condiciones",
       "id": 7,
+      "img": "t&c.png",
       "paragraphs": [
         "Estos términos y condiciones describen las reglas y regulaciones para el uso del sitio web de El Cocinillas, ubicado en elcocinillas.com.",
         "Al acceder a este sitio web asumimos que acepta estos términos y condiciones. No continúe usando El Cocinillas si no acepta todos los términos y condiciones establecidos en esta página.",

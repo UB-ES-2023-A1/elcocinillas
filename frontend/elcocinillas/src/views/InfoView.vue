@@ -1,6 +1,7 @@
 <template>
   <div id="main">
     <h1>{{ view.name }}</h1>
+    <!--<img :src="`../assets/{$view.img}`">-->
     <p v-for="p in view.paragraphs" v-bind:key="p">{{ p }}</p>
     <ul>
       <li v-for="l in view.list" v-bind:key="l">{{ l }}</li>
@@ -16,11 +17,12 @@
 }
 h1{
   text-align: center;
+  padding-top: 3vh;
 }
 p{
   text-align: center;
   margin: auto;
-  margin-top: 20px;
+  margin-top: 2vh;
   width: 40%;
 }
 ul{
