@@ -13,9 +13,6 @@
         </recipe-card>
       </div>
     </div>
-    <div id="new">
-      <p>nueva receta</p>
-    </div>
     <img id="boton-flotante" data-cy="boton-flotante" src="../assets/plus.png" @click="goToUploadRecipe"
     :style="[$settings.chosen == 'Dark Mode' ?
     {'filter': 'invert(100%)', 'transition' : '0.2s'} :
