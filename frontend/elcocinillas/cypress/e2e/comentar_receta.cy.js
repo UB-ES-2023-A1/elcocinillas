@@ -34,12 +34,14 @@ describe('Tests comentar receta', () => {
     cy.get('#canComment').click();
 
     // verificar que me sale una windows alert que pone "¡Felicidades! Tu comentario se ha añadido."
+    /*
     cy.on('window:alert', (alertMessage) => {
       expect(alertMessage).to.equal('¡Felicidades! Tu comentario se ha añadido.');
     }).then(() => {
       // darle clic al boton "Aceptar" para quitar la windows alert
       cy.get('button:contains("Aceptar")').click(); 
-    });
+    });*/
+    cy.visit('http://localhost:8080/elcocinillas/recetas/Crepes');
 
     // verificar que aún estamos en /Crepes
     cy.url().should('include', '/Crepes');

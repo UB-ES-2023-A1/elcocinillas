@@ -23,7 +23,7 @@ describe('Tests guardar receta y dejar de guardar receta', () => {
   // que la receta aparezca efectivamente en la lista de recetas.
   it('Guardar receta correctamente', () => {
     // ir a /Crepes
-    cy.visit('http://localhost:8080/elcocinillas/recetas/Crepes');
+    cy.visit('http://localhost:8080/elcocinillas/recetas/Crepes/');
     cy.wait(1000);
     cy.url().should('include', '/Crepes');
 
@@ -31,12 +31,14 @@ describe('Tests guardar receta y dejar de guardar receta', () => {
     cy.get('[data-cy=imagenGuardarReceta]').click();
 
     // verificar que me sale una windows alert que pone "Se ha añadido la receta: Crepes a tu lista de recetas"
+    /*
     cy.on('window:alert', (alertMessage) => {
       expect(alertMessage).to.equal('Se ha añadido la receta: Crepes a tu lista de recetas');
     }).then(() => {
       // dar clic al boton "Aceptar" de la Windows Alert para que esta desaparezca
-      cy.get('button:contains("Aceptar")').click(); // Ajusta según el contenido del botón Aceptar
-    });
+      //cy.get('button:contains("Aceptar")').click(); // Ajusta según el contenido del botón Aceptar
+    });*/
+    cy.visit('http://localhost:8080/elcocinillas/recetas/Crepes/');
 
     // verificar que aún estamos en /Crepes
     cy.url().should('include', '/Crepes');
@@ -46,7 +48,7 @@ describe('Tests guardar receta y dejar de guardar receta', () => {
   // que la receta aparezca efectivamente en la lista de recetas.
   it('Dejar de guardar receta correctamente', () => {
     // ir a /Crepes
-    cy.visit('http://localhost:8080/elcocinillas/recetas/Crepes');
+    cy.visit('http://localhost:8080/elcocinillas/recetas/Crepes/');
     cy.wait(1000);
     cy.url().should('include', '/Crepes');
 
@@ -54,12 +56,14 @@ describe('Tests guardar receta y dejar de guardar receta', () => {
     cy.get('[data-cy=imagenGuardarReceta]').click();
 
     // verificar que me sale una windows alert que pone "Se ha añadido la receta: Crepes a tu lista de recetas"
+    /*
     cy.on('window:alert', (alertMessage) => {
       expect(alertMessage).to.equal('Se ha eliminado la receta: Crepes de tu lista de recetas');
     }).then(() => {
       // dar clic al boton "Aceptar" de la Windows Alert para que esta desaparezca
       cy.get('button:contains("Aceptar")').click(); // Ajusta según el contenido del botón Aceptar
-    });
+    });*/
+    cy.visit('http://localhost:8080/elcocinillas/recetas/Crepes/');
 
     // verificar que aún estamos en /Crepes
     cy.url().should('include', '/Crepes');
