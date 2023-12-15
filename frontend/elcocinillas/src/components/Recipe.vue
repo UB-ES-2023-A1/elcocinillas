@@ -6,7 +6,7 @@
           <div class="col">
             <div id="contenedorNombre">
               <h2 id="title" data-cy="recipe-title">{{ this.name }}</h2>
-              <img src="../img/mark.png" v-if="this.logged" data-cy="imagenGuardarReceta"
+              <img src="../img/mark.png" v-if="this.$globalData.logged" data-cy="imagenGuardarReceta"
               style="height: 30px;"
               :style="{ filter: this.receptaSeguida ? 
               'invert(27%) sepia(99%) saturate(715%) hue-rotate(346deg) brightness(112%) contrast(104%)' : 'grayscale(100%)',
