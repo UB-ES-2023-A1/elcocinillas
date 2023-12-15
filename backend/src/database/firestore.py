@@ -98,7 +98,7 @@ def get_imagenes_receta(uuid):
     return images_urls
 
 
-def busca_recetas(cadena, distancia = 50):
+def busca_recetas(cadena, distancia = 70):
 
     coleccion = db.collection("receptes")
     recetas = coleccion.stream()
