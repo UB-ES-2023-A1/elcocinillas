@@ -174,7 +174,7 @@ export default {
     },
     goToUploadRecipe() {
       console.log("isLogged click: ", this.usuarioLogeado != null);
-      if(this.usuarioLogeado){
+      if(this.$globalData.logged){
         console.log("ir a recetas");
         this.$router.push('/publicarReceta')
       } else{

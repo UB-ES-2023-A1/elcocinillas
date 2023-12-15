@@ -21,7 +21,7 @@
 <style scoped>
 #router{
   padding-top: 5vh;
-  min-height: 81vh;
+  min-height: 100vh;
 }
 #buttons{
   position: fixed;
