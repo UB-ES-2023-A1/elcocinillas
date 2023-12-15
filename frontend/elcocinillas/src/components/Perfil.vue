@@ -139,7 +139,6 @@ h2{
 </style>
 
 <script>
-import { store } from '../store';
 import axios from 'axios';
 import router from "@/router";
 import NavPerfil from "./NavPerfil";
@@ -148,11 +147,11 @@ export default {
   name: "Perfil",
   components: { NavPerfil },
   data() {
-    return {
-      userName: store.state.userName,
+    return {      
+      userName: this.$cookies.username(),
       correo: '',
       contrasena: '',
-      newcorreo: store.state.correo,
+      newcorreo: '', 
     }
   },
 
@@ -161,7 +160,7 @@ export default {
   },
   methods: {
     modificarInformacion() {
-      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/user/' + store.state.userName + '/';
+      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/user/' + this.userName + '/';
       axios.put(url, this.getDatosPerfilUsuario())
           .then((response) => {
             console.log('Ok modificar datos:', response.data);
@@ -176,20 +175,20 @@ export default {
 
     getDatosPerfilUsuario() {
       return {
-        userID: store.state.userName,
+        userID: this.username,
         email: this.correo,
         password: this.contrasena
       };
     },
     deleteAccount(){
-      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/eliminar_cuenta/' + store.state.userName + '/';
+      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/eliminar_cuenta/' + this.userName + '/';
       axios.delete(url)
           .then((response) => {
               console.log('Ok eliminar usuario:', response.data);
               window.alert('Usuario eliminado correctamente');
               router.push("/recetas");
-              this.$globalData.logged = false;
-              store.state.initSession = false;
+              this.$cookies.deleteAll();
+              this.$globalData.updateSession();
           })
           .catch((error) => {
             console.error('KO eliminar usuario:', error);

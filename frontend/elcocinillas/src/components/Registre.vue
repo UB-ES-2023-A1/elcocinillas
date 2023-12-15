@@ -24,7 +24,7 @@
 
 <style scoped>
 body{
-  height: 100vh;
+  height: fit-content;
   background-image: url('../img/defaultRecipePhoto.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -70,7 +70,6 @@ span.psw {
   padding-top: 0;
   padding-right: 15px;
 }
-
 button {
   background-color: #73694F !important;
   color: white !important;
@@ -124,8 +123,13 @@ export default {
             .then((response) => {
               console.log('OK crear usuario:', response.data);
               this.recipes = response.data;
-              router.push("/recetas");
-              alert("¡Felicidades! Te has registrado en El Cocinillas")
+              alert("¡Felicidades! Te has registrado en El Cocinillas");
+
+              // Cookies
+              this.$cookies.update(this.userName, true);
+
+              // Session
+              this.$globalData.updateSession();
             })
             .catch((error) => {
               console.error('KO registro:', error);

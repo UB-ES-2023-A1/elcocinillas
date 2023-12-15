@@ -10,9 +10,11 @@
 
 <style scoped>
   .cardStyle{
-    width: 18rem;
+    color: black;
+    width: 24vh;
     margin: 2%;
-    border-radius: 3%;
+    border: 2px solid lightgray;
+    border-radius: 5%;
   }
 
   .cardStyle img{
