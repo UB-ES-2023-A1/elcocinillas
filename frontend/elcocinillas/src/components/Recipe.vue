@@ -1,23 +1,27 @@
 <template>
-  <div id="app">
+  <div id="app" data-cy="main-Recipe">
     <section id="headerSection">
       <div class="container-fluid">
         <div class="row">
           <div class="col">
             <div id="contenedorNombre">
-              <h2 id="title">{{ this.name }}</h2>
+              <h2 id="title" data-cy="recipe-title">{{ this.name }}</h2>
               <img src="../img/mark.png" 
               style="height: 30px;"
-              :style="{ filter: this.receptaSeguida ? 'invert(27%) sepia(99%) saturate(715%) hue-rotate(346deg) brightness(112%) contrast(104%)' : 'grayscale(100%)' }"
+              :style="{ filter: this.receptaSeguida ? 
+              'invert(27%) sepia(99%) saturate(715%) hue-rotate(346deg) brightness(112%) contrast(104%)' : 'grayscale(100%)',
+              'filter' : 'invert(50%)'}"
               @click="seguirReceta()">
             </div>
             <div id="contenedorUsuario">
-              <h5 id="subtitulo">by {{this.user}}</h5>
+              <h5 id="subtitulo" data-cy="recipe-subtitle">by {{this.user}}</h5>
               <img src="../img/person_add.png"
-              :style="{ filter: this.userSeguid ? 'invert(27%) sepia(99%) saturate(715%) hue-rotate(346deg) brightness(112%) contrast(104%)' : 'grayscale(100%)'}"
+              :style="{ filter: this.userSeguid ? 
+              'invert(27%) sepia(99%) saturate(715%) hue-rotate(346deg) brightness(112%) contrast(104%)' : 'grayscale(100%)',
+              'filter' : 'invert(50%)'}"
               @click="seguirAmigo()">
             </div>
-            <div class="container" id="columnasDebajoTitulo">
+            <div class="container" id="columnasDebajoTitulo" data-cy="recipe-data">
               <div class="row">
                 <div class="col border-right" style="padding-left: 0">
                   <h2>{{ this.time }}</h2>
@@ -57,7 +61,7 @@
     </section>
 
     
-    <section class="sections">
+    <section class="sections" data-cy="ingredientes">
       <h4>INGREDIENTES (4 personas):</h4>
       <hr id="solidDividerYellow" />
       <ul v-for="ingrediente in this.ingredientes" :key="ingrediente.id">
@@ -65,7 +69,7 @@
       </ul>
     </section>
 
-    <section class="sections" id="pasosText">
+    <section class="sections" id="pasosText" data-cy="pasos">
       <h4>ELABORACIÓN DE LA RECETA</h4>
       <hr id="solidDividerYellow" />
       <p>Estos son los pasos que tienes que seguir</p>
@@ -88,7 +92,7 @@
                            @mouseover="stars(m + rating)">
                     </span>
       </div>
-      <h4 v-if="!rated">¡Valora la receta!</h4>
+      <h4 v-if="!rated" data-cy="valoracion">¡Valora la receta!</h4>
       <button class="button" id="delRating"
               v-if="rated" @click="rated = false">
         Borrar valoración
@@ -96,7 +100,7 @@
     </section>
 
     <section class="sections">
-      <h4>Comentar Receta:</h4>
+      <h4 data-cy="comentario">Comentar Receta:</h4>
       <textarea class="comment" rows="3" v-model="cText"></textarea>
       <button class="button" id="cannotComment" 
       v-if="cText == null || cText == ''">
@@ -108,7 +112,7 @@
       </button>
     </section>
 
-    <section class="sections">
+    <section class="sections" data-cy="comentarios">
       <h4>Comentarios:</h4>
       <div v-for="c in this.comments" v-bind:key="c.id">
         <!--
@@ -151,14 +155,12 @@ p{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   margin-top: 7%;
   padding-left: 5%;
   padding-right: 5%;
 }
 
 #headerSection {
-  color: #5c5540;
   margin-bottom: 8%;
 }
 
@@ -169,7 +171,6 @@ p{
 
 #title {
   font-weight: bold;
-  color: #5c5540;
   font-size: xxx-large;
   text-align: left;
   margin-left: 4%;
@@ -190,7 +191,6 @@ p{
   margin-bottom: 0;
 }
 .sections {
-  color: #5c5540;
   text-align: left;
   margin-left: 3%;
 }
@@ -230,7 +230,6 @@ textarea{
   margin: 0;
   outline: none;
   font-size: 14px;
-  color: #666;
   line-height: 22px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -268,8 +267,8 @@ export default {
   },
   data() {
     return {
-      //path: "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/";
-      path: "http://localhost:8000/",
+      path: "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/",
+      //path: "http://localhost:8000/",
       userName: store.state.userName,
       recipe: null,
 

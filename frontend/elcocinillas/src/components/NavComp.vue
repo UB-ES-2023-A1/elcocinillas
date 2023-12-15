@@ -43,7 +43,7 @@
           Registrarse
         </router-link>
       </div>
-      <div id="nut" @mouseenter="showNut = true">
+      <div id="nut" @mouseenter="showNut = true" data-cy="nut">
         <img class="image" src="../assets/settings.png">
       </div>
     </div>

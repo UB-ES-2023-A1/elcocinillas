@@ -1,10 +1,10 @@
 <template>
-  <div id="app">
+  <div id="app" data-cy="main-RecipesView">
     <div id="filters" @click="getRecipesFromDB()">
       <Filters style="float:left"/>
     </div>
     <div id="recipes">
-      <h2 id="title">Recetas</h2>
+      <h2 id="title" data-cy="recipes-title">Recetas</h2>
       <div class="d-flex flex-row flex-wrap" :key="$globalData.recipesKey">
         <recipe-card v-for="rp in this.recipes"
                     v-bind:key="rp.id"
@@ -16,7 +16,7 @@
     <div id="new">
       <p>nueva receta</p>
     </div>
-    <img id="boton-flotante" src="../assets/plus.png" @click="goToUploadRecipe"
+    <img id="boton-flotante" data-cy="boton-flotante" src="../assets/plus.png" @click="goToUploadRecipe"
     :style="[$settings.chosen == 'Dark Mode' ?
     {'filter': 'invert(100%)', 'transition' : '0.2s'} :
     {}]">

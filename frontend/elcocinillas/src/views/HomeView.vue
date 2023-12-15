@@ -1,5 +1,5 @@
 <template>
-  <div id="main">
+  <div id="main" data-cy="main-HomeView">
     <div>
       <div class="column left">
         <ColumnComp>
