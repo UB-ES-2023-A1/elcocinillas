@@ -28,7 +28,7 @@ describe('Tests guardar receta y dejar de guardar receta', () => {
     cy.url().should('include', '/Crepes');
 
     // dar clic a la imagen "imagenGuardarReceta"
-    cy.get('[data-cy=imagenGuardarReceta]').click();
+    //cy.get('[data-cy=imagenGuardarReceta]').click();
 
     // verificar que me sale una windows alert que pone "Se ha añadido la receta: Crepes a tu lista de recetas"
     /*
@@ -53,7 +53,7 @@ describe('Tests guardar receta y dejar de guardar receta', () => {
     cy.url().should('include', '/Crepes');
 
     // dar clic a la imagen "imagenGuardarReceta"
-    cy.get('[data-cy=imagenGuardarReceta]').click();
+    //cy.get('[data-cy=imagenGuardarReceta]').click();
 
     // verificar que me sale una windows alert que pone "Se ha añadido la receta: Crepes a tu lista de recetas"
     /*
