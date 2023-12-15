@@ -267,7 +267,7 @@ export default {
   },
   data() {
     return {
-      path: "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/";
+      path: "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/",
       //path: "http://localhost:8000/",
       userName: this.$cookies.username(),
       recipe: null,
