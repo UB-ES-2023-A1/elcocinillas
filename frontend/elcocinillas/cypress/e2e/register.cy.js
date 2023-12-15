@@ -4,6 +4,8 @@ describe('Registro en El Cocinillas', () => {
     // visitar la URL de la página principal antes de cada prueba
     cy.visit('http://localhost:8080/elcocinillas/registre');
   });
+  // Se testea que al rellenar el formulario de registro y hacer submit
+  // aparezca una alerta informando al usuario que el proceso ha sido exitoso.
   it('Completa el formulario de registro correctamente', () => {
     // Ingresa los datos en el formulario
     cy.get('[placeholder="Introduce tu nombre de usuario"]').type('Asier');

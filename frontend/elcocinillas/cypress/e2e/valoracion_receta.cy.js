@@ -17,7 +17,9 @@ describe('Test valorar receta', () => {
 
     cy.url().should('include', '/recetas');
   });
-
+  // Se testea que al valorar una receta (habiendo iniciado sesión)
+  // aparezca una alarma informando al usuario y
+  // se actualice la valoración de la receta correctamente.
   it('Valorar receta correctamente', () => {
     // ir a /Crepes
     cy.visit('http://localhost:8080/elcocinillas/recetas/Crepes');

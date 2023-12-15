@@ -18,7 +18,8 @@ describe('Post recetas', () => {
     // Buscar el botón que pone "+" y darle clic (que es el botón que en el código es llamado boton-flotante)
     cy.get('#boton-flotante').click();
   });
-
+  // Se testea que al añadir una nueva receta
+  // esta se añade correctamente.
   it('crear receta correcta', () => {
     // Rellenar los campos del formulario
     cy.get('#name').type('Ensalada Cesar');
@@ -38,6 +39,8 @@ describe('Post recetas', () => {
   });
 
 //TEST INCORRECTOS de prueba:
+  // Se testea que al añadir una nueva receta de forma incorrecta
+  // esta se añade ?
   it('crear receta incorrecta', () => {
     // Rellenar los campos del formulario
     cy.get('#name').type('Ensalada Cesar');

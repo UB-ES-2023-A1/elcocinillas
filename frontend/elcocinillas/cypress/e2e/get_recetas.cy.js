@@ -31,7 +31,8 @@ describe('Get todas las recetas', () => {
   beforeEach(() => {
     cy.visit('http://localhost:8080/elcocinillas/');
   });
-
+  // Se testea que al no aplicar ningún filtro
+  // aparezcan todas las recetas.
   it('No seleccionar filtros', () => {
     // Seleccionar tiempo máximo (para que salgan todas las recetas, q tendrán un tiempo menor o igual, por lo que han de salir así sí o sí)
     cy.get('#slider').invoke('val', 60).trigger('input');

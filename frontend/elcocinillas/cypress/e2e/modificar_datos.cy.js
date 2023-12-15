@@ -4,7 +4,8 @@ describe('Modificar datos', () => {
     cy.get('[data-cy=iniciar_sesion]').click()
     cy.url().should('include', '/userlogin');
   });
-
+  // Se testea que al cambiar la contraseña
+  // se cambie efectivamente.
   it('Cambiar contraseña de la cuenta', () => {
     //logearse correctamente primero 
     cy.get('input[name="mail"]').type('usuariodeprueba@gmail.com');
@@ -36,7 +37,8 @@ describe('Modificar datos', () => {
 
     cy.url().should('include', '/recetas');
   });
-
+  // Se testea que al cambiar la contraseña
+  // se cambie efectivamente.
   it('Cambiar contraseña de la cuenta de vuelta', () => {
     //logearse correctamente primero 
     cy.get('input[name="mail"]').type('usuariodeprueba@gmail.com');
@@ -95,7 +97,8 @@ describe('Modificar datos', () => {
     cy.on('window:confirm', () => true);
     cy.url().should('include', '/perfil');
   });*/
-
+  // Se testea que al intentar modificar datos sin colocar un correo
+  // no se permita al usuario modificar los datos hasta introducir correo.
   it('Intentar modificar datos sin poner correo', () => {
     //logearse correctamente primero 
     cy.get('input[name="mail"]').type('usuariodeprueba@gmail.com');
@@ -124,7 +127,8 @@ describe('Modificar datos', () => {
     cy.wait(500)
     cy.url().should('include', '/perfil');
   });
-
+  // Se testea que al intentar modificar datos sin colocar contraseña
+  // no se permita al usuario modificar los datos hasta introducir contraseña.
   it('Intentar modificar datos sin poner contraseña', () => {
     //logearse correctamente primero 
     cy.get('input[name="mail"]').type('usuariodeprueba@gmail.com');

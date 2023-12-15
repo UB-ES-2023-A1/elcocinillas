@@ -21,9 +21,8 @@ describe('Test seguir usuario', () => {
 
     cy.url().should('include', '/recetas');
   });
+  // Se testea que el hacer click en el botón de seguir usuario
   it('Seguir a usuario correctamente', () => {
-
-
     cy.visit('http://localhost:8080/elcocinillas/recetas/Crepes');
 
     cy.wait(1000)
@@ -39,6 +38,7 @@ describe('Test seguir usuario', () => {
     //cy.url().should('include', '/Crepes');
 
   });
+  // Se testea que el hacer click en el botón de seguir usuario
   it('Dejar de seguir a usuario correctamente', () => {
     cy.visit('http://localhost:8080/elcocinillas/recetas/Crepes');
 

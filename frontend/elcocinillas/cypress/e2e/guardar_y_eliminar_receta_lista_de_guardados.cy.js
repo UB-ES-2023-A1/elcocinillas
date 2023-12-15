@@ -41,7 +41,9 @@ describe('Tests guardar receta y dejar de guardar receta', () => {
     // verificar que aún estamos en /Crepes
     cy.url().should('include', '/Crepes');
   });
-
+  // Se testea que al añadir una nueva receta a la lista de recetas
+  // aparezca una alert informándo al usuario de la adición y 
+  // que la receta aparezca efectivamente en la lista de recetas.
   it('Dejar de guardar receta correctamente', () => {
     // ir a /Crepes
     cy.visit('http://localhost:8080/elcocinillas/recetas/Crepes');
