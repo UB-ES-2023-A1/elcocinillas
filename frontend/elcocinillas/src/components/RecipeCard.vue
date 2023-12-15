@@ -1,7 +1,7 @@
 <template>
   <div class="card text-left border-light cardStyle"  @click="openRecipe">
-    <!--<img class="card-img-top" src="../img/defaultRecipePhoto.png">-->
-    <img class="card-img-top"  :src=imageUrl>
+    <img class="card-img-top"  :src=imageUrl v-if="imageUrl !== '' && imageUrl !== undefined">
+    <img class="card-img-top"  src="../img/default_img_recipe.jpg" v-if="imageUrl === '' || imageUrl === undefined">
     <div class="card-body">
       <p class="card-text">{{ recipeName }}</p>
     </div>
@@ -10,9 +10,11 @@
 
 <style scoped>
   .cardStyle{
-    width: 18rem;
+    color: black;
+    width: 24vh;
     margin: 2%;
-    border-radius: 3%;
+    border: 2px solid lightgray;
+    border-radius: 5%;
   }
 
   .cardStyle img{

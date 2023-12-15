@@ -1,0 +1,87 @@
+{
+  "views":[
+    {
+      "name": "Acerca de",
+      "id": 1,
+      "paragraphs": [
+        "El Cocinillas es una empresa emergente a con intención de convertirse en un líder en páginas de alimentación. Basándonos en crear una website fácil de usar, trabajamos por una mejor Internet para todos.",
+        "Nuestra visión es construir un mundo donde el conocimiento sobre la cocina se comparta de forma libre pero segura. Queremos crear un ecosistema digital próspero.",
+        "Creemos que el consentimiento es un derecho humano básico y que cualquier modelo de negocio exitoso basado en datos del futuro considera que el consentimiento y el cumplimiento de los datos son el centro de su empresa."
+      ],
+      "list": []
+    },
+    {
+      "name": "Contacto",
+      "id": 2,
+      "paragrahs": [],
+      "list": [
+        "Dirección de Oficinas: \n Gran Via de les Corts Catalanes, 585, L'Eixample, 08007 Barcelona",
+        "Correo de Contacto: \n sblancpo108@alumnes.ub.edu",
+        "Número de Contacto: \n (+34)123 56 78 90"
+      ]
+    },
+    {
+      "name": "Información Legal",
+      "id": 3,
+      "paragraphs": [
+        "En caso de cualquier conflicto entre los términos y condiciones de estos Términos de la Red Pública y dichos servicios o acuerdos de licencia, prevalecerán los términos y condiciones de los Términos de la Red Pública.",
+        "Debe tener al menos 13 años para acceder o utilizar la Red o los Servicios, incluido, entre otros, completar el registro de una cuenta de El Cocinillas. Al acceder o utilizar los Servicios o la Red de cualquier manera, usted declara y garantiza que tiene al menos 13 años de edad.", 
+        "Si tiene menos de 13 años, no podrá, bajo ninguna circunstancia ni por ningún motivo, acceder o utilizar los Servicios o la Red de ninguna manera, y no podrá proporcionar ninguna información personal a o en los Servicios o la Red (incluidos, por ejemplo , un nombre, dirección, número de teléfono o dirección de correo electrónico)."
+      ],
+      "list": []
+    },
+    {
+      "name": "Política de Cookies",
+      "id": 4,
+      "paragrahs": [
+        "Recopilamos información personal directamente de usted con su consentimiento cuando deja un comentario o utiliza otras funciones interactivas en el Sitio o se comunica con nosotros en línea o por otros medios.", 
+        "Si deja un comentario en el Sitio, recopilamos su dirección de correo electrónico y dirección IP para confirmar que el comentario se originó en un usuario del Sitio y no en un bot u otro generador automatizado de spam.", 
+        "Si accede o envía una consulta a través de nuestro Sitio, se suscribe a un servicio, se registra para recibir materiales de marketing, participa en concursos, sorteos o promociones, o recibe otros Servicios, es posible que le solicitemos que proporcione cierta información personal, como su nombre, correo electrónico. dirección, número de teléfono y código postal, y posiblemente otra información personal.", 
+        "Tomamos medidas razonables para asegurarnos de que su información de contacto sea precisa, completa, actual y confiable. Usamos su información personal para comunicarnos con usted sobre Cronometer y nuestros Servicios y con fines de marketing directo, tales como:"
+      ],
+      "list": [
+        "La Comisión Europea proporciona una plataforma para la resolución de disputas (OS) en línea: https://ec.europa.eu/consumers/odr. Nuestra dirección de correo electrónico se puede encontrar aquí en el pie de imprenta.",
+        "Como proveedor de servicios somos responsables según § 7 Abs.1 TMG de los contenidos propios de estas páginas según las leyes generales. Sin embargo, según los artículos 8 a 10 de la TMG, nosotros, como proveedores de servicios, no estamos obligados a controlar la información externa transmitida o almacenada ni a investigar circunstancias que indiquen una actividad ilegal. Las obligaciones de eliminar o bloquear el uso de información según la ley general no se verán afectadas. Sin embargo, una responsabilidad a este respecto sólo es posible a partir de la fecha en que se tiene conocimiento de una infracción específica. Tras la notificación de infracciones apropiadas, eliminaremos este contenido de inmediato.",
+        "Si nuestra oferta contiene enlaces a sitios web externos de terceros sobre cuyos contenidos no tenemos ninguna influencia. Por lo tanto, no podemos asumir ninguna responsabilidad por estos contenidos externos. El respectivo proveedor u operador de las páginas es siempre responsable del contenido de las páginas enlazadas. En el momento de la vinculación se comprobaron las páginas enlazadas para detectar posibles infracciones legales. El contenido ilegal no era reconocible en el momento del enlace. Sin embargo, un control permanente del contenido de las páginas enlazadas no es razonable sin pruebas concretas de una infracción. Tras la notificación de infracciones, eliminaremos dichos enlaces de inmediato.",
+        "Los contenidos y trabajos de estas páginas creados por los operadores del sitio están sujetos a la ley de derechos de autor alemana. La reproducción, procesamiento, distribución y cualquier tipo de explotación fuera de los límites del derecho de autor requieren el consentimiento por escrito del respectivo autor o creador. Las descargas y copias de este sitio son únicamente para uso privado y no comercial. Siempre que los contenidos de esta página no hayan sido creados por el operador, se consideran derechos de autor de terceros. En particular, se marcan como tales contenidos de terceros. Si aún tiene conocimiento de una infracción de derechos de autor, le solicitamos una nota. Tras la notificación de infracciones, eliminaremos dicho contenido de inmediato."
+      ]
+    },
+    {
+      "name": "Privacidad",
+      "id": 5,
+      "paragraphs": [
+        "Recopilamos información personal directamente de usted con su consentimiento cuando deja un comentario o utiliza otras funciones interactivas en El Cocinillas o se comunica con nosotros en línea o por otros medios.", 
+        "Si deja un comentario en El Cocinillas, posiblemente recopilamos su dirección de correo electrónico y dirección IP para confirmar que el comentario se originó en un usuario del sitio y no en un bot u otro generador automatizado de spam.", 
+        "Si accede o envía una consulta a través de nuestro sitio, se suscribe a un servicio, se registra para recibir materiales de marketing, participa en concursos, sorteos o promociones, o recibe otros Servicios, es posible que le solicitemos que proporcione cierta información personal, como su nombre, correo electrónico. dirección, número de teléfono y código postal, y posiblemente otra información personal.", 
+        "Tomamos medidas razonables para asegurarnos de que su información de contacto sea precisa, completa, actual y confiable. Usamos su información personal para comunicarnos con usted sobre Cronometer y nuestros Servicios y con fines de marketing directo, tales como:"
+      ],
+      "list": [
+        "Enviarle comunicaciones periódicas por correo electrónico y boletines informativos;",
+        "Responder a sus consultas;",
+        "Enviarle encuestas y otras comunicaciones de control de calidad;",
+        "Analizar preferencias, tendencias y estadísticas;",
+        "Informarle sobre nuestros nuevos productos, servicios y ofertas; y",
+        "Proporcionarle otra información de marketing de y sobre El Cocinillas."
+      ]
+    },
+    {
+      "name": "Términos & Condiciones",
+      "id": 6,
+      "img": "t&c.png",
+      "paragraphs": [
+        "Estos términos y condiciones describen las reglas y regulaciones para el uso del sitio web de El Cocinillas, ubicado en elcocinillas.com.",
+        "Al acceder a este sitio web asumimos que acepta estos términos y condiciones. No continúe usando El Cocinillas si no acepta todos los términos y condiciones establecidos en esta página.",
+        "Partes de este sitio web ofrecen a los usuarios la oportunidad de publicar e intercambiar opiniones e información. El Cocinillas no filtra, edita, publica ni revisa los Comentarios antes de su presencia en el sitio web. Los comentarios no reflejan los puntos de vista y opiniones de El Cocinillas, sus agentes y/o afiliados. Los comentarios reflejan los puntos de vista y opiniones de la persona que publica sus puntos de vista y opiniones. En la medida permitida por las leyes aplicables, El Cocinillas no será responsable de los Comentarios ni de ninguna responsabilidad, daños o gastos causados y/o sufridos como resultado de cualquier uso y/o publicación y/o aparición de los Comentarios en este sitio web.",
+        "Usted garantiza y declara que:"
+      ],
+      "list":[
+        "Tiene derecho a publicar Comentarios en nuestro sitio web y tiene todas las licencias y consentimientos necesarios para hacerlo;",
+        "Los Comentarios no invaden ningún derecho de propiedad intelectual, incluidos, entre otros, derechos de autor, patentes o marcas comerciales de terceros;",
+        "Los Comentarios no contienen ningún material difamatorio, calumnioso, ofensivo, indecente o ilegal que sea una invasión de la privacidad.",
+        "Los Comentarios no se utilizarán para solicitar o promover negocios o costumbres o presentar actividades comerciales o actividades ilegales.",
+        "Por la presente otorga a El Cocinillas una licencia no exclusiva para usar, reproducir, editar y autorizar a otros a usar, reproducir y editar cualquiera de sus Comentarios en todas y cada una de las formas, formatos o medios."
+      ]
+    }
+  ]
+}
+

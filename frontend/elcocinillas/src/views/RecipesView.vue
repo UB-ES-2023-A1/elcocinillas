@@ -1,10 +1,10 @@
 <template>
-  <div id="app">
+  <div id="app" data-cy="main-RecipesView">
     <div id="filters" @click="getRecipesFromDB()">
       <Filters style="float:left"/>
     </div>
     <div id="recipes">
-      <h2 id="title">Recetas</h2>
+      <h2 id="title" data-cy="recipes-title">Recetas</h2>
       <div class="d-flex flex-row flex-wrap" :key="$globalData.recipesKey">
         <recipe-card v-for="rp in this.recipes"
                     v-bind:key="rp.id"
@@ -13,18 +13,18 @@
         </recipe-card>
       </div>
     </div>
-    <button id="boton-flotante" @click="goToUploadRecipe">+</button>
+    <img id="boton-flotante" data-cy="boton-flotante" src="../assets/plus.png" @click="goToUploadRecipe"
+    :style="[$settings.chosen == 'Dark Mode' ?
+    {'filter': 'invert(100%)', 'transition' : '0.2s'} :
+    {}]">
   </div>
 
 </template>
 
-<style>
+<style scoped>
 #app {
   font-family: "Lato", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   overflow: hidden;
 }
 
@@ -40,7 +40,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   margin-left: 10%;
   margin-right: 10%;
   margin-top: 5%;
@@ -50,30 +49,29 @@
 
 #title {
   font-weight: bold;
-  margin-bottom: 80px;
-  color: #5c5540;
+  margin-bottom: 2.5vh;
   text-align: center;
   font-size: xxx-large;
   margin-right: 10%;
 }
-
+#new{
+  position: fixed;
+  bottom: 17%;
+  right: 2.5%;
+}
 #boton-flotante {
   position: fixed;
-  height: 55px;
-  width: 55px;
-  bottom: 8%;
-  right: 8%;
-  padding: 10px;
-  background-color: #73694F;
-  border: none;
+  height: 8vh;
+  width: 8vh;
+  bottom: 10%;
+  right: 4%;
+  cursor: pointer;
   border-radius: 50%;
-  font-size: x-large;
+  transition: 0.2s;
 }
-
-#boton-flotante-inner{
-  color: #ffffff;
-  font-size: 24px;
-  text-decoration: none;
+#boton-flotante:hover{
+  transform: scale(1.05);
+  transition: 0.2s;
 }
 </style>
 
@@ -104,11 +102,10 @@ export default {
       this.$globalData.logged = !this.$globalData.logged;
     },
     getRecipesFromDB() {
-      if (this.$chosen.diet === null && this.$chosen.dishes.length === 0 && this.$chosen.dishes.time === 0){
+      if (this.$chosen.diet === null && this.$chosen.dishes.length === 0 && this.$chosen.time === 0){
         this.getAllRecipesFromDB();
         return;
       }
-      //const path = "http://localhost:8000/recetas/";
       const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/recetas/";
       const classes = this.$chosen.dishes;
       const listaComoCadena = classes.join(',');
@@ -147,7 +144,6 @@ export default {
     },
 
     getAllRecipesFromDB() {
-      //const path = "http://localhost:8000/todasrecetas/";
       const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/todasrecetas/";
       axios.get(path)
           .then((response) => {
@@ -163,9 +159,8 @@ export default {
       this.$router.push('/publicarReceta')
     },
     handleBusqueda() {
-      //const path = "http://localhost:8000/recetas/";
       const path = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/recetas/";
-      axios.get(path + this.$globalData.searchQuery)
+      axios.get(path + this.$globalData.searchQuery + "/")
       .then((response) => {
         console.log("metodo búsqueda llamada OK");
         this.recipes = response.data;
@@ -176,13 +171,13 @@ export default {
     },
     goToUploadRecipe() {
       console.log("isLogged click: ", this.usuarioLogeado != null);
-      if(this.usuarioLogeado){
+      if(this.$globalData.logged){
         console.log("ir a recetas");
         this.$router.push('/publicarReceta')
       } else{
         alert("Inicia sesión para poder publicar una receta");
       }
-    }
+    },
   }
 };
 </script>

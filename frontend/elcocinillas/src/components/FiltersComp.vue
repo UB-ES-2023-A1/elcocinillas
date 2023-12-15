@@ -1,16 +1,16 @@
 <template>
-  <div class="filtros">
-    <h3 class="filters-h3">Filtros</h3>
+  <div id="filtros">
+    <h3>Filtros</h3>
     <div class="section">
-      <h2 class="filters-h2">Tiempo: {{ time }} minutos</h2>
+      <h2>Tiempo: {{ time }} minutos</h2>
       <input type="range" min="0" max="60" value=30
       class="slider" id="slider" v-model="time" style="margin-bottom: 10px;"
       @input="updateTime(time);">
     </div>
     <div class="section">
-      <h2 class="filters-h2">Dietas:</h2>
-      <ul class="filters-ul">
-        <li class="filters-li" v-for="diet in this.$globalData.diets" v-bind:key="diet.id"
+      <h2>Dietas:</h2>
+      <ul>
+        <li v-for="diet in this.$globalData.diets" v-bind:key="diet.id"
         :style="[$chosen.diet === diet ? 
         {'background-color': clicked} :
         {'background-color': notClicked, 'color': 'black'}]"
@@ -20,9 +20,9 @@
       </ul>
     </div>
     <div class="section">
-      <h2 class="filters-h2">Tipos de Plato:</h2>
-      <ul class="filters-ul">
-        <li class="filters-li" v-for="dish in this.$globalData.dishes" v-bind:key="dish.id"
+      <h2>Tipos de Plato:</h2>
+      <ul>
+        <li v-for="dish in this.$globalData.dishes" v-bind:key="dish.id"
         :style="[$chosen.dishes.includes(dish) ? 
         {'background-color': clicked} :
         {'background-color': notClicked, 'color': 'black'}]"
@@ -35,36 +35,41 @@
 </template>
   
 <style scoped>
-.filtros{
+#filtros{
+  margin-top: 4vh;
+  border-right: 0.5vh solid lightgray;
+  text-align:center;
+}
+#filters{
   margin-top: 4vh;
   height: 85vh;
   width: fit-content;
   text-align:center;
-  border-style: solid;
-  border-color: lightgray;
+  align-content: center;
+  border-right: 0.5vh solid lightgray;
   font-size: 2.5vh;
 }
 .section{
   padding: 2vh;
   margin-bottom: 2vh;
 }
-.filters-h2{
+h2{
   font-size: 3vh;
   text-align: center;
-  text-shadow: 1px 1px 2px white;
   border-radius: 2vh;
   margin-top: 2vh;
 }
-.filters-h3{
+h3{
   font-size: 4vh;
   font-weight: bold;
   margin: 2vh;
 }
-.filters-ul{
+ul{
   list-style-type: none;
   padding: 0;
+  align-content: center;
 }
-.filters-li{
+li{
   height: 4vh;
   width: 30vh;
   font-size: 2.5vh;
@@ -80,10 +85,14 @@
   display: grid;
   align-items: center;
 }
-.filters-li:hover{
+li:hover{
   margin-bottom: 2vh;
   box-shadow: 5px 5px black;
   transition: 0.2s;
+}
+input[type="range"] {
+  accent-color: #76ded9;
+  width: 30vh;
 }
 </style>
 

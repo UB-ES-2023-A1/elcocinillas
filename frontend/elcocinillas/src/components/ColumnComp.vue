@@ -17,9 +17,7 @@
 </template>
 
 <style scoped>
-.image{
-  margin-top: 4vh;
-}
+
 .description {
   display: flex;
   margin: auto;
@@ -29,10 +27,8 @@
   font-size: 2.5vh;
 }
 .heading {
-  margin-top: 12%;
+  margin-top: 5%;
   font-size: 7.5vh;
-  color: black;
-  text-shadow: 2px 2px white;
 }
 .col-section {
   text-align: center;
