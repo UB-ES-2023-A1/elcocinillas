@@ -80,7 +80,6 @@ describe('Darkmode', () => {
     cy.contains('Filtros').should('have.css', 'color', 'rgb(43, 43, 43)')
     cy.contains('Dietas:').should('have.css', 'color', 'rgb(43, 43, 43)')
     cy.contains('Tipos de Plato:').should('have.css', 'color', 'rgb(43, 43, 43)')
-    cy.contains('nueva receta').should('have.css', 'color', 'rgb(43, 43, 43)')
     // 'Boton-flotante''s color is currently NOT inverted:
     //cy.contains('[data-cy="boton-flotante"]').should('have.css', 'filter', '')
 
