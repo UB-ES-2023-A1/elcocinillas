@@ -63,7 +63,7 @@
   background-color: rgba(255, 255, 255, 0.6); 
   border: 5px solid #EEF2B6;
   border-radius: 5px;
-  padding: 5%;
+  padding: 0%;
   margin-left: 10%;
   
 }
