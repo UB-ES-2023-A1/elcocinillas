@@ -19,25 +19,25 @@
           Recetas
         </router-link>
       </div>
-      <div class="link" v-if="getInit()" data-cy="clic_perfil">
+      <div class="link" v-if=getInit() data-cy="clic_perfil">
         <router-link to="/perfil">
           <img class="image imgUp" src="../assets/perfil.png">
           Perfil
         </router-link>
       </div>
-      <div class="link" v-if="getInit()" @click="logoff()">
+      <div class="link" v-if=getInit() @click="logoff()">
         <router-link to="/">
           <img class="image imgUp" src="../assets/exit.png">
           Cerrar Sesión
         </router-link>
       </div>
-      <div class="link" data-cy="iniciar_sesion" v-if="!getInit()">
+      <div class="link" data-cy="iniciar_sesion" v-if=!getInit()>
         <router-link to="/userlogin">
           <img class="image imgUp" src="../assets/enter.png">
           Iniciar Sesión
         </router-link>
       </div>
-      <div class="link" v-if="!getInit()">
+      <div class="link" v-if=!getInit()>
         <router-link to="/registre">
           <img class="image imgUp" src="../assets/enter.png">
           Registrarse
@@ -104,7 +104,6 @@ a {
   background-color: #73694f;
   width: 100%;
   z-index: 1;
-  border-bottom: 1px solid black;
 }
 #nut {
   position: relative;
@@ -169,10 +168,15 @@ a {
   transform: scale(0.7);
   top: -0.25vh;
 }
+
+@media only screen and (max-width: 1154px) {
+  #nav {
+    height: 150px;
+  }
+}
 </style>
 
 <script>
-import { store } from '../store'
 import { bus } from '../main';
 
 export default {
@@ -180,9 +184,11 @@ export default {
   data(){
     return {
       showingSettings: false,
-      usuarioLogeado : store.state.initSession,
+      usuarioLogeado: this.$cookies.username(),
       searchQuery: '',
       showNut: false,
+      username: "",
+      correo: "",
     }
   },
   methods: {
@@ -190,8 +196,8 @@ export default {
       this.$settings.chosen = s;
     },
     logoff(){
-      this.$globalData.logged = false;
-      store.state.initSession = false;
+      this.$cookies.deleteAll();
+      this.$globalData.updateSession();
     },
     logoStart(){
       document.getElementById("logo").style.transform = "rotate(40deg) scale(1.2) translate(5px)";
@@ -202,7 +208,7 @@ export default {
       document.getElementById("logo").style.transition = "0.2s";
     },
     getInit(){
-      return store.state.initSession;
+      return this.$globalData.logged;
     },
     realizarBusqueda() {
       this.$globalData.searchQuery = this.searchQuery;

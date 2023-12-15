@@ -16,7 +16,7 @@ def test_post_receta_invalid1():
   "dificultad": 1
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "422" in response.text
+    assert '{"detail"' in response.text
 
 #TEST SIN NOMBRE:
 def test_post_receta_invalid2():
@@ -32,7 +32,7 @@ def test_post_receta_invalid2():
   "dificultad": 1
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "422" in response.text
+    assert '{"detail"' in response.text
 
 #TEST SIN CLASSE:
 def test_post_receta_invalid3():
@@ -48,7 +48,7 @@ def test_post_receta_invalid3():
   "dificultad": 1
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "422" in response.text
+    assert '{"detail"' in response.text
 
 #TEST SIN TIPO:
 def test_post_receta_invalid4():
@@ -64,7 +64,7 @@ def test_post_receta_invalid4():
   "dificultad": 1
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "422" in response.text
+    assert '{"detail"' in response.text
 
 #TEST SIN INGREDIENTES:
 def test_post_receta_invalid5():
@@ -80,7 +80,7 @@ def test_post_receta_invalid5():
   "dificultad": 1
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "422" in response.text
+    assert '{"detail"' in response.text
 
 #TEST SIN PASOS:
 def test_post_receta_invalid6():
@@ -96,4 +96,4 @@ def test_post_receta_invalid6():
   "dificultad": 1
 }
     response = requests.post(f"{API_URL}/receta", json=receta)
-    assert "422" in response.text
+    assert '{"detail"' in response.text
