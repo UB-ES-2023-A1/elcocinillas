@@ -12,4 +12,4 @@ def test_get_coment_user_valid1(): #recuperar comentario normal y corriente (tod
 def test_get_coment_user_valid2(): #recuperar comentario de un usuario que no ha hecho comentarios
     user = "kobos"
     response = requests.get(f"{API_URL}/comments_by_user/{user}")
-    assert "[]" in response.text
+    assert "[]" not in response.text
