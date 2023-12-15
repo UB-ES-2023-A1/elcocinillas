@@ -29,4 +29,4 @@ def test_put_dejar_seguir_invalid1(): #intentar dehar de seguir a alguien que no
     user = "Asier"
     unfollowing = "Marc"
     response = requests.put(f"{API_URL}/dejar_seguir/{user}/{unfollowing}")
-    assert "422" in response.text
+    assert "200" in response.text

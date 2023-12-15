@@ -91,7 +91,6 @@ button:hover {
 </style>
 
 <script>
-import { store } from '../store'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import router from "@/router";
 export default {
@@ -120,18 +119,19 @@ export default {
               const user = userCredential.user;
               console.log("Usuario autenticado:", user);
               const uid = user.uid;
-              store.state.userName = uid;
-              store.state.initSession = true;
               alert("Sesión iniciada con éxito");
-              this.$globalData.navKey += 1;
-              this.$globalData.logged = true;
               router.push("/recetas");
-              console.log("userName: ", store.state.userName)
+              console.log("userName: ", uid)
+
+              // Cookies
+              this.$cookies.update(uid, true);
+
+              // Session
+              this.$globalData.updateSession();
             })
             .catch((error) => {
               // Maneja errores de inicio de sesión
               console.error("Error de inicio de sesión:", error.message);
-              store.commit('setinitSession', {isLogged: false})
               alert("Error en el inicio de sesión: email o contraseñas incorrectos");
             });
       }

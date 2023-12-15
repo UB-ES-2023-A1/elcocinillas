@@ -37,13 +37,58 @@ Vue.prototype.$settings = Vue.observable({
 Vue.prototype.$globalData = Vue.observable({
   diets: ['Vegana', 'Vegetariana', 'Omnívora'],
   dishes: ['Ensalada', 'Hamburguesa', 'Postre'],
-  searchQuery:''
+  searchQuery:'',
+  logged: false,
+  updateSession: function(){
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${'session'}=`);
+    if (parts.length === 2 && parts.pop().split(';').shift() === 'true'){
+      this.logged = true;
+    } else {
+      this.logged = false;
+    }
+  }
 });
 Vue.prototype.$chosen = Vue.observable({
   time: 0,
   diet: null,
   dishes: [],
-  logged: false,
+});
+
+// Cookies
+Vue.prototype.$cookies = Vue.observable({
+  update: function(username, session){
+    this.deleteAll();
+    document.cookie = "username = " + username;
+    document.cookie = "session = " + session;
+    document.cookie = "Path = /" ;
+  },
+  deleteAll: function() {
+    const cookies = document.cookie.split(";");
+
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf("=");
+        const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+  },
+  find: function(name){
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  },
+  username: function(){
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${'username'}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  },
+  session: function(){
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${'session'}=`);
+    if (parts.length === 2 && parts.pop().split(';').shift() === 'true') return true;
+    else return false;
+  },
 });
 
 // Cookies
@@ -88,5 +133,3 @@ new Vue({
   components: { App },
   template: "<App/>",
 })
-
-

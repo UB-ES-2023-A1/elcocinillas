@@ -23,7 +23,7 @@
 </template>
 
 <style scoped>
-#granContainerRegistre {
+body{
   height: fit-content;
   background-image: url('../img/defaultRecipePhoto.png');
   background-size: cover;
@@ -61,15 +61,6 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 
-.formcontainer {
-  text-align: center;
-  border: 5px solid #EEF2B6;
-  background-color: white;
-  opacity: 95%;
-  width: 80%;
-  display: inline-block;
-  margin: 5%;
-}
 .inner-container {
   padding: 16px 0;
   text-align:left;
@@ -132,8 +123,13 @@ export default {
             .then((response) => {
               console.log('OK crear usuario:', response.data);
               this.recipes = response.data;
-              router.push("/recetas");
-              alert("¡Felicidades! Te has registrado en El Cocinillas")
+              alert("¡Felicidades! Te has registrado en El Cocinillas");
+
+              // Cookies
+              this.$cookies.update(this.userName, true);
+
+              // Session
+              this.$globalData.updateSession();
             })
             .catch((error) => {
               console.error('KO registro:', error);
