@@ -403,7 +403,7 @@ export default {
       alert('Comentario añadido: "' + v + '"');
     },
     sigoUser(){
-      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/siguiendo/' + this.userName + '/';
+      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/siguiendo/' + this.user + '/';
       axios.get(url)
         .then((response) => {
           const usersSeguidos = response.data;
@@ -411,6 +411,7 @@ export default {
 
           usersSeguidos.forEach((usuario) => {
             if (usuario === usuarioBuscado) {
+              alert('working');
               // Si se encuentra el usuario, actualiza la propiedad a true
               this.userSeguid = true;
             }
@@ -422,7 +423,7 @@ export default {
         })
     },
     sigoReceta(){
-      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/guardadas/' + this.userName + '/';
+      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/guardadas/' + this.user + '/';
       axios.get(url)
         .then((response) => {
           const recetasSeguidas = response.data;

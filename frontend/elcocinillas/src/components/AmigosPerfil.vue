@@ -164,7 +164,6 @@ ul li:last-child {
 <script>
 // eslint-disable-next-line vue/multi-word-component-names
 import axios from 'axios';
-import { store } from '../store';
 import NavPerfil from "./NavPerfil";
 export default {
     name: "AmigosPerfil",
@@ -174,6 +173,7 @@ export default {
             nombreAmigo: "",
             users: this.listarAmigos(),
             usuariosFiltrados: [],
+            userName: this.$cookies.username(),
         }
     },
     created() {
@@ -182,7 +182,7 @@ export default {
     methods:{
         eliminarAmigo(nombre, index){
             const unfollow = '/' + nombre
-            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/dejar_seguir/' + store.state.userName + unfollow + '/';
+            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/dejar_seguir/' + this.userName + unfollow + '/';
             axios.put(url)
             .then((response) => {
                 console.log('Ok modificar datos:', response.data);
@@ -195,7 +195,7 @@ export default {
             })
         },
         listarAmigos(){
-            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/siguiendo/' + store.state.userName + '/';
+            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/siguiendo/' + this.userName + '/';
             axios.get(url)
             .then((response) => {
                 this.users = response.data;
@@ -207,7 +207,7 @@ export default {
         },
         seguirAmigo(nombre){
             const follow = '/' + nombre;
-            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/seguir/' + store.state.userName + follow + '/';
+            const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/seguir/' + this.userName + follow + '/';
             axios.put(url)
             .then((response) => {
                 window.alert('Has empezado a seguir a: ', nombre);

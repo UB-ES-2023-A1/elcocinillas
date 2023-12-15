@@ -165,7 +165,6 @@ border-bottom: none; /* No agrega borde inferior al último elemento li */
 <script>
 // eslint-disable-next-line vue/multi-word-component-names
 import axios from 'axios';
-import { store } from '../store';
 import NavPerfil from "./NavPerfil";
 export default {
   name: "RecetasPerfil",
@@ -175,6 +174,7 @@ export default {
           nombreReceta: "",
           recetas: [],
           recetasFiltradas: [],
+          userName: this.$cookies.username(),
 
         }
     },
@@ -184,7 +184,7 @@ export default {
     methods:{
       eliminarReceta(nombre, index){
         const receta = '/' + nombre
-        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/dejar_de_guardar/' + store.state.userName + receta + '/';
+        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/dejar_de_guardar/' + this.userName + receta + '/';
         axios.put(url)
         .then((response) => {
           console.log('Ok modificar datos:', response.data);
@@ -197,7 +197,7 @@ export default {
         })
       },
       listarRecetas(){
-        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/guardadas/' + store.state.userName + '/';
+        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/guardadas/' + this.userName + '/';
         axios.get(url)
         .then((response) => {
           this.recetas = response.data;
