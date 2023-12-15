@@ -219,3 +219,4 @@ def delete_account(nombre_usuario: str):
     except Exception as e:
         #Captura cualquier excepción y maneja el error
         return HTTPException(status_code=422, detail="Error en el servidor eliminando usuario: " + str(e))
+
