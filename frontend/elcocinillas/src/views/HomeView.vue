@@ -152,6 +152,9 @@ a {
   box-shadow: 5px 5px black;
   transition: 0.2s;
 }
+input[type="range"] {
+  accent-color: #73694F;
+}
 </style>
 
 <script>
