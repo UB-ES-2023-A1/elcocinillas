@@ -5,7 +5,7 @@ describe('Tests comentar receta', () => {
     cy.get('[data-cy=iniciar_sesion]').click();
     cy.url().should('include', '/userlogin');
     // primero iniciamos sesion
-    cy.get('input[name="mail"]').type('usuariodepruebafalsoxd@gmail.com');
+    cy.get('input[name="mail"]').type('usuariodeprueba@gmail.com');
     cy.get('input[name="psw"]').type('123456');
     cy.get('form').submit();
 
