@@ -11,7 +11,7 @@
                     </div>
                     <div class="c-input">
                         <input v-model="nombreAmigo" type="text" placeholder="Busqueda Amigo">
-                        <button @click="busqueda()">Añadir Amigo</button>
+                        <button @click="busqueda()">Buscar Amigo</button>
                     </div>
                 </div>
                 <div class="c-body">
