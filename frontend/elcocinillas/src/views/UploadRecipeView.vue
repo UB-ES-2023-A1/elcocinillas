@@ -214,14 +214,13 @@ input[type="range"] {
 
 <script>
 import axios from "axios";
-import {store} from "@/store";
 import router from "@/router";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   data() {
     return {
-      usuario: store.state.userName,
+      usuario: this.$cookies.username(),
       nombreReceta: null,
       classeReceta: "",
       tipoReceta: "",

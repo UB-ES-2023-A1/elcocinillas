@@ -4,6 +4,8 @@ describe('Get recetas', () => {
     cy.visit('http://localhost:8080/elcocinillas/');
   });
 
+  // Se testea que al aplicar alguno de los filtros las recetas que aparezcan
+  // a continuación estén filtradas correctamente.
   it('Seleccionar opciones en el filtro', () => {
     // Seleccionar tiempo
     cy.get('#slider.slider').invoke('val', 15).trigger('input');
