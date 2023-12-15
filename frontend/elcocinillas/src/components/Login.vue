@@ -98,7 +98,6 @@ export default {
   name: "Login",
   data() {
     return {
-      actual_path: "http://localhost:8000/",
       email: "",
       password: "",
       addUserForm: {

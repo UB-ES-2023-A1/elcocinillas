@@ -1,8 +1,8 @@
 <template>
-  <div
+  <div data-cy="main"
   :style="[$settings.chosen == 'Dark Mode' ?
-  {'background-color': '#2b2b2b', 'color': 'white', 'transition' : '0.2s'} :
-  {'background-color': 'white', 'color': '#2b2b2b', 'transition' : '0.2s'}]"
+  {'background-color': '#2b2b2b', 'color': '#ffffff', 'transition' : '0.2s'} :
+  {'background-color': '#ffffff', 'color': '#2b2b2b', 'transition' : '0.2s'}]"
   >
   <!--
     <div>
@@ -14,7 +14,6 @@
   -->
     <NavComp/>
     <router-view id="router"/>
-    <FooterComp/>
     <FooterComp/>
   </div>
 </template>
