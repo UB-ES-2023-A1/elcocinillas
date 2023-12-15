@@ -130,6 +130,8 @@ export default {
 
               // Session
               this.$globalData.updateSession();
+              router.push("/recetas");
+
             })
             .catch((error) => {
               console.error('KO registro:', error);

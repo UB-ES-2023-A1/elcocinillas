@@ -15,7 +15,7 @@
             </div>
             <div id="contenedorUsuario">
               <h5 id="subtitulo" data-cy="recipe-subtitle">by {{this.user}}</h5>
-              <img src="../img/person_add.png"
+              <img src="../img/person_add.png" v-if="this.$globalData.logged"
               :style="{ filter: this.userSeguid ? 'invert(27%) sepia(99%) saturate(715%) hue-rotate(346deg) brightness(112%) contrast(104%)' : 'grayscale(100%)',
               'filter' : 'invert(50%)'}"
               @click="seguirAmigo()">
