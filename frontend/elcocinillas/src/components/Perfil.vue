@@ -149,6 +149,7 @@ export default {
   data() {
     return {      
       userName: this.$cookies.username(),
+      username: '',
       correo: '',
       contrasena: '',
       newcorreo: '', 
