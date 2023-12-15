@@ -353,8 +353,8 @@ export default {
       }
     },
     getComments(){
-      const path = "http://localhost:8000/comments_by_recipe/" + this.nombreReceta + "/";
-      axios.get(path)
+      const url = this.path + this.nombreReceta + "/";
+      axios.get(url)
           .then((response) => {
             console.log("Comments fetched successfully.");
             this.comments = response.data;
@@ -364,7 +364,7 @@ export default {
           })
     },
     getRecipe() {
-      const pathReceta = "https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/receta/" + this.nombreReceta + "/";
+      const pathReceta = this.path + "receta/" + this.nombreReceta + "/";
       const urlCodificada = encodeURI(pathReceta);
       axios
         .get(urlCodificada)
@@ -402,7 +402,7 @@ export default {
       alert('Comentario añadido: "' + v + '"');
     },
     sigoUser(){
-      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/siguiendo/' + store.state.userName + '/';
+      const url = this.path + 'siguiendo/' + store.state.userName + '/';
       axios.get(url)
         .then((response) => {
           const usersSeguidos = response.data;
@@ -421,7 +421,7 @@ export default {
         })
     },
     sigoReceta(){
-      const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/guardadas/' + store.state.userName + '/';
+      const url = this.path + 'guardadas/' + store.state.userName + '/';
       axios.get(url)
         .then((response) => {
           const recetasSeguidas = response.data;
@@ -441,7 +441,7 @@ export default {
     seguirReceta(){
       if (this.receptaSeguida){
         const receta = '/' + this.name;
-        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/dejar_de_guardar/' + store.state.userName + receta + '/';
+        const url = this.path + 'dejar_de_guardar/' + store.state.userName + receta + '/';
         axios.put(url)
           .then((response) => {
             console.log('Ok modificar datos:', response.data);
@@ -454,7 +454,7 @@ export default {
           })
       }else{
         const receta = '/' + this.name;
-        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/guardar/' + store.state.userName + receta + '/';
+        const url = this.path + 'guardar/' + store.state.userName + receta + '/';
         axios.put(url)
           .then((response) => {
             console.log('Ok modificar datos:', response.data);
@@ -470,7 +470,7 @@ export default {
     seguirAmigo(){
       if(this.userSeguid){
         const unfollow = '/' + this.user;
-        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/dejar_seguir/' + store.state.userName + unfollow + '/';
+        const url = this.path + 'dejar_seguir/' + store.state.userName + unfollow + '/';
         axios.put(url)
         .then((response) => {
           console.log('Ok modificar datos:', response.data);
@@ -483,7 +483,7 @@ export default {
         })
       }else{
         const follow = '/' + this.user;
-        const url = 'https://elcocinillas-api.kindglacier-480a070a.westeurope.azurecontainerapps.io/seguir/' + store.state.userName + follow + '/';
+        const url = this.path + 'seguir/' + store.state.userName + follow + '/';
         axios.put(url)
         .then((response) => {
             window.alert('Has empezado a seguir a: '+ this.user);
