@@ -18,6 +18,9 @@ describe('Tests comentar receta', () => {
     cy.url().should('include', '/recetas');
   });
 
+  // Se testea que al añadir un comentario nuevo a una receta 
+  // salga una alerta informando al usuario de que se ha añadido el comentario y
+  // que el comentario añadido se encuentra en la sección inferior de 'Comentarios: ' de Recipe.vue.
   it('Comentar receta correctamente', () => {
     // ir a /Crepes
     cy.visit('http://localhost:8080/elcocinillas/recetas/Crepes');
